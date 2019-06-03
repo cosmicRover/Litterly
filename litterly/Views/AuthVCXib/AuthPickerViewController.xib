@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthPickerViewController" customModule="litterly" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue" translatesAutoresizingMaskIntoConstraints="NO" id="CCB-QF-ugv">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="487"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mash" translatesAutoresizingMaskIntoConstraints="NO" id="lWi-qB-ciK">
+                    <rect key="frame" x="20" y="80" width="335" height="344"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="CCB-QF-ugv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5YW-J4-qpq"/>
+                <constraint firstItem="lWi-qB-ciK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="88X-uY-s1f"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lWi-qB-ciK" secondAttribute="trailing" constant="20" id="C0e-G6-PNN"/>
+                <constraint firstAttribute="bottom" secondItem="CCB-QF-ugv" secondAttribute="bottom" constant="180" id="UEW-Q3-5Xo"/>
+                <constraint firstAttribute="trailing" secondItem="CCB-QF-ugv" secondAttribute="trailing" id="ZsO-9P-Kva"/>
+                <constraint firstItem="CCB-QF-ugv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o1F-vr-662"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="lWi-qB-ciK" secondAttribute="bottom" constant="243" id="v2Y-Kt-Jmf"/>
+                <constraint firstItem="lWi-qB-ciK" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="vpn-hr-1c8"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="blue" width="341" height="341"/>
+        <image name="mash" width="341" height="341"/>
+    </resources>
+</document>
