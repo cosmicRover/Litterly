@@ -94,13 +94,13 @@ class MeetupViewController: UIViewController {
     
     //holds storyBoard IDs for their respective detail VC
     func actionsForCardViews(){
-        let organicMeetupDetail:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrganicMeetups") as UIViewController
+        let organicMeetupDetail:UIViewController = UIStoryboard(name: "Meetups", bundle: nil).instantiateViewController(withIdentifier: "OrganicMeetups") as UIViewController
         organicCardView.shouldPresent(organicMeetupDetail, from: self, fullscreen: false)
         
-        let plasticMeetupDetail:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PlasticMeetups") as UIViewController
+        let plasticMeetupDetail:UIViewController = UIStoryboard(name: "Meetups", bundle: nil).instantiateViewController(withIdentifier: "PlasticMeetups") as UIViewController
         plasticCardView.shouldPresent(plasticMeetupDetail, from: self, fullscreen: false)
         
-        let metalMeetupDetail:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MetalMeetups") as UIViewController
+        let metalMeetupDetail:UIViewController = UIStoryboard(name: "Meetups", bundle: nil).instantiateViewController(withIdentifier: "MetalMeetups") as UIViewController
         metalCardView.shouldPresent(metalMeetupDetail, from: self, fullscreen: false)
     }
     

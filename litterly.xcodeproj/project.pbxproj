@@ -41,9 +41,6 @@
 		C593FB7422935EC4002FAE72 /* plant.json in Resources */ = {isa = PBXBuildFile; fileRef = C593FB7322935EC4002FAE72 /* plant.json */; };
 		C593FB782293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593FB772293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift */; };
 		C593FB7A229381B9002FAE72 /* JoinAlertVC-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593FB79229381B9002FAE72 /* JoinAlertVC-Firebase.swift */; };
-		C5942AEF2273843D004F1A43 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5942AED2273843D004F1A43 /* TagViewController.swift */; };
-		C5942AF32273845E004F1A43 /* MeetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5942AF12273845E004F1A43 /* MeetViewController.swift */; };
-		C5942AF722738476004F1A43 /* PointsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5942AF522738476004F1A43 /* PointsViewController.swift */; };
 		C597957C2264E01100B1797D /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597957B2264E01100B1797D /* AppColors.swift */; };
 		C59909632294573A00E16E44 /* TextFadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59909622294573A00E16E44 /* TextFadeTransition.swift */; };
 		C599F5EA2262FD830038A1A6 /* PageOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C599F5E92262FD830038A1A6 /* PageOneViewController.swift */; };
@@ -69,6 +66,9 @@
 		C5C35EEB227A1C7B00103AD9 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C35EEA227A1C7B00103AD9 /* ApiKeys.swift */; };
 		C5C675D62283DEB20005AFEA /* ScheduledMarkerInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5C675D52283DEB20005AFEA /* ScheduledMarkerInfoWindow.xib */; };
 		C5C675D82283DEF20005AFEA /* ScheduledMarkerInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C675D72283DEF20005AFEA /* ScheduledMarkerInfoWindow.swift */; };
+		C5C7448422A7FA60005C0E72 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C7448322A7FA60005C0E72 /* Profile.storyboard */; };
+		C5C7448722A7FBE7005C0E72 /* Meetups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C7448622A7FBE7005C0E72 /* Meetups.storyboard */; };
+		C5C7448A22A7FD8F005C0E72 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C7448922A7FD8F005C0E72 /* Maps.storyboard */; };
 		C5CA15A3226950AD008B04EB /* MeetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA15A2226950AD008B04EB /* MeetupViewController.swift */; };
 		C5D3E903225BB10900C03AFB /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D3E901225BB10900C03AFB /* CardViewController.swift */; };
 		C5D3E904225BB10900C03AFB /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5D3E902225BB10900C03AFB /* CardViewController.xib */; };
@@ -123,9 +123,6 @@
 		C593FB7322935EC4002FAE72 /* plant.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plant.json; sourceTree = "<group>"; };
 		C593FB772293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleAttendingCollectionViewCell.swift; sourceTree = "<group>"; };
 		C593FB79229381B9002FAE72 /* JoinAlertVC-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JoinAlertVC-Firebase.swift"; sourceTree = "<group>"; };
-		C5942AED2273843D004F1A43 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
-		C5942AF12273845E004F1A43 /* MeetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetViewController.swift; sourceTree = "<group>"; };
-		C5942AF522738476004F1A43 /* PointsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsViewController.swift; sourceTree = "<group>"; };
 		C597957B2264E01100B1797D /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		C59909622294573A00E16E44 /* TextFadeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFadeTransition.swift; sourceTree = "<group>"; };
 		C599F5E92262FD830038A1A6 /* PageOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOneViewController.swift; sourceTree = "<group>"; };
@@ -151,6 +148,9 @@
 		C5C35EEA227A1C7B00103AD9 /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		C5C675D52283DEB20005AFEA /* ScheduledMarkerInfoWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduledMarkerInfoWindow.xib; sourceTree = "<group>"; };
 		C5C675D72283DEF20005AFEA /* ScheduledMarkerInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledMarkerInfoWindow.swift; sourceTree = "<group>"; };
+		C5C7448322A7FA60005C0E72 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		C5C7448622A7FBE7005C0E72 /* Meetups.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Meetups.storyboard; sourceTree = "<group>"; };
+		C5C7448922A7FD8F005C0E72 /* Maps.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Maps.storyboard; sourceTree = "<group>"; };
 		C5CA15A2226950AD008B04EB /* MeetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupViewController.swift; sourceTree = "<group>"; };
 		C5D3E901225BB10900C03AFB /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		C5D3E902225BB10900C03AFB /* CardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewController.xib; sourceTree = "<group>"; };
@@ -196,9 +196,7 @@
 				2FA974CB2272B0F000115FBD /* CardContentTableViewCell.swift */,
 				C593FB772293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift */,
 				C50C75292297695C005A16DD /* ProfileVCTrashandMeetupsCell.swift */,
-				C50C752A2297695C005A16DD /* ProfileVCTrashandMeetupsCell.xib */,
 				C50C752D22978724005A16DD /* RedeemPointsCell.swift */,
-				C50C752E22978724005A16DD /* RedeemPointsCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -327,10 +325,10 @@
 		C58D911E225D5581006A0390 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C5907FA72284ECC6001E720D /* AlertStoryboard */,
+				C5C7448B22A8003E005C0E72 /* Storyboards */,
+				C5C7448122A7F394005C0E72 /* ProfileVCXib */,
 				C543BFA12277DB7D000C2FC7 /* AuthVCXib */,
 				C543BFA02277DB45000C2FC7 /* CardVCXib */,
-				C543BF9F2277DB2B000C2FC7 /* MainStoryboard */,
 				C543BF9E2277D6F0000C2FC7 /* MarkerViewandWindowXibs */,
 				2F68CABC2272E049009C2AB6 /* Cells */,
 			);
@@ -399,9 +397,6 @@
 			isa = PBXGroup;
 			children = (
 				C5DD0886225845D1000988A3 /* ProfileViewController.swift */,
-				C5942AED2273843D004F1A43 /* TagViewController.swift */,
-				C5942AF12273845E004F1A43 /* MeetViewController.swift */,
-				C5942AF522738476004F1A43 /* PointsViewController.swift */,
 				C59A8BBA227B66DC009CAA90 /* ProfileVC-Firebase.swift */,
 			);
 			path = ProfileVCs;
@@ -509,6 +504,51 @@
 				C5C35EEA227A1C7B00103AD9 /* ApiKeys.swift */,
 			);
 			path = Keys;
+			sourceTree = "<group>";
+		};
+		C5C7448122A7F394005C0E72 /* ProfileVCXib */ = {
+			isa = PBXGroup;
+			children = (
+				C50C752E22978724005A16DD /* RedeemPointsCell.xib */,
+				C50C752A2297695C005A16DD /* ProfileVCTrashandMeetupsCell.xib */,
+			);
+			path = ProfileVCXib;
+			sourceTree = "<group>";
+		};
+		C5C7448222A7F988005C0E72 /* ProfileStoryboard */ = {
+			isa = PBXGroup;
+			children = (
+				C5C7448322A7FA60005C0E72 /* Profile.storyboard */,
+			);
+			path = ProfileStoryboard;
+			sourceTree = "<group>";
+		};
+		C5C7448522A7FBCD005C0E72 /* MeetupsStoryboard */ = {
+			isa = PBXGroup;
+			children = (
+				C5C7448622A7FBE7005C0E72 /* Meetups.storyboard */,
+			);
+			path = MeetupsStoryboard;
+			sourceTree = "<group>";
+		};
+		C5C7448822A7FD54005C0E72 /* MapsStoryboard */ = {
+			isa = PBXGroup;
+			children = (
+				C5C7448922A7FD8F005C0E72 /* Maps.storyboard */,
+			);
+			path = MapsStoryboard;
+			sourceTree = "<group>";
+		};
+		C5C7448B22A8003E005C0E72 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				C5907FA72284ECC6001E720D /* AlertStoryboard */,
+				C543BF9F2277DB2B000C2FC7 /* MainStoryboard */,
+				C5C7448222A7F988005C0E72 /* ProfileStoryboard */,
+				C5C7448522A7FBCD005C0E72 /* MeetupsStoryboard */,
+				C5C7448822A7FD54005C0E72 /* MapsStoryboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		C5CA15A122695080008B04EB /* MeetupVC */ = {
@@ -643,12 +683,15 @@
 				C543BF9D2277D6E3000C2FC7 /* UnscheduledMarkerInfoWindow.xib in Resources */,
 				C50C752C2297695C005A16DD /* ProfileVCTrashandMeetupsCell.xib in Resources */,
 				C5D3E904225BB10900C03AFB /* CardViewController.xib in Resources */,
+				C5C7448722A7FBE7005C0E72 /* Meetups.storyboard in Resources */,
 				C5D83E2B22581794009CB884 /* LaunchScreen.storyboard in Resources */,
 				C5D83E2822581794009CB884 /* Assets.xcassets in Resources */,
 				C5C675D62283DEB20005AFEA /* ScheduledMarkerInfoWindow.xib in Resources */,
+				C5C7448422A7FA60005C0E72 /* Profile.storyboard in Resources */,
 				C5D83E2622581793009CB884 /* Main.storyboard in Resources */,
 				C584FC6622669DC300ED1B53 /* town.json in Resources */,
 				C5907FA92284ECFB001E720D /* Alert.storyboard in Resources */,
+				C5C7448A22A7FD8F005C0E72 /* Maps.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -764,7 +807,6 @@
 			files = (
 				C5063150226E8E7C0078265C /* MenuController.swift in Sources */,
 				C59C82AD2295BE3B0051F3F8 /* PlasticMeetupViewController.swift in Sources */,
-				C5942AF722738476004F1A43 /* PointsViewController.swift in Sources */,
 				C5863AFC228A38B5004A25E4 /* SharedValues.swift in Sources */,
 				C5063156226E8F100078265C /* HomeControllerDelegateProtocol.swift in Sources */,
 				C599F5EC2263044C0038A1A6 /* PageTwoViewController.swift in Sources */,
@@ -793,7 +835,6 @@
 				C593FB7A229381B9002FAE72 /* JoinAlertVC-Firebase.swift in Sources */,
 				C5D3E903225BB10900C03AFB /* CardViewController.swift in Sources */,
 				C5DD0887225845D1000988A3 /* ProfileViewController.swift in Sources */,
-				C5942AF32273845E004F1A43 /* MeetViewController.swift in Sources */,
 				C543BF982277D5CE000C2FC7 /* MapsVC-Firebase.swift in Sources */,
 				C599F5EE226304590038A1A6 /* PageThreeViewController.swift in Sources */,
 				C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */,
@@ -805,7 +846,6 @@
 				C506314E226E8E430078265C /* ContainerController.swift in Sources */,
 				C59C82B82295C2D60051F3F8 /* MeetupsQueryModel.swift in Sources */,
 				C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */,
-				C5942AEF2273843D004F1A43 /* TagViewController.swift in Sources */,
 				C5D83E2122581793009CB884 /* AppDelegate.swift in Sources */,
 				C5C35EE322791FD300103AD9 /* DocumentSerializableProtocol.swift in Sources */,
 				C56CEA33225D977A005DC40E /* SelectedButton.swift in Sources */,

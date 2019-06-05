@@ -144,13 +144,13 @@ class ContainerController: UIViewController{
             //call destination your VC here
             print("show meetup")
             
-            let meetupVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MeetupVC") as UIViewController
+            let meetupVC:UIViewController = UIStoryboard(name: "Meetups", bundle: nil).instantiateViewController(withIdentifier: "MeetupVC") as UIViewController
             self.present(UINavigationController(rootViewController: meetupVC), animated: true, completion: nil)
             
         case .Profile:
             print("show profile")
             
-            let profileVC:UIViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as UIViewController
+            let profileVC:UIViewController = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as UIViewController
             self.present(UINavigationController(rootViewController: profileVC), animated: true, completion: nil)
             
         case .Logout:

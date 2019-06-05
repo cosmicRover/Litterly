@@ -24,11 +24,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     let meetupHistoryLabel = UILabel()
     let containerView = UIView()
     let tableView = UITableView()
-    
-    //located in the views folder
-    let tagVC:UIView = TagViewController().view
-    let meetVC:UIView = MeetViewController().view
-    let pointsVC:UIView = PointsViewController().view
 
     let trashTagAtt = ("---", "TRASHTAG")
     let meetupAtt = ("___", "MEETUPS")
@@ -297,6 +292,21 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         return returnValue
     }
     
+    //determines which image string to return
+    func configureCellImage(for trashType:String) -> String{
+        switch trashType{
+        case "organic" :
+            return "icons8-natural-food-100"
+        case "plastic" :
+            return "icons8-plastic-100"
+        case "metal" :
+            return "icons8-gears-100"
+        default:
+            print("error")
+            return ""
+        }
+    }
+    
     //register the cell first and then call it here
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -317,19 +327,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.buttonParentView.backgroundColor = UIColor.unselectedGrey
             }
             
-            switch userTaggedTrash[indexPath.row].trash_type{
-            case "organic" :
-                cell.trashTypeButton.setImage(UIImage(named: "icons8-natural-food-100"), for: .normal)
-                    break
-            case "plastic" :
-                cell.trashTypeButton.setImage(UIImage(named: "icons8-plastic-100"), for: .normal)
-                    break
-            case "metal" :
-                cell.trashTypeButton.setImage(UIImage(named: "icons8-gears-100"), for: .normal)
-                break
-            default:
-                print("error")
-            }
+            let imageName = configureCellImage(for: userTaggedTrash[indexPath.row].trash_type)
+            cell.trashTypeButton.setImage(UIImage(named: "\(imageName)"), for: .normal)
             
             cell.addressLabel.textColor = UIColor.backBarViewGray
             cell.dateAndTimeLabel.textColor = UIColor.containerDividerGrey
@@ -354,19 +353,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             cell.addressLabel.textColor = UIColor.backBarViewGray
             cell.dateAndTimeLabel.textColor = UIColor.containerDividerGrey
             
-            switch userCreatedMeetups[indexPath.row].type_of_trash{
-            case "organic" :
-                cell.trashTypeButton.setImage(UIImage(named: "icons8-natural-food-100"), for: .normal)
-                break
-            case "plastic" :
-                cell.trashTypeButton.setImage(UIImage(named: "icons8-plastic-100"), for: .normal)
-                break
-            case "metal" :
-                cell.trashTypeButton.setImage(UIImage(named: "icons8-gears-100"), for: .normal)
-                break
-            default:
-                print("error")
-            }
+            let imageName = configureCellImage(for: userCreatedMeetups[indexPath.row].type_of_trash)
+            cell.trashTypeButton.setImage(UIImage(named: "\(imageName)"), for: .normal)
             
             cell.addressLabel.text = userCreatedMeetups[indexPath.row].meetup_address
             cell.dateAndTimeLabel.text = userCreatedMeetups[indexPath.row].meetup_date_time
@@ -392,6 +380,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
          return cell
     }
     
+    //tableView animations
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
         cell.layer.transform = rotationTransform
