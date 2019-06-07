@@ -114,7 +114,8 @@ class JoinAlertViewController: UIViewController, UICollectionViewDelegate, UICol
         
         guard let usersData = confirmedUsers else {return cell}
         
-        //gets image from network
+        //gets image from network.
+        // TODO := need to provide default values so it doesnt return nil and crash
         let userImage = usersData[indexPath.row]["user_pic_url"] as! String
         let imageUrl = URL(string: userImage)
         let data = try! Data(contentsOf: imageUrl!)

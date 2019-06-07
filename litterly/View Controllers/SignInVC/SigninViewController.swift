@@ -145,6 +145,8 @@ extension SigninViewController: FUIAuthDelegate{
             singletonValues.currentUserDisplayName = user_name
             singletonValues.currentUserProfileImageURL = profile_pic_url
             
+            storeImageOnDevice(with: profile_pic_url)
+            
             
             
             let currentUser = UserDataModel(user_id: user_id!, user_name: user_name, profile_pic_url: profile_pic_url, neighborhood: "")
@@ -162,6 +164,26 @@ extension SigninViewController: FUIAuthDelegate{
             
         }
         
+    }
+    
+    //stores user profile photo to disk
+    func storeImageOnDevice(with url:String){
+        
+        let userImage = url as! String
+        let imageUrl = URL(string: userImage)
+        let data = try! Data(contentsOf: imageUrl!)
+        let image = UIImage(data: data)!
+        
+        do {
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileURL = documentsURL.appendingPathComponent("profilePhoto.png")
+            if let pngImageData = image.pngData() {
+                try pngImageData.write(to: fileURL, options: .atomic)
+            }
+            print("image has been saved")
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
 }

@@ -120,14 +120,21 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         usrCityLabel.textColor = UIColor.textWhite
     }
     
+    //gets user profile pic from disk
+    func getUserImage() -> UIImage{
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let filePath = documentsURL.appendingPathComponent("profilePhoto.png").path
+        if FileManager.default.fileExists(atPath: filePath) {
+            return UIImage(contentsOfFile: filePath)!
+        }
+        
+        return UIImage(named: "userPhoto")!
+    }
+    
     //sets up the profile pic
     func configureProfilePhoto(){
         
-        //provides an image for the imageView using alamofire
-        let userImage = Auth.auth().currentUser?.photoURL?.absoluteString as! String
-        let imageUrl = URL(string: userImage)
-        let data = try! Data(contentsOf: imageUrl!)
-        let image = UIImage(data: data)
+        let image = getUserImage()
         
         profileImageView.image = image
         profileImageView.contentMode = .scaleAspectFill

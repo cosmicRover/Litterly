@@ -31,17 +31,25 @@ class MenuController: UIViewController{
     
     // MARK: - Handlers
     
+    //gets photo from device
+    func getUserImage() -> UIImage{
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let filePath = documentsURL.appendingPathComponent("profilePhoto.png").path
+        if FileManager.default.fileExists(atPath: filePath) {
+            return UIImage(contentsOfFile: filePath)!
+        }
+        
+        return UIImage(named: "userPhoto")!
+    }
+    
     //set up the tableview with data source, delegate, cell and constarints
     func configureTableView(){
         
         let imageView = UIImageView()
         
-        let userImage = Auth.auth().currentUser?.photoURL?.absoluteString as! String
-        let imageUrl = URL(string: userImage)
-        let data = try! Data(contentsOf: imageUrl!)
-        let image = UIImage(data: data)
+        let image = getUserImage()
         
-        let profileImage = ResizeImage(image: image!, targetSize: CGSize(width: 64, height: 64))
+        let profileImage = ResizeImage(image: image, targetSize: CGSize(width: 64, height: 64))
         imageView.image = profileImage
         
         //imageView.frame = CGRect(x: 0, y: 0, width: 64, height: 64)
