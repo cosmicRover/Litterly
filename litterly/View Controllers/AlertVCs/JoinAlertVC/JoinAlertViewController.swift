@@ -29,25 +29,25 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         disableJoinButton()
         setupColors()
         roundCorners()
+        configureCollectionViewFlowLayout()
         fetchMeetupDetails()
 
         attendingUserCollectionView.dataSource = self
         attendingUserCollectionView.delegate = self
         
-        self.attendingUserCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        //self.attendingUserCollectionView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 100).isActive = tru
-        
+        //attendingUserCollectionView.reloadData()
     
     }
-    
-    //sets collectionView cell sizes
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: <#T##Double#>, height: <#T##Double#>)
-        
+
+    func configureCollectionViewFlowLayout(){
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        attendingUserCollectionView.collectionViewLayout = layout
     }
     
     func disableJoinButton(){
@@ -77,8 +77,8 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
     
     @IBAction func onJoinTap(_ sender: UIButton) {
         
-        let userId = sharedValue.currentUserEmail as! String
-        let userPicUrl = sharedValue.currentUserProfileImageURL as! String
+        let userId = sharedValue.currentUserEmail! as String
+        let userPicUrl = sharedValue.currentUserProfileImageURL! as String
         let meetupId = ("\(sharedValue.tappedArrayElementDict.lat)\(sharedValue.tappedArrayElementDict.lon)meetup")
         
         updateConfirmedUsersArray(for: meetupId, with: userId, and: userPicUrl)
@@ -127,10 +127,11 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
         //gets image from network.
         let userImage = confirmedUsers[indexPath.row]["user_pic_url"] as! String
         let imageUrl = URL(string: userImage)
+
         
         if let data = try? Data(contentsOf: (imageUrl)!){
             let image = UIImage(data: data)
-            
+
             cell.attendingUserProfileImages.image = image
             //rounds and configures the cell
             cell.attendingUserProfileImages.contentMode = .scaleAspectFill
@@ -140,11 +141,11 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
             cell.attendingUserProfileImages.layer.borderColor = UIColor.searchBoxTextGray.cgColor
             cell.attendingUserProfileImages.layer.cornerRadius = cell.attendingUserProfileImages.frame.height/2
             cell.attendingUserProfileImages.clipsToBounds = true
-            
+
             return cell
-            
+
         } else{
-            
+
             //if downloaded image is nil, provide a default value
             cell.attendingUserProfileImages.image = UIImage(named: "profile")
             //rounds and configures the cell
@@ -155,11 +156,9 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
             cell.attendingUserProfileImages.layer.borderColor = UIColor.searchBoxTextGray.cgColor
             cell.attendingUserProfileImages.layer.cornerRadius = cell.attendingUserProfileImages.frame.height/2
             cell.attendingUserProfileImages.clipsToBounds = true
-            
+
             return cell
         }
-        
-        //return cell
         
     }
     

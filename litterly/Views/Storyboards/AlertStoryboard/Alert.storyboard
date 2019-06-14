@@ -198,31 +198,35 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-TH-TyW">
-                                        <rect key="frame" x="17" y="405" width="311" height="68"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J5j-TH-TyW">
+                                        <rect key="frame" x="17" y="367.5" width="311" height="134.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TCG-f9-ehq">
-                                            <size key="itemSize" width="66" height="66"/>
+                                            <size key="itemSize" width="64" height="55"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PeopleAttendingCollectionViewCell" id="rfD-eq-wC7" customClass="PeopleAttendingCollectionViewCell" customModule="litterly" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1" width="66" height="66"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="64" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="66" height="66"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="64" height="55"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uGT-uT-tPk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="66" height="66"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="64" height="55"/>
                                                         </imageView>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
+                                                    <constraint firstItem="uGT-uT-tPk" firstAttribute="leading" secondItem="rfD-eq-wC7" secondAttribute="leading" id="Nmc-qM-gjx"/>
+                                                    <constraint firstItem="uGT-uT-tPk" firstAttribute="top" secondItem="rfD-eq-wC7" secondAttribute="top" id="NzL-3U-wlH"/>
                                                     <constraint firstItem="uGT-uT-tPk" firstAttribute="top" secondItem="rfD-eq-wC7" secondAttribute="top" id="QKL-zu-jh3"/>
+                                                    <constraint firstAttribute="bottom" secondItem="uGT-uT-tPk" secondAttribute="bottom" id="RZh-Um-L7F"/>
                                                     <constraint firstAttribute="trailing" secondItem="uGT-uT-tPk" secondAttribute="trailing" id="WNp-Wc-rby"/>
+                                                    <constraint firstAttribute="trailing" secondItem="uGT-uT-tPk" secondAttribute="trailing" id="dfE-15-sVX"/>
                                                     <constraint firstAttribute="bottom" secondItem="uGT-uT-tPk" secondAttribute="bottom" id="g6C-Pn-pgu"/>
                                                     <constraint firstItem="uGT-uT-tPk" firstAttribute="leading" secondItem="rfD-eq-wC7" secondAttribute="leading" id="ze9-yz-rxo"/>
                                                 </constraints>
@@ -233,10 +237,10 @@
                                         </cells>
                                     </collectionView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="mIO-7C-4h9">
-                                        <rect key="frame" x="8" y="491" width="329" height="52"/>
+                                        <rect key="frame" x="8" y="514" width="329" height="29"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUx-6Z-2Mb">
-                                                <rect key="frame" x="0.0" y="0.0" width="139.5" height="52"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="139.5" height="29"/>
                                                 <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="15"/>
                                                 <state key="normal" title="Cancel">
@@ -247,10 +251,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORR-B3-GWu">
-                                                <rect key="frame" x="189.5" y="0.0" width="139.5" height="52"/>
+                                                <rect key="frame" x="189.5" y="0.0" width="139.5" height="29"/>
                                                 <color key="backgroundColor" red="0.18039215689999999" green="0.80000000000000004" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="52" id="Kv4-hB-3DU"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="29" id="Kv4-hB-3DU"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="15"/>
                                                 <state key="normal" title="Join">
@@ -288,7 +292,7 @@
                                     <constraint firstItem="mJj-fz-ggn" firstAttribute="top" secondItem="Sgt-16-6eD" secondAttribute="bottom" constant="8" id="uGR-K3-bQI"/>
                                     <constraint firstAttribute="trailing" secondItem="mJj-fz-ggn" secondAttribute="trailing" constant="17" id="vS8-kw-wya"/>
                                     <constraint firstItem="mIO-7C-4h9" firstAttribute="leading" secondItem="X8N-q0-cAm" secondAttribute="leading" constant="8" id="vh4-7d-Yaj"/>
-                                    <constraint firstItem="mIO-7C-4h9" firstAttribute="top" secondItem="J5j-TH-TyW" secondAttribute="bottom" constant="18" id="wEM-fL-hhM"/>
+                                    <constraint firstItem="mIO-7C-4h9" firstAttribute="top" secondItem="J5j-TH-TyW" secondAttribute="bottom" constant="12" id="wEM-fL-hhM"/>
                                     <constraint firstAttribute="bottom" secondItem="mIO-7C-4h9" secondAttribute="bottom" constant="24" id="zoa-IJ-gcU"/>
                                 </constraints>
                             </view>
