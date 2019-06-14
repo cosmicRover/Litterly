@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class JoinAlertViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var headerTitle: UILabel!
@@ -36,6 +36,18 @@ class JoinAlertViewController: UIViewController, UICollectionViewDelegate, UICol
 
         attendingUserCollectionView.dataSource = self
         attendingUserCollectionView.delegate = self
+        
+        self.attendingUserCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        //self.attendingUserCollectionView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 100).isActive = tru
+        
+    
+    }
+    
+    //sets collectionView cell sizes
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: <#T##Double#>, height: <#T##Double#>)
+        
     }
     
     func disableJoinButton(){
