@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class JoinAlertViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var headerTitle: UILabel!
@@ -29,13 +29,25 @@ class JoinAlertViewController: UIViewController, UICollectionViewDelegate, UICol
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         disableJoinButton()
         setupColors()
         roundCorners()
+        configureCollectionViewFlowLayout()
         fetchMeetupDetails()
 
         attendingUserCollectionView.dataSource = self
         attendingUserCollectionView.delegate = self
+        
+        //attendingUserCollectionView.reloadData()
+    
+    }
+
+    func configureCollectionViewFlowLayout(){
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        attendingUserCollectionView.collectionViewLayout = layout
     }
     
     func disableJoinButton(){
@@ -65,8 +77,8 @@ class JoinAlertViewController: UIViewController, UICollectionViewDelegate, UICol
     
     @IBAction func onJoinTap(_ sender: UIButton) {
         
-        let userId = sharedValue.currentUserEmail as! String
-        let userPicUrl = sharedValue.currentUserProfileImageURL as! String
+        let userId = sharedValue.currentUserEmail! as String
+        let userPicUrl = sharedValue.currentUserProfileImageURL! as String
         let meetupId = ("\(sharedValue.tappedArrayElementDict.lat)\(sharedValue.tappedArrayElementDict.lon)meetup")
         
         updateConfirmedUsersArray(for: meetupId, with: userId, and: userPicUrl)
@@ -115,10 +127,11 @@ class JoinAlertViewController: UIViewController, UICollectionViewDelegate, UICol
         //gets image from network.
         let userImage = confirmedUsers[indexPath.row]["user_pic_url"] as! String
         let imageUrl = URL(string: userImage)
+
         
         if let data = try? Data(contentsOf: (imageUrl)!){
             let image = UIImage(data: data)
-            
+
             cell.attendingUserProfileImages.image = image
             //rounds and configures the cell
             cell.attendingUserProfileImages.contentMode = .scaleAspectFill
@@ -128,11 +141,11 @@ class JoinAlertViewController: UIViewController, UICollectionViewDelegate, UICol
             cell.attendingUserProfileImages.layer.borderColor = UIColor.searchBoxTextGray.cgColor
             cell.attendingUserProfileImages.layer.cornerRadius = cell.attendingUserProfileImages.frame.height/2
             cell.attendingUserProfileImages.clipsToBounds = true
-            
+
             return cell
-            
+
         } else{
-            
+
             //if downloaded image is nil, provide a default value
             cell.attendingUserProfileImages.image = UIImage(named: "profile")
             //rounds and configures the cell
@@ -143,11 +156,9 @@ class JoinAlertViewController: UIViewController, UICollectionViewDelegate, UICol
             cell.attendingUserProfileImages.layer.borderColor = UIColor.searchBoxTextGray.cgColor
             cell.attendingUserProfileImages.layer.cornerRadius = cell.attendingUserProfileImages.frame.height/2
             cell.attendingUserProfileImages.clipsToBounds = true
-            
+
             return cell
         }
-        
-        //return cell
         
     }
     
