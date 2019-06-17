@@ -57,6 +57,7 @@ class ContainerController: UIViewController{
     
     //set the home controller for our slide menu using a navigationController and rootVC
     func configureHomeController(){
+        
         let homeController = MapsViewController()
         homeController.delegate = self
         centerController = UINavigationController(rootViewController: homeController)
@@ -71,6 +72,7 @@ class ContainerController: UIViewController{
     
     //configure the actual menu, configure only once
     func configureMenuController(){
+        
         if menuController == nil{
             //add menu controller
             menuController = MenuController()
@@ -79,16 +81,33 @@ class ContainerController: UIViewController{
             addChild(menuController)
             menuController.didMove(toParent: self)
             print("Did add menu controller")
+            
+            
+            for myViews in menuController.view.subviews {
+                print("Current views : \(myViews)")
+            }
+            //menuController.view.frame = CGRect(x: 0, y: 0, width: 200, height: UIScreen.main.bounds.height/2)
+           // menuController.view.backgroundColor = .red
+            
         }
     }
     
     //animate the menu sliding in and out
     func animatePanel(shouldExpand: Bool, menuOption: MenuOption?){
         
+        let imageViewSize = menuController.imageView.bounds.width
+        
+        
         if shouldExpand{
             //show menu
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
-                self.centerController.view.frame.origin.x = self.centerController.view.frame.width - 287
+                
+                
+              // self.centerController.view.frame.origin.x = (self.centerController.view.frame.width / 3) - 12
+               // self.centerController.view.frame.origin.x = self.centerController.view.frame.width - 287
+                
+                
+                self.centerController.view.frame.origin.x = (imageViewSize + 24)
                 
                 //self.centerController.view.isUserInteractionEnabled = false
                 

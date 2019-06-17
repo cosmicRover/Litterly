@@ -28,11 +28,13 @@ class MenuController: UIViewController{
         super.viewDidLoad()
         configureTableView()
     }
+
     
     // MARK: - Handlers
     
     //gets photo from device
-    func getUserImage() -> UIImage{
+    func getUserImage() -> UIImage {
+        
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let filePath = documentsURL.appendingPathComponent("profilePhoto.png").path
         if FileManager.default.fileExists(atPath: filePath) {
@@ -42,10 +44,12 @@ class MenuController: UIViewController{
         return UIImage(named: "userPhoto")!
     }
     
+     internal let imageView = UIImageView()
+    
     //set up the tableview with data source, delegate, cell and constarints
     func configureTableView(){
         
-        let imageView = UIImageView()
+      //  let imageView = UIImageView()   // Moved it upwards public
         
         let image = getUserImage()
         
@@ -58,6 +62,7 @@ class MenuController: UIViewController{
         
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 12).isActive = true
         imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12).isActive = true
  
@@ -71,7 +76,7 @@ class MenuController: UIViewController{
         tableView.dataSource = self
         
         tableView.register(MenuOptionCell.self, forCellReuseIdentifier: reusableIdentifier)
-        tableView.backgroundColor = UIColor.mainBlue
+        tableView.backgroundColor = UIColor.mainBlue //
         tableView.separatorColor = UIColor.containerDividerGrey
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         tableView.rowHeight = 73
@@ -125,6 +130,7 @@ extension MenuController: UITableViewDelegate, UITableViewDataSource{
         
         let menuOption = MenuOption(rawValue: indexPath.row)
         //cell.descriptionLabel.text = menuOption?.description
+        
         cell.iconImageView.image = menuOption?.image
         
         return cell
