@@ -102,14 +102,9 @@ class ContainerController: UIViewController{
             //show menu
             UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 
-                
-              // self.centerController.view.frame.origin.x = (self.centerController.view.frame.width / 3) - 12
-               // self.centerController.view.frame.origin.x = self.centerController.view.frame.width - 287
-                
-                
+                //expands the menu
                 self.centerController.view.frame.origin.x = (imageViewSize + 24)
                 
-                //self.centerController.view.isUserInteractionEnabled = false
                 
                 //adding the blur effect
                 self.centerController.view.addSubview(self.blurEffectView)
