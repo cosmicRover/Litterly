@@ -21,6 +21,9 @@ class MenuController: UIViewController{
     //also need access to the delegate
     var delegate: HomeControllerDelegate?
     
+    //imageView for the user
+    let imageView = UIImageView()
+    
     
     // MARK: - Init
     
@@ -28,11 +31,13 @@ class MenuController: UIViewController{
         super.viewDidLoad()
         configureTableView()
     }
+
     
     // MARK: - Handlers
     
     //gets photo from device
-    func getUserImage() -> UIImage{
+    func getUserImage() -> UIImage {
+        
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let filePath = documentsURL.appendingPathComponent("profilePhoto.png").path
         if FileManager.default.fileExists(atPath: filePath) {
@@ -45,8 +50,6 @@ class MenuController: UIViewController{
     //set up the tableview with data source, delegate, cell and constarints
     func configureTableView(){
         
-        let imageView = UIImageView()
-        
         let image = getUserImage()
         
         let profileImage = ResizeImage(image: image, targetSize: CGSize(width: 64, height: 64))
@@ -58,6 +61,7 @@ class MenuController: UIViewController{
         
         view.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
         imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 12).isActive = true
         imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12).isActive = true
  
@@ -71,7 +75,7 @@ class MenuController: UIViewController{
         tableView.dataSource = self
         
         tableView.register(MenuOptionCell.self, forCellReuseIdentifier: reusableIdentifier)
-        tableView.backgroundColor = UIColor.mainBlue
+        tableView.backgroundColor = UIColor.mainBlue //
         tableView.separatorColor = UIColor.containerDividerGrey
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         tableView.rowHeight = 73
@@ -83,6 +87,7 @@ class MenuController: UIViewController{
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
     }
     
     func ResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
@@ -125,7 +130,9 @@ extension MenuController: UITableViewDelegate, UITableViewDataSource{
         
         let menuOption = MenuOption(rawValue: indexPath.row)
         //cell.descriptionLabel.text = menuOption?.description
+        
         cell.iconImageView.image = menuOption?.image
+        cell.selectionStyle = .none
         
         return cell
     }
@@ -133,8 +140,6 @@ extension MenuController: UITableViewDelegate, UITableViewDataSource{
     //returns the selected item on the tableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let menuOption = MenuOption(rawValue: indexPath.row)
-        let cell:MenuOptionCell = tableView.cellForRow(at: indexPath) as! MenuOptionCell
-        cell.selectionStyle = .none
         delegate?.handleMenuToggle(forMenuOption: menuOption)
     }
     
