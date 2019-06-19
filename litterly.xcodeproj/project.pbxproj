@@ -41,6 +41,8 @@
 		C593FB7422935EC4002FAE72 /* plant.json in Resources */ = {isa = PBXBuildFile; fileRef = C593FB7322935EC4002FAE72 /* plant.json */; };
 		C593FB782293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593FB772293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift */; };
 		C593FB7A229381B9002FAE72 /* JoinAlertVC-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593FB79229381B9002FAE72 /* JoinAlertVC-Firebase.swift */; };
+		C594409722B9B18B00B95FF9 /* NearbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C594409622B9B18B00B95FF9 /* NearbyViewController.swift */; };
+		C594409A22B9B1CE00B95FF9 /* Nearby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C594409922B9B1CE00B95FF9 /* Nearby.storyboard */; };
 		C597957C2264E01100B1797D /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597957B2264E01100B1797D /* AppColors.swift */; };
 		C59909632294573A00E16E44 /* TextFadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59909622294573A00E16E44 /* TextFadeTransition.swift */; };
 		C599F5EA2262FD830038A1A6 /* PageOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C599F5E92262FD830038A1A6 /* PageOneViewController.swift */; };
@@ -123,6 +125,8 @@
 		C593FB7322935EC4002FAE72 /* plant.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plant.json; sourceTree = "<group>"; };
 		C593FB772293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleAttendingCollectionViewCell.swift; sourceTree = "<group>"; };
 		C593FB79229381B9002FAE72 /* JoinAlertVC-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JoinAlertVC-Firebase.swift"; sourceTree = "<group>"; };
+		C594409622B9B18B00B95FF9 /* NearbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyViewController.swift; sourceTree = "<group>"; };
+		C594409922B9B1CE00B95FF9 /* Nearby.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Nearby.storyboard; sourceTree = "<group>"; };
 		C597957B2264E01100B1797D /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		C59909622294573A00E16E44 /* TextFadeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFadeTransition.swift; sourceTree = "<group>"; };
 		C599F5E92262FD830038A1A6 /* PageOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOneViewController.swift; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 		C58D911F225D559D006A0390 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C594409522B9B13C00B95FF9 /* NearbyVC */,
 				C5907FAA2284ED3A001E720D /* AlertVCs */,
 				C5942AEB2273760B004F1A43 /* ProfileVCs */,
 				C506314B226E8C0B0078265C /* SideMenuVCs */,
@@ -400,6 +405,22 @@
 				C59A8BBA227B66DC009CAA90 /* ProfileVC-Firebase.swift */,
 			);
 			path = ProfileVCs;
+			sourceTree = "<group>";
+		};
+		C594409522B9B13C00B95FF9 /* NearbyVC */ = {
+			isa = PBXGroup;
+			children = (
+				C594409622B9B18B00B95FF9 /* NearbyViewController.swift */,
+			);
+			path = NearbyVC;
+			sourceTree = "<group>";
+		};
+		C594409822B9B1A100B95FF9 /* NearbyStoryboard */ = {
+			isa = PBXGroup;
+			children = (
+				C594409922B9B1CE00B95FF9 /* Nearby.storyboard */,
+			);
+			path = NearbyStoryboard;
 			sourceTree = "<group>";
 		};
 		C59C82B22295C13B0051F3F8 /* Organic Meetups */ = {
@@ -542,6 +563,7 @@
 		C5C7448B22A8003E005C0E72 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				C594409822B9B1A100B95FF9 /* NearbyStoryboard */,
 				C5907FA72284ECC6001E720D /* AlertStoryboard */,
 				C543BF9F2277DB2B000C2FC7 /* MainStoryboard */,
 				C5C7448222A7F988005C0E72 /* ProfileStoryboard */,
@@ -686,6 +708,7 @@
 				C5C7448722A7FBE7005C0E72 /* Meetups.storyboard in Resources */,
 				C5D83E2B22581794009CB884 /* LaunchScreen.storyboard in Resources */,
 				C5D83E2822581794009CB884 /* Assets.xcassets in Resources */,
+				C594409A22B9B1CE00B95FF9 /* Nearby.storyboard in Resources */,
 				C5C675D62283DEB20005AFEA /* ScheduledMarkerInfoWindow.xib in Resources */,
 				C5C7448422A7FA60005C0E72 /* Profile.storyboard in Resources */,
 				C5D83E2622581793009CB884 /* Main.storyboard in Resources */,
@@ -834,6 +857,7 @@
 				C58D911D225D54B2006A0390 /* MapsVC-SlideInCard.swift in Sources */,
 				C593FB7A229381B9002FAE72 /* JoinAlertVC-Firebase.swift in Sources */,
 				C5D3E903225BB10900C03AFB /* CardViewController.swift in Sources */,
+				C594409722B9B18B00B95FF9 /* NearbyViewController.swift in Sources */,
 				C5DD0887225845D1000988A3 /* ProfileViewController.swift in Sources */,
 				C543BF982277D5CE000C2FC7 /* MapsVC-Firebase.swift in Sources */,
 				C599F5EE226304590038A1A6 /* PageThreeViewController.swift in Sources */,
