@@ -49,14 +49,6 @@ class MapsViewController: UIViewController{
     //init the location manager for device location
     let locationManager = CLLocationManager()
     
-    lazy var customSearchBar: UISearchBar = {
-        let bar = UISearchBar()
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        return bar
-    }()
-    
-    let searchBox = UITextField()
-    
     let db = Firestore.firestore()
     
     var trashModelArray = [TrashDataModel]()
@@ -103,7 +95,7 @@ class MapsViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         makeTheNavBarClear()
-        addASearchBar()
+        addMenuAndSearchButtonToNavBar()
     }
     
     //Calling a function to lower the card
@@ -127,9 +119,6 @@ class MapsViewController: UIViewController{
             unScheduledMarkerInfoWindow.removeFromSuperview()
             scheduledMarkerInfoWindow.removeFromSuperview()
         }
-        
-//        unScheduledMarkerInfoWindow.removeFromSuperview()
-//        scheduledMarkerInfoWindow.removeFromSuperview()
     }
 }
 
