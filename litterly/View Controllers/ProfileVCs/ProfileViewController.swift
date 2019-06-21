@@ -66,7 +66,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.segmentedCtrl.setTitle("\(count as! Int)\n\(self.trashTagAtt.1)", forSegmentAt: 0)
         }
         
-        fetchUserCreatedMeetup { (count) in
+        fetchUserJoinedMeetup { (count) in
             self.segmentedCtrl.setTitle("\(count as! Int)\n\(self.meetupAtt.1)", forSegmentAt: 1)
         }
         

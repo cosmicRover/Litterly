@@ -20,6 +20,8 @@ struct MeetupDataModel{
     var author_id: String
     var author_display_name: String
     var confirmed_users:[[String:String]]
+    var confirmed_users_ids:[String]
+    
     
     var dictionary:[String: Any]{
         return [
@@ -30,7 +32,8 @@ struct MeetupDataModel{
             "type_of_trash": type_of_trash,
             "author_id": author_id,
             "author_display_name": author_display_name,
-            "confirmed_users": confirmed_users
+            "confirmed_users": confirmed_users,
+            "confirmed_users_ids": confirmed_users_ids
         ]
     }
 }
@@ -47,8 +50,9 @@ extension MeetupDataModel: DocumentSerializable{
             let type_of_trash = dictionary["type_of_trash"] as? String,
             let author_id = dictionary["author_id"] as? String,
             let author_display_name = dictionary["author_display_name"] as? String,
-            let confirmed_users = dictionary["confirmed_users"] as? [[String:String]] else {return nil}
+            let confirmed_users = dictionary["confirmed_users"] as? [[String:String]],
+            let confirmed_users_ids = dictionary["confirmed_users_ids"] as? [String] else {return nil}
         
-        self.init(marker_lat: marker_lat, marker_lon: marker_lon, meetup_address: meetup_address, meetup_date_time: meetup_date_time, type_of_trash: type_of_trash, author_id: author_id, author_display_name: author_display_name, confirmed_users: confirmed_users)
+        self.init(marker_lat: marker_lat, marker_lon: marker_lon, meetup_address: meetup_address, meetup_date_time: meetup_date_time, type_of_trash: type_of_trash, author_id: author_id, author_display_name: author_display_name, confirmed_users: confirmed_users, confirmed_users_ids: confirmed_users_ids)
     }
 }

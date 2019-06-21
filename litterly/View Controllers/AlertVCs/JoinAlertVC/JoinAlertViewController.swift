@@ -81,7 +81,7 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
         let userPicUrl = sharedValue.currentUserProfileImageURL! as String
         let meetupId = ("\(sharedValue.tappedArrayElementDict.lat)\(sharedValue.tappedArrayElementDict.lon)meetup")
         
-        updateConfirmedUsersArray(for: meetupId, with: userId, and: userPicUrl)
+        updateConfirmedUsersArrayAndUsersIdArray(for: meetupId, with: userId, and: userPicUrl)
         
         self.dismiss(animated: true, completion: showSuccessAlert)
     }

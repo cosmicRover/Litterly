@@ -123,7 +123,7 @@ class ScheduleAlertViewController: UIViewController {
     @IBAction func onCreateTap(_ sender: UIButton) {
         let id:String = ("\(sharedValue.tappedArrayElementDict.lat)\(sharedValue.tappedArrayElementDict.lon)meetup")
         
-        let dict:MeetupDataModel = MeetupDataModel(marker_lat: sharedValue.tappedArrayElementDict.lat, marker_lon: sharedValue.tappedArrayElementDict.lon, meetup_address: sharedValue.tappedArrayElementDict.street_address, meetup_date_time: "\(meetupDate! as String)", type_of_trash: sharedValue.tappedArrayElementDict.trash_type, author_id: "\(sharedValue.currentUserEmail! as String)", author_display_name: sharedValue.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(sharedValue.currentUserEmail! as String)", "user_pic_url" : "\(sharedValue.currentUserProfileImageURL! as String)"]])
+        let dict:MeetupDataModel = MeetupDataModel(marker_lat: sharedValue.tappedArrayElementDict.lat, marker_lon: sharedValue.tappedArrayElementDict.lon, meetup_address: sharedValue.tappedArrayElementDict.street_address, meetup_date_time: "\(meetupDate! as String)", type_of_trash: sharedValue.tappedArrayElementDict.trash_type, author_id: "\(sharedValue.currentUserEmail! as String)", author_display_name: sharedValue.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(sharedValue.currentUserEmail! as String)", "user_pic_url" : "\(sharedValue.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(sharedValue.currentUserEmail! as String)"])
         
         createAMeetup(with: dict.dictionary, for: "\(id)")
         //updating from device causes arrays to go bat-shit crazy

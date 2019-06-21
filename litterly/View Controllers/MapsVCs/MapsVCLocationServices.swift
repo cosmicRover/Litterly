@@ -7,9 +7,7 @@
 //
 
 import GoogleMaps
-import UIKit
 import CoreLocation
-import GooglePlaces
 import Firebase
 
 //contains all the location permission related cods
