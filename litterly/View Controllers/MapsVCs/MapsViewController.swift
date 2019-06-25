@@ -92,7 +92,7 @@ class MapsViewController: UIViewController{
         firestoreCollection = db.collection("TaggedTrash")
         geoFirestore = GeoFirestore(collectionRef: firestoreCollection)
         
-        executeNearby() //nearby func. cre
+       // executeNearby() //nearby func. cre
         
         //listening for buttonTapped
         NotificationCenter.default.addObserver(self, selector: #selector(reportTapped), name: NSNotification.Name("reportTapped"), object: nil)
@@ -106,12 +106,23 @@ class MapsViewController: UIViewController{
         super.viewDidAppear(animated)
         makeTheNavBarClear()
         addMenuAndSearchButtonToNavBar()
+        NotificationCenter.default.addObserver(self, selector: #selector(listenForRadius), name: NSNotification.Name("updatedLocation"), object: nil)
+        //need to nil guard
+        //guard locationManager.location != nil else{return}
+        
+        //queryForNearby(center: locationManager.location!.coordinate, with: 0.005)
     }
     
     //Calling a function to lower the card
     @objc private func reportTapped() {
         print("lowering the card")
         animateTransitionIfNeeded(state: .collapsed, duration: 0.5)
+    }
+    
+    //listen for nearby
+    @objc private func listenForRadius(){
+        ///maybe wait till all the data is ready to be loaded???????
+        queryForNearby(center: locationManager.location!.coordinate, with: 0.009)
     }
     
     //calling a func to re-assign userAssignedElement

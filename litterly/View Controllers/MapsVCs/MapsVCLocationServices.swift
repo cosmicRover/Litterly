@@ -81,7 +81,8 @@ extension MapsViewController: CLLocationManagerDelegate{
             let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 17.0)
             self.mapView?.animate(to: camera)
             self.mapView?.isMyLocationEnabled = true
-            
+            //for radius notification
+            NotificationCenter.default.post(name: NSNotification.Name("updatedLocation"), object: nil)
             self.locationManager.startUpdatingLocation()
         }
     }
@@ -89,16 +90,20 @@ extension MapsViewController: CLLocationManagerDelegate{
     //func to call after location from the user is taken
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
-        executeNearby()
+        //executeNearby()
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        
+        //queryForNearby(center: location!.coordinate, with: 0.6)
         
         mapView?.animate(to: camera)
         
         locationManager.startUpdatingLocation()
         
         //Finally stop updating location otherwise it will come again and again in this delegate
+        //locationManager.stopUpdatingLocation()
+        mapView?.isMyLocationEnabled = true
+        
         locationManager.stopUpdatingLocation()
-        mapView?.isMyLocationEnabled = false
         
     }
     

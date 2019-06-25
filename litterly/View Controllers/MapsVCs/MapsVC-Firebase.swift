@@ -137,43 +137,49 @@ extension MapsViewController{
     ////**************EXPERIMENTS
     
     func executeNearby(){
-        guard let location = locationManager.location?.coordinate else{return}
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-            self.queryForNearby(center: location, with: 0.6)
-        })
+         //self.queryForNearby(center: location, with: 0.6)
         
         
     }
     
     func queryForNearby(center centerCamera:CLLocationCoordinate2D, with circleRadius:Double){
         
-        let cllocation = CLLocation(latitude: centerCamera.latitude, longitude: centerCamera.longitude)
-        print(cllocation)
+        let center = CLLocation(latitude: centerCamera.latitude, longitude: centerCamera.longitude)
+        print(center)
         
-        let circleQuery:GFSCircleQuery = geoFirestore.query(withCenter: cllocation, radius: circleRadius) ///*** fatal crash
+        let circleQuery = geoFirestore.query(withCenter: center, radius: circleRadius) ///*** fatal crash
         
-        circleQuery.observe(.documentEntered, with: {(key, location) in
-            print("******NEARBY MARKER --->>> The document with documentID '\(key! as String)' entered the search area and is at location '\(location)'")
-            
-            //the key will help us retrieve
-            self.fetchNearbyMarkers(with: key!)
-            
+        _ = circleQuery.observe(.documentExited, with: {(id, location) in
+            print("****************************************\(id! as String) has left nearby")
+            self.fetchNearbyMarkers(with: id!)})
+        
+        _ = circleQuery.observe(.documentEntered, with: {(id, location) in
+            print("****************************************\(id! as String) is nearby")
+            self.fetchNearbyMarkers(with: id!)
         })
+        
+        _ = circleQuery.observe(.documentMoved, with: {(id, location) in
+            print("****************************************\(id! as String) has been moved")
+            self.fetchNearbyMarkers(with: id!)})
         
     }
     
     func fetchNearbyMarkers(with id:String){
-        let query = db.collection("TaggedTrash")
+        let query = db.collection("TaggedTrash").whereField("id", isEqualTo: "\(id)")
         
         query.getDocuments(){
             QuerySnapshot, Error in
+            
+            //self.userTaggedTrash = (QuerySnapshot!.documents.compactMap({TrashDataModel(dictionary: $0.data())}))
             
             guard let snapShot = QuerySnapshot else {return}
             
             snapShot.documents.forEach{
                 data in
                 
-                print(data.data())
+                let x = data.data()["street_address"]
+                
+                print(x as! String)
                 
             }
 
