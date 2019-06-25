@@ -9,6 +9,7 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 import FirebaseFirestore
+import Geofirestore
 
 extension MapsViewController{
     
@@ -47,6 +48,8 @@ extension MapsViewController{
     
     //a listener for markers in real time from other users
     func realTimeMarkerListener(){
+        ////USE geofirestore to pass parameter and query!!!
+        
         db.collection("TaggedTrash").addSnapshotListener{
             QuerySnapshot, Error in
             
@@ -129,6 +132,53 @@ extension MapsViewController{
                 }
             }
         }
+    }
+    
+    ////**************EXPERIMENTS
+    
+    func executeNearby(){
+        guard let location = locationManager.location?.coordinate else{return}
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            self.queryForNearby(center: location, with: 0.6)
+        })
+        
+        
+    }
+    
+    func queryForNearby(center centerCamera:CLLocationCoordinate2D, with circleRadius:Double){
+        
+        let cllocation = CLLocation(latitude: centerCamera.latitude, longitude: centerCamera.longitude)
+        print(cllocation)
+        
+        let circleQuery:GFSCircleQuery = geoFirestore.query(withCenter: cllocation, radius: circleRadius) ///*** fatal crash
+        
+        circleQuery.observe(.documentEntered, with: {(key, location) in
+            print("******NEARBY MARKER --->>> The document with documentID '\(key! as String)' entered the search area and is at location '\(location)'")
+            
+            //the key will help us retrieve
+            self.fetchNearbyMarkers(with: key!)
+            
+        })
+        
+    }
+    
+    func fetchNearbyMarkers(with id:String){
+        let query = db.collection("TaggedTrash")
+        
+        query.getDocuments(){
+            QuerySnapshot, Error in
+            
+            guard let snapShot = QuerySnapshot else {return}
+            
+            snapShot.documents.forEach{
+                data in
+                
+                print(data.data())
+                
+            }
+
+        }
+
     }
     
 }

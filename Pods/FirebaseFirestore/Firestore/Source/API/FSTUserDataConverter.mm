@@ -17,7 +17,6 @@
 #import "Firestore/Source/API/FSTUserDataConverter.h"
 
 #include <memory>
-#include <set>
 #include <string>
 #include <utility>
 #include <vector>
@@ -58,7 +57,6 @@ using firebase::firestore::model::DocumentKey;
 using firebase::firestore::model::FieldMask;
 using firebase::firestore::model::FieldPath;
 using firebase::firestore::model::FieldTransform;
-using firebase::firestore::model::NumericIncrementTransform;
 using firebase::firestore::model::Precondition;
 using firebase::firestore::model::ServerTimestampTransform;
 using firebase::firestore::model::TransformOperation;
@@ -128,11 +126,11 @@ NS_ASSUME_NONNULL_BEGIN
 
   ParseAccumulator accumulator{UserDataSource::MergeSet};
 
-  FSTObjectValue *updateData = (FSTObjectValue *)[self parseData:input
-                                                         context:accumulator.RootContext()];
+  FSTObjectValue *updateData =
+      (FSTObjectValue *)[self parseData:input context:accumulator.RootContext()];
 
   if (fieldMask) {
-    std::set<FieldPath> validatedFieldPaths;
+    std::vector<FieldPath> validatedFieldPaths;
     for (id fieldPath in fieldMask) {
       FieldPath path;
 
@@ -152,7 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
             path.CanonicalString().c_str());
       }
 
-      validatedFieldPaths.insert(path);
+      validatedFieldPaths.push_back(path);
     }
 
     return std::move(accumulator).MergeData(updateData, FieldMask{std::move(validatedFieldPaths)});
@@ -192,8 +190,8 @@ NS_ASSUME_NONNULL_BEGIN
       // Add it to the field mask, but don't add anything to updateData.
       context.AddToFieldMask(std::move(path));
     } else {
-      FSTFieldValue *_Nullable parsedValue = [self parseData:value
-                                                     context:context.ChildContext(path)];
+      FSTFieldValue *_Nullable parsedValue =
+          [self parseData:value context:context.ChildContext(path)];
       if (parsedValue) {
         context.AddToFieldMask(path);
         updateData = [updateData objectBySettingValue:parsedValue forPath:path];
@@ -314,9 +312,10 @@ NS_ASSUME_NONNULL_BEGIN
     } else if (context.data_source() == UserDataSource::Update) {
       HARD_ASSERT(context.path()->size() > 0,
                   "FieldValue.delete() at the top level should have already been handled.");
-      FSTThrowInvalidArgument(@"FieldValue.delete() can only appear at the top level of your "
-                               "update data%s",
-                              context.FieldDescription().c_str());
+      FSTThrowInvalidArgument(
+          @"FieldValue.delete() can only appear at the top level of your "
+           "update data%s",
+          context.FieldDescription().c_str());
     } else {
       // We shouldn't encounter delete sentinels for queries or non-merge setData calls.
       FSTThrowInvalidArgument(
@@ -342,15 +341,6 @@ NS_ASSUME_NONNULL_BEGIN
     auto array_remove = absl::make_unique<ArrayTransform>(TransformOperation::Type::ArrayRemove,
                                                           std::move(parsedElements));
     context.AddToFieldTransforms(*context.path(), std::move(array_remove));
-
-  } else if ([fieldValue isKindOfClass:[FSTNumericIncrementFieldValue class]]) {
-    FSTNumericIncrementFieldValue *numericIncrementFieldValue =
-        (FSTNumericIncrementFieldValue *)fieldValue;
-    FSTNumberValue *operand =
-        (FSTNumberValue *)[self parsedQueryValue:numericIncrementFieldValue.operand];
-    auto numeric_increment = absl::make_unique<NumericIncrementTransform>(operand);
-
-    context.AddToFieldTransforms(*context.path(), std::move(numeric_increment));
 
   } else {
     HARD_FAIL("Unknown FIRFieldValue type: %s", NSStringFromClass([fieldValue class]));
@@ -465,8 +455,7 @@ NS_ASSUME_NONNULL_BEGIN
           self.databaseID->project_id().c_str(), self.databaseID->database_id().c_str(),
           context.FieldDescription().c_str());
     }
-    return [FSTReferenceValue referenceValue:[FSTDocumentKey keyWithDocumentKey:reference.key]
-                                  databaseID:self.databaseID];
+    return [FSTReferenceValue referenceValue:reference.key databaseID:self.databaseID];
 
   } else {
     FSTThrowInvalidArgument(@"Unsupported type: %@%s", NSStringFromClass([input class]),

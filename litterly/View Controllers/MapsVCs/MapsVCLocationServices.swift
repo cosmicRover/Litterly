@@ -89,7 +89,7 @@ extension MapsViewController: CLLocationManagerDelegate{
     //func to call after location from the user is taken
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
-        
+        executeNearby()
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
         
         mapView?.animate(to: camera)

@@ -11,6 +11,7 @@ import GoogleMaps
 import CoreLocation
 import Firebase
 import FirebaseFirestore
+import Geofirestore
 
 class MapsViewController: UIViewController{
     
@@ -53,6 +54,10 @@ class MapsViewController: UIViewController{
     
     var trashModelArray = [TrashDataModel]()
     
+    var firestoreCollection:CollectionReference!
+    var geoFirestore:GeoFirestore!
+    
+    
     //icons for map markers. Scheduled/unscheduled
     let organicMarkerIcon = UIImage(named: "apple")?.withRenderingMode(.alwaysOriginal)
     let plasticMarkerIcon = UIImage(named: "water-bottle")?.withRenderingMode(.alwaysOriginal)
@@ -83,6 +88,11 @@ class MapsViewController: UIViewController{
         checkLocationServices()
         addSlideInCardToMapView()
         mapView?.delegate = self
+        
+        firestoreCollection = db.collection("TaggedTrash")
+        geoFirestore = GeoFirestore(collectionRef: firestoreCollection)
+        
+        executeNearby() //nearby func. cre
         
         //listening for buttonTapped
         NotificationCenter.default.addObserver(self, selector: #selector(reportTapped), name: NSNotification.Name("reportTapped"), object: nil)

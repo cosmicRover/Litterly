@@ -16,6 +16,7 @@ pod 'lottie-ios'
 pod 'Firebase/Firestore'
 pod 'Cards'
 pod 'AlamofireImage'
+pod 'Geofirestore'
 
 
 end
