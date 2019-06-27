@@ -9,5 +9,5 @@
 import Foundation
 
 struct GoogleApiKey {
-    let key = "AIzaSyBxNxi2icS67RBeCOIsQb77vWd_we9CkxY"
+    let key = "AIzaSyByoSrwfKCE1Tor42fh_ADMn2yAi-819CI"
 }
