@@ -41,7 +41,7 @@ extension MapsViewController: CLLocationManagerDelegate{
         //only gets location when the app is open, the ideal condition
         case .authorizedWhenInUse:
             //centering the mapView on device's location
-            centersCameraOnDevice()
+            centersCameraOnDeviceAndTriggersNearby()
             break
         //when user hasn't picked an allow or not allow auth option, ideal to ask for permission here
         case .notDetermined:
@@ -66,7 +66,7 @@ extension MapsViewController: CLLocationManagerDelegate{
     
     
     //camera helps center the position of the view, will use user's current location
-    func centersCameraOnDevice(){
+    func centersCameraOnDeviceAndTriggersNearby(){
         if let location = locationManager.location?.coordinate{
             print(location.latitude)
             print(location.longitude)
@@ -81,33 +81,44 @@ extension MapsViewController: CLLocationManagerDelegate{
             let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 17.0)
             self.mapView?.animate(to: camera)
             self.mapView?.isMyLocationEnabled = true
+            //self.locationManager.startUpdatingLocation()
             
+             NotificationCenter.default.post(name: NSNotification.Name("updatedLocation"), object: nil)
             self.locationManager.startUpdatingLocation()
+            
         }
     }
     
     //func to call after location from the user is taken
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        //executeNearby()
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
-        
-        //queryForNearby(center: location!.coordinate, with: 0.6)
-        
-        mapView?.animate(to: camera)
-        
-        //where to put it???
-        NotificationCenter.default.post(name: NSNotification.Name("updatedLocation"), object: nil)
-        
-        locationManager.startUpdatingLocation()
-        
-        //Finally stop updating location otherwise it will come again and again in this delegate
-        //locationManager.stopUpdatingLocation()
-        mapView?.isMyLocationEnabled = true
-        
-        locationManager.stopUpdatingLocation()
-        
-    }
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+////        let location = locations.last
+////        //executeNearby()
+////        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+////
+////        //queryForNearby(center: location!.coordinate, with: 0.6)
+////
+////        mapView?.animate(to: camera)
+////
+////        //where to put it???
+////        NotificationCenter.default.post(name: NSNotification.Name("updatedLocation"), object: nil)
+////
+////        locationManager.startUpdatingLocation()
+////
+////        //Finally stop updating location otherwise it will come again and again in this delegate
+////        //locationManager.stopUpdatingLocation()
+////        mapView?.isMyLocationEnabled = true
+////
+////        locationManager.stopUpdatingLocation()
+//        
+//        
+//        let location = locations.last!
+//        let center = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+//        
+//        
+//        let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: 17.0)
+//        mapView?.animate(to: camera)
+//
+//    }
     
     //if auth changed, run through the switch case statements
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

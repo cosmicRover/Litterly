@@ -82,9 +82,18 @@ class MapsViewController: UIViewController{
     
     var justModdedArrayElement:TrashDataModel!
     
+    var circleQuery:GFSCircleQuery!, hasLeftNearby:GFSQueryHandle!, hasDocumentMoved:GFSQueryHandle!
+    
+    var realTimeListener:ListenerRegistration!
+    
+    var isCircleQueryListening:Bool = false
+    
+    var isNearbyHanle:GFSQueryHandle!
+    
+    var nearbyIds = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(listenForRadius), name: NSNotification.Name("updatedLocation"), object: nil)
         initMapView()
         checkLocationServices()
         addSlideInCardToMapView()
@@ -93,6 +102,7 @@ class MapsViewController: UIViewController{
         firestoreCollection = db.collection("TaggedTrash")
         geoFirestore = GeoFirestore(collectionRef: firestoreCollection)
         
+        
        // executeNearby() //nearby func. cre
         
         //listening for buttonTapped
@@ -100,6 +110,8 @@ class MapsViewController: UIViewController{
         
         //listening for marker modification event
         NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
+        
+        //NotificationCenter.default.addObserver(self, selector: #selector(listenForRadius), name: NSNotification.Name("updatedLocation"), object: nil)
     }
     
     //when view has appeared successfully, we call in to add the sliding card
@@ -112,6 +124,8 @@ class MapsViewController: UIViewController{
         //guard locationManager.location != nil else{return}
         
         //queryForNearby(center: locationManager.location!.coordinate, with: 0.005)
+        
+        listenForRadius()
     }
     
     //Calling a function to lower the card
@@ -121,13 +135,16 @@ class MapsViewController: UIViewController{
     }
     
     //listen for nearby
-    @objc private func listenForRadius(){
+    func listenForRadius(){
         ///maybe wait till all the data is ready to be loaded???????
         mapView?.clear()
         markers.removeAll()
         trashModelArray.removeAll()
         
-        self.queryForNearby(center: self.locationManager.location!.coordinate, with: 0.009)
+        self.queryForNearby(center: locationManager.location!.coordinate, with: 0.005) { (resp) in
+            print(resp)
+        }
+        
         
         
     }

@@ -11,6 +11,7 @@ import Firebase
 import FirebaseFirestore
 import CoreLocation
 import Geofirestore
+import GoogleMaps
 
 class CardViewController: UIViewController {
 
@@ -120,11 +121,13 @@ class CardViewController: UIViewController {
     func executeTagTrash(){
         //checking to see if location services is enabled, then proceeding to report the trash
         let mapFuncs = MapsViewController()
-        mapFuncs.checkLocationServices()
+        //mapFuncs.checkLocationServices()
         
         if let coordinates = mapFuncs.locationManager.location?.coordinate{
             print(coordinates.latitude)
             print(coordinates.longitude)
+            
+            let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: 17.0)
             
             guard let firebaseUserInstance = Auth.auth().currentUser else {return}
             let id = "\(coordinates.latitude)" + "\(coordinates.longitude)"+"marker" as String
@@ -145,6 +148,8 @@ class CardViewController: UIViewController {
             }
         } else{
             //show an alert saying that location is off
+            // can get detailed direction on how to do that
+            print("location isn't on!!!")
         }
     }
     

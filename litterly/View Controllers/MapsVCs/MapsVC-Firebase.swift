@@ -50,7 +50,7 @@ extension MapsViewController{
     func realTimeMarkerListener(documentId id:String){
         ////USE geofirestore to pass parameter and query!!!
         
-        db.collection("TaggedTrash").whereField("id", isEqualTo: "\(id)")
+       self.realTimeListener =  db.collection("TaggedTrash").whereField("id", isEqualTo: "\(id)")
             .addSnapshotListener{
             QuerySnapshot, Error in
             
@@ -105,7 +105,7 @@ extension MapsViewController{
                     //assigning a reference to the modded data
                     self.justModdedArrayElement = data
                     //and then posting a notification
-                    NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
+                    //NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
                     
                     print("The index of the modded data ->>> \(index)")
                     print("Before change ->>> \(self.trashModelArray[index])")
@@ -136,36 +136,45 @@ extension MapsViewController{
     }
     
     ////**************EXPERIMENTS
-    
-    func executeNearby(){
-         //self.queryForNearby(center: location, with: 0.6)
-        
-        
-    }
-    
-    func queryForNearby(center centerCamera:CLLocationCoordinate2D, with circleRadius:Double){
+
+    func queryForNearby(center centerCamera:CLLocationCoordinate2D, with circleRadius:Double, completionHandler: @escaping ([String]?) -> ()) {
         
         let center = CLLocation(latitude: centerCamera.latitude, longitude: centerCamera.longitude)
         print(center)
         
-        let circleQuery = geoFirestore.query(withCenter: center, radius: circleRadius) ///*** fatal crash
+        var idArray = [String]()
         
-        _ = circleQuery.observe(.documentExited, with: {(id, location) in
-            print("****************************************\(id! as String) has left nearby")
-            //self.realTimeMarkerListener(documentId: "\(id! as String)")
+        self.circleQuery = geoFirestore.query(withCenter: center, radius: circleRadius) ///*** fatal crash
+        
+        self.isCircleQueryListening = true
+        
+        circleQuery.observeReady {
             
-        })
-        
-        _ = circleQuery.observe(.documentEntered, with: {(id, location) in
-            print("****************************************\(id! as String) is nearby")
-            self.realTimeMarkerListener(documentId: "\(id! as String)")
-        })
-        
-        _ = circleQuery.observe(.documentMoved, with: {(id, location) in
-            print("****************************************\(id! as String) has been moved")
-            //self.fetchNearbyMarkers(with: id!)
+            self.isNearbyHanle = self.circleQuery.observe(.documentEntered, with: {(id, location) in
+                print("****************************************\(id! as String) is nearby")
+                idArray.append("\(id! as String)")
+                //self.realTimeMarkerListener(documentId: "\(id! as String)")
+                
+                //need to remove the listeners or duplicate values will be generated
+                
+            })
             
-        })
+            self.hasLeftNearby = self.circleQuery.observe(.documentExited, with: {(id, location) in
+                print("****************************************\(id! as String) has left nearby")
+                
+            })
+            
+            self.hasDocumentMoved = self.circleQuery.observe(.documentMoved, with: {(id, location) in
+                print("****************************************\(id! as String) has been moved")
+                //self.fetchNearbyMarkers(with: id!)
+                
+            })
+         
+            completionHandler(idArray as [String])
+        }
+//        circleQuery.removeObserver(withHandle: self.isNearbyHanle)
+//        circleQuery.removeObserver(withHandle: self.hasLeftNearby)
+//        circleQuery.removeObserver(withHandle: self.hasDocumentMoved)
         
     }
     

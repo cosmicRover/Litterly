@@ -10,6 +10,7 @@ import UIKit
 import GoogleMaps
 import CoreLocation
 import FirebaseFirestore
+import Geofirestore
 
 extension MapsViewController {
     
@@ -69,5 +70,26 @@ extension MapsViewController {
     @objc func onLocateMeTap(sender: UIButton){
         print("locate me tapped")
         checkLocationServices()
+        
+        if let location = locationManager.location?.coordinate{
+            print("TAP ME!! Location data")
+            print("\(location.latitude)")
+            print("\(location.longitude)")
+            
+            print("removing circleQuery observer")
+            
+            if (realTimeListener != nil){
+                print("marker Listener is active")
+                realTimeListener.remove()
+            } else {
+                print("marker Listener is inactive")
+            }
+            
+            circleQuery.removeObserver(withHandle: self.isNearbyHanle)
+            circleQuery.removeObserver(withHandle: self.hasLeftNearby)
+            circleQuery.removeObserver(withHandle: self.hasDocumentMoved)
+            print("adding new observers based on current location")
+            //self.listenForRadius()
+        }
     }
 }
