@@ -84,6 +84,7 @@ class MapsViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(listenForRadius), name: NSNotification.Name("updatedLocation"), object: nil)
         initMapView()
         checkLocationServices()
         addSlideInCardToMapView()
@@ -106,7 +107,7 @@ class MapsViewController: UIViewController{
         super.viewDidAppear(animated)
         makeTheNavBarClear()
         addMenuAndSearchButtonToNavBar()
-        NotificationCenter.default.addObserver(self, selector: #selector(listenForRadius), name: NSNotification.Name("updatedLocation"), object: nil)
+        
         //need to nil guard
         //guard locationManager.location != nil else{return}
         
@@ -122,7 +123,13 @@ class MapsViewController: UIViewController{
     //listen for nearby
     @objc private func listenForRadius(){
         ///maybe wait till all the data is ready to be loaded???????
-        queryForNearby(center: locationManager.location!.coordinate, with: 0.009)
+        mapView?.clear()
+        markers.removeAll()
+        trashModelArray.removeAll()
+        
+        self.queryForNearby(center: self.locationManager.location!.coordinate, with: 0.009)
+        
+        
     }
     
     //calling a func to re-assign userAssignedElement

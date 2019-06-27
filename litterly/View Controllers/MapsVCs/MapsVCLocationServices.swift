@@ -81,8 +81,7 @@ extension MapsViewController: CLLocationManagerDelegate{
             let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 17.0)
             self.mapView?.animate(to: camera)
             self.mapView?.isMyLocationEnabled = true
-            //for radius notification
-            NotificationCenter.default.post(name: NSNotification.Name("updatedLocation"), object: nil)
+            
             self.locationManager.startUpdatingLocation()
         }
     }
@@ -96,6 +95,9 @@ extension MapsViewController: CLLocationManagerDelegate{
         //queryForNearby(center: location!.coordinate, with: 0.6)
         
         mapView?.animate(to: camera)
+        
+        //where to put it???
+        NotificationCenter.default.post(name: NSNotification.Name("updatedLocation"), object: nil)
         
         locationManager.startUpdatingLocation()
         

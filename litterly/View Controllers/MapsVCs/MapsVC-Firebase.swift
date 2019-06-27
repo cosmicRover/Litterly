@@ -47,10 +47,11 @@ extension MapsViewController{
     }
     
     //a listener for markers in real time from other users
-    func realTimeMarkerListener(){
+    func realTimeMarkerListener(documentId id:String){
         ////USE geofirestore to pass parameter and query!!!
         
-        db.collection("TaggedTrash").addSnapshotListener{
+        db.collection("TaggedTrash").whereField("id", isEqualTo: "\(id)")
+            .addSnapshotListener{
             QuerySnapshot, Error in
             
             //chceking if the database we query for is empty
@@ -151,16 +152,20 @@ extension MapsViewController{
         
         _ = circleQuery.observe(.documentExited, with: {(id, location) in
             print("****************************************\(id! as String) has left nearby")
-            self.fetchNearbyMarkers(with: id!)})
+            //self.realTimeMarkerListener(documentId: "\(id! as String)")
+            
+        })
         
         _ = circleQuery.observe(.documentEntered, with: {(id, location) in
             print("****************************************\(id! as String) is nearby")
-            self.fetchNearbyMarkers(with: id!)
+            self.realTimeMarkerListener(documentId: "\(id! as String)")
         })
         
         _ = circleQuery.observe(.documentMoved, with: {(id, location) in
             print("****************************************\(id! as String) has been moved")
-            self.fetchNearbyMarkers(with: id!)})
+            //self.fetchNearbyMarkers(with: id!)
+            
+        })
         
     }
     

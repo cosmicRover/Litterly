@@ -25,7 +25,7 @@ extension MapsViewController {
             mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 86), camera: camera)
             
             //getMarkersFromFireStore()
-            realTimeMarkerListener()
+            //realTimeMarkerListener()
             
             //adding the mapsView as subview to the parent view
             self.view.addSubview(mapView!)
@@ -35,7 +35,7 @@ extension MapsViewController {
             mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 86), camera: GMSCameraPosition.camera(withLatitude: 40.74069, longitude: -73.983114, zoom: 15))
             
             //getMarkersFromFireStore()
-            realTimeMarkerListener()
+            //realTimeMarkerListener()
             
             self.view.addSubview(mapView!)
             locateMeButton()
