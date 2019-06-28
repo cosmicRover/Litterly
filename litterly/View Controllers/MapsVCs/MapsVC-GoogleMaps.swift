@@ -25,8 +25,12 @@ extension MapsViewController {
             //***note the value 86, it is the height of the handleArea and the map's view must end before it touches handle area
             mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 86), camera: camera)
             
-            //getMarkersFromFireStore()
-            //realTimeMarkerListener()
+            reverseGeocodeApi(on: location.latitude, and: location.longitude) { (formattedAddress, city, error) in
+                let user = SharedValues.sharedInstance.currentUserEmail
+                
+                self.updateUserCurrentNeighborhood(forUser: "\(user! as String)", with: "\(city! as String)")
+                print("updated user city")
+            }
             
             //adding the mapsView as subview to the parent view
             self.view.addSubview(mapView!)
@@ -34,10 +38,7 @@ extension MapsViewController {
             
         } else { //else pass a default coordinate to center the location
             mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 86), camera: GMSCameraPosition.camera(withLatitude: 40.74069, longitude: -73.983114, zoom: 15))
-            
-            //getMarkersFromFireStore()
-            //realTimeMarkerListener()
-            
+
             self.view.addSubview(mapView!)
             locateMeButton()
         }
@@ -72,24 +73,26 @@ extension MapsViewController {
         checkLocationServices()
         
         if let location = locationManager.location?.coordinate{
-            print("TAP ME!! Location data")
-            print("\(location.latitude)")
-            print("\(location.longitude)")
+        print("TAP ME!! Location data")
+        print("\(location.latitude)")
+        print("\(location.longitude)")
             
-            print("removing circleQuery observer")
+        print("removing circleQuery observer")
             
-            if (realTimeListener != nil){
-                print("marker Listener is active")
-                realTimeListener.remove()
-            } else {
-                print("marker Listener is inactive")
-            }
+        if (realTimeFirestoreListenerForMarkers != nil){
+            print("marker Listener is active")
+            realTimeFirestoreListenerForMarkers.remove()
+        } else {
+            print("marker Listener is inactive")
+        }
+        
+        //removing the observers before creating new ones again
+        circleQuery.removeObserver(withHandle: self.isNearbyHandle)
+        circleQuery.removeObserver(withHandle: self.hasLeftNearby)
+        circleQuery.removeObserver(withHandle: self.hasDocumentMoved)
+        print("adding new observers based on current location")
+        self.listenForRadius()
             
-            circleQuery.removeObserver(withHandle: self.isNearbyHanle)
-            circleQuery.removeObserver(withHandle: self.hasLeftNearby)
-            circleQuery.removeObserver(withHandle: self.hasDocumentMoved)
-            print("adding new observers based on current location")
-            //self.listenForRadius()
         }
     }
 }

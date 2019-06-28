@@ -38,8 +38,8 @@ extension CardViewController{
             }
         }
     }
-    //**************EXPERIMENTS*****************
     
+    //**************EXPERIMENTS*****************
     func setLocationWithGeoFirestore(for id:String, on location:CLLocationCoordinate2D){
         
         let cllocation = CLLocation(latitude: location.latitude, longitude: location.longitude)

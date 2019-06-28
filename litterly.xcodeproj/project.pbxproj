@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -60,6 +60,8 @@
 		C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */; };
 		C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */; };
 		C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */; };
+		C5B2D9F422C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */; };
+		C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */; };
 		C5B6858A2294DAF300421EE1 /* GeneralAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B685892294DAF300421EE1 /* GeneralAlertViewController.swift */; };
 		C5B6858D2294E08800421EE1 /* check.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B6858C2294E08800421EE1 /* check.json */; };
 		C5C35EE122791B9900103AD9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C35EE022791B9900103AD9 /* UserDataModel.swift */; };
@@ -144,6 +146,8 @@
 		C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlasticMeetup-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetalMeetups-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-NearbyGeoFire.swift"; sourceTree = "<group>"; };
+		C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-ViewDidLoad.swift"; sourceTree = "<group>"; };
 		C5B685892294DAF300421EE1 /* GeneralAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAlertViewController.swift; sourceTree = "<group>"; };
 		C5B6858C2294E08800421EE1 /* check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check.json; sourceTree = "<group>"; };
 		C5C35EE022791B9900103AD9 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				C5DD0884225845B7000988A3 /* MapsViewController.swift */,
+				C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */,
 				C58D911C225D54B2006A0390 /* MapsVC-SlideInCard.swift */,
 				C5931BD5225EBBA400ECBEEB /* MapsVC-SearchBar.swift */,
 				C5743262229617150050F4D4 /* MapsVC-SearchBar-GMS.swift */,
@@ -375,6 +380,7 @@
 				C564B47F226A9EB300F2DEF1 /* MapsVCLocationServices.swift */,
 				C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */,
 				C5C35EE6227A1A9900103AD9 /* MapsVC-GMSDelegate.swift */,
+				C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */,
 			);
 			path = MapsVCs;
 			sourceTree = "<group>";
@@ -804,6 +810,7 @@
 				C5907FAE22850156001E720D /* AlertService.swift in Sources */,
 				C59C82B12295C0D40051F3F8 /* OrganicMeetupViewController.swift in Sources */,
 				C59C82AF2295BF450051F3F8 /* MetalMeetupViewController.swift in Sources */,
+				C5B2D9F422C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift in Sources */,
 				C5063154226E8EF30078265C /* MenuOption.swift in Sources */,
 				C5063152226E8ED00078265C /* MenuOptionCell.swift in Sources */,
 				C593FB72229359FC002FAE72 /* JoinAlertViewController.swift in Sources */,
@@ -819,6 +826,7 @@
 				C599F5EE226304590038A1A6 /* PageThreeViewController.swift in Sources */,
 				C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */,
 				C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */,
+				C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */,
 				C50C752F22978724005A16DD /* RedeemPointsCell.swift in Sources */,
 				C56CEA35225D9E87005DC40E /* MapsVC-GoogleMaps.swift in Sources */,
 				C564B480226A9EB300F2DEF1 /* MapsVCLocationServices.swift in Sources */,

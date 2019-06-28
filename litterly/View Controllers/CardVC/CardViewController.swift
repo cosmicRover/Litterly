@@ -29,7 +29,7 @@ class CardViewController: UIViewController {
     @IBOutlet weak var trashType3: UIButton!
     @IBOutlet weak var reportTrashButton: UIButton!
     
-    let db = SharedValues.sharedInstance.db
+    let db = Firestore.firestore()
     let trashTypes: [String] = ["organic", "plastic", "metal"]
     var submitTrashType: String!
     var trashModelArray = [TrashDataModel]()
@@ -121,13 +121,11 @@ class CardViewController: UIViewController {
     func executeTagTrash(){
         //checking to see if location services is enabled, then proceeding to report the trash
         let mapFuncs = MapsViewController()
-        //mapFuncs.checkLocationServices()
+        mapFuncs.checkLocationServices()
         
         if let coordinates = mapFuncs.locationManager.location?.coordinate{
             print(coordinates.latitude)
             print(coordinates.longitude)
-            
-            let camera = GMSCameraPosition.camera(withLatitude: coordinates.latitude, longitude: coordinates.longitude, zoom: 17.0)
             
             guard let firebaseUserInstance = Auth.auth().currentUser else {return}
             let id = "\(coordinates.latitude)" + "\(coordinates.longitude)"+"marker" as String
@@ -138,12 +136,8 @@ class CardViewController: UIViewController {
             
                 print(address!)
                 print(userCurrentNeighborhood!)
-                
-                let address = address
-                let userCurrentNeighborhood = userCurrentNeighborhood
                 let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.submitTrashType, street_address: address!, is_meetup_scheduled: false)
                 self.submitTrashToFirestore(with: trashTag.dictionary, for: id)
-               // self.updateUserCurrentNeighborhood(forUser: author, with: userCurrentNeighborhood!)
                 self.setLocationWithGeoFirestore(for: id, on: coordinates)
             }
         } else{

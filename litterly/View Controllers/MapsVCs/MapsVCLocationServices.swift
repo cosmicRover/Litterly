@@ -9,6 +9,7 @@
 import GoogleMaps
 import CoreLocation
 import Firebase
+import UIKit
 
 //contains all the location permission related cods
 
@@ -70,55 +71,15 @@ extension MapsViewController: CLLocationManagerDelegate{
         if let location = locationManager.location?.coordinate{
             print(location.latitude)
             print(location.longitude)
-            
-            let userId = Auth.auth().currentUser?.email
-            
-            reverseGeocodeApi(on: location.latitude, and: location.longitude) { (address, userCurrentNeighborhood, error) in
-                
-                self.updateUserCurrentNeighborhood(forUser: userId!, with: userCurrentNeighborhood!)
-            }
-            
+
             let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 17.0)
             self.mapView?.animate(to: camera)
             self.mapView?.isMyLocationEnabled = true
-            //self.locationManager.startUpdatingLocation()
-            
-             NotificationCenter.default.post(name: NSNotification.Name("updatedLocation"), object: nil)
             self.locationManager.startUpdatingLocation()
-            
+            locationManager.stopUpdatingLocation()
+            self.locationManager.delegate = nil
         }
     }
-    
-    //func to call after location from the user is taken
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-////        let location = locations.last
-////        //executeNearby()
-////        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
-////
-////        //queryForNearby(center: location!.coordinate, with: 0.6)
-////
-////        mapView?.animate(to: camera)
-////
-////        //where to put it???
-////        NotificationCenter.default.post(name: NSNotification.Name("updatedLocation"), object: nil)
-////
-////        locationManager.startUpdatingLocation()
-////
-////        //Finally stop updating location otherwise it will come again and again in this delegate
-////        //locationManager.stopUpdatingLocation()
-////        mapView?.isMyLocationEnabled = true
-////
-////        locationManager.stopUpdatingLocation()
-//        
-//        
-//        let location = locations.last!
-//        let center = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-//        
-//        
-//        let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: 17.0)
-//        mapView?.animate(to: camera)
-//
-//    }
     
     //if auth changed, run through the switch case statements
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -141,7 +102,7 @@ extension MapsViewController: CLLocationManagerDelegate{
                 let getAddress = resultChunk[0] as! [String:Any]
                 
                 let neighborhoodChunk = getAddress["address_components"] as! [Any]
-                let neighborhood = neighborhoodChunk[2] as! [String:Any]
+                let neighborhood = neighborhoodChunk[5] as! [String:Any]
                 
                 let userNeighborhood = neighborhood["short_name"] as! String
                 let formattedAddress = getAddress["formatted_address"] as! String

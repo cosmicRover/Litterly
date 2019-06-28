@@ -7,9 +7,7 @@
 //
 import UIKit
 import GoogleMaps
-import CoreLocation
 import FirebaseFirestore
-import Geofirestore
 
 extension MapsViewController{
     
@@ -50,7 +48,7 @@ extension MapsViewController{
     func realTimeMarkerListener(documentId id:String){
         ////USE geofirestore to pass parameter and query!!!
         
-       self.realTimeListener =  db.collection("TaggedTrash").whereField("id", isEqualTo: "\(id)")
+       self.realTimeFirestoreListenerForMarkers =  db.collection("TaggedTrash").whereField("id", isEqualTo: "\(id)")
             .addSnapshotListener{
             QuerySnapshot, Error in
             
@@ -105,7 +103,7 @@ extension MapsViewController{
                     //assigning a reference to the modded data
                     self.justModdedArrayElement = data
                     //and then posting a notification
-                    //NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
                     
                     print("The index of the modded data ->>> \(index)")
                     print("Before change ->>> \(self.trashModelArray[index])")
@@ -133,72 +131,6 @@ extension MapsViewController{
                 }
             }
         }
-    }
-    
-    ////**************EXPERIMENTS
-
-    func queryForNearby(center centerCamera:CLLocationCoordinate2D, with circleRadius:Double, completionHandler: @escaping ([String]?) -> ()) {
-        
-        let center = CLLocation(latitude: centerCamera.latitude, longitude: centerCamera.longitude)
-        print(center)
-        
-        var idArray = [String]()
-        
-        self.circleQuery = geoFirestore.query(withCenter: center, radius: circleRadius) ///*** fatal crash
-        
-        self.isCircleQueryListening = true
-        
-        circleQuery.observeReady {
-            
-            self.isNearbyHanle = self.circleQuery.observe(.documentEntered, with: {(id, location) in
-                print("****************************************\(id! as String) is nearby")
-                idArray.append("\(id! as String)")
-                //self.realTimeMarkerListener(documentId: "\(id! as String)")
-                
-                //need to remove the listeners or duplicate values will be generated
-                
-            })
-            
-            self.hasLeftNearby = self.circleQuery.observe(.documentExited, with: {(id, location) in
-                print("****************************************\(id! as String) has left nearby")
-                
-            })
-            
-            self.hasDocumentMoved = self.circleQuery.observe(.documentMoved, with: {(id, location) in
-                print("****************************************\(id! as String) has been moved")
-                //self.fetchNearbyMarkers(with: id!)
-                
-            })
-         
-            completionHandler(idArray as [String])
-        }
-//        circleQuery.removeObserver(withHandle: self.isNearbyHanle)
-//        circleQuery.removeObserver(withHandle: self.hasLeftNearby)
-//        circleQuery.removeObserver(withHandle: self.hasDocumentMoved)
-        
-    }
-    
-    func fetchNearbyMarkers(with id:String){
-        let query = db.collection("TaggedTrash").whereField("id", isEqualTo: "\(id)")
-        
-        query.getDocuments(){
-            QuerySnapshot, Error in
-            
-            //self.userTaggedTrash = (QuerySnapshot!.documents.compactMap({TrashDataModel(dictionary: $0.data())}))
-            
-            guard let snapShot = QuerySnapshot else {return}
-            
-            snapShot.documents.forEach{
-                data in
-                
-                let x = data.data()["street_address"]
-                
-                print(x as! String)
-                
-            }
-
-        }
-
     }
     
 }

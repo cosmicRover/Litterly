@@ -6,12 +6,13 @@
 //  Copyright © 2019 Joy Paul. All rights reserved.
 //
 
-import UIKit
 import GoogleMaps
 import CoreLocation
 import Firebase
 import FirebaseFirestore
 import Geofirestore
+
+//this class holds all the properties for MapsVC
 
 class MapsViewController: UIViewController{
     
@@ -47,6 +48,7 @@ class MapsViewController: UIViewController{
     
     var mapView: GMSMapView?
     var markers = [GMSMarker]()
+    
     //init the location manager for device location
     let locationManager = CLLocationManager()
     
@@ -54,8 +56,8 @@ class MapsViewController: UIViewController{
     
     var trashModelArray = [TrashDataModel]()
     
-    var firestoreCollection:CollectionReference!
-    var geoFirestore:GeoFirestore!
+    var firestoreCollectionRef:CollectionReference!
+    var geoFirestoreRef:GeoFirestore!
     
     
     //icons for map markers. Scheduled/unscheduled
@@ -82,88 +84,17 @@ class MapsViewController: UIViewController{
     
     var justModdedArrayElement:TrashDataModel!
     
+    //the query vars for our Geofire circleQuery
     var circleQuery:GFSCircleQuery!, hasLeftNearby:GFSQueryHandle!, hasDocumentMoved:GFSQueryHandle!
     
-    var realTimeListener:ListenerRegistration!
+    //the handler for abobe query vars
+    var isNearbyHandle:GFSQueryHandle!
     
-    var isCircleQueryListening:Bool = false
+    //listener for our direstore database
+    var realTimeFirestoreListenerForMarkers:ListenerRegistration!
     
-    var isNearbyHanle:GFSQueryHandle!
-    
+    //an array to hold all the nearbyIds that is being pulled from our databse
     var nearbyIds = [String]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initMapView()
-        checkLocationServices()
-        addSlideInCardToMapView()
-        mapView?.delegate = self
-        
-        firestoreCollection = db.collection("TaggedTrash")
-        geoFirestore = GeoFirestore(collectionRef: firestoreCollection)
-        
-        
-       // executeNearby() //nearby func. cre
-        
-        //listening for buttonTapped
-        NotificationCenter.default.addObserver(self, selector: #selector(reportTapped), name: NSNotification.Name("reportTapped"), object: nil)
-        
-        //listening for marker modification event
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
-        
-        //NotificationCenter.default.addObserver(self, selector: #selector(listenForRadius), name: NSNotification.Name("updatedLocation"), object: nil)
-    }
-    
-    //when view has appeared successfully, we call in to add the sliding card
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        makeTheNavBarClear()
-        addMenuAndSearchButtonToNavBar()
-        
-        //need to nil guard
-        //guard locationManager.location != nil else{return}
-        
-        //queryForNearby(center: locationManager.location!.coordinate, with: 0.005)
-        
-        listenForRadius()
-    }
-    
-    //Calling a function to lower the card
-    @objc private func reportTapped() {
-        print("lowering the card")
-        animateTransitionIfNeeded(state: .collapsed, duration: 0.5)
-    }
-    
-    //listen for nearby
-    func listenForRadius(){
-        ///maybe wait till all the data is ready to be loaded???????
-        mapView?.clear()
-        markers.removeAll()
-        trashModelArray.removeAll()
-        
-        self.queryForNearby(center: locationManager.location!.coordinate, with: 0.005) { (resp) in
-            print(resp)
-        }
-        
-        
-        
-    }
-    
-    //calling a func to re-assign userAssignedElement
-    @objc private func updateTappedArrayElement(){
-        guard tappedMarker != nil else {return}
-        
-        print("tapped array element -> ")
-        print(tappedArrayElement)
-        print("just modded element -> ")
-        print(justModdedArrayElement)
-        
-        guard justModdedArrayElement != nil else {return}
-        
-        if tappedArrayElement.id == justModdedArrayElement.id{
-            unScheduledMarkerInfoWindow.removeFromSuperview()
-            scheduledMarkerInfoWindow.removeFromSuperview()
-        }
-    }
 }
 
