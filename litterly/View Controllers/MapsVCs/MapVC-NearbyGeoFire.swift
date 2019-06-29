@@ -46,15 +46,18 @@ extension MapsViewController{
                 } else {
                     self.nearbyIds.append("\(id! as String)")
                     print("Appeneded ID. Nearby count is \(self.nearbyIds.count)")
-                    
+                    self.cardViewController.nearByCount.fadeTransition(0.3)
+                    self.cardViewController.nearByCount.text = "\(self.nearbyIds.count)"
                     self.realTimeMarkerListener(documentId: self.nearbyIds.last!)
                 }
                 
             })
             
+            //remove events
             self.hasLeftNearby = self.circleQuery.observe(.documentExited, with: {(id, location) in
                 print("LEFT NEARBY EVENT ---->\(id! as String) has left nearby")
-                
+                self.cardViewController.nearByCount.fadeTransition(0.3)
+                self.cardViewController.nearByCount.text = "\(self.nearbyIds.count - 1)"
             })
             
             self.hasDocumentMoved = self.circleQuery.observe(.documentMoved, with: {(id, location) in
