@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-#include "Firestore/core/src/firebase/firestore/util/warnings.h"
-
 #import "FIRFirestoreSettings.h"
 
 #import "Firestore/Source/Util/FSTUsageValidation.h"
@@ -27,7 +25,8 @@ static const BOOL kDefaultSSLEnabled = YES;
 static const BOOL kDefaultPersistenceEnabled = YES;
 static const int64_t kDefaultCacheSizeBytes = 100 * 1024 * 1024;
 static const int64_t kMinimumCacheSizeBytes = 1 * 1024 * 1024;
-static const BOOL kDefaultTimestampsInSnapshotsEnabled = YES;
+// TODO(b/73820332): flip the default.
+static const BOOL kDefaultTimestampsInSnapshotsEnabled = NO;
 
 @implementation FIRFirestoreSettings
 
@@ -51,14 +50,12 @@ static const BOOL kDefaultTimestampsInSnapshotsEnabled = YES;
   }
 
   FIRFirestoreSettings *otherSettings = (FIRFirestoreSettings *)other;
-  SUPPRESS_DEPRECATED_DECLARATIONS_BEGIN()
   return [self.host isEqual:otherSettings.host] &&
          self.isSSLEnabled == otherSettings.isSSLEnabled &&
          self.dispatchQueue == otherSettings.dispatchQueue &&
          self.isPersistenceEnabled == otherSettings.isPersistenceEnabled &&
          self.timestampsInSnapshotsEnabled == otherSettings.timestampsInSnapshotsEnabled &&
          self.cacheSizeBytes == otherSettings.cacheSizeBytes;
-  SUPPRESS_END()
 }
 
 - (NSUInteger)hash {
@@ -66,9 +63,7 @@ static const BOOL kDefaultTimestampsInSnapshotsEnabled = YES;
   result = 31 * result + (self.isSSLEnabled ? 1231 : 1237);
   // Ignore the dispatchQueue to avoid having to deal with sizeof(dispatch_queue_t).
   result = 31 * result + (self.isPersistenceEnabled ? 1231 : 1237);
-  SUPPRESS_DEPRECATED_DECLARATIONS_BEGIN()
   result = 31 * result + (self.timestampsInSnapshotsEnabled ? 1231 : 1237);
-  SUPPRESS_END()
   result = 31 * result + (NSUInteger)self.cacheSizeBytes;
   return result;
 }
@@ -79,9 +74,7 @@ static const BOOL kDefaultTimestampsInSnapshotsEnabled = YES;
   copy.sslEnabled = _sslEnabled;
   copy.dispatchQueue = _dispatchQueue;
   copy.persistenceEnabled = _persistenceEnabled;
-  SUPPRESS_DEPRECATED_DECLARATIONS_BEGIN()
   copy.timestampsInSnapshotsEnabled = _timestampsInSnapshotsEnabled;
-  SUPPRESS_END()
   copy.cacheSizeBytes = _cacheSizeBytes;
   return copy;
 }

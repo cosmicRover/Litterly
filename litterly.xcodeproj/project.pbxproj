@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,7 +25,7 @@
 		C564B483226AA05B00F2DEF1 /* TrashDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564B482226AA05B00F2DEF1 /* TrashDataModel.swift */; };
 		C56CEA33225D977A005DC40E /* SelectedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56CEA32225D977A005DC40E /* SelectedButton.swift */; };
 		C56CEA35225D9E87005DC40E /* MapsVC-GoogleMaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56CEA34225D9E87005DC40E /* MapsVC-GoogleMaps.swift */; };
-		C5743263229617150050F4D4 /* MapsVC-SearchBar-GMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5743262229617150050F4D4 /* MapsVC-SearchBar-GMS.swift */; };
+		C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5743262229617150050F4D4 /* MapsVC-SearchButton-GMS.swift */; };
 		C584FC6122668F3300ED1B53 /* alert.json in Resources */ = {isa = PBXBuildFile; fileRef = C584FC6022668F3200ED1B53 /* alert.json */; };
 		C584FC6622669DC300ED1B53 /* town.json in Resources */ = {isa = PBXBuildFile; fileRef = C584FC6522669DC300ED1B53 /* town.json */; };
 		C5863AFC228A38B5004A25E4 /* SharedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5863AFB228A38B5004A25E4 /* SharedValues.swift */; };
@@ -36,7 +36,7 @@
 		C5907FA92284ECFB001E720D /* Alert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5907FA82284ECFB001E720D /* Alert.storyboard */; };
 		C5907FAC2284EDBE001E720D /* ScheduleAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5907FAB2284EDBE001E720D /* ScheduleAlertViewController.swift */; };
 		C5907FAE22850156001E720D /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5907FAD22850156001E720D /* AlertService.swift */; };
-		C5931BD6225EBBA400ECBEEB /* MapsVC-SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5931BD5225EBBA400ECBEEB /* MapsVC-SearchBar.swift */; };
+		C5931BD6225EBBA400ECBEEB /* MapsVC-SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5931BD5225EBBA400ECBEEB /* MapsVC-SearchButton.swift */; };
 		C593FB72229359FC002FAE72 /* JoinAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593FB71229359FC002FAE72 /* JoinAlertViewController.swift */; };
 		C593FB7422935EC4002FAE72 /* plant.json in Resources */ = {isa = PBXBuildFile; fileRef = C593FB7322935EC4002FAE72 /* plant.json */; };
 		C593FB782293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C593FB772293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift */; };
@@ -60,6 +60,8 @@
 		C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */; };
 		C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */; };
 		C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */; };
+		C5B2D9F422C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */; };
+		C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */; };
 		C5B6858A2294DAF300421EE1 /* GeneralAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B685892294DAF300421EE1 /* GeneralAlertViewController.swift */; };
 		C5B6858D2294E08800421EE1 /* check.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B6858C2294E08800421EE1 /* check.json */; };
 		C5C35EE122791B9900103AD9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C35EE022791B9900103AD9 /* UserDataModel.swift */; };
@@ -109,7 +111,7 @@
 		C564B482226AA05B00F2DEF1 /* TrashDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashDataModel.swift; sourceTree = "<group>"; };
 		C56CEA32225D977A005DC40E /* SelectedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedButton.swift; sourceTree = "<group>"; };
 		C56CEA34225D9E87005DC40E /* MapsVC-GoogleMaps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-GoogleMaps.swift"; sourceTree = "<group>"; };
-		C5743262229617150050F4D4 /* MapsVC-SearchBar-GMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-SearchBar-GMS.swift"; sourceTree = "<group>"; };
+		C5743262229617150050F4D4 /* MapsVC-SearchButton-GMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-SearchButton-GMS.swift"; sourceTree = "<group>"; };
 		C584FC6022668F3200ED1B53 /* alert.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alert.json; sourceTree = "<group>"; };
 		C584FC6522669DC300ED1B53 /* town.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = town.json; sourceTree = "<group>"; };
 		C5863AFB228A38B5004A25E4 /* SharedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValues.swift; sourceTree = "<group>"; };
@@ -120,7 +122,7 @@
 		C5907FA82284ECFB001E720D /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		C5907FAB2284EDBE001E720D /* ScheduleAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAlertViewController.swift; sourceTree = "<group>"; };
 		C5907FAD22850156001E720D /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
-		C5931BD5225EBBA400ECBEEB /* MapsVC-SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-SearchBar.swift"; sourceTree = "<group>"; };
+		C5931BD5225EBBA400ECBEEB /* MapsVC-SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-SearchButton.swift"; sourceTree = "<group>"; };
 		C593FB71229359FC002FAE72 /* JoinAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinAlertViewController.swift; sourceTree = "<group>"; };
 		C593FB7322935EC4002FAE72 /* plant.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plant.json; sourceTree = "<group>"; };
 		C593FB772293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleAttendingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -144,6 +146,8 @@
 		C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlasticMeetup-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetalMeetups-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-NearbyGeoFire.swift"; sourceTree = "<group>"; };
+		C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-ViewDidLoad.swift"; sourceTree = "<group>"; };
 		C5B685892294DAF300421EE1 /* GeneralAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAlertViewController.swift; sourceTree = "<group>"; };
 		C5B6858C2294E08800421EE1 /* check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check.json; sourceTree = "<group>"; };
 		C5C35EE022791B9900103AD9 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
@@ -368,13 +372,15 @@
 			isa = PBXGroup;
 			children = (
 				C5DD0884225845B7000988A3 /* MapsViewController.swift */,
+				C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */,
 				C58D911C225D54B2006A0390 /* MapsVC-SlideInCard.swift */,
-				C5931BD5225EBBA400ECBEEB /* MapsVC-SearchBar.swift */,
-				C5743262229617150050F4D4 /* MapsVC-SearchBar-GMS.swift */,
+				C5931BD5225EBBA400ECBEEB /* MapsVC-SearchButton.swift */,
+				C5743262229617150050F4D4 /* MapsVC-SearchButton-GMS.swift */,
 				C56CEA34225D9E87005DC40E /* MapsVC-GoogleMaps.swift */,
 				C564B47F226A9EB300F2DEF1 /* MapsVCLocationServices.swift */,
 				C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */,
 				C5C35EE6227A1A9900103AD9 /* MapsVC-GMSDelegate.swift */,
+				C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */,
 			);
 			path = MapsVCs;
 			sourceTree = "<group>";
@@ -727,42 +733,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-litterly/Pods-litterly-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/Cards/Cards.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Player/Player.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-litterly/Pods-litterly-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cards.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Player.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-litterly/Pods-litterly-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -797,24 +772,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-litterly/Pods-litterly-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-litterly/Pods-litterly-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-litterly/Pods-litterly-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -848,6 +810,7 @@
 				C5907FAE22850156001E720D /* AlertService.swift in Sources */,
 				C59C82B12295C0D40051F3F8 /* OrganicMeetupViewController.swift in Sources */,
 				C59C82AF2295BF450051F3F8 /* MetalMeetupViewController.swift in Sources */,
+				C5B2D9F422C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift in Sources */,
 				C5063154226E8EF30078265C /* MenuOption.swift in Sources */,
 				C5063152226E8ED00078265C /* MenuOptionCell.swift in Sources */,
 				C593FB72229359FC002FAE72 /* JoinAlertViewController.swift in Sources */,
@@ -863,6 +826,7 @@
 				C599F5EE226304590038A1A6 /* PageThreeViewController.swift in Sources */,
 				C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */,
 				C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */,
+				C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */,
 				C50C752F22978724005A16DD /* RedeemPointsCell.swift in Sources */,
 				C56CEA35225D9E87005DC40E /* MapsVC-GoogleMaps.swift in Sources */,
 				C564B480226A9EB300F2DEF1 /* MapsVCLocationServices.swift in Sources */,
@@ -876,7 +840,7 @@
 				2FA974CC2272B0F000115FBD /* CardContentTableViewCell.swift in Sources */,
 				C5C35EEB227A1C7B00103AD9 /* ApiKeys.swift in Sources */,
 				C597957C2264E01100B1797D /* AppColors.swift in Sources */,
-				C5743263229617150050F4D4 /* MapsVC-SearchBar-GMS.swift in Sources */,
+				C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */,
 				C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */,
 				C5907FAC2284EDBE001E720D /* ScheduleAlertViewController.swift in Sources */,
 				C5DD0885225845B7000988A3 /* MapsViewController.swift in Sources */,
@@ -884,7 +848,7 @@
 				C5863B00228A4443004A25E4 /* MeetupDataModel.swift in Sources */,
 				C5E8F20522656A0C009FAE68 /* AuthPickerViewController.swift in Sources */,
 				C59C82AB2295B09F0051F3F8 /* MeetupVC-Firebase.swift in Sources */,
-				C5931BD6225EBBA400ECBEEB /* MapsVC-SearchBar.swift in Sources */,
+				C5931BD6225EBBA400ECBEEB /* MapsVC-SearchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

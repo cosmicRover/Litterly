@@ -11,17 +11,6 @@ import FirebaseFirestore
 
 extension JoinAlertViewController{
     
-    //append to the confirmedUsers array
-    func appendToConfirmedUsers(for meetupId:String, user_id:String, user_pic_url:String){
-        //get parent's reference
-        let ref = sharedValue.db.collection("Meetups").document("\(meetupId)")
-        
-        //update the objects array using arrayUnion
-        ref.updateData([
-            "confirmed_users": FieldValue.arrayUnion([["user_id" : "\(user_id as String)", "user_pic_url" : "\(user_pic_url as String)"]])
-            ])
-    }
-    
     //get meetup details
     func meetupDetailsFromFirestore(for meetupId:String){
         
@@ -29,6 +18,8 @@ extension JoinAlertViewController{
         
         ref.getDocument { (document, error) in
             
+            //gets selective chunk of the data from the document and passes it to vars for use in
+            //the alert VC. confirmed_users is a list of nested objects
             let address = document?.data()!["meetup_address"]
             let meetup_date_time = document?.data()!["meetup_date_time"]
             let confirmed_users = document?.data()!["confirmed_users"] as! [[String:String]]
@@ -53,12 +44,13 @@ extension JoinAlertViewController{
     }
     
     //appends user_id to confirmed_users array
-    func updateConfirmedUsersArray(for id:String, with userId:String, and picUrl:String){
+    func updateConfirmedUsersArrayAndUsersIdArray(for id:String, with userId:String, and picUrl:String){
         
         let meetupRef = sharedValue.db.collection("Meetups").document("\(id)")
         
         meetupRef.updateData([
-            "confirmed_users" : FieldValue.arrayUnion([["user_id" : "\(userId)", "user_pic_url" : "\(picUrl)"]])
+            "confirmed_users" : FieldValue.arrayUnion([["user_id" : "\(userId)", "user_pic_url" : "\(picUrl)"]]),
+            "confirmed_users_ids": FieldValue.arrayUnion(["\(userId)"])
             ])
     }
     

@@ -7,7 +7,6 @@
 //
 import UIKit
 import GoogleMaps
-import CoreLocation
 import FirebaseFirestore
 
 extension MapsViewController{
@@ -46,8 +45,11 @@ extension MapsViewController{
     }
     
     //a listener for markers in real time from other users
-    func realTimeMarkerListener(){
-        db.collection("TaggedTrash").addSnapshotListener{
+    func realTimeMarkerListener(documentId id:String){
+        
+        //adds snapshot listeners for documents with the specefied ids only
+       self.realTimeFirestoreListenerForMarkers =  db.collection("TaggedTrash").whereField("id", isEqualTo: "\(id)")
+            .addSnapshotListener{
             QuerySnapshot, Error in
             
             //chceking if the database we query for is empty
@@ -100,7 +102,7 @@ extension MapsViewController{
                     
                     //assigning a reference to the modded data
                     self.justModdedArrayElement = data
-                    //and then posting a notification
+                    //and then posting a notification to modify the array
                     NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
                     
                     print("The index of the modded data ->>> \(index)")

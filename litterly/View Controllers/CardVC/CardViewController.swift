@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import CoreLocation
+import Geofirestore
+import GoogleMaps
 
 class CardViewController: UIViewController {
 
@@ -27,10 +29,12 @@ class CardViewController: UIViewController {
     @IBOutlet weak var trashType3: UIButton!
     @IBOutlet weak var reportTrashButton: UIButton!
     
-    let db = SharedValues.sharedInstance.db
+    let db = Firestore.firestore()
     let trashTypes: [String] = ["organic", "plastic", "metal"]
     var submitTrashType: String!
     var trashModelArray = [TrashDataModel]()
+    let firestoreCollection = Firestore.firestore().collection("TaggedTrash")
+    var geoFirestore:GeoFirestore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +42,9 @@ class CardViewController: UIViewController {
         setUpWidgetColors()
         roundButtonCorners()
         reportTrashButton.isEnabled = false
+        
+        geoFirestore = GeoFirestore(collectionRef: firestoreCollection)
+        
     }
 
     //rounds the button's corners
@@ -129,15 +136,14 @@ class CardViewController: UIViewController {
             
                 print(address!)
                 print(userCurrentNeighborhood!)
-                
-                let address = address
-                let userCurrentNeighborhood = userCurrentNeighborhood
                 let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.submitTrashType, street_address: address!, is_meetup_scheduled: false)
                 self.submitTrashToFirestore(with: trashTag.dictionary, for: id)
-                self.updateUserCurrentNeighborhood(forUser: author, with: userCurrentNeighborhood!)
+                self.setLocationWithGeoFirestore(for: id, on: coordinates)
             }
         } else{
             //show an alert saying that location is off
+            // can get detailed direction on how to do that
+            print("location isn't on!!!")
         }
     }
     

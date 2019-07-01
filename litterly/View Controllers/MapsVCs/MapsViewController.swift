@@ -6,15 +6,22 @@
 //  Copyright © 2019 Joy Paul. All rights reserved.
 //
 
-import UIKit
 import GoogleMaps
 import CoreLocation
 import Firebase
 import FirebaseFirestore
+import Geofirestore
+
+//this class holds all the properties for MapsVC
 
 class MapsViewController: UIViewController{
     
+    // MARK: Any delegates to conform to
+    
     var delegate: HomeControllerDelegate?
+    
+    
+    // MARK: Animation properties
     
     //the view state of the card that we will be reffering to
     enum CardState{
@@ -44,14 +51,8 @@ class MapsViewController: UIViewController{
     //when animation is interrupted, set the value to 0
     var animatorProgressWhenInterrupted:CGFloat = 0
     
-    var mapView: GMSMapView?
-    var markers = [GMSMarker]()
-    //init the location manager for device location
-    let locationManager = CLLocationManager()
     
-    let db = Firestore.firestore()
-    
-    var trashModelArray = [TrashDataModel]()
+    // MARK: Marker icons for different types of tyrashes
     
     //icons for map markers. Scheduled/unscheduled
     let organicMarkerIcon = UIImage(named: "apple")?.withRenderingMode(.alwaysOriginal)
@@ -66,6 +67,21 @@ class MapsViewController: UIViewController{
     let unScheduledMarkerInfoWindow = UnscheduledMarkerInfoWindow().loadView()
     let scheduledMarkerInfoWindow = ScheduledMarkerInfoWindow().loadView()
     
+    
+    
+    // MARK: Map marker arrays and their buffers
+    
+    var mapView: GMSMapView?
+    
+    let db = Firestore.firestore()
+    
+    //init the location manager for device location
+    let locationManager = CLLocationManager()
+    
+    var trashModelArray = [TrashDataModel]()
+    
+    var markers = [GMSMarker]()
+    
     //keeps tarnck of the tapped marker
     var tappedMarker: CLLocationCoordinate2D!
     
@@ -77,48 +93,26 @@ class MapsViewController: UIViewController{
     
     var justModdedArrayElement:TrashDataModel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        initMapView()
-        checkLocationServices()
-        addSlideInCardToMapView()
-        mapView?.delegate = self
-        
-        //listening for buttonTapped
-        NotificationCenter.default.addObserver(self, selector: #selector(reportTapped), name: NSNotification.Name("reportTapped"), object: nil)
-        
-        //listening for marker modification event
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
-    }
     
-    //when view has appeared successfully, we call in to add the sliding card
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        makeTheNavBarClear()
-        addMenuAndSearchButtonToNavBar()
-    }
+    // MARK: Nearby queries and their handler + array
     
-    //Calling a function to lower the card
-    @objc private func reportTapped() {
-        print("lowering the card")
-        animateTransitionIfNeeded(state: .collapsed, duration: 0.5)
-    }
+    //the query vars for our Geofire circleQuery
     
-    //calling a func to re-assign userAssignedElement
-    @objc private func updateTappedArrayElement(){
-        guard tappedMarker != nil else {return}
-        
-        print("tapped array element -> ")
-        print(tappedArrayElement)
-        print("just modded element -> ")
-        print(justModdedArrayElement)
-        
-        guard justModdedArrayElement != nil else {return}
-        
-        if tappedArrayElement.id == justModdedArrayElement.id{
-            unScheduledMarkerInfoWindow.removeFromSuperview()
-            scheduledMarkerInfoWindow.removeFromSuperview()
-        }
-    }
+    var firestoreCollectionRef:CollectionReference!
+    var geoFirestoreRef:GeoFirestore!
+    
+    var circleQuery:GFSCircleQuery!, hasLeftNearby:GFSQueryHandle!, hasDocumentMoved:GFSQueryHandle!
+    
+    //the handler for abobe query vars
+    var isNearbyHandle:GFSQueryHandle!
+    
+    //listener for our direstore database
+    var realTimeFirestoreListenerForMarkers:ListenerRegistration!
+    
+    let nearbyRadius = 4828.03 // 3 miles
+    
+    //an array to hold all the nearbyIds that is being pulled from our databse
+    var nearbyIds = [String]()
+    
 }
 

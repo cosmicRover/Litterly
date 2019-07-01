@@ -7,10 +7,9 @@
 //
 
 import GoogleMaps
-import UIKit
 import CoreLocation
-import GooglePlaces
 import Firebase
+import UIKit
 
 //contains all the location permission related cods
 
@@ -43,7 +42,7 @@ extension MapsViewController: CLLocationManagerDelegate{
         //only gets location when the app is open, the ideal condition
         case .authorizedWhenInUse:
             //centering the mapView on device's location
-            centersCameraOnDevice()
+            centersCameraOnDeviceAndTriggersNearby()
             break
         //when user hasn't picked an allow or not allow auth option, ideal to ask for permission here
         case .notDetermined:
@@ -68,40 +67,18 @@ extension MapsViewController: CLLocationManagerDelegate{
     
     
     //camera helps center the position of the view, will use user's current location
-    func centersCameraOnDevice(){
+    func centersCameraOnDeviceAndTriggersNearby(){
         if let location = locationManager.location?.coordinate{
             print(location.latitude)
             print(location.longitude)
-            
-            let userId = Auth.auth().currentUser?.email
-            
-            reverseGeocodeApi(on: location.latitude, and: location.longitude) { (address, userCurrentNeighborhood, error) in
-                
-                self.updateUserCurrentNeighborhood(forUser: userId!, with: userCurrentNeighborhood!)
-            }
-            
+
             let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 17.0)
             self.mapView?.animate(to: camera)
             self.mapView?.isMyLocationEnabled = true
-            
             self.locationManager.startUpdatingLocation()
+            locationManager.stopUpdatingLocation()
+            self.locationManager.delegate = nil
         }
-    }
-    
-    //func to call after location from the user is taken
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
-        
-        mapView?.animate(to: camera)
-        
-        locationManager.startUpdatingLocation()
-        
-        //Finally stop updating location otherwise it will come again and again in this delegate
-        locationManager.stopUpdatingLocation()
-        mapView?.isMyLocationEnabled = false
-        
     }
     
     //if auth changed, run through the switch case statements
@@ -125,7 +102,7 @@ extension MapsViewController: CLLocationManagerDelegate{
                 let getAddress = resultChunk[0] as! [String:Any]
                 
                 let neighborhoodChunk = getAddress["address_components"] as! [Any]
-                let neighborhood = neighborhoodChunk[2] as! [String:Any]
+                let neighborhood = neighborhoodChunk[5] as! [String:Any]
                 
                 let userNeighborhood = neighborhood["short_name"] as! String
                 let formattedAddress = getAddress["formatted_address"] as! String

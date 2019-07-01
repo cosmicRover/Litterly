@@ -8,6 +8,8 @@
 
 import Foundation
 import FirebaseFirestore
+import CoreLocation
+import Geofirestore
 
 extension CardViewController{
     //adds document to firestore
@@ -33,6 +35,20 @@ extension CardViewController{
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
+            }
+        }
+    }
+    
+    //**************EXPERIMENTS*****************
+    func setLocationWithGeoFirestore(for id:String, on location:CLLocationCoordinate2D){
+        
+        let cllocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        
+        geoFirestore.setLocation(location: cllocation, forDocumentWithID: "\(id)") { (error) in
+            if let error = error {
+                print("An error occured: \(error)")
+            } else {
+                print("Saved location successfully!")
             }
         }
     }

@@ -38,9 +38,10 @@ extension ProfileViewController{
         
     }
     
-    func fetchUserCreatedMeetup(completion: @escaping (Int?) -> ()){
+    //gets all the meetups user had joined
+    func fetchUserJoinedMeetup(completion: @escaping (Int?) -> ()){
         let currentUserId = Auth.auth().currentUser?.email
-        let trashTagCountQuery = db.collection("Meetups").whereField("author_id", isEqualTo: "\(currentUserId! as String)" )
+        let trashTagCountQuery = db.collection("Meetups").whereField("confirmed_users_ids", arrayContains: "\(currentUserId! as String)")
         
         trashTagCountQuery.getDocuments(){
             QuerySnapshot, Error in
