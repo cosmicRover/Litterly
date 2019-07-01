@@ -20,7 +20,7 @@ extension MapsViewController{
         trashModelArray.removeAll()
         nearbyIds.removeAll()
         
-        self.queryForNearby(center: locationManager.location!.coordinate, with: 0.01)
+        self.queryForNearby(center: locationManager.location!.coordinate, with: nearbyRadius)
         
     }
     

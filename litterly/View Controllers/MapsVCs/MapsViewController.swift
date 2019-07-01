@@ -20,6 +20,7 @@ class MapsViewController: UIViewController{
     
     var delegate: HomeControllerDelegate?
     
+    
     // MARK: Animation properties
     
     //the view state of the card that we will be reffering to
@@ -72,7 +73,7 @@ class MapsViewController: UIViewController{
     
     var mapView: GMSMapView?
     
-     let db = Firestore.firestore()
+    let db = Firestore.firestore()
     
     //init the location manager for device location
     let locationManager = CLLocationManager()
@@ -107,6 +108,8 @@ class MapsViewController: UIViewController{
     
     //listener for our direstore database
     var realTimeFirestoreListenerForMarkers:ListenerRegistration!
+    
+    let nearbyRadius = 4828.03 // 3 miles
     
     //an array to hold all the nearbyIds that is being pulled from our databse
     var nearbyIds = [String]()
