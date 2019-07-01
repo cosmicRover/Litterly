@@ -14,7 +14,7 @@ extension MapsViewController{
     
     //listen for nearby
     func listenForRadius(){
-        ///maybe wait till all the data is ready to be loaded???????
+        ///clears existing markers and empties the three arrays
         mapView?.clear()
         markers.removeAll()
         trashModelArray.removeAll()

@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         FirebaseApp.configure()
         
         //if user didn't sign out, send the user directly to the mapsVC
-        if let alreadySignedIn = Auth.auth().currentUser{
-            print("User already signed in \(alreadySignedIn) \(Auth.auth().currentUser?.displayName as! String)")
+        if Auth.auth().currentUser != nil{
+            print("User already signed in \(Auth.auth().currentUser?.displayName as! String)")
 
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
@@ -34,6 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
         } else {
             print("User needs to sign in again")
+            
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "IntroPageVC")
+            
+            self.window?.rootViewController = mapsViewController
         }
         
         return true

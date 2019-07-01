@@ -122,44 +122,63 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PeopleAttendingCollectionViewCell", for: indexPath) as! PeopleAttendingCollectionViewCell
         
         //gets image from network.
-        let userImage = confirmedUsers[indexPath.row]["user_pic_url"] as! String
+        let userImage = confirmedUsers[indexPath.row]["user_pic_url"]! as String
         let imageUrl = URL(string: userImage)
 
-        
+        //call a cell image function based on network image 
         if let data = try? Data(contentsOf: (imageUrl)!){
-            let image = UIImage(data: data)
+            let image = UIImage(data: data)!
 
-            cell.attendingUserProfileImages.image = image
-            //rounds and configures the cell
-            cell.attendingUserProfileImages.contentMode = .scaleAspectFill
-            cell.attendingUserProfileImages.isOpaque = false
-            cell.attendingUserProfileImages.layer.borderWidth = 1
-            cell.attendingUserProfileImages.layer.masksToBounds = false
-            cell.attendingUserProfileImages.layer.borderColor = UIColor.searchBoxTextGray.cgColor
-            cell.attendingUserProfileImages.layer.cornerRadius = cell.attendingUserProfileImages.frame.height/2
-            cell.attendingUserProfileImages.clipsToBounds = true
-
+            let cell = returnsRoundedCellWithImage(forImage: image, indexPath: indexPath)
+            
             return cell
 
         } else{
 
-            //if downloaded image is nil, provide a default value
-            cell.attendingUserProfileImages.image = UIImage(named: "profile")
-            //rounds and configures the cell
-            cell.attendingUserProfileImages.contentMode = .scaleAspectFill
-            cell.attendingUserProfileImages.isOpaque = false
-            cell.attendingUserProfileImages.layer.borderWidth = 1
-            cell.attendingUserProfileImages.layer.masksToBounds = false
-            cell.attendingUserProfileImages.layer.borderColor = UIColor.searchBoxTextGray.cgColor
-            cell.attendingUserProfileImages.layer.cornerRadius = cell.attendingUserProfileImages.frame.height/2
-            cell.attendingUserProfileImages.clipsToBounds = true
-
+            let image = UIImage(named: "profile")!
+            
+            let cell = returnsRoundedCellWithoutImage(forImage: image, indexPath: indexPath)
+            
             return cell
         }
         
+    }
+    
+    //for cells with networks pics only
+    func returnsRoundedCellWithImage(forImage image: UIImage, indexPath: IndexPath) -> UICollectionViewCell{
+        let cell = attendingUserCollectionView.dequeueReusableCell(withReuseIdentifier: "PeopleAttendingCollectionViewCell", for: indexPath) as! PeopleAttendingCollectionViewCell
+        
+        cell.attendingUserProfileImages.image = image
+        //rounds and configures the cell
+        cell.attendingUserProfileImages.contentMode = .scaleAspectFill
+        cell.attendingUserProfileImages.isOpaque = false
+        cell.attendingUserProfileImages.layer.borderWidth = 1
+        cell.attendingUserProfileImages.layer.masksToBounds = false
+        cell.attendingUserProfileImages.layer.borderColor = UIColor.searchBoxTextGray.cgColor
+        cell.attendingUserProfileImages.layer.cornerRadius = cell.attendingUserProfileImages.frame.height/2
+        cell.attendingUserProfileImages.clipsToBounds = true
+        
+        return cell
+        
+    }
+    
+    //for cells with pic from the asset library only
+    func returnsRoundedCellWithoutImage(forImage image: UIImage, indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = attendingUserCollectionView.dequeueReusableCell(withReuseIdentifier: "PeopleAttendingCollectionViewCell", for: indexPath) as! PeopleAttendingCollectionViewCell
+        
+        cell.attendingUserProfileImages.image = image
+        //rounds and configures the cell
+        cell.attendingUserProfileImages.contentMode = .scaleAspectFill
+        cell.attendingUserProfileImages.isOpaque = false
+        cell.attendingUserProfileImages.layer.borderWidth = 1
+        cell.attendingUserProfileImages.layer.masksToBounds = false
+        cell.attendingUserProfileImages.layer.borderColor = UIColor.searchBoxTextGray.cgColor
+        cell.attendingUserProfileImages.layer.cornerRadius = cell.attendingUserProfileImages.frame.height/2
+        cell.attendingUserProfileImages.clipsToBounds = true
+        
+        return cell
     }
     
     //animates the cells appearing

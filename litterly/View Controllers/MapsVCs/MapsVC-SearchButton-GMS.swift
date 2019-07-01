@@ -34,8 +34,8 @@ extension MapsViewController: GMSAutocompleteViewControllerDelegate{
     
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        print("Place name: \(place.name)")
-        print("Place ID: \(place.placeID)")
+        print("Place name: \(place.name! as String)")
+        print("Place ID: \(place.placeID! as String)")
         print("Place lat: \(place.coordinate.latitude)")
         print("Place lon: \(place.coordinate.longitude)")
         

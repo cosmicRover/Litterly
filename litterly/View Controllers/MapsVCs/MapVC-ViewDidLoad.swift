@@ -62,8 +62,4 @@ extension MapsViewController{
             scheduledMarkerInfoWindow.removeFromSuperview()
         }
     }
-    
-    func addNearbyCounter(){
-        //print("\(shared.nearbyCount)")
-    }
 }
