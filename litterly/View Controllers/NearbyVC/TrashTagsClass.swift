@@ -9,7 +9,7 @@
 import UIKit
 
 class TrashTags {
-    // MARK: - Public API
+    
     var title = ""
     var description = ""
     var featuredImage: UIImage!
@@ -23,7 +23,7 @@ class TrashTags {
         self.color = color
     }
     
-    // MARK: - Private
+    
     // dummy data
     static func createTrashTags() -> [TrashTags]
     {
