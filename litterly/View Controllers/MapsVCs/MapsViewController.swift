@@ -112,7 +112,7 @@ class MapsViewController: UIViewController{
     let nearbyRadius = 4828.03 // 3 miles
     
     //an array to hold all the nearbyIds that is being pulled from our databse
-    var nearbyIds = [String]()
+    var nearbyIdsAndTheirDistanceFromUser = [NearbyIdModel]()
     
 }
 

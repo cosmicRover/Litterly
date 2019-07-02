@@ -45,6 +45,7 @@
 		C594409A22B9B1CE00B95FF9 /* Nearby.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C594409922B9B1CE00B95FF9 /* Nearby.storyboard */; };
 		C597957C2264E01100B1797D /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597957B2264E01100B1797D /* AppColors.swift */; };
 		C59909632294573A00E16E44 /* TextFadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59909622294573A00E16E44 /* TextFadeTransition.swift */; };
+		C599E08222CAF04D00E0D40A /* NearbyIdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C599E08122CAF04D00E0D40A /* NearbyIdModel.swift */; };
 		C599F5EA2262FD830038A1A6 /* PageOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C599F5E92262FD830038A1A6 /* PageOneViewController.swift */; };
 		C599F5EC2263044C0038A1A6 /* PageTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C599F5EB2263044C0038A1A6 /* PageTwoViewController.swift */; };
 		C599F5EE226304590038A1A6 /* PageThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C599F5ED226304590038A1A6 /* PageThreeViewController.swift */; };
@@ -131,6 +132,7 @@
 		C594409922B9B1CE00B95FF9 /* Nearby.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Nearby.storyboard; sourceTree = "<group>"; };
 		C597957B2264E01100B1797D /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		C59909622294573A00E16E44 /* TextFadeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFadeTransition.swift; sourceTree = "<group>"; };
+		C599E08122CAF04D00E0D40A /* NearbyIdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyIdModel.swift; sourceTree = "<group>"; };
 		C599F5E92262FD830038A1A6 /* PageOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageOneViewController.swift; sourceTree = "<group>"; };
 		C599F5EB2263044C0038A1A6 /* PageTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTwoViewController.swift; sourceTree = "<group>"; };
 		C599F5ED226304590038A1A6 /* PageThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageThreeViewController.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				C5C35EE022791B9900103AD9 /* UserDataModel.swift */,
 				C5863AFF228A4443004A25E4 /* MeetupDataModel.swift */,
 				C59C82B72295C2D60051F3F8 /* MeetupsQueryModel.swift */,
+				C599E08122CAF04D00E0D40A /* NearbyIdModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -839,6 +842,7 @@
 				C56CEA33225D977A005DC40E /* SelectedButton.swift in Sources */,
 				2FA974CC2272B0F000115FBD /* CardContentTableViewCell.swift in Sources */,
 				C5C35EEB227A1C7B00103AD9 /* ApiKeys.swift in Sources */,
+				C599E08222CAF04D00E0D40A /* NearbyIdModel.swift in Sources */,
 				C597957C2264E01100B1797D /* AppColors.swift in Sources */,
 				C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */,
 				C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */,
