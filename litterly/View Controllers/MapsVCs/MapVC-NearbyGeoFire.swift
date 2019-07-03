@@ -52,9 +52,9 @@ extension MapsViewController{
                     let nearby_id_lat:Double = location?.coordinate.latitude as! Double
                     let nearby_id_lon:Double = location?.coordinate.longitude as! Double
                     
-                    let nearby_id_distanbce = self.findDistanceFromUserToMarker(destinationLat: nearby_id_lat, destinationLon: nearby_id_lon)
+                    let nearby_id_distance_from_user = self.findDistanceFromUserToMarker(destinationLat: nearby_id_lat, destinationLon: nearby_id_lon)
                     
-                    let nearbyDataToAppend:NearbyIdModel = NearbyIdModel(nearby_id: nearby_id, nearby_id_lat: nearby_id_lat, nearby_id_lon: nearby_id_lon, nearby_id_distance: nearby_id_distanbce)
+                    let nearbyDataToAppend:NearbyIdModel = NearbyIdModel(nearby_id: nearby_id, nearby_id_lat: nearby_id_lat, nearby_id_lon: nearby_id_lon, nearby_id_distance_from_user: nearby_id_distance_from_user)
                     
                     self.nearbyIdsAndTheirDistanceFromUser.append(nearbyDataToAppend)
                     print("Appeneded Nearby item. Nearby count is \(self.nearbyIdsAndTheirDistanceFromUser.count)")

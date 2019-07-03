@@ -35,6 +35,7 @@ class CardViewController: UIViewController {
     var trashModelArray = [TrashDataModel]()
     let firestoreCollection = Firestore.firestore().collection("TaggedTrash")
     var geoFirestore:GeoFirestore!
+    let alertService = AlertService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,20 +132,54 @@ class CardViewController: UIViewController {
             let id = "\(coordinates.latitude)" + "\(coordinates.longitude)"+"marker" as String
             let author = firebaseUserInstance.email!
             
-            //gets tag address and the neighborhood from reverseGeocode
-            mapFuncs.reverseGeocodeApi(on: coordinates.latitude, and: coordinates.longitude) { (address, userCurrentNeighborhood, error) in
+            let docRef = db.collection("TaggedTrash").document("\(id)")
             
-                print(address!)
-                print(userCurrentNeighborhood!)
-                let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.submitTrashType, street_address: address!, is_meetup_scheduled: false)
-                self.submitTrashToFirestore(with: trashTag.dictionary, for: id)
-                self.setLocationWithGeoFirestore(for: id, on: coordinates)
-            }
+            docRef.getDocument { (document, error) in
+                if let document = document {
+                    
+                    
+                    if document.exists{
+                        //show alert saying marker already exists
+                        print("data already exists")
+                        self.showErrorAlert()
+                        
+                    } else {
+                        
+                        print("Document does not exist and we are free to create one")
+                        //gets tag address and the neighborhood from reverseGeocode
+                        mapFuncs.reverseGeocodeApi(on: coordinates.latitude, and: coordinates.longitude) { (address, userCurrentNeighborhood, error) in
+                        
+                        print(address!)
+                        print(userCurrentNeighborhood!)
+                        let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.submitTrashType, street_address: address!, is_meetup_scheduled: false)
+                        self.submitTrashToFirestore(with: trashTag.dictionary, for: id)
+                        self.setLocationWithGeoFirestore(for: id, on: coordinates)
+                        }
+                    }
+                }}
         } else{
             //show an alert saying that location is off
             // can get detailed direction on how to do that
-            print("location isn't on!!!")
+            print("an error occoured!")
         }
+    }
+    
+    func showErrorAlert(){
+        let alert = alertService.alertForError()
+        
+        DispatchQueue.main.async {
+            self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func getTopMostViewController() -> UIViewController? {
+        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
+        
+        while let presentedViewController = topMostViewController?.presentedViewController {
+            topMostViewController = presentedViewController
+        }
+        
+        return topMostViewController
     }
     
 }

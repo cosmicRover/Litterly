@@ -25,10 +25,10 @@ extension JoinAlertViewController{
             let confirmed_users = document?.data()!["confirmed_users"] as! [[String:String]]
             
             self.meetupAddress.fadeTransition(0.4)
-            self.meetupAddress.text = address as! String
+            self.meetupAddress.text = "\(address as! String)"
             
             self.meetupDateAndTime.fadeTransition(0.4)
-            self.meetupDateAndTime.text = meetup_date_time as! String
+            self.meetupDateAndTime.text = "\(meetup_date_time as! String)"
             
             self.confirmedUsers = confirmed_users
             
@@ -45,13 +45,23 @@ extension JoinAlertViewController{
     
     //appends user_id to confirmed_users array
     func updateConfirmedUsersArrayAndUsersIdArray(for id:String, with userId:String, and picUrl:String){
-        
+        let batch = Firestore.firestore().batch()
         let meetupRef = sharedValue.db.collection("Meetups").document("\(id)")
         
-        meetupRef.updateData([
+        batch.updateData([
             "confirmed_users" : FieldValue.arrayUnion([["user_id" : "\(userId)", "user_pic_url" : "\(picUrl)"]]),
             "confirmed_users_ids": FieldValue.arrayUnion(["\(userId)"])
-            ])
+            ], forDocument: meetupRef)
+        
+        batch.commit { (err) in
+            if let err = err{
+                print(err.localizedDescription)
+                //show error  alert
+            } else{
+                print("update commited successfully")
+                self.showSuccessAlert()
+            }
+        }
     }
     
     //searches the confirmed users array for current user id

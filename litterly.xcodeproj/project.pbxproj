@@ -61,6 +61,10 @@
 		C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */; };
 		C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */; };
 		C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */; };
+		C5AD39E822CD243700258C5B /* ErrorAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */; };
+		C5AD39EA22CD258100258C5B /* broken-stick.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39E922CD258100258C5B /* broken-stick.json */; };
+		C5AD39EC22CD28AB00258C5B /* red-error-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39EB22CD28AB00258C5B /* red-error-cross.json */; };
+		C5AD39EE22CD2D6200258C5B /* bike-error.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39ED22CD2D6200258C5B /* bike-error.json */; };
 		C5B2D9F422C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */; };
 		C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */; };
 		C5B6858A2294DAF300421EE1 /* GeneralAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B685892294DAF300421EE1 /* GeneralAlertViewController.swift */; };
@@ -148,6 +152,10 @@
 		C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlasticMeetup-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetalMeetups-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewController.swift; sourceTree = "<group>"; };
+		C5AD39E922CD258100258C5B /* broken-stick.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "broken-stick.json"; sourceTree = "<group>"; };
+		C5AD39EB22CD28AB00258C5B /* red-error-cross.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-error-cross.json"; sourceTree = "<group>"; };
+		C5AD39ED22CD2D6200258C5B /* bike-error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "bike-error.json"; sourceTree = "<group>"; };
 		C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-NearbyGeoFire.swift"; sourceTree = "<group>"; };
 		C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-ViewDidLoad.swift"; sourceTree = "<group>"; };
 		C5B685892294DAF300421EE1 /* GeneralAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAlertViewController.swift; sourceTree = "<group>"; };
@@ -319,7 +327,10 @@
 			children = (
 				C5B6858C2294E08800421EE1 /* check.json */,
 				C584FC6022668F3200ED1B53 /* alert.json */,
+				C5AD39E922CD258100258C5B /* broken-stick.json */,
 				C593FB7322935EC4002FAE72 /* plant.json */,
+				C5AD39ED22CD2D6200258C5B /* bike-error.json */,
+				C5AD39EB22CD28AB00258C5B /* red-error-cross.json */,
 				C584FC6522669DC300ED1B53 /* town.json */,
 			);
 			path = Animations;
@@ -399,6 +410,7 @@
 		C5907FAA2284ED3A001E720D /* AlertVCs */ = {
 			isa = PBXGroup;
 			children = (
+				C5AD39E622CD241000258C5B /* Error Alerts */,
 				C5B6858B2294DAF900421EE1 /* General Alerts */,
 				C59D640F228D1FC90073B836 /* AlertService */,
 				C59D640E228D1FAD0073B836 /* JoinAlertVC */,
@@ -509,6 +521,14 @@
 				C5907FAD22850156001E720D /* AlertService.swift */,
 			);
 			path = AlertService;
+			sourceTree = "<group>";
+		};
+		C5AD39E622CD241000258C5B /* Error Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */,
+			);
+			path = "Error Alerts";
 			sourceTree = "<group>";
 		};
 		C5B6858B2294DAF900421EE1 /* General Alerts */ = {
@@ -713,13 +733,16 @@
 				C50C753022978724005A16DD /* RedeemPointsCell.xib in Resources */,
 				C543BF9D2277D6E3000C2FC7 /* UnscheduledMarkerInfoWindow.xib in Resources */,
 				C50C752C2297695C005A16DD /* ProfileVCTrashandMeetupsCell.xib in Resources */,
+				C5AD39EC22CD28AB00258C5B /* red-error-cross.json in Resources */,
 				C5D3E904225BB10900C03AFB /* CardViewController.xib in Resources */,
 				C5C7448722A7FBE7005C0E72 /* Meetups.storyboard in Resources */,
+				C5AD39EE22CD2D6200258C5B /* bike-error.json in Resources */,
 				C5D83E2B22581794009CB884 /* LaunchScreen.storyboard in Resources */,
 				C5D83E2822581794009CB884 /* Assets.xcassets in Resources */,
 				C594409A22B9B1CE00B95FF9 /* Nearby.storyboard in Resources */,
 				C5C675D62283DEB20005AFEA /* ScheduledMarkerInfoWindow.xib in Resources */,
 				C5C7448422A7FA60005C0E72 /* Profile.storyboard in Resources */,
+				C5AD39EA22CD258100258C5B /* broken-stick.json in Resources */,
 				C5D83E2622581793009CB884 /* Main.storyboard in Resources */,
 				C584FC6622669DC300ED1B53 /* town.json in Resources */,
 				C5907FA92284ECFB001E720D /* Alert.storyboard in Resources */,
@@ -815,6 +838,7 @@
 				C59C82AF2295BF450051F3F8 /* MetalMeetupViewController.swift in Sources */,
 				C5B2D9F422C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift in Sources */,
 				C5063154226E8EF30078265C /* MenuOption.swift in Sources */,
+				C5AD39E822CD243700258C5B /* ErrorAlertViewController.swift in Sources */,
 				C5063152226E8ED00078265C /* MenuOptionCell.swift in Sources */,
 				C593FB72229359FC002FAE72 /* JoinAlertViewController.swift in Sources */,
 				C59909632294573A00E16E44 /* TextFadeTransition.swift in Sources */,
