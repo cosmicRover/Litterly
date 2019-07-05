@@ -21,6 +21,7 @@ class NearbyViewController: UIViewController {
         
         trashCollectionView.dataSource = self
         meetupsCollectionView.dataSource = self
+        
     }
     
 }
@@ -32,16 +33,28 @@ extension NearbyViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trashTag.count
+
+        if collectionView == self.trashCollectionView {
+            return trashTag.count
+        }
+        
+        return  meetups.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrashTagsCollectionViewCell", for: indexPath) as! TrashTagsCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        cell.trashTag = trashTag[indexPath.item]
-        
-        return cell
+        if collectionView == self.trashCollectionView {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TrashTagsCollectionViewCell", for: indexPath) as! TrashTagsCollectionViewCell
+            cell.trashTag = trashTag[indexPath.item]
+            return cell
+        }
+            
+        else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MeetupsCollectionViewCell", for: indexPath) as! MeetupsCollectionViewCell
+            cell.meetup = meetups[indexPath.item]
+            return cell
+        }
         
     }
     
