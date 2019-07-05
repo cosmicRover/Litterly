@@ -78,6 +78,7 @@
 		C5C7448422A7FA60005C0E72 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C7448322A7FA60005C0E72 /* Profile.storyboard */; };
 		C5C7448722A7FBE7005C0E72 /* Meetups.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C7448622A7FBE7005C0E72 /* Meetups.storyboard */; };
 		C5C7448A22A7FD8F005C0E72 /* Maps.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C7448922A7FD8F005C0E72 /* Maps.storyboard */; };
+		C5C9187B22CEDBFD00A82E05 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C9187A22CEDBFD00A82E05 /* HelperFunctions.swift */; };
 		C5CA15A3226950AD008B04EB /* MeetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA15A2226950AD008B04EB /* MeetupViewController.swift */; };
 		C5D3E903225BB10900C03AFB /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D3E901225BB10900C03AFB /* CardViewController.swift */; };
 		C5D3E904225BB10900C03AFB /* CardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5D3E902225BB10900C03AFB /* CardViewController.xib */; };
@@ -169,6 +170,7 @@
 		C5C7448322A7FA60005C0E72 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		C5C7448622A7FBE7005C0E72 /* Meetups.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Meetups.storyboard; sourceTree = "<group>"; };
 		C5C7448922A7FD8F005C0E72 /* Maps.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Maps.storyboard; sourceTree = "<group>"; };
+		C5C9187A22CEDBFD00A82E05 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		C5CA15A2226950AD008B04EB /* MeetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupViewController.swift; sourceTree = "<group>"; };
 		C5D3E901225BB10900C03AFB /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		C5D3E902225BB10900C03AFB /* CardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardViewController.xib; sourceTree = "<group>"; };
@@ -602,6 +604,14 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		C5C9187922CEDBE300A82E05 /* Helper Functions */ = {
+			isa = PBXGroup;
+			children = (
+				C5C9187A22CEDBFD00A82E05 /* HelperFunctions.swift */,
+			);
+			path = "Helper Functions";
+			sourceTree = "<group>";
+		};
 		C5CA15A122695080008B04EB /* MeetupVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -635,6 +645,7 @@
 		C5D83E1F22581793009CB884 /* litterly */ = {
 			isa = PBXGroup;
 			children = (
+				C5C9187922CEDBE300A82E05 /* Helper Functions */,
 				C59C82BD2295D1250051F3F8 /* Subclassing Extensions */,
 				C5863AFA228A3886004A25E4 /* Singleton */,
 				C5C35EE9227A1C5A00103AD9 /* Keys */,
@@ -831,6 +842,7 @@
 				C59A8BB9227B665E009CAA90 /* SigninVC-Firebase.swift in Sources */,
 				C5CA15A3226950AD008B04EB /* MeetupViewController.swift in Sources */,
 				C59A8BB7227B65A4009CAA90 /* CardVC-Firebase.swift in Sources */,
+				C5C9187B22CEDBFD00A82E05 /* HelperFunctions.swift in Sources */,
 				C5863AFE228A3D64004A25E4 /* ScheduleAlertVC-Firebase.swift in Sources */,
 				C59A8BBB227B66DC009CAA90 /* ProfileVC-Firebase.swift in Sources */,
 				C5907FAE22850156001E720D /* AlertService.swift in Sources */,
