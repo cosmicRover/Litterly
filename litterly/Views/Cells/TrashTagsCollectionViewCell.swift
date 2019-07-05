@@ -38,5 +38,6 @@ class TrashTagsCollectionViewCell: UICollectionViewCell {
         featuredImageView.layer.masksToBounds = true
         overlayView.layer.cornerRadius = 10.0
         overlayView.layer.masksToBounds = true
+        overlayView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
     }
 }
