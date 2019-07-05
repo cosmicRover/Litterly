@@ -20,7 +20,9 @@ extension MapsViewController{
         trashModelArray.removeAll()
         nearbyIdsAndTheirDistanceFromUser.removeAll()
         
-        self.queryForNearby(center: locationManager.location!.coordinate, with: nearbyRadius)
+        if let location = locationManager.location?.coordinate{
+            self.queryForNearby(center: location, with: self.nearbyRadius)
+        }
         
     }
     
@@ -54,7 +56,7 @@ extension MapsViewController{
                     
                     let nearby_id_distance_from_user = self.findDistanceFromUserToMarker(destinationLat: nearby_id_lat, destinationLon: nearby_id_lon)
                     
-                    let nearbyDataToAppend:NearbyIdModel = NearbyIdModel(nearby_id: nearby_id, nearby_id_lat: nearby_id_lat, nearby_id_lon: nearby_id_lon, nearby_id_distance_from_user: nearby_id_distance_from_user)
+                    let nearbyDataToAppend:NearbyIdModel = NearbyIdModel(nearby_id: nearby_id, nearby_id_lat: nearby_id_lat, nearby_id_lon: nearby_id_lon, nearby_id_distance: nearby_id_distance_from_user)
                     
                     self.nearbyIdsAndTheirDistanceFromUser.append(nearbyDataToAppend)
                     print("Appeneded Nearby item. Nearby count is \(self.nearbyIdsAndTheirDistanceFromUser.count)")

@@ -17,7 +17,7 @@ class SharedValues{
     
     let db = Firestore.firestore()
     var tappedArrayElementDict:TrashDataModel!
-    
+    var trashModelArrayBuffer = [TrashDataModel]()
     let cardVC = CardViewController()
     
     var nearbyCount:Int! = 0
