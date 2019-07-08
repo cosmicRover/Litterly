@@ -5,7 +5,6 @@
 //  Created by Joy Paul on 4/5/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.
 //
-
 import UIKit
 import GoogleMaps
 import GooglePlaces
@@ -23,19 +22,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         FirebaseApp.configure()
         
         //if user didn't sign out, send the user directly to the mapsVC
-//        if let alreadySignedIn = Auth.auth().currentUser{
-//            print("User already signed in \(alreadySignedIn) \(Auth.auth().currentUser?.displayName as! String)")
-//
-//            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//
-//            let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "ContainerVC")
-//
-//            self.window?.rootViewController = mapsViewController
-//
-//        } else {
-//            print("User needs to sign in again")
-//        }
+        if Auth.auth().currentUser != nil{
+            print("User already signed in \(Auth.auth().currentUser?.displayName as! String)")
 
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
+            let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "ContainerVC")
+
+            self.window?.rootViewController = mapsViewController
+
+        } else {
+            print("User needs to sign in again")
+            
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "IntroPageVC")
+            
+            self.window?.rootViewController = mapsViewController
+        }
+        
         return true
     }
 
@@ -60,9 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-
     }
 
 
 }
-
