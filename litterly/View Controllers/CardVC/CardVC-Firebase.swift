@@ -52,4 +52,18 @@ extension CardViewController{
             }
         }
     }
+    
+    //batch write for geofirestore won't work
+    
+//    func batchWriteToDatabase(with dictionary: [String:Any], for id:String, on location:CLLocationCoordinate2D){
+//        let cllocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+//        let batch = Firestore.firestore().batch()
+//
+//        let mainDocRef = db.collection("TaggedTrash").document("\(id)")
+//        let geofireUpdate = geoFirestore.collectionRef.document("\(id)")
+//
+//        batch.setData(dictionary, forDocument: mainDocRef)
+//        batch.setData(cllocation, forDocument: geofireUpdate)
+//
+//    }
 }

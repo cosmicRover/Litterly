@@ -33,4 +33,12 @@ class AlertService {
         
         return alertVC
     }
+    
+    func alertForError() -> ErrorAlertViewController{
+        let storyboard = UIStoryboard(name: "Alert", bundle: .main)
+        
+        let alertVC = storyboard.instantiateViewController(withIdentifier: "ErrorAlertVC") as! ErrorAlertViewController
+        
+        return alertVC
+    }
 }

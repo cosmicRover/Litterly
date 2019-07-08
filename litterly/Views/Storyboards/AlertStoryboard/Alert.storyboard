@@ -356,6 +356,37 @@
             </objects>
             <point key="canvasLocation" x="1543.2" y="20.239880059970016"/>
         </scene>
+        <!--Error Alert View Controller-->
+        <scene sceneID="Hsq-sb-TAg">
+            <objects>
+                <viewController storyboardIdentifier="ErrorAlertVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="POF-Ki-S2y" customClass="ErrorAlertViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="49M-9l-PJt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAW-Z9-8OH">
+                                <rect key="frame" x="67" y="240.5" width="241" height="186"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="186" id="xqB-Cl-HPk"/>
+                                    <constraint firstAttribute="width" constant="241" id="yer-L7-ojq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="tintColor" red="0.20784313730000001" green="0.2274509804" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="QAW-Z9-8OH" firstAttribute="centerY" secondItem="49M-9l-PJt" secondAttribute="centerY" id="byd-uy-eWJ"/>
+                            <constraint firstItem="QAW-Z9-8OH" firstAttribute="centerX" secondItem="49M-9l-PJt" secondAttribute="centerX" id="niS-82-Jd2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="h7U-ad-SD7"/>
+                    </view>
+                    <connections>
+                        <outlet property="parentView" destination="QAW-Z9-8OH" id="LEt-Aq-1kE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xvz-Cn-hOl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2286" y="20"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icons8-gears-100" width="31" height="31"/>

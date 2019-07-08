@@ -21,6 +21,7 @@ extension MapsViewController{
         checkLocationServices()
         addSlideInCardToMapView()
         mapView?.delegate = self
+        
         //init nearby firestore ref
         firestoreCollectionRef = db.collection("TaggedTrash")
         geoFirestoreRef = GeoFirestore(collectionRef: firestoreCollectionRef)

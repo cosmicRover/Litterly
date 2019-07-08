@@ -44,6 +44,7 @@ extension MapsViewController: GMSMapViewDelegate{
         if tappedArrayElement.is_meetup_scheduled == false{
             setupViewForUnscheduled()
             unScheduledMarkerInfoWindow.center = mapView.projection.point(for: position)
+            value.trashModelArrayBuffer = trashModelArray
             mapView.addSubview(unScheduledMarkerInfoWindow)
         }else if tappedArrayElement.is_meetup_scheduled == true{
             setupViewForScheduled()

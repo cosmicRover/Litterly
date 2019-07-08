@@ -18,9 +18,11 @@ extension MapsViewController{
         mapView?.clear()
         markers.removeAll()
         trashModelArray.removeAll()
-        nearbyIds.removeAll()
+        nearbyIdsAndTheirDistanceFromUser.removeAll()
         
-        self.queryForNearby(center: locationManager.location!.coordinate, with: nearbyRadius)
+        if let location = locationManager.location?.coordinate{
+            self.queryForNearby(center: location, with: self.nearbyRadius)
+        }
         
     }
     
@@ -40,15 +42,29 @@ extension MapsViewController{
             
             self.isNearbyHandle = self.circleQuery.observe(.documentEntered, with: {(id, location) in
                 print("ENTERED NEARBY EVENT ---->\(id! as String) is nearby")
-                if self.nearbyIds.contains("\(id! as String)"){
-                    print("Id is already in. Nearby count is \(self.nearbyIds.count)")
+                if self.nearbyIdsAndTheirDistanceFromUser.contains(where: {$0.nearby_id == "\(id! as String)"})
+                {
+                    print("Id is already in. Nearby count is \(self.nearbyIdsAndTheirDistanceFromUser.count)")
                     
                 } else {
-                    self.nearbyIds.append("\(id! as String)")
-                    print("Appeneded ID. Nearby count is \(self.nearbyIds.count)")
+                    
+                    ///*** should move all the marker related array to the singleton instance for better access
+                    
+                    let nearby_id:String = id! as String
+                    let nearby_id_lat:Double = location?.coordinate.latitude as! Double
+                    let nearby_id_lon:Double = location?.coordinate.longitude as! Double
+                    
+                    let nearby_id_distance_from_user = self.findDistanceFromUserToMarker(destinationLat: nearby_id_lat, destinationLon: nearby_id_lon)
+                    
+                    let nearbyDataToAppend:NearbyIdModel = NearbyIdModel(nearby_id: nearby_id, nearby_id_lat: nearby_id_lat, nearby_id_lon: nearby_id_lon, nearby_id_distance: nearby_id_distance_from_user)
+                    
+                    self.nearbyIdsAndTheirDistanceFromUser.append(nearbyDataToAppend)
+                    print("Appeneded Nearby item. Nearby count is \(self.nearbyIdsAndTheirDistanceFromUser.count)")
                     self.cardViewController.nearByCount.fadeTransition(0.3)
-                    self.cardViewController.nearByCount.text = "\(self.nearbyIds.count)"
-                    self.realTimeMarkerListener(documentId: self.nearbyIds.last!)
+                    self.cardViewController.nearByCount.text = "\(self.nearbyIdsAndTheirDistanceFromUser.count)"
+                    self.realTimeMarkerListener(documentId: self.nearbyIdsAndTheirDistanceFromUser.last!.nearby_id)
+                    
+                    print(self.nearbyIdsAndTheirDistanceFromUser.last?.dictionary as! [String : Any])
                 }
                 
             })
@@ -57,7 +73,7 @@ extension MapsViewController{
             self.hasLeftNearby = self.circleQuery.observe(.documentExited, with: {(id, location) in
                 print("LEFT NEARBY EVENT ---->\(id! as String) has left nearby")
                 self.cardViewController.nearByCount.fadeTransition(0.3)
-                self.cardViewController.nearByCount.text = "\(self.nearbyIds.count - 1)"
+                self.cardViewController.nearByCount.text = "\(self.nearbyIdsAndTheirDistanceFromUser.count - 1)"
             })
             
             self.hasDocumentMoved = self.circleQuery.observe(.documentMoved, with: {(id, location) in
@@ -66,7 +82,18 @@ extension MapsViewController{
             })
         }
         
-        print(self.nearbyIds.count)
+        print(self.nearbyIdsAndTheirDistanceFromUser.count)
         
+    }
+    
+    //find distance between two markers
+    func findDistanceFromUserToMarker(destinationLat lat:Double, destinationLon lon:Double) -> Double{
+        
+        let deviceCoordinates = CLLocation(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
+        let destinationCoordinate = CLLocation(latitude: lat, longitude: lon)
+        
+        let distanceInMeters = deviceCoordinates.distance(from: destinationCoordinate)
+        
+        return distanceInMeters
     }
 }

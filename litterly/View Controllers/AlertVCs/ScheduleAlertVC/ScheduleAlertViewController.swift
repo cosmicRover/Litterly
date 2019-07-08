@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class ScheduleAlertViewController: UIViewController {
     
@@ -22,6 +23,9 @@ class ScheduleAlertViewController: UIViewController {
     let alertService = AlertService()
     let sharedValue = SharedValues.sharedInstance
     var meetupDate:String!
+    let db = Firestore.firestore()
+    let eligibleMarkerDistance = 50.0 //meters
+    var batch = Firestore.firestore().batch()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,22 +125,97 @@ class ScheduleAlertViewController: UIViewController {
     
     //on createTap, schedule a meetup and update the marker's meetup property
     @IBAction func onCreateTap(_ sender: UIButton) {
-        let id:String = ("\(sharedValue.tappedArrayElementDict.lat)\(sharedValue.tappedArrayElementDict.lon)meetup")
         
-        let dict:MeetupDataModel = MeetupDataModel(marker_lat: sharedValue.tappedArrayElementDict.lat, marker_lon: sharedValue.tappedArrayElementDict.lon, meetup_address: sharedValue.tappedArrayElementDict.street_address, meetup_date_time: "\(meetupDate! as String)", type_of_trash: sharedValue.tappedArrayElementDict.trash_type, author_id: "\(sharedValue.currentUserEmail! as String)", author_display_name: sharedValue.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(sharedValue.currentUserEmail! as String)", "user_pic_url" : "\(sharedValue.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(sharedValue.currentUserEmail! as String)"])
+        let helper = HelperFunctions()
+        var toBeScheduledMarkers = [TrashDataModel]()
+        let dispatcher = DispatchGroup()
         
-        createAMeetup(with: dict.dictionary, for: "\(id)")
-        //updating from device causes arrays to go bat-shit crazy
-        updateMeetupProperty(for: "\(sharedValue.tappedArrayElementDict.id)", with: true)
-        print(sharedValue.tappedArrayElementDict.id)
-        //sharedValue.meetupDict = nil
-        self.dismiss(animated: true, completion: showSuccessAlert)
-
+        var loopCounter = 0
+        
+        //we are looking for 20 or less markers within a ceratin radius to be appended to our scheduling array
+        for marker in sharedValue.trashModelArrayBuffer{
+            //if it's already 20, break immediately
+            if loopCounter == 20{
+                break
+            }
+            
+            //gets the distance between tapped marker and the other markers on the main marker array
+            let distance = helper.findDistanceBetweenTwoMarkers(coordinate1Lat: sharedValue.tappedArrayElementDict.lat, coordinate1Lon: sharedValue.tappedArrayElementDict.lon, coordinate2Lat: marker.lat , coordinate2Lat: marker.lon)
+            
+            //if the distance and meetup property criteria match, append the marker
+            if distance <= eligibleMarkerDistance && marker.is_meetup_scheduled == false{
+                toBeScheduledMarkers.append(marker)
+            }
+            
+            //inc counter
+            loopCounter += 1
+        }
+        
+        print(toBeScheduledMarkers)
+        self.dismiss(animated: true, completion: nil)//dismisses the schedule view
+        
+        if toBeScheduledMarkers.count == 0{
+            print("no nearby markers")
+            //this is an error since the tapped marker itself should be appended
+        } else{
+            
+            //loop to go through all the eligible markers
+            for marker in toBeScheduledMarkers{
+                dispatcher.enter()
+                // setting up the data
+                let meetupId:String = ("\(marker.lat)\(marker.lon)meetup")
+                let markerId:String = ("\(marker.lat)\(marker.lon)marker")
+                let meetupDocRef = db.collection("Meetups").document("\(meetupId)")
+                let markerDocRef = db.collection("TaggedTrash").document("\(markerId)")
+                
+                //checks if the document already exists. If not, proceed with the batch preparation
+                meetupDocRef.getDocument { (document, error) in
+                    if let document = document {
+                        if document.exists{
+                            //show alert saying marker already exists
+                            print("data already exists")
+                            
+                        } else {
+                            //data prep
+                            let dict:MeetupDataModel = MeetupDataModel(marker_lat: marker.lat, marker_lon: marker.lon, meetup_address: marker.street_address, meetup_date_time: "\(self.meetupDate! as String)", type_of_trash: marker.trash_type, author_id: "\(self.sharedValue.currentUserEmail! as String)", author_display_name: self.sharedValue.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(self.sharedValue.currentUserEmail! as String)", "user_pic_url" : "\(self.sharedValue.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(self.sharedValue.currentUserEmail! as String)"])
+                            
+                            //batch prep
+                            self.batch.setData(dict.dictionary, forDocument: meetupDocRef)
+                            self.batch.updateData(["is_meetup_scheduled": true], forDocument: markerDocRef)
+                            print("setting batches...")
+                            dispatcher.leave()
+                            print("right under dispatcher")
+                        }
+                    }
+                }
+            }
+            
+            //notify the main thread that the batch data sets is ready
+            dispatcher.notify(queue: .main) {
+                print("loop finished")
+                self.commitTheBatch()
+            }
+        }
     }
     
+    //commits the batch and then shows the success alert if everything went through
+    func commitTheBatch(){
+        batch.commit { (error) in
+            if let error = error{
+                print(error.localizedDescription)
+                //show error alert
+            }else{
+                print("comitted batch")
+                self.showSuccessAlert()
+            }
+        }
+    }
+    
+    
+    //display the checkmark animation
     func showSuccessAlert(){
         let alert = alertService.alertForGeneral()
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
         }
     }

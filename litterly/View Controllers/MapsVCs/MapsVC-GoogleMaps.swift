@@ -82,14 +82,15 @@ extension MapsViewController {
         if (realTimeFirestoreListenerForMarkers != nil){
             print("marker Listener is active")
             realTimeFirestoreListenerForMarkers.remove()
+            circleQuery.removeObserver(withHandle: self.isNearbyHandle)
+            circleQuery.removeObserver(withHandle: self.hasLeftNearby)
+            circleQuery.removeObserver(withHandle: self.hasDocumentMoved)
         } else {
             print("marker Listener is inactive")
         }
         
         //removing the observers before creating new ones again
-        circleQuery.removeObserver(withHandle: self.isNearbyHandle)
-        circleQuery.removeObserver(withHandle: self.hasLeftNearby)
-        circleQuery.removeObserver(withHandle: self.hasDocumentMoved)
+        
         print("adding new observers based on current location")
         self.listenForRadius()
             
