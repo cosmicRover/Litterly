@@ -18,15 +18,29 @@ class NearbyViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         trashCollectionView.dataSource = self
         meetupsCollectionView.dataSource = self
         
+        configureColors()
+        
     }
     
+    func configureColors(){
+        self.view.backgroundColor = UIColor.mainBlue
+        meetupsCollectionView.backgroundColor = UIColor.mainBlue
+        trashCollectionView.backgroundColor = UIColor.mainBlue
+    }
 }
 
-extension NearbyViewController: UICollectionViewDataSource {
+
+extension NearbyViewController: UICollectionViewDataSource{
+    
+    func configureCollectionViewSize(){
+        let width = (view.frame.size.width) / 2.5
+        let layout = trashCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        
+        layout.itemSize = CGSize(width: width, height: width)
+    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -57,7 +71,4 @@ extension NearbyViewController: UICollectionViewDataSource {
         }
         
     }
-    
-    
-    
 }
