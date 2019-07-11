@@ -8,19 +8,29 @@
 
 import UIKit
 
-class NearbyViewController: UIViewController {
+class NearbyViewController: UIViewController, UICollectionViewDataSource{
     
     @IBOutlet var parentView: UIView!
     let trashTagsView = UIView()
     let meetupsView = UIView()
-    let trashTagCollectionView = UICollectionView()
-    let meetupsCollectionView = UICollectionView()
+    let trashTagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let meetupsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 
     override func viewDidLoad() {
         configureNavbar()
         configureParentViews()
-//        trashTagCollectionView.dataSource = self
-//        trashTagCollectionView.delegate = self
+        
+        trashTagCollectionView.dataSource = self
+        trashTagCollectionView.delegate = self
+        
+        meetupsCollectionView.dataSource = self
+        meetupsCollectionView.delegate = self
+        
+        trashTagCollectionView.register(TrashTagsCollectionViewCell.self, forCellWithReuseIdentifier: TrashTagsCollectionViewCell.reuseIdentifier)
+        meetupsCollectionView.register(TrashTagsCollectionViewCell.self, forCellWithReuseIdentifier: TrashTagsCollectionViewCell.reuseIdentifier)
+        
+        conFigureCollectionViews()
+        changeCollectionViewLayout()
     }
     
     func configureNavbar(){
@@ -87,9 +97,90 @@ class NearbyViewController: UIViewController {
     
     //todo: configure the respective collectionViews
     func conFigureCollectionViews(){
+        trashTagsView.addSubview(trashTagCollectionView)
+        trashTagCollectionView.backgroundColor = UIColor.mainBlue
+        trashTagCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        trashTagCollectionView.topAnchor.constraint(equalTo: trashTagsView.topAnchor).isActive = true
+        trashTagCollectionView.leftAnchor.constraint(equalTo: trashTagsView.leftAnchor).isActive = true
+        trashTagCollectionView.rightAnchor.constraint(equalTo: trashTagsView.rightAnchor).isActive = true
+        trashTagCollectionView.bottomAnchor.constraint(equalTo: trashTagsView.bottomAnchor).isActive = true
+        
+        meetupsView.addSubview(meetupsCollectionView)
+        meetupsCollectionView.backgroundColor = UIColor.mainBlue
+        meetupsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        meetupsCollectionView.topAnchor.constraint(equalTo: meetupsView.topAnchor).isActive = true
+        meetupsCollectionView.rightAnchor.constraint(equalTo: meetupsView.rightAnchor).isActive = true
+        meetupsCollectionView.leftAnchor.constraint(equalTo: meetupsView.leftAnchor).isActive = true
+        meetupsCollectionView.bottomAnchor.constraint(equalTo: meetupsView.bottomAnchor).isActive = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == self.trashTagCollectionView{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrashTagsCollectionViewCell.reuseIdentifier, for: indexPath) as! TrashTagsCollectionViewCell
+            
+            cell.trashImageView.image = UIImage(named: "NoPath - Copy (13)")
+            
+            return cell
+        } else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrashTagsCollectionViewCell.reuseIdentifier, for: indexPath) as! TrashTagsCollectionViewCell
+            
+            cell.trashImageView.image = UIImage(named: "NoPath - Copy (13)")
+            
+            return cell
+        }
+    }
+    
+  
+}
+
+
+
+extension NearbyViewController: UICollectionViewDelegate{
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
-  
+}
+
+
+
+extension NearbyViewController: UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: trashTagsView.frame.size.width / 3, height: trashTagsView.frame.size.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) //.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func changeCollectionViewLayout(){
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        trashTagCollectionView.collectionViewLayout = layout
+        meetupsCollectionView.collectionViewLayout = layout
+    }
 }
 
 

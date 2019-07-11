@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2F106D5922C59422001C631D /* TrashTagsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F106D5822C59422001C631D /* TrashTagsClass.swift */; };
 		2F106D5B22C59714001C631D /* MeetUpsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F106D5A22C59714001C631D /* MeetUpsClass.swift */; };
-		2F106D5D22C598C8001C631D /* TrashTagsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F106D5C22C598C8001C631D /* TrashTagsCollectionViewCell.swift */; };
 		2F1B637D22CB19FE00DEDDF0 /* MeetupsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1B637C22CB19FE00DEDDF0 /* MeetupsCollectionViewCell.swift */; };
 		2FA974CC2272B0F000115FBD /* CardContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA974CB2272B0F000115FBD /* CardContentTableViewCell.swift */; };
 		C506314E226E8E430078265C /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C506314D226E8E430078265C /* ContainerController.swift */; };
@@ -73,6 +72,7 @@
 		C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */; };
 		C5B6858A2294DAF300421EE1 /* GeneralAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B685892294DAF300421EE1 /* GeneralAlertViewController.swift */; };
 		C5B6858D2294E08800421EE1 /* check.json in Resources */ = {isa = PBXBuildFile; fileRef = C5B6858C2294E08800421EE1 /* check.json */; };
+		C5C13D9722D6B1B100C440D7 /* TrashTagsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C13D9622D6B1B100C440D7 /* TrashTagsCollectionViewCell.swift */; };
 		C5C35EE122791B9900103AD9 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C35EE022791B9900103AD9 /* UserDataModel.swift */; };
 		C5C35EE322791FD300103AD9 /* DocumentSerializableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C35EE222791FD300103AD9 /* DocumentSerializableProtocol.swift */; };
 		C5C35EE7227A1A9900103AD9 /* MapsVC-GMSDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C35EE6227A1A9900103AD9 /* MapsVC-GMSDelegate.swift */; };
@@ -103,7 +103,6 @@
 		2F04E5C0226E25C1006EB956 /* gibson-semibold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gibson-semibold-webfont.ttf"; sourceTree = "<group>"; };
 		2F106D5822C59422001C631D /* TrashTagsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashTagsClass.swift; sourceTree = "<group>"; };
 		2F106D5A22C59714001C631D /* MeetUpsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetUpsClass.swift; sourceTree = "<group>"; };
-		2F106D5C22C598C8001C631D /* TrashTagsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashTagsCollectionViewCell.swift; sourceTree = "<group>"; };
 		2F1B637C22CB19FE00DEDDF0 /* MeetupsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupsCollectionViewCell.swift; sourceTree = "<group>"; };
 		2FA974CB2272B0F000115FBD /* CardContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContentTableViewCell.swift; sourceTree = "<group>"; };
 		39E256F25A70D3C807D7B6F4 /* Pods-litterly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-litterly.release.xcconfig"; path = "Target Support Files/Pods-litterly/Pods-litterly.release.xcconfig"; sourceTree = "<group>"; };
@@ -169,6 +168,7 @@
 		C5B2D9F522C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-ViewDidLoad.swift"; sourceTree = "<group>"; };
 		C5B685892294DAF300421EE1 /* GeneralAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralAlertViewController.swift; sourceTree = "<group>"; };
 		C5B6858C2294E08800421EE1 /* check.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = check.json; sourceTree = "<group>"; };
+		C5C13D9622D6B1B100C440D7 /* TrashTagsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashTagsCollectionViewCell.swift; sourceTree = "<group>"; };
 		C5C35EE022791B9900103AD9 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		C5C35EE222791FD300103AD9 /* DocumentSerializableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSerializableProtocol.swift; sourceTree = "<group>"; };
 		C5C35EE6227A1A9900103AD9 /* MapsVC-GMSDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-GMSDelegate.swift"; sourceTree = "<group>"; };
@@ -220,13 +220,13 @@
 		2F68CABC2272E049009C2AB6 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				2F106D5C22C598C8001C631D /* TrashTagsCollectionViewCell.swift */,
 				2F1B637C22CB19FE00DEDDF0 /* MeetupsCollectionViewCell.swift */,
 				C5063151226E8ED00078265C /* MenuOptionCell.swift */,
 				2FA974CB2272B0F000115FBD /* CardContentTableViewCell.swift */,
 				C593FB772293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift */,
 				C50C75292297695C005A16DD /* ProfileVCTrashandMeetupsCell.swift */,
 				C50C752D22978724005A16DD /* RedeemPointsCell.swift */,
+				C5C13D9622D6B1B100C440D7 /* TrashTagsCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -843,6 +843,7 @@
 				C59C82AD2295BE3B0051F3F8 /* PlasticMeetupViewController.swift in Sources */,
 				C5863AFC228A38B5004A25E4 /* SharedValues.swift in Sources */,
 				C5063156226E8F100078265C /* HomeControllerDelegateProtocol.swift in Sources */,
+				C5C13D9722D6B1B100C440D7 /* TrashTagsCollectionViewCell.swift in Sources */,
 				C599F5EC2263044C0038A1A6 /* PageTwoViewController.swift in Sources */,
 				C599F5EA2262FD830038A1A6 /* PageOneViewController.swift in Sources */,
 				C5C35EE122791B9900103AD9 /* UserDataModel.swift in Sources */,
@@ -883,7 +884,6 @@
 				C56CEA35225D9E87005DC40E /* MapsVC-GoogleMaps.swift in Sources */,
 				C564B480226A9EB300F2DEF1 /* MapsVCLocationServices.swift in Sources */,
 				C5B6858A2294DAF300421EE1 /* GeneralAlertViewController.swift in Sources */,
-				2F106D5D22C598C8001C631D /* TrashTagsCollectionViewCell.swift in Sources */,
 				C506314E226E8E430078265C /* ContainerController.swift in Sources */,
 				C59C82B82295C2D60051F3F8 /* MeetupsQueryModel.swift in Sources */,
 				C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */,
