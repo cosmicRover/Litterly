@@ -13,6 +13,35 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
     @IBOutlet var parentView: UIView!
     let trashTagsView = UIView()
     let meetupsView = UIView()
+    
+    let trashTagLabel:UILabel = {
+        let label = UILabel()
+        label.text = "#trashtags"
+        label.textColor = UIColor.textWhite
+        label.adjustsFontSizeToFitWidth = true
+        label.adjustsFontForContentSizeCategory = true
+        label.font = UIFont(name: "MarkerFelt-Thin", size: 20)
+        return label
+    }()
+    
+    let meetupLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Meetups"
+        label.textColor = UIColor.textWhite
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "MarkerFelt-Thin", size: 20)
+        return label
+    }()
+    
+    let nearbyTextLabel:UILabel = {
+        let label = UILabel()
+        label.text = "Nearby"
+        label.textColor = UIColor.textWhite
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "MarkerFelt-Thin", size: 40)
+        return label
+    }()
+    
     let trashTagCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let meetupsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 
@@ -31,6 +60,10 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
         
         conFigureCollectionViews()
         changeCollectionViewLayout()
+        
+        //cant seem to disable vertical scrolling
+        self.trashTagCollectionView.alwaysBounceVertical = false
+        self.trashTagCollectionView.contentInsetAdjustmentBehavior = .never
     }
     
     func configureNavbar(){
@@ -43,8 +76,8 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
         
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.textWhite, NSAttributedString.Key.font: UIFont(name: "MarkerFelt-Thin", size: 40)]
         navigationController?.navigationBar.largeTitleTextAttributes = textAttributes as [NSAttributedString.Key : Any]
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Nearby"
+//        navigationController?.navigationBar.prefersLargeTitles = false
+//        navigationItem.title = "Nearby"
         navigationController?.navigationBar.backgroundColor = UIColor.mainBlue
         
         // create the button
@@ -54,7 +87,7 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
         //backButton.addTarget(self, action: #selector(goBackToMap), for: .touchUpInside)
         
         // here where the magic happens, you can shift it where you like
-        backButton.transform = CGAffineTransform(translationX: 10, y: 0)
+        backButton.transform = CGAffineTransform(translationX: 0, y: 0)
         
         // add the button to a container, otherwise the transform will be ignored
         let backButtonContainer = UIView(frame: backButton.frame)
@@ -72,26 +105,46 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
     
     func configureParentViews(){
         
+        self.parentView.backgroundColor = UIColor.mainBlue
+        
+        view.addSubview(nearbyTextLabel)
+        nearbyTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        nearbyTextLabel.topAnchor.constraint(equalTo: self.parentView.safeAreaLayoutGuide.topAnchor).isActive = true
+        nearbyTextLabel.leftAnchor.constraint(equalTo: self.parentView.leftAnchor, constant: 24.0).isActive = true
+        nearbyTextLabel.rightAnchor.constraint(equalTo: self.parentView.rightAnchor).isActive = true
+        
         trashTagsView.frame = CGRect(x: 0, y: 0, width: parentView.frame.width, height: parentView.frame.height/2)
         parentView.addSubview(trashTagsView)
-        
         trashTagsView.translatesAutoresizingMaskIntoConstraints = false
-        trashTagsView.topAnchor.constraint(equalTo: parentView.safeAreaLayoutGuide.topAnchor).isActive = true
+        trashTagsView.topAnchor.constraint(equalTo: nearbyTextLabel.bottomAnchor, constant: 20).isActive = true
         trashTagsView.leftAnchor.constraint(equalTo: parentView.leftAnchor).isActive = true
         trashTagsView.rightAnchor.constraint(equalTo: parentView.rightAnchor).isActive = true
-        trashTagsView.heightAnchor.constraint(equalToConstant: parentView.frame.height / 2 - (self.navigationController?.navigationBar.frame.size.height)!).isActive = true
-        trashTagsView.backgroundColor = .yellow
+        let size = self.parentView.frame.height / 2.5
+        trashTagsView.heightAnchor.constraint(equalToConstant: size).isActive = true
+        trashTagsView.backgroundColor = UIColor.mainBlue
+        
+        trashTagsView.addSubview(trashTagLabel)
+        trashTagLabel.translatesAutoresizingMaskIntoConstraints = false
+        trashTagLabel.topAnchor.constraint(equalTo: trashTagsView.topAnchor).isActive = true
+        trashTagLabel.leftAnchor.constraint(equalTo: trashTagsView.leftAnchor, constant: 24.0).isActive = true
+        trashTagLabel.rightAnchor.constraint(equalTo: trashTagsView.rightAnchor).isActive = true
+        //trashTagLabel.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
         
         
-        meetupsView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height / 2)
+        meetupsView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0 )
         parentView.addSubview(meetupsView)
-        
         meetupsView.translatesAutoresizingMaskIntoConstraints = false
         meetupsView.topAnchor.constraint(equalTo: trashTagsView.bottomAnchor).isActive = true
         meetupsView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         meetupsView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         meetupsView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        meetupsView.backgroundColor = .green
+        meetupsView.backgroundColor = UIColor.mainBlue
+        
+        meetupsView.addSubview(meetupLabel)
+        meetupLabel.translatesAutoresizingMaskIntoConstraints = false
+        meetupLabel.topAnchor.constraint(equalTo: meetupsView.topAnchor, constant: 16).isActive = true
+        meetupLabel.leftAnchor.constraint(equalTo: meetupsView.leftAnchor, constant: 24.0).isActive = true
+        meetupLabel.rightAnchor.constraint(equalTo: meetupsView.rightAnchor).isActive = true
         
     }
     
@@ -100,7 +153,7 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
         trashTagsView.addSubview(trashTagCollectionView)
         trashTagCollectionView.backgroundColor = UIColor.mainBlue
         trashTagCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        trashTagCollectionView.topAnchor.constraint(equalTo: trashTagsView.topAnchor).isActive = true
+        trashTagCollectionView.topAnchor.constraint(equalTo: trashTagLabel.bottomAnchor).isActive = true
         trashTagCollectionView.leftAnchor.constraint(equalTo: trashTagsView.leftAnchor).isActive = true
         trashTagCollectionView.rightAnchor.constraint(equalTo: trashTagsView.rightAnchor).isActive = true
         trashTagCollectionView.bottomAnchor.constraint(equalTo: trashTagsView.bottomAnchor).isActive = true
@@ -108,7 +161,7 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
         meetupsView.addSubview(meetupsCollectionView)
         meetupsCollectionView.backgroundColor = UIColor.mainBlue
         meetupsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        meetupsCollectionView.topAnchor.constraint(equalTo: meetupsView.topAnchor).isActive = true
+        meetupsCollectionView.topAnchor.constraint(equalTo: meetupLabel.bottomAnchor).isActive = true
         meetupsCollectionView.rightAnchor.constraint(equalTo: meetupsView.rightAnchor).isActive = true
         meetupsCollectionView.leftAnchor.constraint(equalTo: meetupsView.leftAnchor).isActive = true
         meetupsCollectionView.bottomAnchor.constraint(equalTo: meetupsView.bottomAnchor).isActive = true
@@ -122,13 +175,15 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
         if collectionView == self.trashTagCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrashTagsCollectionViewCell.reuseIdentifier, for: indexPath) as! TrashTagsCollectionViewCell
             
-            cell.trashImageView.image = UIImage(named: "NoPath - Copy (13)")
+            cell.trashImageView.image = UIImage(named: "organic-bin")
+            cell.overlayView.heightAnchor.constraint(equalToConstant: (self.trashTagCollectionView.frame.height / 3.5) - 10).isActive = true
             
             return cell
         } else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrashTagsCollectionViewCell.reuseIdentifier, for: indexPath) as! TrashTagsCollectionViewCell
             
-            cell.trashImageView.image = UIImage(named: "NoPath - Copy (13)")
+            cell.trashImageView.image = UIImage(named: "plastic-bin")
+            cell.overlayView.heightAnchor.constraint(equalToConstant: (self.meetupsCollectionView.frame.height / 3.5)).isActive = true
             
             return cell
         }
@@ -153,7 +208,7 @@ extension NearbyViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: trashTagsView.frame.size.width / 3, height: trashTagsView.frame.size.height)
+        return CGSize(width: (parentView.frame.width / 3), height: ((parentView.frame.height / 2.5) - (self.parentView.frame.height / 6)))
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -165,19 +220,18 @@ extension NearbyViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 12
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return -16
     }
     
     func changeCollectionViewLayout(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        
         trashTagCollectionView.collectionViewLayout = layout
         meetupsCollectionView.collectionViewLayout = layout
     }

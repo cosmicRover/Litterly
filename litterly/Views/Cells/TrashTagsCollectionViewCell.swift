@@ -14,9 +14,18 @@ class TrashTagsCollectionViewCell: UICollectionViewCell {
     
     let trashImageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
+        iv.backgroundColor = UIColor.lightText
+        iv.layer.cornerRadius = 12
+        iv.contentMode = ContentMode.scaleAspectFit
         iv.clipsToBounds = true
         return iv
+    }()
+    
+    let overlayView:UIView = {
+       let view = UIView(frame: .zero)
+        view.backgroundColor = UIColor.unselectedGrey
+        view.layer.cornerRadius = 12
+        return view
     }()
     
 //    let descriptionLabel: UILabel = {
@@ -35,9 +44,17 @@ class TrashTagsCollectionViewCell: UICollectionViewCell {
         trashImageView.translatesAutoresizingMaskIntoConstraints = false
         
         trashImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
-        trashImageView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
+        trashImageView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 28).isActive = true
         trashImageView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
         trashImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
+        
+        self.contentView.addSubview(overlayView)
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        
+        overlayView.bottomAnchor.constraint(equalTo: trashImageView.bottomAnchor).isActive = true
+        overlayView.leftAnchor.constraint(equalTo: trashImageView.leftAnchor).isActive = true
+        overlayView.rightAnchor.constraint(equalTo: trashImageView.rightAnchor).isActive = true
+        overlayView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
     }
     
