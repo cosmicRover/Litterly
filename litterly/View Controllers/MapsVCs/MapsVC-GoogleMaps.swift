@@ -35,19 +35,20 @@ extension MapsViewController {
             //adding the mapsView as subview to the parent view
             self.view.addSubview(mapView!)
             locateMeButton()
+            segueToNearbyButton()
             
         } else { //else pass a default coordinate to center the location
             mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 86), camera: GMSCameraPosition.camera(withLatitude: 40.74069, longitude: -73.983114, zoom: 15))
 
             self.view.addSubview(mapView!)
             locateMeButton()
+            segueToNearbyButton()
         }
         
     }
     
     //add a button to help center the screen position on device location
     func locateMeButton(){
-        let gpsButton = UIButton(frame: CGRect(x: 0, y: 0, width: 52, height: 52))
         gpsButton.backgroundColor = UIColor.textWhite
         
         gpsButton.setImage(UIImage(named: "52gps"), for: .normal)
@@ -95,5 +96,39 @@ extension MapsViewController {
         self.listenForRadius()
             
         }
+    }
+    
+    //add a button to segue to nearby
+    func segueToNearbyButton(){
+        nearbyButton.backgroundColor = UIColor.textWhite
+        
+        nearbyButton.setImage(UIImage(named: "52bino"), for: .normal)
+        
+        nearbyButton.translatesAutoresizingMaskIntoConstraints = false
+        mapView?.addSubview(nearbyButton)
+        
+        nearbyButton.addTarget(self, action: #selector(onNearbyTap(sender:)), for: .touchUpInside)
+        
+        nearbyButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        
+        nearbyButton.bottomAnchor.constraint(equalTo: gpsButton.topAnchor, constant: -8).isActive = true
+        nearbyButton.rightAnchor.constraint(equalTo: mapView!.rightAnchor, constant: -16).isActive = true
+        
+        nearbyButton.layer.cornerRadius = 12
+        nearbyButton.layer.shadowRadius = 50
+        nearbyButton.layer.shadowColor = UIColor.searchBoxShadowColor.cgColor
+    }
+    
+    @objc func onNearbyTap(sender: UIButton){
+        print("nearby tapped")
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Nearby", bundle: nil)
+        
+        let NearbyVC = storyBoard.instantiateViewController(withIdentifier: "NearbyScreen") as! NearbyViewController
+        
+        let navController = UINavigationController(rootViewController: NearbyVC)
+        
+        self.present(navController, animated: true, completion: nil)
+        
     }
 }

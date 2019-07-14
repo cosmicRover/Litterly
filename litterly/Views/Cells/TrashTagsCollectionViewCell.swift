@@ -28,13 +28,21 @@ class TrashTagsCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-//    let descriptionLabel: UILabel = {
-//        let label = UILabel()
-//        label.textColor = .white
-//        label.font = UIFont.systemFont(ofSize: 16)
-//        label.text = "Sample text"
-//        return label
-//    }()
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.textWhite
+        label.font = UIFont(name: "MarkerFelt-Thin", size: 16)
+        label.text = "Title Text"
+        return label
+    }()
+    
+    let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.lightText
+        label.font = UIFont(name: "MarkerFelt-Thin", size: 14)
+        label.text = "Subtitle Text"
+        return label
+    }()
     
     override init(frame: CGRect) {
         
@@ -54,7 +62,20 @@ class TrashTagsCollectionViewCell: UICollectionViewCell {
         overlayView.bottomAnchor.constraint(equalTo: trashImageView.bottomAnchor).isActive = true
         overlayView.leftAnchor.constraint(equalTo: trashImageView.leftAnchor).isActive = true
         overlayView.rightAnchor.constraint(equalTo: trashImageView.rightAnchor).isActive = true
-        overlayView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        self.overlayView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        titleLabel.topAnchor.constraint(equalTo: self.overlayView.topAnchor, constant: 14.0).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: self.overlayView.leftAnchor, constant: 16.0).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: self.overlayView.rightAnchor, constant: 16.0).isActive = true
+        
+        self.overlayView.addSubview(subtitleLabel)
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        subtitleLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 0.0).isActive = true
+        subtitleLabel.leftAnchor.constraint(equalTo: self.overlayView.leftAnchor, constant: 16.0).isActive = true
+        subtitleLabel.rightAnchor.constraint(equalTo: self.overlayView.rightAnchor, constant: 16.0).isActive = true
         
     }
     

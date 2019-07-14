@@ -76,15 +76,13 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
         
         let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.textWhite, NSAttributedString.Key.font: UIFont(name: "MarkerFelt-Thin", size: 40)]
         navigationController?.navigationBar.largeTitleTextAttributes = textAttributes as [NSAttributedString.Key : Any]
-//        navigationController?.navigationBar.prefersLargeTitles = false
-//        navigationItem.title = "Nearby"
         navigationController?.navigationBar.backgroundColor = UIColor.mainBlue
         
         // create the button
         let backImage  = UIImage(named: "white_back_arrow")!.withRenderingMode(.alwaysOriginal)
         let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         backButton.setBackgroundImage(backImage, for: .normal)
-        //backButton.addTarget(self, action: #selector(goBackToMap), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(goBackToMap), for: .touchUpInside)
         
         // here where the magic happens, you can shift it where you like
         backButton.transform = CGAffineTransform(translationX: 0, y: 0)
@@ -193,7 +191,7 @@ class NearbyViewController: UIViewController, UICollectionViewDataSource{
 }
 
 
-
+//delegate methods
 extension NearbyViewController: UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -202,13 +200,13 @@ extension NearbyViewController: UICollectionViewDelegate{
 }
 
 
-
+//flow layout customization goes here
 extension NearbyViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (parentView.frame.width / 3), height: ((parentView.frame.height / 2.5) - (self.parentView.frame.height / 6)))
+        return CGSize(width: (parentView.frame.width / 2.1), height: ((parentView.frame.height / 2.5) - (self.parentView.frame.height / 6)))
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -229,6 +227,7 @@ extension NearbyViewController: UICollectionViewDelegateFlowLayout{
         return -16
     }
     
+    //sets the layouts to horizontal
     func changeCollectionViewLayout(){
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
