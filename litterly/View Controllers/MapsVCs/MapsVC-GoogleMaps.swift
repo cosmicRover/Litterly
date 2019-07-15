@@ -121,13 +121,13 @@ extension MapsViewController {
     
     @objc func onNearbyTap(sender: UIButton){
         print("nearby tapped")
-        
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Nearby", bundle: nil)
-        
+
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Nearby", bundle: .main)
+
         let NearbyVC = storyBoard.instantiateViewController(withIdentifier: "NearbyScreen") as! NearbyViewController
         
         let navController = UINavigationController(rootViewController: NearbyVC)
-        
+
         self.present(navController, animated: true, completion: nil)
         
     }

@@ -10,8 +10,10 @@ import UIKit
 
 class TrashTagsCollectionViewCell: UICollectionViewCell {
     
+    //the deque identifier
     static var reuseIdentifier: String = "TrashTagsCollectionViewCell"
     
+    //the components of the cell
     let trashImageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = UIColor.lightText
@@ -44,6 +46,7 @@ class TrashTagsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    //init the constraints here
     override init(frame: CGRect) {
         
         super.init(frame: frame)
