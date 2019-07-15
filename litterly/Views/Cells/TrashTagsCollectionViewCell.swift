@@ -2,7 +2,7 @@
 //  TrashTagsCollectionViewCell.swift
 //  litterly
 //
-//  Created by Joyce Huang on 6/27/19.
+//  Created by Joy Paul on 7/10/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.
 //
 
@@ -10,34 +10,80 @@ import UIKit
 
 class TrashTagsCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var featuredImageView: UIImageView!
-    @IBOutlet weak var overlayView: UIView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    //the deque identifier
+    static var reuseIdentifier: String = "TrashTagsCollectionViewCell"
     
-    var trashTag: TrashTags! {
-        didSet {
-            self.updateUI()
-        }
-    }
+    //the components of the cell
+    let trashImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.backgroundColor = UIColor.lightText
+        iv.layer.cornerRadius = 12
+        iv.contentMode = ContentMode.scaleAspectFit
+        iv.clipsToBounds = true
+        return iv
+    }()
     
-    func updateUI() {
-        if let trashTag = trashTag {
-            featuredImageView.image = trashTag.featuredImage
-            titleLabel.text = trashTag.title
-            descriptionLabel.text = trashTag.description
-            overlayView.backgroundColor = trashTag.color
-        } else {
-            featuredImageView.image = nil
-            titleLabel.text = nil
-            descriptionLabel.text = nil
-            overlayView.backgroundColor = nil
-        }
+    let overlayView:UIView = {
+       let view = UIView(frame: .zero)
+        view.backgroundColor = UIColor.unselectedGrey
+        view.layer.cornerRadius = 12
+        return view
+    }()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.textWhite
+        label.font = UIFont(name: "MarkerFelt-Thin", size: 16)
+        label.text = "Title Text"
+        return label
+    }()
+    
+    let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.lightText
+        label.font = UIFont(name: "MarkerFelt-Thin", size: 14)
+        label.text = "Subtitle Text"
+        return label
+    }()
+    
+    //init the constraints here
+    override init(frame: CGRect) {
         
-        featuredImageView.layer.cornerRadius = 10.0
-        featuredImageView.layer.masksToBounds = true
-        overlayView.layer.cornerRadius = 10.0
-        overlayView.layer.masksToBounds = true
-        overlayView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        super.init(frame: frame)
+        
+        self.contentView.addSubview(trashImageView)
+        trashImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        trashImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        trashImageView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 28).isActive = true
+        trashImageView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor).isActive = true
+        trashImageView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor).isActive = true
+        
+        self.contentView.addSubview(overlayView)
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        
+        overlayView.bottomAnchor.constraint(equalTo: trashImageView.bottomAnchor).isActive = true
+        overlayView.leftAnchor.constraint(equalTo: trashImageView.leftAnchor).isActive = true
+        overlayView.rightAnchor.constraint(equalTo: trashImageView.rightAnchor).isActive = true
+        
+        self.overlayView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        titleLabel.topAnchor.constraint(equalTo: self.overlayView.topAnchor, constant: 14.0).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: self.overlayView.leftAnchor, constant: 16.0).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: self.overlayView.rightAnchor, constant: 16.0).isActive = true
+        
+        self.overlayView.addSubview(subtitleLabel)
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        subtitleLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 0.0).isActive = true
+        subtitleLabel.leftAnchor.constraint(equalTo: self.overlayView.leftAnchor, constant: 16.0).isActive = true
+        subtitleLabel.rightAnchor.constraint(equalTo: self.overlayView.rightAnchor, constant: 16.0).isActive = true
+        
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }

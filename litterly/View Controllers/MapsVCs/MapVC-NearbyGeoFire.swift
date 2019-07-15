@@ -49,13 +49,12 @@ extension MapsViewController{
                 } else {
                     
                     ///*** should move all the marker related array to the singleton instance for better access
-                    
+                    let helper = HelperFunctions()
                     let nearby_id:String = id! as String
                     let nearby_id_lat:Double = location?.coordinate.latitude as! Double
                     let nearby_id_lon:Double = location?.coordinate.longitude as! Double
                     
-                    let nearby_id_distance_from_user = self.findDistanceFromUserToMarker(destinationLat: nearby_id_lat, destinationLon: nearby_id_lon)
-                    
+                    let nearby_id_distance_from_user = helper.findDistanceFromUserToMarker(destinationLat: nearby_id_lat, destinationLon: nearby_id_lon, manager: self.locationManager)
                     let nearbyDataToAppend:NearbyIdModel = NearbyIdModel(nearby_id: nearby_id, nearby_id_lat: nearby_id_lat, nearby_id_lon: nearby_id_lon, nearby_id_distance: nearby_id_distance_from_user)
                     
                     self.nearbyIdsAndTheirDistanceFromUser.append(nearbyDataToAppend)
@@ -84,16 +83,5 @@ extension MapsViewController{
         
         print(self.nearbyIdsAndTheirDistanceFromUser.count)
         
-    }
-    
-    //find distance between two markers
-    func findDistanceFromUserToMarker(destinationLat lat:Double, destinationLon lon:Double) -> Double{
-        
-        let deviceCoordinates = CLLocation(latitude: (locationManager.location?.coordinate.latitude)!, longitude: (locationManager.location?.coordinate.longitude)!)
-        let destinationCoordinate = CLLocation(latitude: lat, longitude: lon)
-        
-        let distanceInMeters = deviceCoordinates.distance(from: destinationCoordinate)
-        
-        return distanceInMeters
     }
 }

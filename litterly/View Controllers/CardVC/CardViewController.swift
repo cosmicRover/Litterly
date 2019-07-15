@@ -45,7 +45,6 @@ class CardViewController: UIViewController {
         reportTrashButton.isEnabled = false
         
         geoFirestore = GeoFirestore(collectionRef: firestoreCollection)
-        
     }
 
     //rounds the button's corners

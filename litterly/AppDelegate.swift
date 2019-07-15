@@ -33,11 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
         } else {
             print("User needs to sign in again")
-            
+
             let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            
+
             let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "IntroPageVC")
-            
+
             self.window?.rootViewController = mapsViewController
         }
         

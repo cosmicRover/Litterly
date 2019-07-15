@@ -73,6 +73,10 @@ class MapsViewController: UIViewController{
     
     var mapView: GMSMapView?
     
+    //buttons for the mapView
+    let gpsButton = UIButton(frame: CGRect(x: 0, y: 0, width: 52, height: 52))
+    let nearbyButton = UIButton(frame: CGRect(x: 0, y: 0, width: 52, height: 52))
+    
     let db = Firestore.firestore()
     
     //init the location manager for device location
