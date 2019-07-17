@@ -47,7 +47,7 @@ extension MapsViewController: CLLocationManagerDelegate{
         //when user hasn't picked an allow or not allow auth option, ideal to ask for permission here
         case .notDetermined:
             //requesting when in use permission of location tracking
-            locationManager.requestWhenInUseAuthorization()
+            locationManager.requestAlwaysAuthorization()
             break
         //location services can be blocked by the device admin and user can't turn it on/off
         case .restricted:
@@ -58,6 +58,7 @@ extension MapsViewController: CLLocationManagerDelegate{
             //show an alert to let them know how to authorize again
             break
         case .authorizedAlways:
+            centersCameraOnDeviceAndTriggersNearby()
             break
         @unknown default:
             print("Unknown value")
@@ -76,9 +77,22 @@ extension MapsViewController: CLLocationManagerDelegate{
             self.mapView?.animate(to: camera)
             self.mapView?.isMyLocationEnabled = true
             self.locationManager.startUpdatingLocation()
-            locationManager.stopUpdatingLocation()
-            self.locationManager.delegate = nil
+//            locationManager.stopUpdatingLocation()
+//            self.locationManager.delegate = nil
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        //locationManager.allowsBackgroundLocationUpdates = true
+        
+//        if UIApplication.shared.applicationState == .active{
+//            print("Active app location \(locations.last?.coordinate as! CLLocationCoordinate2D)")
+//        }else if UIApplication.shared.applicationState == .background{
+//            print("background app location \(locations.last?.coordinate as! CLLocationCoordinate2D)")
+//        } else{
+//            print("Inactive app location \(locations.last?.coordinate as! CLLocationCoordinate2D)")
+//        }
     }
     
     //if auth changed, run through the switch case statements
@@ -96,7 +110,7 @@ extension MapsViewController: CLLocationManagerDelegate{
             
             do{
                 let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-//
+
                 let objects = json as! [String:Any]
                 let resultChunk = objects["results"] as! [Any]
                 let getAddress = resultChunk[0] as! [String:Any]

@@ -32,6 +32,8 @@ extension MapsViewController{
         //listening for marker modification event
         NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
         
+        startMonnitoring()
+        
     }
     
     //when view has appeared successfully, we call in to add the sliding card + the listeners

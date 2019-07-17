@@ -131,4 +131,58 @@ extension MapsViewController {
         self.present(navController, animated: true, completion: nil)
         
     }
+    
+    //geofence experiments, not working -_-
+    
+    func geofenceRegion(with lat:Double, lon:Double) ->CLCircularRegion{
+        let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), radius: 1000.0, identifier: "region1")
+        
+        region.notifyOnEntry = true
+        region.notifyOnExit = false
+        
+        return region
+        
+    }
+    
+    func startMonnitoring(){
+        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self){
+            print("geofence monitoring isn't available in this Phone")
+            return
+        }
+        
+        if CLLocationManager.authorizationStatus() != .authorizedAlways{
+            print("Need always authorization for geofence monitoring")
+        }
+        
+        let fenceRegion = geofenceRegion(with: 40.83974015103788, lon: -73.86272174704575)
+        locationManager.startMonitoring(for: fenceRegion)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+        if region.identifier == "region1"{
+            locationManager.requestState(for: region)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?,
+                         withError error: Error) {
+        print("@@@@@@@@@@@@@@@@@@@@@Monitoring failed for region with identifier: \(region!.identifier)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location Manager failed with the following error: \(error)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        
+        if region is CLCircularRegion{
+            print("*********Entered fence*********")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if region is CLCircularRegion{
+            print("*********exited fence*********")
+        }
+    }
 }
