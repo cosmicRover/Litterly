@@ -8,6 +8,10 @@
 
 import Foundation
 import CoreLocation
+import FirebaseFirestore
+import Firebase
+
+//geofence experiments
 
 extension AppDelegate: CLLocationManagerDelegate{
     func geofenceRegion(with lat:Double, lon:Double, identifier:String) ->CLCircularRegion{
@@ -44,10 +48,17 @@ extension AppDelegate: CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+        let regionId = region.identifier
+        let userId = Auth.auth().currentUser?.email as! String
+        let time = NSDate().timeIntervalSince1970
+        
         if state == .inside{
             geofenceIndsideHandler(for: region)
+            updateGeofenceOnTrigger(for: "\(regionId)inside", with: "\(userId)", and: "\(time)")
+            
         } else if state == .outside{
             geofenceExitHandler(for: region)
+            updateGeofenceOnTrigger(for: "\(regionId)outside", with: "\(userId)", and: "\(time)")
         }
     }
     
@@ -85,4 +96,27 @@ extension AppDelegate: CLLocationManagerDelegate{
 //            print("*********exited fence*********")
 //        }
 //    }
+    
+    //func to append data to firestore, to check if geofence gets triggered when the app is terminated. Needs more testing though
+    
+    func updateGeofenceOnTrigger(for id:String, with userId:String, and time:String){
+        let db = Firestore.firestore()
+        let batch = Firestore.firestore().batch()
+        let meetupRef = db.collection("GeofenceProof").document("\(id)")
+        
+        batch.setData([
+            "geofence_region_id" : FieldValue.arrayUnion(["\(id)"]),
+            "users_id": FieldValue.arrayUnion(["\(userId)"]),
+            "time_stamp": FieldValue.arrayUnion(["\(time)"])
+            ], forDocument: meetupRef)
+        
+        batch.commit { (err) in
+            if let err = err{
+                print(err.localizedDescription)
+                //show error  alert
+            } else{
+                print("update commited successfully")
+            }
+        }
+    }
 }
