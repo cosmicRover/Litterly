@@ -32,7 +32,7 @@ extension MapsViewController{
         //listening for marker modification event
         NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
         
-        startMonnitoring()
+        //startMonnitoring()
         
     }
     

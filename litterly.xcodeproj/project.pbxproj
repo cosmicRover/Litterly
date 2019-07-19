@@ -28,6 +28,7 @@
 		C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5743262229617150050F4D4 /* MapsVC-SearchButton-GMS.swift */; };
 		C584FC6122668F3300ED1B53 /* alert.json in Resources */ = {isa = PBXBuildFile; fileRef = C584FC6022668F3200ED1B53 /* alert.json */; };
 		C584FC6622669DC300ED1B53 /* town.json in Resources */ = {isa = PBXBuildFile; fileRef = C584FC6522669DC300ED1B53 /* town.json */; };
+		C58565A322DF94C90065FB2A /* AppDelegateGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58565A222DF94C90065FB2A /* AppDelegateGeofence.swift */; };
 		C5863AFC228A38B5004A25E4 /* SharedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5863AFB228A38B5004A25E4 /* SharedValues.swift */; };
 		C5863AFE228A3D64004A25E4 /* ScheduleAlertVC-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5863AFD228A3D64004A25E4 /* ScheduleAlertVC-Firebase.swift */; };
 		C5863B00228A4443004A25E4 /* MeetupDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5863AFF228A4443004A25E4 /* MeetupDataModel.swift */; };
@@ -61,6 +62,7 @@
 		C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */; };
 		C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */; };
 		C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */; };
+		C59F17F322DF857F00C5986D /* MapVC-Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */; };
 		C5AD39E822CD243700258C5B /* ErrorAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */; };
 		C5AD39EA22CD258100258C5B /* broken-stick.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39E922CD258100258C5B /* broken-stick.json */; };
 		C5AD39EC22CD28AB00258C5B /* red-error-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39EB22CD28AB00258C5B /* red-error-cross.json */; };
@@ -121,6 +123,7 @@
 		C5743262229617150050F4D4 /* MapsVC-SearchButton-GMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-SearchButton-GMS.swift"; sourceTree = "<group>"; };
 		C584FC6022668F3200ED1B53 /* alert.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alert.json; sourceTree = "<group>"; };
 		C584FC6522669DC300ED1B53 /* town.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = town.json; sourceTree = "<group>"; };
+		C58565A222DF94C90065FB2A /* AppDelegateGeofence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateGeofence.swift; sourceTree = "<group>"; };
 		C5863AFB228A38B5004A25E4 /* SharedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValues.swift; sourceTree = "<group>"; };
 		C5863AFD228A3D64004A25E4 /* ScheduleAlertVC-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleAlertVC-Firebase.swift"; sourceTree = "<group>"; };
 		C5863AFF228A4443004A25E4 /* MeetupDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupDataModel.swift; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 		C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlasticMeetup-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetalMeetups-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-Geofence.swift"; sourceTree = "<group>"; };
 		C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewController.swift; sourceTree = "<group>"; };
 		C5AD39E922CD258100258C5B /* broken-stick.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "broken-stick.json"; sourceTree = "<group>"; };
 		C5AD39EB22CD28AB00258C5B /* red-error-cross.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-error-cross.json"; sourceTree = "<group>"; };
@@ -341,6 +345,15 @@
 			path = Animations;
 			sourceTree = "<group>";
 		};
+		C58565A122DF94A70065FB2A /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				C5D83E2022581793009CB884 /* AppDelegate.swift */,
+				C58565A222DF94C90065FB2A /* AppDelegateGeofence.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
 		C5863AFA228A3886004A25E4 /* Singleton */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +413,7 @@
 				C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */,
 				C5C35EE6227A1A9900103AD9 /* MapsVC-GMSDelegate.swift */,
 				C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */,
+				C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */,
 			);
 			path = MapsVCs;
 			sourceTree = "<group>";
@@ -648,6 +662,7 @@
 		C5D83E1F22581793009CB884 /* litterly */ = {
 			isa = PBXGroup;
 			children = (
+				C58565A122DF94A70065FB2A /* AppDelegate */,
 				C5C9187922CEDBE300A82E05 /* Helper Functions */,
 				C59C82BD2295D1250051F3F8 /* Subclassing Extensions */,
 				C5863AFA228A3886004A25E4 /* Singleton */,
@@ -659,7 +674,6 @@
 				C543BF992277D644000C2FC7 /* UIViewCode */,
 				C58D911F225D559D006A0390 /* View Controllers */,
 				C58D911E225D5581006A0390 /* Views */,
-				C5D83E2022581793009CB884 /* AppDelegate.swift */,
 				C5D83E2722581794009CB884 /* Assets.xcassets */,
 				C50C75312297914D005A16DD /* AppIcon.appiconset */,
 				C5D83E2922581794009CB884 /* LaunchScreen.storyboard */,
@@ -872,6 +886,7 @@
 				C5DD0887225845D1000988A3 /* ProfileViewController.swift in Sources */,
 				C543BF982277D5CE000C2FC7 /* MapsVC-Firebase.swift in Sources */,
 				C599F5EE226304590038A1A6 /* PageThreeViewController.swift in Sources */,
+				C58565A322DF94C90065FB2A /* AppDelegateGeofence.swift in Sources */,
 				C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */,
 				C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */,
 				C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */,
@@ -882,6 +897,7 @@
 				C506314E226E8E430078265C /* ContainerController.swift in Sources */,
 				C59C82B82295C2D60051F3F8 /* MeetupsQueryModel.swift in Sources */,
 				C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */,
+				C59F17F322DF857F00C5986D /* MapVC-Geofence.swift in Sources */,
 				C5D83E2122581793009CB884 /* AppDelegate.swift in Sources */,
 				C5C35EE322791FD300103AD9 /* DocumentSerializableProtocol.swift in Sources */,
 				C56CEA33225D977A005DC40E /* SelectedButton.swift in Sources */,
