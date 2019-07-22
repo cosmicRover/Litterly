@@ -44,7 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         FirebaseApp.configure()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        locationManager.allowsBackgroundLocationUpdates = true
         
         //if user didn't sign out, send the user directly to the mapsVC
         if Auth.auth().currentUser != nil{
@@ -65,6 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
             self.window?.rootViewController = mapsViewController
         }
+        
+        //for background fetches
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         
         startMonnitoring()
         
@@ -92,6 +94,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        //this is where we fetch the current day's geofence coordinates and run the func to start monitoring
+        
+        let userId = Auth.auth().currentUser?.email as! String
+        let time = NSDate().timeIntervalSince1970
+        
+        let db = Firestore.firestore()
+        let batch = Firestore.firestore().batch()
+        let meetupRef = db.collection("BackgroundFetchProof").document("\(userId)")
+        
+        batch.updateData([
+            "background_call_time" : FieldValue.arrayUnion(["called at ->> \(time)"])
+            ], forDocument: meetupRef)
+        
+        batch.commit { (err) in
+            if let err = err{
+                print(err.localizedDescription)
+                //show error  alert
+            } else{
+                print("update commited successfully")
+                completionHandler(.newData)
+                //.noNewData, .failed can be used to indicate the data that we had received is any good or not
+            }
+        }
+        
+        
     }
 
 }
