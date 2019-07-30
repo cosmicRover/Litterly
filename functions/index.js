@@ -1,18 +1,27 @@
 const functions = require('firebase-functions');
-
 const admin = require('firebase-admin');
-admin.initializeApp();
+admin.initializeApp(functions.config().firestore);
 
-exports.createUser = functions.firestore
-    .document('Meetups/{userId}')
-    .onCreate((snap, context) => {
-      // Get an object representing the document
-      // e.g. {'name': 'Marie', 'age': 66}
-      const newValue = snap.data();
+db = admin.firestore()
+let userRef = db.collection('Users');
 
-      console.log("hooray "+ newValue);
-      // access a particular field as you would any JS property
-      const name = newValue.name;
+exports.scheduledFunction = functions.pubsub.schedule('every 1 minutes').onRun((context) => {
+    readData();
+});
 
-      // perform desired operations ...
-    });
+function readData() {
+    functions.https.onRequest((request, Response) => {
+        userRef.get().then(snapshot => {
+            snapshot.forEach(doc => {
+                console.log(doc)
+            });
+        });
+        return
+    }).catch(err => {
+        console.log(err)
+        return
+    })
+}
+
+
+
