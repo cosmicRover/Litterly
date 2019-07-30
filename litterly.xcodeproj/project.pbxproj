@@ -93,6 +93,7 @@
 		C5DD088322584589000988A3 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD088222584589000988A3 /* SigninViewController.swift */; };
 		C5DD0885225845B7000988A3 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD0884225845B7000988A3 /* MapsViewController.swift */; };
 		C5DD0887225845D1000988A3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD0886225845D1000988A3 /* ProfileViewController.swift */; };
+		C5DFA17922EFE9B700E16E21 /* AppDelegate-PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */; };
 		C5E8F20522656A0C009FAE68 /* AuthPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F20322656A0C009FAE68 /* AuthPickerViewController.swift */; };
 		C5E8F20622656A0C009FAE68 /* AuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5E8F20422656A0C009FAE68 /* AuthPickerViewController.xib */; };
 		D34B1F79709B5F5A3BD8D8B6 /* Pods_litterly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E706035DFCD681245FB63D /* Pods_litterly.framework */; };
@@ -129,6 +130,7 @@
 		C5863AFF228A4443004A25E4 /* MeetupDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupDataModel.swift; sourceTree = "<group>"; };
 		C58776B92267DA86007C680D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C58D911C225D54B2006A0390 /* MapsVC-SlideInCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-SlideInCard.swift"; sourceTree = "<group>"; };
+		C58E1CCE22EFE26E00A05DFB /* litterly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = litterly.entitlements; sourceTree = "<group>"; };
 		C5907FA82284ECFB001E720D /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		C5907FAB2284EDBE001E720D /* ScheduleAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAlertViewController.swift; sourceTree = "<group>"; };
 		C5907FAD22850156001E720D /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 		C5DD088222584589000988A3 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		C5DD0884225845B7000988A3 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		C5DD0886225845D1000988A3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate-PushNotification.swift"; sourceTree = "<group>"; };
 		C5E8F20322656A0C009FAE68 /* AuthPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPickerViewController.swift; sourceTree = "<group>"; };
 		C5E8F20422656A0C009FAE68 /* AuthPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthPickerViewController.xib; sourceTree = "<group>"; };
 		CCB928DB4E5E78DB217C54B3 /* Pods-litterly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-litterly.debug.xcconfig"; path = "Target Support Files/Pods-litterly/Pods-litterly.debug.xcconfig"; sourceTree = "<group>"; };
@@ -349,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				C5D83E2022581793009CB884 /* AppDelegate.swift */,
+				C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */,
 				C58565A222DF94C90065FB2A /* AppDelegateGeofence.swift */,
 			);
 			path = AppDelegate;
@@ -662,6 +666,7 @@
 		C5D83E1F22581793009CB884 /* litterly */ = {
 			isa = PBXGroup;
 			children = (
+				C58E1CCE22EFE26E00A05DFB /* litterly.entitlements */,
 				C58565A122DF94A70065FB2A /* AppDelegate */,
 				C5C9187922CEDBE300A82E05 /* Helper Functions */,
 				C59C82BD2295D1250051F3F8 /* Subclassing Extensions */,
@@ -728,6 +733,9 @@
 						CreatedOnToolsVersion = 10.2;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
@@ -914,6 +922,7 @@
 				C5E8F20522656A0C009FAE68 /* AuthPickerViewController.swift in Sources */,
 				C59C82AB2295B09F0051F3F8 /* MeetupVC-Firebase.swift in Sources */,
 				C5931BD6225EBBA400ECBEEB /* MapsVC-SearchButton.swift in Sources */,
+				C5DFA17922EFE9B700E16E21 /* AppDelegate-PushNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1069,7 @@
 			baseConfigurationReference = CCB928DB4E5E78DB217C54B3 /* Pods-litterly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = litterly/litterly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BGNF8D28S2;
 				INFOPLIST_FILE = litterly/Info.plist;
@@ -1067,7 +1077,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641..litterly;
+				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641.litterly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1079,6 +1089,7 @@
 			baseConfigurationReference = 39E256F25A70D3C807D7B6F4 /* Pods-litterly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = litterly/litterly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BGNF8D28S2;
 				INFOPLIST_FILE = litterly/Info.plist;
@@ -1086,7 +1097,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641..litterly;
+				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641.litterly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
