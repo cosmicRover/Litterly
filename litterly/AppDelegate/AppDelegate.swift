@@ -101,6 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         print(userInfo)
     }
     
+    //*******for silent push notifications
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // If you are receiving a notification message while your app is in the background,
@@ -114,6 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
+        
+        //startMonnitoring()
         
         // Print full message.
         print(userInfo)

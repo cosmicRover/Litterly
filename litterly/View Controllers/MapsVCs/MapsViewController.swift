@@ -113,7 +113,7 @@ class MapsViewController: UIViewController{
     //listener for our direstore database
     var realTimeFirestoreListenerForMarkers:ListenerRegistration!
     
-    let nearbyRadius = 500.00 // miles ??
+    let nearbyRadius = 0.1 // 1000 meters
     
     //an array to hold all the nearbyIds that is being pulled from our databse
     var nearbyIdsAndTheirDistanceFromUser = [NearbyIdModel]()

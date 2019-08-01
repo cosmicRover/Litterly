@@ -33,6 +33,7 @@ extension MapsViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
         
         //startMonnitoring()
+        listenForRadius()
         
     }
     
@@ -41,7 +42,6 @@ extension MapsViewController{
         super.viewDidAppear(animated)
         makeTheNavBarClear()
         addMenuAndSearchButtonToNavBar()
-        listenForRadius()
     }
     
     //Calling a function to lower the card
