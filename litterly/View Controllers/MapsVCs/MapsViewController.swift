@@ -11,6 +11,7 @@ import CoreLocation
 import Firebase
 import FirebaseFirestore
 import Geofirestore
+import FirebaseMessaging
 
 //this class holds all the properties for MapsVC
 

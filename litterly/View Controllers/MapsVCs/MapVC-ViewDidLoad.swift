@@ -34,6 +34,7 @@ extension MapsViewController{
         
         //startMonnitoring()
         listenForRadius()
+        updateDeviceToken(for: "\(Auth.auth().currentUser?.email as! String)")
         
     }
     

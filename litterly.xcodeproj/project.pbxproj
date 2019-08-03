@@ -63,6 +63,8 @@
 		C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */; };
 		C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */; };
 		C59F17F322DF857F00C5986D /* MapVC-Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */; };
+		C5A085B422F4F84900D10644 /* GeofenceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A085B322F4F84900D10644 /* GeofenceDataModel.swift */; };
+		C5A085B622F4FF8C00D10644 /* Appdelegate-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A085B522F4FF8C00D10644 /* Appdelegate-Firebase.swift */; };
 		C5AD39E822CD243700258C5B /* ErrorAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */; };
 		C5AD39EA22CD258100258C5B /* broken-stick.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39E922CD258100258C5B /* broken-stick.json */; };
 		C5AD39EC22CD28AB00258C5B /* red-error-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39EB22CD28AB00258C5B /* red-error-cross.json */; };
@@ -160,6 +162,8 @@
 		C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetalMeetups-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-Geofence.swift"; sourceTree = "<group>"; };
+		C5A085B322F4F84900D10644 /* GeofenceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceDataModel.swift; sourceTree = "<group>"; };
+		C5A085B522F4FF8C00D10644 /* Appdelegate-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Appdelegate-Firebase.swift"; sourceTree = "<group>"; };
 		C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewController.swift; sourceTree = "<group>"; };
 		C5AD39E922CD258100258C5B /* broken-stick.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "broken-stick.json"; sourceTree = "<group>"; };
 		C5AD39EB22CD28AB00258C5B /* red-error-cross.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-error-cross.json"; sourceTree = "<group>"; };
@@ -330,6 +334,7 @@
 				C5863AFF228A4443004A25E4 /* MeetupDataModel.swift */,
 				C59C82B72295C2D60051F3F8 /* MeetupsQueryModel.swift */,
 				C599E08122CAF04D00E0D40A /* NearbyIdModel.swift */,
+				C5A085B322F4F84900D10644 /* GeofenceDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				C5D83E2022581793009CB884 /* AppDelegate.swift */,
 				C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */,
 				C58565A222DF94C90065FB2A /* AppDelegateGeofence.swift */,
+				C5A085B522F4FF8C00D10644 /* Appdelegate-Firebase.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -858,6 +864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5063150226E8E7C0078265C /* MenuController.swift in Sources */,
+				C5A085B422F4F84900D10644 /* GeofenceDataModel.swift in Sources */,
 				C59C82AD2295BE3B0051F3F8 /* PlasticMeetupViewController.swift in Sources */,
 				C5863AFC228A38B5004A25E4 /* SharedValues.swift in Sources */,
 				C5063156226E8F100078265C /* HomeControllerDelegateProtocol.swift in Sources */,
@@ -915,6 +922,7 @@
 				C597957C2264E01100B1797D /* AppColors.swift in Sources */,
 				C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */,
 				C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */,
+				C5A085B622F4FF8C00D10644 /* Appdelegate-Firebase.swift in Sources */,
 				C5907FAC2284EDBE001E720D /* ScheduleAlertViewController.swift in Sources */,
 				C5DD0885225845B7000988A3 /* MapsViewController.swift in Sources */,
 				C5C35EE7227A1A9900103AD9 /* MapsVC-GMSDelegate.swift in Sources */,
