@@ -12,13 +12,13 @@ struct GeofenceDataModel{
     
     var user_id:String
     var device_token:String
-    var monday:[[String:String]]
-    var tuesday:[[String:String]]
-    var wednesday:[[String:String]]
-    var thursday:[[String:String]]
-    var friday:[[String:String]]
-    var saturday:[[String:String]]
-    var sunday:[[String:String]]
+    var monday:[[String:Double]]
+    var tuesday:[[String:Double]]
+    var wednesday:[[String:Double]]
+    var thursday:[[String:Double]]
+    var friday:[[String:Double]]
+    var saturday:[[String:Double]]
+    var sunday:[[String:Double]]
     var monday_count:Int
     var tuesday_count:Int
     var wednesday_count:Int
@@ -57,13 +57,13 @@ extension GeofenceDataModel: DocumentSerializable{
         //guard let to make sure we don't run into nil values
         guard let user_id = dictionary["user_id"] as? String,
         let device_token = dictionary["device_token"] as? String,
-        let monday = dictionary["monday"] as? [[String:String]],
-        let tuesday = dictionary["tuesday"] as? [[String:String]],
-        let wednesday = dictionary["wednesday"] as? [[String:String]],
-        let thursday = dictionary["thursday"] as? [[String:String]],
-        let friday = dictionary["friday"] as? [[String:String]],
-        let saturday = dictionary["saturday"] as? [[String:String]],
-        let sunday = dictionary["sunday"] as? [[String:String]],
+        let monday = dictionary["monday"] as? [[String:Double]],
+        let tuesday = dictionary["tuesday"] as? [[String:Double]],
+        let wednesday = dictionary["wednesday"] as? [[String:Double]],
+        let thursday = dictionary["thursday"] as? [[String:Double]],
+        let friday = dictionary["friday"] as? [[String:Double]],
+        let saturday = dictionary["saturday"] as? [[String:Double]],
+        let sunday = dictionary["sunday"] as? [[String:Double]],
         let monday_count = dictionary["monday_count"] as? Int,
         let tuesday_count = dictionary["tuesday_count"] as? Int,
         let wednesday_count = dictionary["wednesday_count"] as? Int,

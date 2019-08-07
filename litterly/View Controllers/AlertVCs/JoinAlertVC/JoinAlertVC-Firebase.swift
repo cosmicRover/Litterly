@@ -36,11 +36,30 @@ extension JoinAlertViewController{
             
             let isUserOnTheList = self.didUserAlreadyJoin(search: "\(self.sharedValue.currentUserEmail! as String)")
             
-            isUserOnTheList ? self.changeAlertHeader() : self.enableJoinButton()
+            isUserOnTheList ? self.changeAlertHeader(with: "You are on the list!") : self.enableJoinButton()
             
             print("isUserPresent: \(isUserOnTheList)")
         }
         
+    }
+    
+    //*******TODO********
+    //*****get the day count before enabling the join button
+    //*****modify the meetup data model to contain a day field
+    func checkDayCount(){
+        let docId = sharedValue.currentUserEmail
+        let geofenceDataRef = sharedValue.db.collection("GeofenceData").document("\(docId)")
+        
+        geofenceDataRef.getDocument { (snapshot, error) in
+            if let err = error{
+                print("error getting day count -> ", err.localizedDescription)
+                return
+            }
+            
+            let data = snapshot?.data()
+            //self.dayCount = data[" "]
+            
+        }
     }
     
     //appends user_id to confirmed_users array
@@ -80,7 +99,7 @@ extension JoinAlertViewController{
         joinButton.isEnabled = true
     }
     
-    func changeAlertHeader(){
-        headerTitle.text = "You are on the list!"
+    func changeAlertHeader(with text:String){
+        headerTitle.text = "\(text)"
     }
 }

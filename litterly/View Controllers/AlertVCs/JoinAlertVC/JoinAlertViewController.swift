@@ -23,6 +23,8 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var joinButton: UIButton!
     
     let cornerRadiusValue = 12
+//    var dayCount:Int!
+//    var viewingMeetupDay:String!
     let sharedValue = SharedValues.sharedInstance
     let alertService = AlertService()
     var confirmedUsers:[[String:String]]!
