@@ -18,7 +18,12 @@ extension MapsViewController{
         mapView?.clear()
         markers.removeAll()
         trashModelArray.removeAll()
+        unScheduledMarkerInfoWindow.removeFromSuperview()
+        scheduledMarkerInfoWindow.removeFromSuperview()
         nearbyIdsAndTheirDistanceFromUser.removeAll()
+        if (realTimeFirestoreListenerForMarkers != nil){
+            realTimeFirestoreListenerForMarkers.remove()
+        }
         
         if let location = locationManager.location?.coordinate{
             self.queryForNearby(center: location, with: self.nearbyRadius)

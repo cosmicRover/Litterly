@@ -28,13 +28,23 @@ extension SigninViewController{
     }
     
     func submitGeofenceInitialDataToFirestore(with geofenceDictionary: [String:Any], for id:String){
+        
+        let ref = db.collection("GeofenceData").document("\(id)")
    
-        db.collection("GeofenceData").document("\(id)").setData(geofenceDictionary) { (error) in
-            if let err = error {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
+        ref.getDocument { (snapshot, error) in
+            if snapshot!.exists{
+                //do nothing, user already exists
+            }else{
+                //submit user to the firestore
+                ref.setData(geofenceDictionary, completion: { (error) in
+                    if let error = error{
+                        print("Print error submitting geofence User: ", error.localizedDescription)
+                    }else{
+                        print("Succeeded creating geofence data!")
+                    }
+                })
             }
+        
         }
         
     }

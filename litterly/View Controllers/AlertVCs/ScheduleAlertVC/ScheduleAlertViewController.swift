@@ -189,6 +189,18 @@ class ScheduleAlertViewController: UIViewController {
             
             if toBeScheduledMarkers.count == 0{
                 print("no nearby markers")
+                
+                //calls for relisten of the radius
+                //need to find a stable fix
+                NotificationCenter.default.post(name: NSNotification.Name("zeroMarkerCountTempFix"), object: nil)
+                
+                ///****Current bug***
+                //if pressed info window once and it can't be scheduled,
+                //user cant tap again to reschedule again*******
+                
+//                let mapVc = MapsViewController()
+//                mapVc.listenForRadius()
+                
                 //this is an error since the tapped marker itself should be appended
             } else{
                 
@@ -212,14 +224,14 @@ class ScheduleAlertViewController: UIViewController {
                                 
                             } else {
                                 //data prep
-                                let dict:MeetupDataModel = MeetupDataModel(marker_lat: marker.lat, marker_lon: marker.lon, meetup_address: marker.street_address, meetup_date_time: "\(self.meetupDate! as String)", type_of_trash: marker.trash_type, author_id: "\(self.sharedValue.currentUserEmail! as String)", author_display_name: self.sharedValue.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(self.sharedValue.currentUserEmail! as String)", "user_pic_url" : "\(self.sharedValue.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(self.sharedValue.currentUserEmail! as String)"])
+                                let dict:MeetupDataModel = MeetupDataModel(marker_lat: marker.lat, marker_lon: marker.lon, meetup_address: marker.street_address, meetup_date_time: "\(self.meetupDate! as String)", type_of_trash: marker.trash_type, author_id: "\(self.sharedValue.currentUserEmail! as String)", author_display_name: self.sharedValue.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(self.sharedValue.currentUserEmail! as String)", "user_pic_url" : "\(self.sharedValue.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(self.sharedValue.currentUserEmail! as String)"], meetup_day: "\(self.scheduleWeekdayText as String)")
                                 
                                 //batch prep
                                 self.batch.setData(dict.dictionary, forDocument: meetupDocRef)
                                 self.batch.updateData(["is_meetup_scheduled": true], forDocument: markerDocRef)
                                 
                                 self.batch.updateData([
-                                    "\(self.scheduleWeekdayText as String)" : FieldValue.arrayUnion([["lat" : "\(marker.lat)", "lon" : "\(marker.lon)"]])], forDocument: geofenceDocRef)
+                                    "\(self.scheduleWeekdayText as String)" : FieldValue.arrayUnion([["lat" : marker.lat as Double, "lon" : marker.lon as Double]])], forDocument: geofenceDocRef)
                                 
                                 print("setting batches...")
                                 dispatcher.leave()
@@ -232,9 +244,10 @@ class ScheduleAlertViewController: UIViewController {
                 //update the day's count
                 let geofenceId:String = "\(self.sharedValue.currentUserEmail! as String)"
                 let geofenceDocRef = self.db.collection("GeofenceData").document("\(geofenceId)")
-                geofenceDocRef.updateData(
-                    ["\(self.scheduleWeekdayText as String)_count" : todayCount + toBeScheduledMarkers.count]
-                )
+                self.batch.updateData(
+                    ["\(self.scheduleWeekdayText as String)_count" :
+                    todayCount + toBeScheduledMarkers.count],
+                    forDocument: geofenceDocRef)
                 
                 //notify the main thread that the batch data sets is ready
                 dispatcher.notify(queue: .main) {

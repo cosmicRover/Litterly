@@ -33,8 +33,10 @@ extension MapsViewController{
         NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
         
         //startMonnitoring()
-        listenForRadius()
         updateDeviceToken(for: "\(Auth.auth().currentUser?.email as! String)")
+        
+        //zeroMarkerBug temp fix
+        NotificationCenter.default.addObserver(self, selector: #selector(manuallyListenForRadius), name: NSNotification.Name("zeroMarkerCountTempFix"), object: nil)
         
     }
     
@@ -43,6 +45,25 @@ extension MapsViewController{
         super.viewDidAppear(animated)
         makeTheNavBarClear()
         addMenuAndSearchButtonToNavBar()
+        listenForRadius()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("view disappear called!")
+        mapView?.clear()
+        markers.removeAll()
+        trashModelArray.removeAll()
+        unScheduledMarkerInfoWindow.removeFromSuperview()
+        scheduledMarkerInfoWindow.removeFromSuperview()
+        nearbyIdsAndTheirDistanceFromUser.removeAll()
+        if (realTimeFirestoreListenerForMarkers != nil){
+            realTimeFirestoreListenerForMarkers.remove()
+        }
+    }
+    
+    @objc private func manuallyListenForRadius(){
+        //show an alert saying an error occoured
+        listenForRadius()
     }
     
     //Calling a function to lower the card
