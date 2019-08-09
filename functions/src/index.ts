@@ -10,9 +10,15 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
     //(* * * * *) runs every 1 minute. look up cron time to learn more
     .schedule('* * * * *').onRun(async context => {
 
+        //get today's day
+        const now = Date();
+        const day = now.split(" ");
+        console.log("Now is ->> ", day[0]);
+        const today =
+
         //query and the task to get those queries from firebase
-        //need to get the device tokens + tomorrow's geofence payload
-        const query = db.collection('Users');
+        //need to get the device tokens + today's geofence payload
+        const query = db.collection('GeofenceData');
         const task = await query.get();
 
         //jobs to execute
@@ -20,11 +26,14 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
 
         //for each user in the user class, send out the 
         task.forEach(snapshot => {
-            //const now = admin.firestore.Timestamp.now();
             const data = snapshot.data();
-            let name = data["user_name"];
-            //let device_token = data["device_token"];
-            //let geofence_payload = data["geofence_payload"] an array of objects need further deserialization;
+
+            //gotta get today's payload ****might have to re-configure dates on firestore
+            let device_token = data["device_token"];
+            let today_payload = data["${day[0]}"]
+
+
+
 
             //follow the silent message composing format to send silent messages
             //insert payload into the message
