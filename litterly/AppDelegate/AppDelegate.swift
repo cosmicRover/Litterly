@@ -94,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
+            print("THIS IS FOR BACKFROUND regular *******************")
             print("Message ID: \(messageID)")
         }
         
@@ -113,6 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
+            print("THIS IS FOR BACKFROUND FETCH *******************")
             print("Message ID: \(messageID)")
         }
         
@@ -120,6 +122,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         // Print full message.
         print(userInfo)
+        
+        //gets key/val pair from the data content
+        print(userInfo["key1"])
+        
+//        guard let url = URL(string: "https://stackoverflow.com") else { return }
+//        UIApplication.shared.open(url)
         
         completionHandler(UIBackgroundFetchResult.newData)
     }

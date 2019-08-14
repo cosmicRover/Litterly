@@ -14,7 +14,7 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
         const now = Date();
         const day = now.split(" ");
         console.log("Now is ->> ", day[0]);
-        const today =
+        // const today =
 
         //query and the task to get those queries from firebase
         //need to get the device tokens + today's geofence payload
@@ -30,24 +30,31 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
 
             //gotta get today's payload ****might have to re-configure dates on firestore
             let device_token = data["device_token"];
-            let today_payload = data["${day[0]}"]
+            let today_payload = data["saturday"]
 
-
+            console.log(device_token, today_payload)
 
 
             //follow the silent message composing format to send silent messages
             //insert payload into the message
-            const payload: admin.messaging.MessagingPayload = {
-
+            const payload = {
                 notification: {
-                    title: 'Test from cloud functions',
-                    body: '${name} is here!!',
-                    icon: 'https://i.pinimg.com/originals/15/a3/0e/15a30e80a28dca1e25dd7c25156c6054.gif'
+                    title: "DataSync",
+                    body: "DataSync"
+                },
+                data: {
+                    "key1": "value1",
+                    "key2": "value2"
                 }
-
             };
 
-            console.log(name);
+            //need to specify options and priority
+            var options = {
+                contentAvailable: true,
+                priority: "high"
+            };
+
+            // console.log(name);
 
             // var message = {
             //     notification: {
@@ -58,7 +65,7 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
             // };
 
             // send to each individual device token retrieved from the database
-            fcm.sendToDevice("es5664oO_m0:APA91bFixdr4Ug49Lby4J_FEGeZ_CZuhJPjOpMwEWr2cWkV-qP6j0x6sI1E0UEfT58sXidTjZCVo8A3ffDNu9f2gKUab97hvivrV_MLAkrlVymbV8okL31EHYuSwTFbxqiPX2Cr7YYVU", payload)
+            fcm.sendToDevice(`${device_token}`, payload, options)
                 .then((response) => {
                     console.log(response)
                 }).catch((error) => {
