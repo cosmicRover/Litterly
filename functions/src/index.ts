@@ -14,7 +14,33 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
         const now = Date();
         const day = now.split(" ");
         console.log("Now is ->> ", day[0]);
-        // const today =
+        const today = day[0];
+        var queryDay = ""
+
+        switch (today) {
+            case "Sun":
+                queryDay = "monday"
+                break
+            case "Mon":
+                queryDay = "tuesday"
+                break
+            case "Tue":
+                queryDay = "wednesday"
+                break
+            case "Wed":
+                queryDay = "thursday"
+                break
+            case "Thu":
+                queryDay = "friday"
+                break
+            case "Fri":
+                queryDay = "Saturday"
+                break
+            case "Sat":
+                queryDay = "Sunday"
+                break
+
+        };
 
         //query and the task to get those queries from firebase
         //need to get the device tokens + today's geofence payload
@@ -30,21 +56,22 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
 
             //gotta get today's payload ****might have to re-configure dates on firestore
             let device_token = data["device_token"];
-            let today_payload = data["saturday"]
 
-            console.log(device_token, today_payload)
+            //only send fcm if count > 0
+            let day_count = data[`${queryDay}` + "_count"]
+
+            console.log(device_token, day_count)
 
 
             //follow the silent message composing format to send silent messages
             //insert payload into the message
             const payload = {
                 notification: {
-                    title: "DataSync",
-                    body: "DataSync"
+                    title: "Your meetups are ready!",
+                    body: "Tap me to confirm!"
                 },
                 data: {
-                    "key1": "value1",
-                    "key2": "value2"
+                    "day": `friday`//`${queryDay}`
                 }
             };
 

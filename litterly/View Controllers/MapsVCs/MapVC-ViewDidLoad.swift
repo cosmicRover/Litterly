@@ -12,6 +12,7 @@ import CoreLocation
 import Firebase
 import FirebaseFirestore
 import Geofirestore
+import RealmSwift
 
 extension MapsViewController{
     
@@ -46,6 +47,14 @@ extension MapsViewController{
         makeTheNavBarClear()
         addMenuAndSearchButtonToNavBar()
         listenForRadius()
+        
+//        let realm = try! Realm()
+//
+//        let fence = realm.objects(GeofenceRegion.self)
+//
+//        print("**********************************************REALM HERE********************************")
+//        print(fence)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {

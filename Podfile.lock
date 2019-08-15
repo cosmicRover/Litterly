@@ -159,6 +159,11 @@ PODS:
   - nanopb/encode (0.3.901)
   - Player (0.13.0)
   - Protobuf (3.9.0)
+  - Realm (3.17.3):
+    - Realm/Headers (= 3.17.3)
+  - Realm/Headers (3.17.3)
+  - RealmSwift (3.17.3):
+    - Realm (= 3.17.3)
 
 DEPENDENCIES:
   - AlamofireImage
@@ -172,6 +177,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - lottie-ios
+  - RealmSwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -206,6 +212,8 @@ SPEC REPOS:
     - nanopb
     - Player
     - Protobuf
+    - Realm
+    - RealmSwift
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
@@ -239,7 +247,9 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Player: 968d8d07d923bcdd6f7e4091c9e306eb44a5f7a4
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
+  Realm: 5a1d9d47bfc101dd597668b1a8af4288a2557f6d
+  RealmSwift: b7fdc2d18616621c31df5c7a398a45a2163f8eb0
 
-PODFILE CHECKSUM: 649043e5c21a7fc115628ee5cc9a73c67026909f
+PODFILE CHECKSUM: 1e267f3a3ebe0bda47da74b13d1ed82e6158550f
 
 COCOAPODS: 1.7.2

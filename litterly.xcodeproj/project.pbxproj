@@ -91,6 +91,8 @@
 		C5D83E2622581793009CB884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D83E2422581793009CB884 /* Main.storyboard */; };
 		C5D83E2822581794009CB884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5D83E2722581794009CB884 /* Assets.xcassets */; };
 		C5D83E2B22581794009CB884 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D83E2922581794009CB884 /* LaunchScreen.storyboard */; };
+		C5D8C78C2304C7E500A5D968 /* RealmGeofenceSaveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D8C78B2304C7E500A5D968 /* RealmGeofenceSaveModel.swift */; };
+		C5D8C78E2304C8EE00A5D968 /* AppDelegate-Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D8C78D2304C8EE00A5D968 /* AppDelegate-Realm.swift */; };
 		C5DD088122584562000988A3 /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD088022584562000988A3 /* IntroPageViewController.swift */; };
 		C5DD088322584589000988A3 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD088222584589000988A3 /* SigninViewController.swift */; };
 		C5DD0885225845B7000988A3 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD0884225845B7000988A3 /* MapsViewController.swift */; };
@@ -192,6 +194,8 @@
 		C5D83E2722581794009CB884 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5D83E2A22581794009CB884 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5D83E2C22581794009CB884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5D8C78B2304C7E500A5D968 /* RealmGeofenceSaveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmGeofenceSaveModel.swift; sourceTree = "<group>"; };
+		C5D8C78D2304C8EE00A5D968 /* AppDelegate-Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate-Realm.swift"; sourceTree = "<group>"; };
 		C5DD088022584562000988A3 /* IntroPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPageViewController.swift; sourceTree = "<group>"; };
 		C5DD088222584589000988A3 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		C5DD0884225845B7000988A3 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 		C564B481226AA03D00F2DEF1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C5D8C78A2304C79A00A5D968 /* Realm Models */,
 				C564B482226AA05B00F2DEF1 /* TrashDataModel.swift */,
 				C5063153226E8EF30078265C /* MenuOption.swift */,
 				C5C35EE022791B9900103AD9 /* UserDataModel.swift */,
@@ -360,6 +365,7 @@
 				C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */,
 				C58565A222DF94C90065FB2A /* AppDelegateGeofence.swift */,
 				C5A085B522F4FF8C00D10644 /* Appdelegate-Firebase.swift */,
+				C5D8C78D2304C8EE00A5D968 /* AppDelegate-Realm.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -694,6 +700,14 @@
 			path = litterly;
 			sourceTree = "<group>";
 		};
+		C5D8C78A2304C79A00A5D968 /* Realm Models */ = {
+			isa = PBXGroup;
+			children = (
+				C5D8C78B2304C7E500A5D968 /* RealmGeofenceSaveModel.swift */,
+			);
+			path = "Realm Models";
+			sourceTree = "<group>";
+		};
 		CCAFCF734AD4EBD5E0794F3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -920,10 +934,12 @@
 				C5C35EEB227A1C7B00103AD9 /* ApiKeys.swift in Sources */,
 				C599E08222CAF04D00E0D40A /* NearbyIdModel.swift in Sources */,
 				C597957C2264E01100B1797D /* AppColors.swift in Sources */,
+				C5D8C78C2304C7E500A5D968 /* RealmGeofenceSaveModel.swift in Sources */,
 				C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */,
 				C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */,
 				C5A085B622F4FF8C00D10644 /* Appdelegate-Firebase.swift in Sources */,
 				C5907FAC2284EDBE001E720D /* ScheduleAlertViewController.swift in Sources */,
+				C5D8C78E2304C8EE00A5D968 /* AppDelegate-Realm.swift in Sources */,
 				C5DD0885225845B7000988A3 /* MapsViewController.swift in Sources */,
 				C5C35EE7227A1A9900103AD9 /* MapsVC-GMSDelegate.swift in Sources */,
 				C5863B00228A4443004A25E4 /* MeetupDataModel.swift in Sources */,

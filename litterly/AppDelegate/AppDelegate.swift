@@ -12,6 +12,7 @@ import Firebase
 import FirebaseMessaging
 import FirebaseFirestore
 import UserNotifications
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate{
@@ -118,18 +119,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             print("Message ID: \(messageID)")
         }
         
-        //startMonnitoring()
-        
-        // Print full message.
         print(userInfo)
         
-        //gets key/val pair from the data content
-        print(userInfo["key1"])
+        let today:String = userInfo["day"] as! String
+        let userId:String = Auth.auth().currentUser?.email as! String
         
-//        guard let url = URL(string: "https://stackoverflow.com") else { return }
-//        UIApplication.shared.open(url)
+        //gets the data from firestore. Note that it can't get data if app is force killed
+        //but data gets fetched when user opens the app next
+        getGeofenceDataFromFirestore(for: userId, on: today) { (text) in
+            
+            if text == "ok"{
+                completionHandler(UIBackgroundFetchResult.newData)
+            }
+        }
         
-        completionHandler(UIBackgroundFetchResult.newData)
     }
 
 }

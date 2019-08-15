@@ -18,6 +18,7 @@ pod 'Firebase/Firestore'
 pod 'Cards'
 pod 'AlamofireImage'
 pod 'Geofirestore'
+pod 'RealmSwift'
 
 
 end
