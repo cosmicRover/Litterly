@@ -26,4 +26,46 @@ extension AppDelegate{
         }
         
     }
+    
+    func deletePreviousGeofenceDataAndStopMonitoring(completionHandler: @escaping (String?)-> Void){
+        let realm = try! Realm()
+        
+        let fence = realm.objects(GeofenceRegion.self)
+        
+        for data in fence{
+            
+            let regionName = data["regionName"] as! String
+            let lat = data["lat"] as! Double
+            let lon = data["lon"] as! Double
+            
+            stopMonitoring(lat: lat, lon: lon, identifier: regionName)
+        }
+        
+        print("stopped previous geofence monitoring")
+        
+        try! realm.write{
+            
+            realm.delete(fence)
+        }
+        
+        completionHandler("ok")
+    }
+    
+    func readRealmDataAndStartMonitoring(completionHandler: @escaping (String?)-> Void){
+        let realm = try! Realm()
+        
+        let fence = realm.objects(GeofenceRegion.self)
+        
+        for data in fence{
+            
+            let regionName = data["regionName"] as! String
+            let lat = data["lat"] as! Double
+            let lon = data["lon"] as! Double
+            
+            startMonitoring(lat: lat, lon: lon, identifier: regionName)
+        }
+        
+        completionHandler("ok")
+        
+    }
 }

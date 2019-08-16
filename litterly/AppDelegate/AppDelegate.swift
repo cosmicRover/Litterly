@@ -21,9 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     let gcmMessageIDKey = "gcm.message_id"
     
     let locationManager = CLLocationManager()
-    let geofencedLocations:[[String:Any]] = [["lat" : 41.43557351415048, "lon" : -102.62374330504326, "name" :"reg1"],
-                                             ["lat" : 27.064346022727918, "lon" : -102.1177372407189, "name" :"reg2"],
-                                             ["lat" : 33.32624671918817, "lon" : -94.2954716157189, "name" :"reg3"]]
+    var geofencedLocations = [[GeofenceQueryModel]]()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -56,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         
         routeTheUser()
-        //startMonnitoring()
         
         return true
     }
@@ -119,20 +116,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             print("Message ID: \(messageID)")
         }
         
-        print(userInfo)
-        
-        let today:String = userInfo["day"] as! String
-        let userId:String = Auth.auth().currentUser?.email as! String
-        
-        //gets the data from firestore. Note that it can't get data if app is force killed
-        //but data gets fetched when user opens the app next
-        getGeofenceDataFromFirestore(for: userId, on: today) { (text) in
-            
+        deletePreviousGeofenceDataAndStopMonitoring { (text) in
             if text == "ok"{
-                completionHandler(UIBackgroundFetchResult.newData)
+                print(userInfo)
+                
+                let today:String = userInfo["day"] as! String
+                let userId:String = Auth.auth().currentUser?.email as! String
+                
+                //gets the data from firestore. Note that it can't get data if app is force killed
+                //but data gets fetched when user opens the app next
+                self.getGeofenceDataFromFirestore(for: userId, on: today) { (text) in
+                    
+                    if text == "ok"{
+                        self.readRealmDataAndStartMonitoring(completionHandler: { (text) in
+                            if text == "ok"{
+                                self.eraseGeofenceToDefaultAndSetDayCountToZero(for: "\(userId as String)", on: "\(today as String)")
+                                completionHandler(UIBackgroundFetchResult.newData)
+                            }
+                        })
+                    }
+                }
             }
         }
-        
     }
 
 }

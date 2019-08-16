@@ -65,6 +65,7 @@
 		C59F17F322DF857F00C5986D /* MapVC-Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */; };
 		C5A085B422F4F84900D10644 /* GeofenceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A085B322F4F84900D10644 /* GeofenceDataModel.swift */; };
 		C5A085B622F4FF8C00D10644 /* Appdelegate-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A085B522F4FF8C00D10644 /* Appdelegate-Firebase.swift */; };
+		C5A9CA6B23060E03006E9444 /* GeofenceQueryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A9CA6A23060E03006E9444 /* GeofenceQueryModel.swift */; };
 		C5AD39E822CD243700258C5B /* ErrorAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */; };
 		C5AD39EA22CD258100258C5B /* broken-stick.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39E922CD258100258C5B /* broken-stick.json */; };
 		C5AD39EC22CD28AB00258C5B /* red-error-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39EB22CD28AB00258C5B /* red-error-cross.json */; };
@@ -166,6 +167,7 @@
 		C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-Geofence.swift"; sourceTree = "<group>"; };
 		C5A085B322F4F84900D10644 /* GeofenceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceDataModel.swift; sourceTree = "<group>"; };
 		C5A085B522F4FF8C00D10644 /* Appdelegate-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Appdelegate-Firebase.swift"; sourceTree = "<group>"; };
+		C5A9CA6A23060E03006E9444 /* GeofenceQueryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceQueryModel.swift; sourceTree = "<group>"; };
 		C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewController.swift; sourceTree = "<group>"; };
 		C5AD39E922CD258100258C5B /* broken-stick.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "broken-stick.json"; sourceTree = "<group>"; };
 		C5AD39EB22CD28AB00258C5B /* red-error-cross.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-error-cross.json"; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				C59C82B72295C2D60051F3F8 /* MeetupsQueryModel.swift */,
 				C599E08122CAF04D00E0D40A /* NearbyIdModel.swift */,
 				C5A085B322F4F84900D10644 /* GeofenceDataModel.swift */,
+				C5A9CA6A23060E03006E9444 /* GeofenceQueryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -907,6 +910,7 @@
 				C593FB72229359FC002FAE72 /* JoinAlertViewController.swift in Sources */,
 				C59909632294573A00E16E44 /* TextFadeTransition.swift in Sources */,
 				C50C752B2297695C005A16DD /* ProfileVCTrashandMeetupsCell.swift in Sources */,
+				C5A9CA6B23060E03006E9444 /* GeofenceQueryModel.swift in Sources */,
 				C593FB782293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift in Sources */,
 				C58D911D225D54B2006A0390 /* MapsVC-SlideInCard.swift in Sources */,
 				C593FB7A229381B9002FAE72 /* JoinAlertVC-Firebase.swift in Sources */,
@@ -1104,7 +1108,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641.litterly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1124,7 +1128,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641.litterly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -8,7 +8,8 @@ const fcm = admin.messaging();
 
 export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
     //(* * * * *) runs every 1 minute. look up cron time to learn more
-    .schedule('* * * * *').onRun(async context => {
+    //at 10 pm each day
+    .schedule('0 22 * * *').onRun(async context => {
 
         //get today's day
         const now = Date();
@@ -16,28 +17,37 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
         console.log("Now is ->> ", day[0]);
         const today = day[0];
         var queryDay = ""
+        var queryDayCount = ""
 
+        //why send tomorrow......?
         switch (today) {
             case "Sun":
                 queryDay = "monday"
+                queryDayCount = "monday_count"
                 break
             case "Mon":
                 queryDay = "tuesday"
+                queryDayCount = "tuesday_count"
                 break
             case "Tue":
                 queryDay = "wednesday"
+                queryDayCount = "wednesday_count"
                 break
             case "Wed":
                 queryDay = "thursday"
+                queryDayCount = "thursday_count"
                 break
             case "Thu":
                 queryDay = "friday"
+                queryDayCount = "friday_count"
                 break
             case "Fri":
-                queryDay = "Saturday"
+                queryDay = "saturday"
+                queryDayCount = "saturday_count"
                 break
             case "Sat":
-                queryDay = "Sunday"
+                queryDay = "sunday"
+                queryDayCount = "sunday_count"
                 break
 
         };
@@ -58,46 +68,47 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
             let device_token = data["device_token"];
 
             //only send fcm if count > 0
-            let day_count = data[`${queryDay}` + "_count"]
+            let day_count = data[`${queryDayCount}`];
 
             console.log(device_token, day_count)
 
+            if (day_count > 0) {
+                //follow the silent message composing format to send silent messages
+                //insert payload into the message
+                const payload = {
+                    notification: {
+                        title: "Your meetups are ready!",
+                        body: "Tap me to confirm!"
+                    },
+                    data: {
+                        "day": `${queryDay}`//`${queryDay}`
+                    }
+                };
 
-            //follow the silent message composing format to send silent messages
-            //insert payload into the message
-            const payload = {
-                notification: {
-                    title: "Your meetups are ready!",
-                    body: "Tap me to confirm!"
-                },
-                data: {
-                    "day": `friday`//`${queryDay}`
-                }
-            };
+                //need to specify options and priority
+                var options = {
+                    contentAvailable: true,
+                    priority: "high"
+                };
 
-            //need to specify options and priority
-            var options = {
-                contentAvailable: true,
-                priority: "high"
-            };
+                // console.log(name);
 
-            // console.log(name);
+                // var message = {
+                //     notification: {
+                //         title: '$GOOG up 1.43% on the day',
+                //         body: '$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.'
+                //     },
+                //     condition: condition
+                // };
 
-            // var message = {
-            //     notification: {
-            //         title: '$GOOG up 1.43% on the day',
-            //         body: '$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.'
-            //     },
-            //     condition: condition
-            // };
-
-            // send to each individual device token retrieved from the database
-            fcm.sendToDevice(`${device_token}`, payload, options)
-                .then((response) => {
-                    console.log(response)
-                }).catch((error) => {
-                    console.log(error)
-                });
+                // send to each individual device token retrieved from the database
+                fcm.sendToDevice(`${device_token}`, payload, options)
+                    .then((response) => {
+                        console.log(response)
+                    }).catch((error) => {
+                        console.log(error)
+                    });
+            }
         });
 
         return await Promise.all(jobs);

@@ -24,27 +24,32 @@ extension AppDelegate: CLLocationManagerDelegate{
         
     }
     
-    func startMonnitoring(){
+    func stopMonitoring(lat:Double, lon:Double, identifier:String){
+        let region = geofenceRegion(with: lat, lon: lon, identifier: identifier)
+        locationManager.stopMonitoring(for: region)
+        print("Stopping monitor for \(region)")
+    }
+    
+    func startMonitoring(lat:Double, lon:Double, identifier:String){
         if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self){
             print("geofence monitoring isn't available in this Phone")
             return
         }
-        
+
         if CLLocationManager.authorizationStatus() != .authorizedAlways{
             print("Need always authorization for geofence monitoring")
         }
-        
+
         if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self){
-            for x in geofencedLocations{
-                let region = geofenceRegion(with: x["lat"] as! Double, lon: x["lon"] as! Double, identifier: x["name"] as! String)
+            
+                let region = geofenceRegion(with: lat, lon: lon, identifier: identifier)
                 locationManager.startMonitoring(for: region)
-            }
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
         print("LOCATION MANAGER HAS STARTED MONITORING WITH \(region.identifier)")
-        locationManager.requestState(for: region)
+//        locationManager.requestState(for: region)
     }
     
     func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
@@ -84,39 +89,20 @@ extension AppDelegate: CLLocationManagerDelegate{
         print("Exited on \(region.identifier)")
     }
     
-//    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-//
-//        if region is CLCircularRegion{
-//            print("*********Entered fence*********")
-//        }
-//    }
-//
-//    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-//        if region is CLCircularRegion{
-//            print("*********exited fence*********")
-//        }
-//    }
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+
+        if region is CLCircularRegion{
+            print("*********Entered fence*********")
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if region is CLCircularRegion{
+            print("*********exited fence*********")
+        }
+    }
     
     //func to append data to firestore, to check if geofence gets triggered when the app is terminated. Needs more testing though
     
-    func updateGeofenceOnTrigger(for id:String, with userId:String, and time:String){
-        let db = Firestore.firestore()
-        let batch = Firestore.firestore().batch()
-        let meetupRef = db.collection("GeofenceProof").document("\(id)")
-        
-        batch.setData([
-            "geofence_region_id" : FieldValue.arrayUnion(["\(id)"]),
-            "users_id": FieldValue.arrayUnion(["\(userId)"]),
-            "time_stamp": FieldValue.arrayUnion(["\(time)"])
-            ], forDocument: meetupRef)
-        
-        batch.commit { (err) in
-            if let err = err{
-                print(err.localizedDescription)
-                //show error  alert
-            } else{
-                print("update commited successfully")
-            }
-        }
-    }
+    
 }
