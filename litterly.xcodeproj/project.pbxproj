@@ -28,6 +28,7 @@
 		C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5743262229617150050F4D4 /* MapsVC-SearchButton-GMS.swift */; };
 		C584FC6122668F3300ED1B53 /* alert.json in Resources */ = {isa = PBXBuildFile; fileRef = C584FC6022668F3200ED1B53 /* alert.json */; };
 		C584FC6622669DC300ED1B53 /* town.json in Resources */ = {isa = PBXBuildFile; fileRef = C584FC6522669DC300ED1B53 /* town.json */; };
+		C58565A322DF94C90065FB2A /* AppDelegateGeofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58565A222DF94C90065FB2A /* AppDelegateGeofence.swift */; };
 		C5863AFC228A38B5004A25E4 /* SharedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5863AFB228A38B5004A25E4 /* SharedValues.swift */; };
 		C5863AFE228A3D64004A25E4 /* ScheduleAlertVC-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5863AFD228A3D64004A25E4 /* ScheduleAlertVC-Firebase.swift */; };
 		C5863B00228A4443004A25E4 /* MeetupDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5863AFF228A4443004A25E4 /* MeetupDataModel.swift */; };
@@ -61,6 +62,10 @@
 		C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */; };
 		C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */; };
 		C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */; };
+		C59F17F322DF857F00C5986D /* MapVC-Geofence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */; };
+		C5A085B422F4F84900D10644 /* GeofenceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A085B322F4F84900D10644 /* GeofenceDataModel.swift */; };
+		C5A085B622F4FF8C00D10644 /* Appdelegate-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A085B522F4FF8C00D10644 /* Appdelegate-Firebase.swift */; };
+		C5A9CA6B23060E03006E9444 /* GeofenceQueryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A9CA6A23060E03006E9444 /* GeofenceQueryModel.swift */; };
 		C5AD39E822CD243700258C5B /* ErrorAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */; };
 		C5AD39EA22CD258100258C5B /* broken-stick.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39E922CD258100258C5B /* broken-stick.json */; };
 		C5AD39EC22CD28AB00258C5B /* red-error-cross.json in Resources */ = {isa = PBXBuildFile; fileRef = C5AD39EB22CD28AB00258C5B /* red-error-cross.json */; };
@@ -87,10 +92,13 @@
 		C5D83E2622581793009CB884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D83E2422581793009CB884 /* Main.storyboard */; };
 		C5D83E2822581794009CB884 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5D83E2722581794009CB884 /* Assets.xcassets */; };
 		C5D83E2B22581794009CB884 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5D83E2922581794009CB884 /* LaunchScreen.storyboard */; };
+		C5D8C78C2304C7E500A5D968 /* RealmGeofenceSaveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D8C78B2304C7E500A5D968 /* RealmGeofenceSaveModel.swift */; };
+		C5D8C78E2304C8EE00A5D968 /* AppDelegate-Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D8C78D2304C8EE00A5D968 /* AppDelegate-Realm.swift */; };
 		C5DD088122584562000988A3 /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD088022584562000988A3 /* IntroPageViewController.swift */; };
 		C5DD088322584589000988A3 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD088222584589000988A3 /* SigninViewController.swift */; };
 		C5DD0885225845B7000988A3 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD0884225845B7000988A3 /* MapsViewController.swift */; };
 		C5DD0887225845D1000988A3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DD0886225845D1000988A3 /* ProfileViewController.swift */; };
+		C5DFA17922EFE9B700E16E21 /* AppDelegate-PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */; };
 		C5E8F20522656A0C009FAE68 /* AuthPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F20322656A0C009FAE68 /* AuthPickerViewController.swift */; };
 		C5E8F20622656A0C009FAE68 /* AuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5E8F20422656A0C009FAE68 /* AuthPickerViewController.xib */; };
 		D34B1F79709B5F5A3BD8D8B6 /* Pods_litterly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E706035DFCD681245FB63D /* Pods_litterly.framework */; };
@@ -121,11 +129,13 @@
 		C5743262229617150050F4D4 /* MapsVC-SearchButton-GMS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-SearchButton-GMS.swift"; sourceTree = "<group>"; };
 		C584FC6022668F3200ED1B53 /* alert.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = alert.json; sourceTree = "<group>"; };
 		C584FC6522669DC300ED1B53 /* town.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = town.json; sourceTree = "<group>"; };
+		C58565A222DF94C90065FB2A /* AppDelegateGeofence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateGeofence.swift; sourceTree = "<group>"; };
 		C5863AFB228A38B5004A25E4 /* SharedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedValues.swift; sourceTree = "<group>"; };
 		C5863AFD228A3D64004A25E4 /* ScheduleAlertVC-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleAlertVC-Firebase.swift"; sourceTree = "<group>"; };
 		C5863AFF228A4443004A25E4 /* MeetupDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupDataModel.swift; sourceTree = "<group>"; };
 		C58776B92267DA86007C680D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C58D911C225D54B2006A0390 /* MapsVC-SlideInCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-SlideInCard.swift"; sourceTree = "<group>"; };
+		C58E1CCE22EFE26E00A05DFB /* litterly.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = litterly.entitlements; sourceTree = "<group>"; };
 		C5907FA82284ECFB001E720D /* Alert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alert.storyboard; sourceTree = "<group>"; };
 		C5907FAB2284EDBE001E720D /* ScheduleAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAlertViewController.swift; sourceTree = "<group>"; };
 		C5907FAD22850156001E720D /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
@@ -154,6 +164,10 @@
 		C59C82B92295C9820051F3F8 /* PlasticMeetup-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlasticMeetup-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BB2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetalMeetups-Firebase.swift"; sourceTree = "<group>"; };
 		C59C82BE2295D1550051F3F8 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapVC-Geofence.swift"; sourceTree = "<group>"; };
+		C5A085B322F4F84900D10644 /* GeofenceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceDataModel.swift; sourceTree = "<group>"; };
+		C5A085B522F4FF8C00D10644 /* Appdelegate-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Appdelegate-Firebase.swift"; sourceTree = "<group>"; };
+		C5A9CA6A23060E03006E9444 /* GeofenceQueryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeofenceQueryModel.swift; sourceTree = "<group>"; };
 		C5AD39E722CD243700258C5B /* ErrorAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewController.swift; sourceTree = "<group>"; };
 		C5AD39E922CD258100258C5B /* broken-stick.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "broken-stick.json"; sourceTree = "<group>"; };
 		C5AD39EB22CD28AB00258C5B /* red-error-cross.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "red-error-cross.json"; sourceTree = "<group>"; };
@@ -182,10 +196,13 @@
 		C5D83E2722581794009CB884 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5D83E2A22581794009CB884 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C5D83E2C22581794009CB884 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5D8C78B2304C7E500A5D968 /* RealmGeofenceSaveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmGeofenceSaveModel.swift; sourceTree = "<group>"; };
+		C5D8C78D2304C8EE00A5D968 /* AppDelegate-Realm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate-Realm.swift"; sourceTree = "<group>"; };
 		C5DD088022584562000988A3 /* IntroPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPageViewController.swift; sourceTree = "<group>"; };
 		C5DD088222584589000988A3 /* SigninViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		C5DD0884225845B7000988A3 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		C5DD0886225845D1000988A3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate-PushNotification.swift"; sourceTree = "<group>"; };
 		C5E8F20322656A0C009FAE68 /* AuthPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPickerViewController.swift; sourceTree = "<group>"; };
 		C5E8F20422656A0C009FAE68 /* AuthPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthPickerViewController.xib; sourceTree = "<group>"; };
 		CCB928DB4E5E78DB217C54B3 /* Pods-litterly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-litterly.debug.xcconfig"; path = "Target Support Files/Pods-litterly/Pods-litterly.debug.xcconfig"; sourceTree = "<group>"; };
@@ -317,12 +334,15 @@
 		C564B481226AA03D00F2DEF1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C5D8C78A2304C79A00A5D968 /* Realm Models */,
 				C564B482226AA05B00F2DEF1 /* TrashDataModel.swift */,
 				C5063153226E8EF30078265C /* MenuOption.swift */,
 				C5C35EE022791B9900103AD9 /* UserDataModel.swift */,
 				C5863AFF228A4443004A25E4 /* MeetupDataModel.swift */,
 				C59C82B72295C2D60051F3F8 /* MeetupsQueryModel.swift */,
 				C599E08122CAF04D00E0D40A /* NearbyIdModel.swift */,
+				C5A085B322F4F84900D10644 /* GeofenceDataModel.swift */,
+				C5A9CA6A23060E03006E9444 /* GeofenceQueryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -339,6 +359,18 @@
 				C584FC6522669DC300ED1B53 /* town.json */,
 			);
 			path = Animations;
+			sourceTree = "<group>";
+		};
+		C58565A122DF94A70065FB2A /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				C5D83E2022581793009CB884 /* AppDelegate.swift */,
+				C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */,
+				C58565A222DF94C90065FB2A /* AppDelegateGeofence.swift */,
+				C5A085B522F4FF8C00D10644 /* Appdelegate-Firebase.swift */,
+				C5D8C78D2304C8EE00A5D968 /* AppDelegate-Realm.swift */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		C5863AFA228A3886004A25E4 /* Singleton */ = {
@@ -400,6 +432,7 @@
 				C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */,
 				C5C35EE6227A1A9900103AD9 /* MapsVC-GMSDelegate.swift */,
 				C5B2D9F322C6C9E30058EEA4 /* MapVC-NearbyGeoFire.swift */,
+				C59F17F222DF857F00C5986D /* MapVC-Geofence.swift */,
 			);
 			path = MapsVCs;
 			sourceTree = "<group>";
@@ -648,6 +681,8 @@
 		C5D83E1F22581793009CB884 /* litterly */ = {
 			isa = PBXGroup;
 			children = (
+				C58E1CCE22EFE26E00A05DFB /* litterly.entitlements */,
+				C58565A122DF94A70065FB2A /* AppDelegate */,
 				C5C9187922CEDBE300A82E05 /* Helper Functions */,
 				C59C82BD2295D1250051F3F8 /* Subclassing Extensions */,
 				C5863AFA228A3886004A25E4 /* Singleton */,
@@ -659,7 +694,6 @@
 				C543BF992277D644000C2FC7 /* UIViewCode */,
 				C58D911F225D559D006A0390 /* View Controllers */,
 				C58D911E225D5581006A0390 /* Views */,
-				C5D83E2022581793009CB884 /* AppDelegate.swift */,
 				C5D83E2722581794009CB884 /* Assets.xcassets */,
 				C50C75312297914D005A16DD /* AppIcon.appiconset */,
 				C5D83E2922581794009CB884 /* LaunchScreen.storyboard */,
@@ -667,6 +701,14 @@
 				C58776B92267DA86007C680D /* GoogleService-Info.plist */,
 			);
 			path = litterly;
+			sourceTree = "<group>";
+		};
+		C5D8C78A2304C79A00A5D968 /* Realm Models */ = {
+			isa = PBXGroup;
+			children = (
+				C5D8C78B2304C7E500A5D968 /* RealmGeofenceSaveModel.swift */,
+			);
+			path = "Realm Models";
 			sourceTree = "<group>";
 		};
 		CCAFCF734AD4EBD5E0794F3B /* Frameworks */ = {
@@ -712,6 +754,14 @@
 				TargetAttributes = {
 					C5D83E1C22581793009CB884 = {
 						CreatedOnToolsVersion = 10.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -831,6 +881,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C5063150226E8E7C0078265C /* MenuController.swift in Sources */,
+				C5A085B422F4F84900D10644 /* GeofenceDataModel.swift in Sources */,
 				C59C82AD2295BE3B0051F3F8 /* PlasticMeetupViewController.swift in Sources */,
 				C5863AFC228A38B5004A25E4 /* SharedValues.swift in Sources */,
 				C5063156226E8F100078265C /* HomeControllerDelegateProtocol.swift in Sources */,
@@ -859,6 +910,7 @@
 				C593FB72229359FC002FAE72 /* JoinAlertViewController.swift in Sources */,
 				C59909632294573A00E16E44 /* TextFadeTransition.swift in Sources */,
 				C50C752B2297695C005A16DD /* ProfileVCTrashandMeetupsCell.swift in Sources */,
+				C5A9CA6B23060E03006E9444 /* GeofenceQueryModel.swift in Sources */,
 				C593FB782293693D002FAE72 /* PeopleAttendingCollectionViewCell.swift in Sources */,
 				C58D911D225D54B2006A0390 /* MapsVC-SlideInCard.swift in Sources */,
 				C593FB7A229381B9002FAE72 /* JoinAlertVC-Firebase.swift in Sources */,
@@ -867,6 +919,7 @@
 				C5DD0887225845D1000988A3 /* ProfileViewController.swift in Sources */,
 				C543BF982277D5CE000C2FC7 /* MapsVC-Firebase.swift in Sources */,
 				C599F5EE226304590038A1A6 /* PageThreeViewController.swift in Sources */,
+				C58565A322DF94C90065FB2A /* AppDelegateGeofence.swift in Sources */,
 				C59C82BC2295CB6F0051F3F8 /* MetalMeetups-Firebase.swift in Sources */,
 				C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */,
 				C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */,
@@ -877,6 +930,7 @@
 				C506314E226E8E430078265C /* ContainerController.swift in Sources */,
 				C59C82B82295C2D60051F3F8 /* MeetupsQueryModel.swift in Sources */,
 				C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */,
+				C59F17F322DF857F00C5986D /* MapVC-Geofence.swift in Sources */,
 				C5D83E2122581793009CB884 /* AppDelegate.swift in Sources */,
 				C5C35EE322791FD300103AD9 /* DocumentSerializableProtocol.swift in Sources */,
 				C56CEA33225D977A005DC40E /* SelectedButton.swift in Sources */,
@@ -884,15 +938,19 @@
 				C5C35EEB227A1C7B00103AD9 /* ApiKeys.swift in Sources */,
 				C599E08222CAF04D00E0D40A /* NearbyIdModel.swift in Sources */,
 				C597957C2264E01100B1797D /* AppColors.swift in Sources */,
+				C5D8C78C2304C7E500A5D968 /* RealmGeofenceSaveModel.swift in Sources */,
 				C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */,
 				C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */,
+				C5A085B622F4FF8C00D10644 /* Appdelegate-Firebase.swift in Sources */,
 				C5907FAC2284EDBE001E720D /* ScheduleAlertViewController.swift in Sources */,
+				C5D8C78E2304C8EE00A5D968 /* AppDelegate-Realm.swift in Sources */,
 				C5DD0885225845B7000988A3 /* MapsViewController.swift in Sources */,
 				C5C35EE7227A1A9900103AD9 /* MapsVC-GMSDelegate.swift in Sources */,
 				C5863B00228A4443004A25E4 /* MeetupDataModel.swift in Sources */,
 				C5E8F20522656A0C009FAE68 /* AuthPickerViewController.swift in Sources */,
 				C59C82AB2295B09F0051F3F8 /* MeetupVC-Firebase.swift in Sources */,
 				C5931BD6225EBBA400ECBEEB /* MapsVC-SearchButton.swift in Sources */,
+				C5DFA17922EFE9B700E16E21 /* AppDelegate-PushNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,6 +1097,7 @@
 			baseConfigurationReference = CCB928DB4E5E78DB217C54B3 /* Pods-litterly.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = litterly/litterly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BGNF8D28S2;
 				INFOPLIST_FILE = litterly/Info.plist;
@@ -1046,10 +1105,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641..litterly;
+				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641.litterly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1058,6 +1117,7 @@
 			baseConfigurationReference = 39E256F25A70D3C807D7B6F4 /* Pods-litterly.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = litterly/litterly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BGNF8D28S2;
 				INFOPLIST_FILE = litterly/Info.plist;
@@ -1065,10 +1125,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641..litterly;
+				PRODUCT_BUNDLE_IDENTIFIER = joypaul.08041995.brooklyn.ny6641.litterly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -18,7 +18,12 @@ extension MapsViewController{
         mapView?.clear()
         markers.removeAll()
         trashModelArray.removeAll()
+        unScheduledMarkerInfoWindow.removeFromSuperview()
+        scheduledMarkerInfoWindow.removeFromSuperview()
         nearbyIdsAndTheirDistanceFromUser.removeAll()
+        if (realTimeFirestoreListenerForMarkers != nil){
+            realTimeFirestoreListenerForMarkers.remove()
+        }
         
         if let location = locationManager.location?.coordinate{
             self.queryForNearby(center: location, with: self.nearbyRadius)
@@ -61,6 +66,7 @@ extension MapsViewController{
                     print("Appeneded Nearby item. Nearby count is \(self.nearbyIdsAndTheirDistanceFromUser.count)")
                     self.cardViewController.nearByCount.fadeTransition(0.3)
                     self.cardViewController.nearByCount.text = "\(self.nearbyIdsAndTheirDistanceFromUser.count)"
+                    
                     self.realTimeMarkerListener(documentId: self.nearbyIdsAndTheirDistanceFromUser.last!.nearby_id)
                     
                     print(self.nearbyIdsAndTheirDistanceFromUser.last?.dictionary as! [String : Any])

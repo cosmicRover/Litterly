@@ -38,6 +38,24 @@ extension ScheduleAlertViewController{
         }
     }
     
+    func getMeetupDayCount(for id:String, completionHandler: @escaping (Int?) -> Void){
+        let ref = sharedValue.db.collection("GeofenceData").document("\(id)")
+        
+        ref.getDocument { (snapshot, error) in
+            if let err = error{
+                print("error getting geofence day! ", err.localizedDescription)
+                return
+            }
+            
+            let data = snapshot?.data()
+            let day:String = "\(self.scheduleWeekdayText as String)"
+            
+            completionHandler(data!["\(day)_count"] as? Int)
+            
+        }
+    }
+    
+    
     //batch write fires up all the data at once and its much more safer
     func batchCreateMeetupAndUpdateMeetupProperty(with dictionary: [String:Any], for meetupId:String, and trashTagId:String, updateTo value:Bool){
         let batch = Firestore.firestore().batch()

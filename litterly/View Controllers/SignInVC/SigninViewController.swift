@@ -151,10 +151,13 @@ extension SigninViewController: FUIAuthDelegate{
             
             let currentUser = UserDataModel(user_id: user_id!, user_name: user_name, profile_pic_url: profile_pic_url, neighborhood: "")
             
-            print(currentUser.dictionary)
+            //only do this if the user doesn't already exist******
+            let geofenceInitData = GeofenceDataModel(user_id: user_id!, device_token: "", monday: [["lat": 0, "lon":0]], tuesday: [["lat":0, "lon":0]], wednesday: [["lat":0, "lon":0]], thursday: [["lat":0, "lon":0]], friday: [["lat":0, "lon":0]], saturday: [["lat":0, "lon":0]], sunday: [["lat":0, "lon":0]], monday_count: 0, tuesday_count: 0, wednesday_count: 0, thursday_count: 0, friday_count: 0, saturday_count: 0, sunday_count: 0)
+            //might want to set the array objects later
             
             //calls func to create user in firestore
             submitUserToFirestore(with: currentUser.dictionary, for: user_id!)
+            submitGeofenceInitialDataToFirestore(with: geofenceInitData.dictionary, for: user_id!)
             
             
             let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "ContainerVC")

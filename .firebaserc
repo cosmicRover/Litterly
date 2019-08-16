@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "fir-signintest-79b2c"
+    "default": "fir-signintest-79b2c",
+    "staging": "fir-signintest-79b2c",
+    "litterly": "fir-signintest-79b2c"
   }
 }

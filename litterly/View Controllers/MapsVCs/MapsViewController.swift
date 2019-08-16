@@ -11,6 +11,7 @@ import CoreLocation
 import Firebase
 import FirebaseFirestore
 import Geofirestore
+import FirebaseMessaging
 
 //this class holds all the properties for MapsVC
 
@@ -113,7 +114,7 @@ class MapsViewController: UIViewController{
     //listener for our direstore database
     var realTimeFirestoreListenerForMarkers:ListenerRegistration!
     
-    let nearbyRadius = 1000.00 // miles ??
+    let nearbyRadius = 0.9 // 9000 meters
     
     //an array to hold all the nearbyIds that is being pulled from our databse
     var nearbyIdsAndTheirDistanceFromUser = [NearbyIdModel]()
