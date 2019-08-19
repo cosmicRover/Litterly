@@ -5,7 +5,7 @@
       location = "group:custom-gpx.gpx">
    </FileRef>
    <FileRef
-      location = "group:litterly.xcodeproj">
+      location = "group:Litterly.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

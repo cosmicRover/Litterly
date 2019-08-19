@@ -1,6 +1,6 @@
 //
 //  NearbyViewController.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 6/18/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

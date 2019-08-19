@@ -1,6 +1,6 @@
 //
 //  Appdelegate-Firebase.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 8/2/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

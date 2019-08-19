@@ -1,6 +1,6 @@
 //
 //  CardViewController.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 4/8/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.
@@ -20,7 +20,7 @@ class CardViewController: UIViewController {
     @IBOutlet weak var handleArea: UIView!
     @IBOutlet weak var arrowImage: UIImageView!
     @IBOutlet weak var cardViewArea: UIView!
-    @IBOutlet weak var litterlySign: UILabel!
+    @IBOutlet weak var LitterlySign: UILabel!
     @IBOutlet weak var nearbySign: UILabel!
     @IBOutlet weak var nearbySignSubTitle: UILabel!
     @IBOutlet weak var nearByCount: UILabel!
@@ -64,7 +64,7 @@ class CardViewController: UIViewController {
         nearbySign.textColor = UIColor.textWhite
         nearbySignSubTitle.textColor = UIColor.textWhite
         nearByCount.textColor = UIColor.mainGreen
-        litterlySign.textColor = UIColor.textWhite
+        LitterlySign.textColor = UIColor.textWhite
         trashType1.backgroundColor = UIColor.unselectedGrey
         trashType2.backgroundColor = UIColor.unselectedGrey
         trashType3.backgroundColor = UIColor.unselectedGrey

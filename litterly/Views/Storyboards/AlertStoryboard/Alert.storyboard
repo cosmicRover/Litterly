@@ -13,7 +13,7 @@
         <!--Schedule Alert View Controller-->
         <scene sceneID="Sii-Sl-5sj">
             <objects>
-                <viewController storyboardIdentifier="ScheduleAlertVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="pO3-jf-6iY" customClass="ScheduleAlertViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScheduleAlertVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="pO3-jf-6iY" customClass="ScheduleAlertViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KfU-ki-jEz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -154,7 +154,7 @@
         <!--Join Alert View Controller-->
         <scene sceneID="4kk-Co-fL3">
             <objects>
-                <viewController storyboardIdentifier="JoinAlertVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="Lwz-K4-nRn" customClass="JoinAlertViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="JoinAlertVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="Lwz-K4-nRn" customClass="JoinAlertViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k8A-9j-URv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -208,7 +208,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PeopleAttendingCollectionViewCell" id="rfD-eq-wC7" customClass="PeopleAttendingCollectionViewCell" customModule="litterly" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PeopleAttendingCollectionViewCell" id="rfD-eq-wC7" customClass="PeopleAttendingCollectionViewCell" customModule="Litterly" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="64" height="55"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -328,7 +328,7 @@
         <!--General Alert View Controller-->
         <scene sceneID="OIG-cr-8mG">
             <objects>
-                <viewController storyboardIdentifier="GeneralAlertVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="4DU-Au-abW" customClass="GeneralAlertViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GeneralAlertVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="4DU-Au-abW" customClass="GeneralAlertViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pzj-Ss-dfv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -359,7 +359,7 @@
         <!--Error Alert View Controller-->
         <scene sceneID="Hsq-sb-TAg">
             <objects>
-                <viewController storyboardIdentifier="ErrorAlertVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="POF-Ki-S2y" customClass="ErrorAlertViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ErrorAlertVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="POF-Ki-S2y" customClass="ErrorAlertViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="49M-9l-PJt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

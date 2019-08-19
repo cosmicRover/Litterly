@@ -13,7 +13,7 @@
         <!--Nearby View Controller-->
         <scene sceneID="jmL-Qt-RVu">
             <objects>
-                <viewController storyboardIdentifier="NearbyScreen" id="g4U-dh-iR9" customClass="NearbyViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NearbyScreen" id="g4U-dh-iR9" customClass="NearbyViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a7N-e6-GsN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

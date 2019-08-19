@@ -10,13 +10,13 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardViewController" customModule="litterly" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardViewController" customModule="Litterly" customModuleProvider="target">
             <connections>
                 <outlet property="arrowImage" destination="6bp-Hf-dzB" id="p0V-aG-wSG"/>
                 <outlet property="cardView" destination="i5M-Pr-FkT" id="iwC-OX-DaH"/>
                 <outlet property="cardViewArea" destination="REE-LG-VS8" id="XMo-2W-DdC"/>
                 <outlet property="handleArea" destination="K0t-iM-8uf" id="hnn-kQ-DeO"/>
-                <outlet property="litterlySign" destination="3pA-u8-pBn" id="dBu-iK-NDx"/>
+                <outlet property="LitterlySign" destination="3pA-u8-pBn" id="dBu-iK-NDx"/>
                 <outlet property="nearByCount" destination="CE4-yj-vas" id="fD9-Qc-5VA"/>
                 <outlet property="nearbySign" destination="iyo-uH-5Be" id="Zql-PQ-x8u"/>
                 <outlet property="nearbySignSubTitle" destination="VFF-tN-Yvs" id="bCI-Wt-9vJ"/>
@@ -48,7 +48,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#litterly, meetups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFF-tN-Yvs">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Litterly, meetups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFF-tN-Yvs">
                             <rect key="frame" x="53" y="37.5" width="95.5" height="16"/>
                             <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,7 +81,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="REE-LG-VS8">
                     <rect key="frame" x="0.0" y="72" width="385" height="303"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#litterly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pA-u8-pBn">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Litterly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pA-u8-pBn">
                             <rect key="frame" x="24" y="30" width="77.5" height="26"/>
                             <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,7 +103,7 @@
                         <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Asg-Nz-mdU">
                             <rect key="frame" x="24" y="75" width="337" height="76"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OxP-O2-bco" customClass="SelectedButton" customModule="litterly" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OxP-O2-bco" customClass="SelectedButton" customModule="Litterly" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="104.5" height="76"/>
                                     <color key="backgroundColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -118,7 +118,7 @@
                                         <action selector="trashType1ButtonOnTap:" destination="-1" eventType="touchUpInside" id="YgY-NE-IrP"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYQ-Ck-OzE" customClass="SelectedButton" customModule="litterly" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYQ-Ck-OzE" customClass="SelectedButton" customModule="Litterly" customModuleProvider="target">
                                     <rect key="frame" x="116.5" y="0.0" width="104" height="76"/>
                                     <color key="backgroundColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -134,7 +134,7 @@
                                         <action selector="trashType2ButtonOnTap:" destination="-1" eventType="touchUpInside" id="kSB-3Y-CVg"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKT-sF-7jg" customClass="SelectedButton" customModule="litterly" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RKT-sF-7jg" customClass="SelectedButton" customModule="Litterly" customModuleProvider="target">
                                     <rect key="frame" x="232.5" y="0.0" width="104.5" height="76"/>
                                     <color key="backgroundColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>

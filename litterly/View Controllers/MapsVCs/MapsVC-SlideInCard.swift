@@ -1,6 +1,6 @@
 //
 //  MapsViewController-Slide-In-Card.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 4/9/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

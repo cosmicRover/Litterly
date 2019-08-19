@@ -1,6 +1,6 @@
 //
 //  MapsVC-GMSDelegate.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 5/1/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

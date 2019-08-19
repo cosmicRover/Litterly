@@ -1,6 +1,6 @@
 //
 //  MapVC-Geofence.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 7/17/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

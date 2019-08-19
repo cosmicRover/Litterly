@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_litterlyVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_litterlyVersionString[];
+FOUNDATION_EXPORT double Pods_LitterlyVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_LitterlyVersionString[];
 

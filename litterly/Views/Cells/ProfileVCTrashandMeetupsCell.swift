@@ -1,6 +1,6 @@
 //
 //  ProfileVCTrashandMeetupsCell.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 5/23/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

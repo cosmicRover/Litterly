@@ -1,6 +1,6 @@
 //
 //  EmbeddedTableViewCell.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joyce Huang on 4/25/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

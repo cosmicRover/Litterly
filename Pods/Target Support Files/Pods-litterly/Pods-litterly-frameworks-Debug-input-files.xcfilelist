@@ -1,4 +1,4 @@
-${PODS_ROOT}/Target Support Files/Pods-litterly/Pods-litterly-frameworks.sh
+${PODS_ROOT}/Target Support Files/Pods-Litterly/Pods-Litterly-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework
 ${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework

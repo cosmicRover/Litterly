@@ -14,7 +14,7 @@
         <!--Page One View Controller-->
         <scene sceneID="cH9-q0-3Sb">
             <objects>
-                <viewController storyboardIdentifier="pageOne" id="ZYJ-ip-zin" customClass="PageOneViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageOne" id="ZYJ-ip-zin" customClass="PageOneViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZTz-mC-FQc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,7 +32,7 @@
                                         <nil key="highlightedColor"/>
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to litterly!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0X7-Bl-FFe">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Litterly!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0X7-Bl-FFe">
                                         <rect key="frame" x="0.0" y="47" width="189.5" height="39"/>
                                         <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="22"/>
                                         <color key="textColor" red="0.96078431369999995" green="0.95686274510000002" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -91,7 +91,7 @@
         <!--Intro Page View Controller-->
         <scene sceneID="bAb-48-ejc">
             <objects>
-                <pageViewController storyboardIdentifier="IntroPageVC" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="eW3-mQ-ne9" customClass="IntroPageViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="IntroPageVC" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="eW3-mQ-ne9" customClass="IntroPageViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hlc-HZ-QVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1369" y="134"/>
@@ -99,7 +99,7 @@
         <!--Signin View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SigninViewController" customModule="litterly" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SigninViewController" customModule="Litterly" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,7 +118,7 @@
         <!--Container Controller-->
         <scene sceneID="PWf-Ze-hPD">
             <objects>
-                <viewController storyboardIdentifier="ContainerVC" id="5kT-Z7-8hQ" customClass="ContainerController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContainerVC" id="5kT-Z7-8hQ" customClass="ContainerController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pUw-YA-XAV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,7 +133,7 @@
         <!--Page Two View Controller-->
         <scene sceneID="z7o-lg-DPx">
             <objects>
-                <viewController storyboardIdentifier="pageTwo" id="hdb-mt-cPY" customClass="PageTwoViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageTwo" id="hdb-mt-cPY" customClass="PageTwoViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rHG-g7-Sxz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -210,7 +210,7 @@
         <!--Page Three View Controller-->
         <scene sceneID="dcb-uw-Ci9">
             <objects>
-                <viewController storyboardIdentifier="pageThree" id="qAh-p0-GlF" customClass="PageThreeViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="pageThree" id="qAh-p0-GlF" customClass="PageThreeViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wwY-G6-8Ox">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

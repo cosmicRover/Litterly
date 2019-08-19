@@ -1,6 +1,6 @@
 //
 //  AppDelegate-PushNotification.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 7/29/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

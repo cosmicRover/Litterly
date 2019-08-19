@@ -1,6 +1,6 @@
 //
 //  MapsVCLocationServices.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 4/18/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

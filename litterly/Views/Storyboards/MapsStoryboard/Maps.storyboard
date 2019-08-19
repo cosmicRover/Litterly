@@ -11,7 +11,7 @@
         <!--Maps View Controller-->
         <scene sceneID="ja9-kG-z0f">
             <objects>
-                <viewController storyboardIdentifier="MapsVc" id="w0t-Zc-Wpg" customClass="MapsViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapsVc" id="w0t-Zc-Wpg" customClass="MapsViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="eq7-v2-3VJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aGc-Qr-FVs" userLabel="First Responder" sceneMemberID="firstResponder"/>

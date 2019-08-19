@@ -13,7 +13,7 @@
         <!--Meetup View Controller-->
         <scene sceneID="OZC-xU-1ix">
             <objects>
-                <viewController storyboardIdentifier="MeetupVC" id="gA7-wv-KEU" customClass="MeetupViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MeetupVC" id="gA7-wv-KEU" customClass="MeetupViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7dk-78-eix">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +28,7 @@
         <!--Organic Meetup View Controller-->
         <scene sceneID="hQC-XZ-Dcz">
             <objects>
-                <viewController storyboardIdentifier="OrganicMeetups" id="gnp-6p-yiK" customClass="OrganicMeetupViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrganicMeetups" id="gnp-6p-yiK" customClass="OrganicMeetupViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a3L-9c-sY7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +37,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardContentTableViewCell" rowHeight="264" id="NkM-xs-Puh" customClass="CardContentTableViewCell" customModule="litterly" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardContentTableViewCell" rowHeight="264" id="NkM-xs-Puh" customClass="CardContentTableViewCell" customModule="Litterly" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="264"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NkM-xs-Puh" id="QIV-YY-5qj">
@@ -136,7 +136,7 @@
         <!--Plastic Meetup View Controller-->
         <scene sceneID="1Ho-8d-sNK">
             <objects>
-                <viewController storyboardIdentifier="PlasticMeetups" id="jt0-Z5-1zD" customClass="PlasticMeetupViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlasticMeetups" id="jt0-Z5-1zD" customClass="PlasticMeetupViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9K0-cN-L7e">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,7 +145,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardContentTableViewCell" rowHeight="264" id="dDz-iK-Mtb" customClass="CardContentTableViewCell" customModule="litterly" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardContentTableViewCell" rowHeight="264" id="dDz-iK-Mtb" customClass="CardContentTableViewCell" customModule="Litterly" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="264"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dDz-iK-Mtb" id="EiI-Hb-SLn">
@@ -244,7 +244,7 @@
         <!--Metal Meetup View Controller-->
         <scene sceneID="Apb-li-c6W">
             <objects>
-                <viewController storyboardIdentifier="MetalMeetups" id="1JE-IG-6kb" customClass="MetalMeetupViewController" customModule="litterly" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MetalMeetups" id="1JE-IG-6kb" customClass="MetalMeetupViewController" customModule="Litterly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QqT-iY-4c2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -253,7 +253,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardContentTableViewCell" rowHeight="264" id="tbb-jr-ZKO" customClass="CardContentTableViewCell" customModule="litterly" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardContentTableViewCell" rowHeight="264" id="tbb-jr-ZKO" customClass="CardContentTableViewCell" customModule="Litterly" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="264"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tbb-jr-ZKO" id="XWc-l0-tMG">

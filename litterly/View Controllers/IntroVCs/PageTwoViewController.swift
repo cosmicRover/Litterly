@@ -1,6 +1,6 @@
 //
 //  PageTwoViewController.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 4/14/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

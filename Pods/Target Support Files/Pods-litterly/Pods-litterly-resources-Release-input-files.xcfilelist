@@ -1,4 +1,4 @@
-${PODS_ROOT}/Target Support Files/Pods-litterly/Pods-litterly-resources.sh
+${PODS_ROOT}/Target Support Files/Pods-Litterly/Pods-Litterly-resources.sh
 ${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle

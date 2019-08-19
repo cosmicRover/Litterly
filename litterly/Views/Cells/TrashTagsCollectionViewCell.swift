@@ -1,6 +1,6 @@
 //
 //  TrashTagsCollectionViewCell.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 7/10/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.

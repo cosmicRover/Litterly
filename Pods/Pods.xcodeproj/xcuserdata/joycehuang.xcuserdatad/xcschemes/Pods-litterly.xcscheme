@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "93DED63086C3D3BCD7F14649A65B40A8"
-               BuildableName = "Pods_litterly.framework"
-               BlueprintName = "Pods-litterly"
+               BuildableName = "Pods_Litterly.framework"
+               BlueprintName = "Pods-Litterly"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "93DED63086C3D3BCD7F14649A65B40A8"
-            BuildableName = "Pods_litterly.framework"
-            BlueprintName = "Pods-litterly"
+            BuildableName = "Pods_Litterly.framework"
+            BlueprintName = "Pods-Litterly"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

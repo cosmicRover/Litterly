@@ -1,6 +1,6 @@
 //
 //  ContainerViewController.swift
-//  litterly
+//  Litterly
 //
 //  Created by Joy Paul on 4/22/19.
 //  Copyright © 2019 Joy Paul. All rights reserved.
