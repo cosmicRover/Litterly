@@ -13,6 +13,7 @@ import RealmSwift
 
 extension AppDelegate{
     
+    //get the geofence coordinates and save to realm
     func getGeofenceDataFromFirestore(for userId:String, on day:String, completion: @escaping (String?) -> Void){
         
         let db = Firestore.firestore()

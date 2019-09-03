@@ -26,7 +26,7 @@ class ScheduleAlertViewController: UIViewController {
     let sharedValue = SharedValues.sharedInstance
     var meetupDate:String!
     let db = Firestore.firestore()
-    let eligibleMarkerDistance = 50.0 //meters
+    let eligibleMarkerDistance = 10.0 //meters
     var batch = Firestore.firestore().batch()
     
     override func viewDidLoad() {

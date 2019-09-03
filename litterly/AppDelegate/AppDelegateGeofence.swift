@@ -15,7 +15,7 @@ import Firebase
 
 extension AppDelegate: CLLocationManagerDelegate{
     func geofenceRegion(with lat:Double, lon:Double, identifier:String) ->CLCircularRegion{
-        let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), radius: 50.0, identifier: identifier)
+        let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), radius: 100.0, identifier: identifier)
         
         region.notifyOnEntry = true
         region.notifyOnExit = true
