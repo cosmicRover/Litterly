@@ -141,9 +141,9 @@ extension SigninViewController: FUIAuthDelegate{
             
             let singletonValues = SharedValues.sharedInstance
             
-            singletonValues.currentUserEmail = user_id
-            singletonValues.currentUserDisplayName = user_name
-            singletonValues.currentUserProfileImageURL = profile_pic_url
+            GlobalValues.currentUserEmail = user_id
+            GlobalValues.currentUserDisplayName = user_name
+            GlobalValues.currentUserProfileImageURL = profile_pic_url
             
             storeImageOnDevice(with: profile_pic_url)
             

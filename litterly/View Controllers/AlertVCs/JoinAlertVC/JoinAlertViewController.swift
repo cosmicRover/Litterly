@@ -27,7 +27,7 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
     var markerLon:Double!
     var dayMeetupCount:Int!
     var viewingMeetupDay:String!
-    let sharedValue = SharedValues.sharedInstance
+//    let sharedValue = SharedValues.sharedInstance
     let alertService = AlertService()
     var confirmedUsers:[[String:String]]!
     
@@ -81,9 +81,9 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
     
     @IBAction func onJoinTap(_ sender: UIButton) {
         
-        let userId = sharedValue.currentUserEmail! as String
-        let userPicUrl = sharedValue.currentUserProfileImageURL! as String
-        let meetupId = ("\(sharedValue.tappedArrayElementDict.lat)\(sharedValue.tappedArrayElementDict.lon)meetup")
+        let userId = GlobalValues.currentUserEmail! as String
+        let userPicUrl = GlobalValues.currentUserProfileImageURL! as String
+        let meetupId = ("\(GlobalValues.tappedArrayElementDict.lat)\(GlobalValues.tappedArrayElementDict.lon)meetup")
         
         updateConfirmedUsersArrayAndUsersIdArray(for: meetupId, with: userId, and: userPicUrl)
         
@@ -109,7 +109,7 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func fetchMeetupDetails(){
-        let meetupId = ("\(sharedValue.tappedArrayElementDict.lat)\(sharedValue.tappedArrayElementDict.lon)meetup")
+        let meetupId = ("\(GlobalValues.tappedArrayElementDict.lat)\(GlobalValues.tappedArrayElementDict.lon)meetup")
         
         meetupDetailsFromFirestore(for: meetupId)
     }

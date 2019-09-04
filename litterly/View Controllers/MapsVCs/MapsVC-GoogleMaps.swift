@@ -26,7 +26,7 @@ extension MapsViewController {
             mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - 86), camera: camera)
             
             reverseGeocodeApi(on: location.latitude, and: location.longitude) { (formattedAddress, city, error) in
-                let user = SharedValues.sharedInstance.currentUserEmail
+                let user = GlobalValues.currentUserEmail
                 
                 self.updateUserCurrentNeighborhood(forUser: "\(user! as String)", with: "\(city! as String)")
                 print("updated user city")

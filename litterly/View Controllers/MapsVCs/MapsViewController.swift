@@ -21,6 +21,9 @@ class MapsViewController: UIViewController{
     
     var delegate: HomeControllerDelegate?
     
+    //helper func class
+    let helper = HelperFunctions()
+    
     
     // MARK: Animation properties
     

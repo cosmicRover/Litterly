@@ -31,8 +31,10 @@ extension MapsViewController: GMSMapViewDelegate{
         tappedArrayElement = trashModelArray[index]
         
         //passing the data to the singleton
-        let value = SharedValues.sharedInstance
-        value.tappedArrayElementDict = trashModelArray[index]
+//        let value = SharedValues.sharedInstance
+//        value.tappedArrayElementDict = trashModelArray[index]
+        
+        GlobalValues.tappedArrayElementDict = trashModelArray[index]
         
         let position = marker.position
         mapView.animate(toLocation: position)
@@ -44,7 +46,8 @@ extension MapsViewController: GMSMapViewDelegate{
         if tappedArrayElement.is_meetup_scheduled == false{
             setupViewForUnscheduled()
             unScheduledMarkerInfoWindow.center = mapView.projection.point(for: position)
-            value.trashModelArrayBuffer = trashModelArray
+//            value.trashModelArrayBuffer = trashModelArray
+            GlobalValues.trashModelArrayBuffer = trashModelArray
             mapView.addSubview(unScheduledMarkerInfoWindow)
         }else if tappedArrayElement.is_meetup_scheduled == true{
             setupViewForScheduled()

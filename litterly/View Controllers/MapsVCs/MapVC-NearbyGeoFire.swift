@@ -39,6 +39,7 @@ extension MapsViewController{
     func queryForNearby(center centerCamera:CLLocationCoordinate2D, with circleRadius:Double){
         
         let center = CLLocation(latitude: centerCamera.latitude, longitude: centerCamera.longitude)
+        var leftCounter:Int = 0
         print(center)
         
         self.circleQuery = geoFirestoreRef.query(withCenter: center, radius: circleRadius)
@@ -78,7 +79,8 @@ extension MapsViewController{
             self.hasLeftNearby = self.circleQuery.observe(.documentExited, with: {(id, location) in
                 print("LEFT NEARBY EVENT ---->\(id! as String) has left nearby")
                 self.cardViewController.nearByCount.fadeTransition(0.3)
-                self.cardViewController.nearByCount.text = "\(self.nearbyIdsAndTheirDistanceFromUser.count - 1)"
+                leftCounter += 1
+                self.cardViewController.nearByCount.text = "\(self.nearbyIdsAndTheirDistanceFromUser.count - leftCounter)"
             })
             
             self.hasDocumentMoved = self.circleQuery.observe(.documentMoved, with: {(id, location) in

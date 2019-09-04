@@ -21,7 +21,7 @@ extension MapsViewController: CLLocationManagerDelegate{
             setupLocationManger()
             checkLocationAuthorization()
         } else{
-            //show an alert to let people kn ow that location services are not enabled
+            //show an alert to let people know that location services are not enabled
             //checkLocationAuthorization()
         }
     }
@@ -130,17 +130,4 @@ extension MapsViewController: CLLocationManagerDelegate{
             
         }.resume()
     }
-    
-    func updateUserCurrentNeighborhood(forUser id:String, with neighborhood:String){
-        db.collection("Users").document("\(id)").updateData([
-            "neighborhood" : neighborhood
-        ]) { (error:Error?) in
-            if let err = error {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-    }
-    
 }

@@ -28,6 +28,7 @@ class ScheduleAlertViewController: UIViewController {
     let db = Firestore.firestore()
     let eligibleMarkerDistance = 10.0 //meters
     var batch = Firestore.firestore().batch()
+    let helper = HelperFunctions()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +66,7 @@ class ScheduleAlertViewController: UIViewController {
         scheduleWeekdayNum = Calendar.current.component(.weekday, from: minDate)
         print("\(scheduleWeekdayNum as Int)")
         
-        scheduleWeekdayText = convertNumToWeekday(on: scheduleWeekdayNum)
+        scheduleWeekdayText = helper.convertNumToWeekday(on: scheduleWeekdayNum)
         print("\(scheduleWeekdayText as String)")
         
     }
@@ -81,7 +82,7 @@ class ScheduleAlertViewController: UIViewController {
         scheduleWeekdayNum = Calendar.current.component(.weekday, from: sender.date)
         print("\(scheduleWeekdayNum as Int)")
         
-        scheduleWeekdayText = convertNumToWeekday(on: scheduleWeekdayNum)
+        scheduleWeekdayText = helper.convertNumToWeekday(on: scheduleWeekdayNum)
         print("\(scheduleWeekdayText as String)")
         
     }
@@ -135,7 +136,7 @@ class ScheduleAlertViewController: UIViewController {
     func configuresColors(){
         self.view.backgroundColor = UIColor.unselectedGrey.withAlphaComponent(0.35)
         parentView.backgroundColor = UIColor.mainBlue
-        selectedButtonColor(selected: sharedValue.tappedArrayElementDict.trash_type)
+        selectedButtonColor(selected: GlobalValues.tappedArrayElementDict.trash_type)
         createButton.backgroundColor = UIColor.mainGreen
         cancelButton.backgroundColor = UIColor.unselectedGrey
         meetupdatePicker.setValue(UIColor.textWhite, forKey: "textColor")
@@ -147,17 +148,22 @@ class ScheduleAlertViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func sortMarkersByMeetupStatus(){
+        
+    }
+    
     //on createTap, schedule a meetup and update the marker's meetup property
     @IBAction func onCreateTap(_ sender: UIButton) {
-        
-        let helper = HelperFunctions()
+    
         var toBeScheduledMarkers = [TrashDataModel]()
         let dispatcher = DispatchGroup()
         var loopCounter = 0
         var todayCount:Int!
         
-        getMeetupDayCount(for: "\(self.sharedValue.currentUserEmail! as String)") { (count) in
-            todayCount = count as! Int
+        
+        
+        getMeetupDayCount(for: "\(GlobalValues.currentUserEmail! as String)") { (count) in
+            todayCount = count
             
             if todayCount == 10{
                 self.dismiss(animated: true, completion: nil)//dismisses the schedule view
@@ -166,41 +172,36 @@ class ScheduleAlertViewController: UIViewController {
             }
             
             //we are looking for 10 or less markers within a ceratin radius to be appended to our scheduling array
-            for marker in self.sharedValue.trashModelArrayBuffer{
+            for marker in GlobalValues.trashModelArrayBuffer{
                 //if it's already 10, break immediately
                 if loopCounter == (10 - todayCount){
                     break
                 }
                 
                 //gets the distance between tapped marker and the other markers on the main marker array
-                let distance = helper.findDistanceBetweenTwoMarkers(coordinate1Lat: self.sharedValue.tappedArrayElementDict.lat, coordinate1Lon: self.sharedValue.tappedArrayElementDict.lon, coordinate2Lat: marker.lat , coordinate2Lat: marker.lon)
+                let distance = self.helper.findDistanceBetweenTwoMarkers(coordinate1Lat: GlobalValues.tappedArrayElementDict.lat, coordinate1Lon: GlobalValues.tappedArrayElementDict.lon, coordinate2Lat: marker.lat , coordinate2Lat: marker.lon)
+                print("marker append loop gets called")
                 
+                //*********** LOOP EXITS BEFORE GETTING ALL THE MARKERS THAT ARE QUALIFIED TO BE SCHEDULED *********
                 //if the distance and meetup property criteria match, append the marker
                 if distance <= self.eligibleMarkerDistance && marker.is_meetup_scheduled == false{
+                    print("DISTANCE AND MARKER -> ", distance, marker)
                     toBeScheduledMarkers.append(marker)
                 }
+                
                 
                 //inc counter
                 loopCounter += 1
             }
             
             print(toBeScheduledMarkers)
+            print("TAPPED ELEMENT -> ", GlobalValues.tappedArrayElementDict as TrashDataModel)
+            print("TRASH MODEL ARRAY CHUNK -> ", GlobalValues.trashModelArrayBuffer as [TrashDataModel])
             self.dismiss(animated: true, completion: nil)//dismisses the schedule view
             
             if toBeScheduledMarkers.count == 0{
-                print("no nearby markers")
-                
-                //calls for relisten of the radius
-                //need to find a stable fix
-                NotificationCenter.default.post(name: NSNotification.Name("zeroMarkerCountTempFix"), object: nil)
-                
-                ///****Current bug***
-                //if pressed info window once and it can't be scheduled,
-                //user cant tap again to reschedule again*******
-                
-//                let mapVc = MapsViewController()
-//                mapVc.listenForRadius()
-                
+//                print(todayCount as! Int)
+//                print("no nearby markers")
                 //this is an error since the tapped marker itself should be appended
             } else{
                 
@@ -210,7 +211,7 @@ class ScheduleAlertViewController: UIViewController {
                     // setting up the data
                     let meetupId:String = ("\(marker.lat)\(marker.lon)meetup")
                     let markerId:String = ("\(marker.lat)\(marker.lon)marker")
-                    let geofenceId:String = "\(self.sharedValue.currentUserEmail! as String)"
+                    let geofenceId:String = "\(GlobalValues.currentUserEmail! as String)"
                     let meetupDocRef = self.db.collection("Meetups").document("\(meetupId)")
                     let markerDocRef = self.db.collection("TaggedTrash").document("\(markerId)")
                     let geofenceDocRef = self.db.collection("GeofenceData").document("\(geofenceId)")
@@ -224,7 +225,7 @@ class ScheduleAlertViewController: UIViewController {
                                 
                             } else {
                                 //data prep
-                                let dict:MeetupDataModel = MeetupDataModel(marker_lat: marker.lat, marker_lon: marker.lon, meetup_address: marker.street_address, meetup_date_time: "\(self.meetupDate! as String)", type_of_trash: marker.trash_type, author_id: "\(self.sharedValue.currentUserEmail! as String)", author_display_name: self.sharedValue.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(self.sharedValue.currentUserEmail! as String)", "user_pic_url" : "\(self.sharedValue.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(self.sharedValue.currentUserEmail! as String)"], meetup_day: "\(self.scheduleWeekdayText as String)")
+                                let dict:MeetupDataModel = MeetupDataModel(marker_lat: marker.lat, marker_lon: marker.lon, meetup_address: marker.street_address, meetup_date_time: "\(self.meetupDate! as String)", type_of_trash: marker.trash_type, author_id: "\(GlobalValues.currentUserEmail! as String)", author_display_name: GlobalValues.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(GlobalValues.currentUserEmail! as String)", "user_pic_url" : "\(GlobalValues.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(GlobalValues.currentUserEmail! as String)"], meetup_day: "\(self.scheduleWeekdayText as String)")
                                 
                                 //batch prep
                                 self.batch.setData(dict.dictionary, forDocument: meetupDocRef)
@@ -242,7 +243,7 @@ class ScheduleAlertViewController: UIViewController {
                 }
                 
                 //update the day's count
-                let geofenceId:String = "\(self.sharedValue.currentUserEmail! as String)"
+                let geofenceId:String = "\(GlobalValues.currentUserEmail! as String)"
                 let geofenceDocRef = self.db.collection("GeofenceData").document("\(geofenceId)")
                 self.batch.updateData(
                     ["\(self.scheduleWeekdayText as String)_count" :
@@ -252,69 +253,10 @@ class ScheduleAlertViewController: UIViewController {
                 //notify the main thread that the batch data sets is ready
                 dispatcher.notify(queue: .main) {
                     print("loop finished")
-                    self.commitTheBatch()
+                    self.commitTheBatch(for: self.batch)
                 }
             }
         }
             
         }
-    
-    
-    //commits the batch and then shows the success alert if everything went through
-    func commitTheBatch(){
-        batch.commit { (error) in
-            if let error = error{
-                print(error.localizedDescription)
-                //show error alert
-            }else{
-                print("comitted batch")
-                self.showSuccessAlert()
-            }
-        }
-    }
-    
-    
-    //display the checkmark animation
-    func showSuccessAlert(){
-        let alert = alertService.alertForGeneral()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func getTopMostViewController() -> UIViewController? {
-        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
-        
-        while let presentedViewController = topMostViewController?.presentedViewController {
-            topMostViewController = presentedViewController
-        }
-        
-        return topMostViewController
-    }
-    
-    func convertNumToWeekday(on num:Int) -> String{
-        
-        switch num{
-        case 1:
-            return "sunday"
-        case 2:
-            return "monday"
-        case 3:
-            return "tuesday"
-        case 4:
-            return "wednesday"
-        case 5:
-            return "thursday"
-        case 6:
-            return "friday"
-        case 7:
-            return "saturday"
-        default:
-            return "unknown_day"
-        
-        }
-        
-    }
-    
-
 }

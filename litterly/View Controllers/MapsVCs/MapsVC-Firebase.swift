@@ -136,7 +136,7 @@ extension MapsViewController{
     }
     
     func updateDeviceToken(for user_id:String){
-        let token = getDeviceToken()
+        let token = helper.getDeviceToken()
         let batch = Firestore.firestore().batch()
         let tokenRef = db.collection("GeofenceData").document("\(user_id)")
         
@@ -152,22 +152,15 @@ extension MapsViewController{
         
     }
     
-    func getDeviceToken() -> String {
-        
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            
-            let file = "deviceToken.txt"
-            let fileURL = dir.appendingPathComponent(file)
-            
-            do {
-                let token = try String(contentsOf: fileURL, encoding: .utf8)
-                return token
-            }
-            catch {
-                print("error getting token from disk")
+    func updateUserCurrentNeighborhood(forUser id:String, with neighborhood:String){
+        db.collection("Users").document("\(id)").updateData([
+            "neighborhood" : neighborhood
+        ]) { (error:Error?) in
+            if let err = error {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
             }
         }
-        
-        return "device_token_not_found"
     }
 }

@@ -5,7 +5,7 @@ extension PlasticMeetupViewController{
     
     func fetchPlasticMeetups(){
         
-        let plasticMeetupQuery = sharedValues.db.collection("Meetups").whereField("type_of_trash", isEqualTo: "plastic")
+        let plasticMeetupQuery = GlobalValues.db.collection("Meetups").whereField("type_of_trash", isEqualTo: "plastic")
         
         plasticMeetupQuery.getDocuments(){
             QuerySnapshot, Error in

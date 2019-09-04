@@ -37,7 +37,8 @@ extension MapsViewController{
         updateDeviceToken(for: "\(Auth.auth().currentUser?.email as! String)")
         
         //zeroMarkerBug temp fix
-        NotificationCenter.default.addObserver(self, selector: #selector(manuallyListenForRadius), name: NSNotification.Name("zeroMarkerCountTempFix"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(manuallyListenForRadius), name: NSNotification.Name("zeroMarkerCountTempFix"), object: nil)
+        //listenForRadius()
         
     }
     
@@ -47,14 +48,6 @@ extension MapsViewController{
         makeTheNavBarClear()
         addMenuAndSearchButtonToNavBar()
         listenForRadius()
-        
-//        let realm = try! Realm()
-//
-//        let fence = realm.objects(GeofenceRegion.self)
-//
-//        print("**********************************************REALM HERE********************************")
-//        print(fence)
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
