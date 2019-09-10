@@ -2,7 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:custom-gpx.gpx">
+      location = "group:/Users/joypaul/swiftdevelopments/Litterly/Track_1MPH.gpx">
+   </FileRef>
+   <FileRef
+      location = "group:SF_HWY_10mph.gpx">
    </FileRef>
    <FileRef
       location = "group:Litterly.xcodeproj">
