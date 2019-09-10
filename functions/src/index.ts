@@ -19,6 +19,7 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
         const today = day[0];
         var queryDay = ""
         var queryDayCount = ""
+        var exception = "token_not_found"
 
         //why send tomorrow......?
         switch (today) {
@@ -71,15 +72,15 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
             //only send fcm if count > 0
             let day_count = data[`${queryDayCount}`];
 
-            console.log(device_token, day_count)
+            console.log(device_token, day_count, queryDay, queryDayCount)
             
             //make exception
-            if (day_count > 0) {
+            if (day_count > 0 && data["device_token"] != exception) {
                 //follow the silent message composing format to send silent messages
                 //insert payload into the message
                 const payload = {
                     notification: {
-                        title: "Your meetups are ready!",
+                        title: "Your meetups are ready.",
                         body: "Tap me to confirm!"
                     },
                     data: {

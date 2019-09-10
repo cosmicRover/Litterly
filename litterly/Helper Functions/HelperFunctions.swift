@@ -9,6 +9,8 @@
 import Foundation
 import CoreLocation
 import UIKit
+import Firebase
+import UserNotifications
 
 struct HelperFunctions {
     
@@ -86,7 +88,8 @@ struct HelperFunctions {
         return topMostViewController
     }
     
-    func getDeviceToken() -> String {
+    //Deprecated
+    func getDeviceToken(completionHandler: @escaping (String?) -> Void) {
         
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             
@@ -95,13 +98,55 @@ struct HelperFunctions {
             
             do {
                 let token = try String(contentsOf: fileURL, encoding: .utf8)
-                return token
+                completionHandler("\(token)")
             }
             catch {
                 print("error getting token from disk")
+                completionHandler("token_not_found")
+            }
+        }
+    }
+    
+    //get token from current instance of fcm
+    func getCurrentFCMId(completion: @escaping (String?) -> Void ){
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error:  \(error)")
+                completion("token_not_found")
+            } else if let result = result {
+                print("Remote instance: \(result.token)")
+                completion("\(result.token as String)")
+            }
+        }
+    }
+    
+    func updateDeviceToken(for user_id:String){
+        getCurrentFCMId { (token) in
+            let batch = Firestore.firestore().batch()
+            let tokenRef = GlobalValues.db.collection("GeofenceData").document("\(user_id)")
+            
+            batch.updateData(["device_token": "\(token! as String)"], forDocument: tokenRef)
+            
+            batch.commit { (error) in
+                if let err = error{
+                    print("error posting token", err.localizedDescription)
+                }else{
+                    print("successfully posted token")
+                }
             }
         }
         
-        return "device_token_not_found"
+    }
+    
+    func checkIfNotificationPermissionWasGiven(){
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                self.updateDeviceToken(for: GlobalValues.currentUserEmail! as String)
+                print("***************NOTIFICATIONS ARE ON*****************")
+            }
+            else {
+                // Either denied or notDetermined
+            }
+        }
     }
 }

@@ -27,7 +27,7 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
     var markerLon:Double!
     var dayMeetupCount:Int!
     var viewingMeetupDay:String!
-//    let sharedValue = SharedValues.sharedInstance
+    let helper = HelperFunctions()
     let alertService = AlertService()
     var confirmedUsers:[[String:String]]!
     

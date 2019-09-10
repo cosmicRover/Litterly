@@ -9,6 +9,7 @@ import UIKit
 import GoogleMaps
 import FirebaseFirestore
 import FirebaseMessaging
+import Firebase
 
 extension MapsViewController{
     
@@ -130,23 +131,6 @@ extension MapsViewController{
                     print("TYPE MODDED ->>>")
                     
                 }
-            }
-        }
-        
-    }
-    
-    func updateDeviceToken(for user_id:String){
-        let token = helper.getDeviceToken()
-        let batch = Firestore.firestore().batch()
-        let tokenRef = db.collection("GeofenceData").document("\(user_id)")
-        
-        batch.updateData(["device_token": "\(token)"], forDocument: tokenRef)
-        
-        batch.commit { (error) in
-            if let err = error{
-                print("error posting token", err.localizedDescription)
-            }else{
-                print("successfully posted token")
             }
         }
         

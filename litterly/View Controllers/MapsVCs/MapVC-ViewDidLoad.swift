@@ -33,8 +33,8 @@ extension MapsViewController{
         //listening for marker modification event
         NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
         
-        //startMonnitoring()
-        updateDeviceToken(for: "\(Auth.auth().currentUser?.email as! String)")
+        //uploads the fcm key if it had changed
+        helper.checkIfNotificationPermissionWasGiven()
         
         //zeroMarkerBug temp fix
         //NotificationCenter.default.addObserver(self, selector: #selector(manuallyListenForRadius), name: NSNotification.Name("zeroMarkerCountTempFix"), object: nil)

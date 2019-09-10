@@ -90,7 +90,6 @@ extension ScheduleAlertViewController{
                 self.helper.showSuccessAlert()
             }
         }
-        
     }
     
 }

@@ -27,4 +27,15 @@ struct GlobalValues {
     static var cardVC = CardViewController()
     
     static var nearbyCount:Int! = 0
+    
+//    func getCurrentFCMId(completion: @escaping (String?) -> Void ){
+//        InstanceID.instanceID().instanceID { (result, error) in
+//            if let error = error {
+//                print("Error:  \(error)")
+//            } else if let result = result {
+//                print("Remote instance: \(result.token)")
+//                completion("\(result.token as String)")
+//            }
+//        }
+//    }
 }
