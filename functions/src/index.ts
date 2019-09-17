@@ -19,7 +19,7 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
         const today = day[0];
         var queryDay = ""
         var queryDayCount = ""
-        var exception = "token_not_found"
+        var exception = ["token_not_found", "account_signed_out"]
 
         //why send tomorrow......?
         switch (today) {
