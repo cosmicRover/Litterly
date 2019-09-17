@@ -35,11 +35,6 @@ extension MapsViewController{
         
         //uploads the fcm key if it had changed
         helper.checkIfNotificationPermissionWasGiven()
-        
-        //zeroMarkerBug temp fix
-        //NotificationCenter.default.addObserver(self, selector: #selector(manuallyListenForRadius), name: NSNotification.Name("zeroMarkerCountTempFix"), object: nil)
-        //listenForRadius()
-        
     }
     
     //when view has appeared successfully, we call in to add the sliding card + the listeners

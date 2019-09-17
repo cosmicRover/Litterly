@@ -61,24 +61,6 @@ extension AppDelegate: MessagingDelegate{
         
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
-        // TODO: If necessary send token to application server.
-        // Note: This callback is fired at each app startup and whenever a new token is generated.
-        
-//        let file = "deviceToken.txt" //this is the file. we will write to and read from it
-//
-//        let text = "\(fcmToken)" //just a text
-//
-//        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-//
-//            let fileURL = dir.appendingPathComponent(file)
-//
-//            do {
-//                try text.write(to: fileURL, atomically: true, encoding: .utf8)
-//            }
-//            catch {
-//                print("error writing token to device")
-//            }
-//        }
     }
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
