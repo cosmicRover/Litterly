@@ -15,15 +15,10 @@ class SharedValues{
     private init() {}
     static let sharedInstance = SharedValues()
     
-    let db = Firestore.firestore()
-    var tappedArrayElementDict:TrashDataModel!
-    var trashModelArrayBuffer = [TrashDataModel]()
-    let cardVC = CardViewController()
+//    var tappedArrayElementDict:TrashDataModel!
+//    var trashModelArrayBuffer = [TrashDataModel]()
+
     
-    var nearbyCount:Int! = 0
     
-    var currentUserDisplayName = Auth.auth().currentUser?.displayName
-    var currentUserEmail = Auth.auth().currentUser?.email
-    var currentUserProfileImageURL = Auth.auth().currentUser?.photoURL?.absoluteString
     
 }

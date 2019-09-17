@@ -169,7 +169,7 @@ class ContainerController: UIViewController{
             
         case .Logout:
             print("log user out")
-            
+            deleteDeviceTokenn() //deletes token on sign out as to prevent notificatio being sent to a wrong account
             do {
                 try Auth.auth().signOut()
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

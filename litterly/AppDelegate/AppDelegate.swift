@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
+    let radius = 150.0
     
     let locationManager = CLLocationManager()
     var geofencedLocations = [[GeofenceQueryModel]]()
@@ -34,6 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         //init location for geofence
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        //locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.activityType = CLActivityType.automotiveNavigation
 
         //init push notification
         if #available(iOS 10.0, *) {
@@ -54,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         
         routeTheUser()
+        readRealmDataAndPrintIt { (_) in
+            
+        }
         
         return true
     }

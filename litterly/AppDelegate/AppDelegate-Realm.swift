@@ -68,4 +68,22 @@ extension AppDelegate{
         completionHandler("ok")
         
     }
+    
+    func readRealmDataAndPrintIt(completionHandler: @escaping (String?)-> Void){
+        let realm = try! Realm()
+        
+        let fence = realm.objects(GeofenceRegion.self)
+        
+        for data in fence{
+            
+            let regionName = data["regionName"] as! String
+            let lat = data["lat"] as! Double
+            let lon = data["lon"] as! Double
+            
+            print(regionName, lat, lon)
+        }
+        
+        completionHandler("ok")
+        
+    }
 }

@@ -13,7 +13,7 @@ extension OrganicMeetupViewController{
     
     func fetchOrganicMeetups(){
         
-        let organicMeetupQuery = sharedValues.db.collection("Meetups").whereField("type_of_trash", isEqualTo: "organic")
+        let organicMeetupQuery = GlobalValues.db.collection("Meetups").whereField("type_of_trash", isEqualTo: "organic")
         
         organicMeetupQuery.getDocuments(){
             QuerySnapshot, Error in

@@ -21,7 +21,7 @@ extension MapsViewController: CLLocationManagerDelegate{
             setupLocationManger()
             checkLocationAuthorization()
         } else{
-            //show an alert to let people kn ow that location services are not enabled
+            //show an alert to let people know that location services are not enabled
             //checkLocationAuthorization()
         }
     }
@@ -75,7 +75,7 @@ extension MapsViewController: CLLocationManagerDelegate{
 
             let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 17.0)
             self.mapView?.animate(to: camera)
-            self.mapView?.isMyLocationEnabled = true
+            //self.mapView?.isMyLocationEnabled = true
             self.locationManager.startUpdatingLocation()
 //            locationManager.stopUpdatingLocation()
 //            self.locationManager.delegate = nil
@@ -130,17 +130,4 @@ extension MapsViewController: CLLocationManagerDelegate{
             
         }.resume()
     }
-    
-    func updateUserCurrentNeighborhood(forUser id:String, with neighborhood:String){
-        db.collection("Users").document("\(id)").updateData([
-            "neighborhood" : neighborhood
-        ]) { (error:Error?) in
-            if let err = error {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-    }
-    
 }

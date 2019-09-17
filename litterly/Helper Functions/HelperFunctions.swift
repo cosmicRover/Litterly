@@ -8,8 +8,13 @@
 
 import Foundation
 import CoreLocation
+import UIKit
+import Firebase
+import UserNotifications
 
 struct HelperFunctions {
+    
+    let alertService = AlertService()
     
     //finds distance from point a to b
     func findDistanceBetweenTwoMarkers(coordinate1Lat marker1Lat:Double, coordinate1Lon marker1Lon:Double, coordinate2Lat marker2Lat:Double, coordinate2Lat marker2Lon:Double) -> Double{
@@ -29,5 +34,119 @@ struct HelperFunctions {
         let distanceInMeters = deviceCoordinates.distance(from: destinationCoordinate)
         
         return distanceInMeters
+    }
+    
+    //convers a calendernum to a weekday
+    func convertNumToWeekday(on num:Int) -> String{
+        
+        switch num{
+        case 1:
+            return "sunday"
+        case 2:
+            return "monday"
+        case 3:
+            return "tuesday"
+        case 4:
+            return "wednesday"
+        case 5:
+            return "thursday"
+        case 6:
+            return "friday"
+        case 7:
+            return "saturday"
+        default:
+            return "unknown_day"
+            
+        }
+        
+    }
+    
+    //display the checkmark animation
+    func showSuccessAlert(){
+        let alert = alertService.alertForGeneral()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    //displays a cross animation
+    func showErrorAlert(){
+        let alert = alertService.alertForError()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func getTopMostViewController() -> UIViewController? {
+        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
+        
+        while let presentedViewController = topMostViewController?.presentedViewController {
+            topMostViewController = presentedViewController
+        }
+        
+        return topMostViewController
+    }
+    
+    //Deprecated
+    func getDeviceToken(completionHandler: @escaping (String?) -> Void) {
+        
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            
+            let file = "deviceToken.txt"
+            let fileURL = dir.appendingPathComponent(file)
+            
+            do {
+                let token = try String(contentsOf: fileURL, encoding: .utf8)
+                completionHandler("\(token)")
+            }
+            catch {
+                print("error getting token from disk")
+                completionHandler("token_not_found")
+            }
+        }
+    }
+    
+    //get token from current instance of fcm
+    func getCurrentFCMId(completion: @escaping (String?) -> Void ){
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error:  \(error)")
+                completion("token_not_found")
+            } else if let result = result {
+                print("Remote instance: \(result.token)")
+                completion("\(result.token as String)")
+            }
+        }
+    }
+    
+    func updateDeviceToken(for user_id:String){
+        getCurrentFCMId { (token) in
+            let batch = Firestore.firestore().batch()
+            let tokenRef = GlobalValues.db.collection("GeofenceData").document("\(user_id)")
+            
+            batch.updateData(["device_token": "\(token! as String)"], forDocument: tokenRef)
+            
+            batch.commit { (error) in
+                if let err = error{
+                    print("error posting token", err.localizedDescription)
+                }else{
+                    print("successfully posted token")
+                }
+            }
+        }
+        
+    }
+    
+    func checkIfNotificationPermissionWasGiven(){
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                self.updateDeviceToken(for: GlobalValues.currentUserEmail! as String)
+                print("***************NOTIFICATIONS ARE ON*****************")
+            }
+            else {
+                // Either denied or notDetermined
+            }
+        }
     }
 }

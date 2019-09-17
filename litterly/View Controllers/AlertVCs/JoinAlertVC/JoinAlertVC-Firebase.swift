@@ -14,7 +14,7 @@ extension JoinAlertViewController{
     //get meetup details
     func meetupDetailsFromFirestore(for meetupId:String){
         
-        let ref = sharedValue.db.collection("Meetups").document("\(meetupId)")
+        let ref = GlobalValues.db.collection("Meetups").document("\(meetupId)")
         
         ref.getDocument { (document, error) in
             
@@ -45,7 +45,7 @@ extension JoinAlertViewController{
                         
                         self.attendingUserCollectionView.reloadData()
                         
-                        let isUserOnTheList = self.didUserAlreadyJoin(search: "\(self.sharedValue.currentUserEmail! as String)")
+                        let isUserOnTheList = self.didUserAlreadyJoin(search: "\(GlobalValues.currentUserEmail! as String)")
                         
                         isUserOnTheList ? self.changeAlertHeader(with: "You are on the list!") : self.enableJoinButton()
                         
@@ -61,7 +61,7 @@ extension JoinAlertViewController{
                         
                         self.attendingUserCollectionView.reloadData()
                         
-                        let isUserOnTheList = self.didUserAlreadyJoin(search: "\(self.sharedValue.currentUserEmail! as String)")
+                        let isUserOnTheList = self.didUserAlreadyJoin(search: "\(GlobalValues.currentUserEmail! as String)")
                         
                         isUserOnTheList ? self.changeAlertHeader(with: "You are on the list!") :
                             self.changeAlertHeader(with: "You are maxed for \(self.viewingMeetupDay as String)")
@@ -76,8 +76,8 @@ extension JoinAlertViewController{
     //*****get the day count before enabling the join button
     //*****modify the meetup data model to contain a day field
     func checkDayCount(for day:String, completionHandler: @escaping (Int?) -> Void){
-        let docId = sharedValue.currentUserEmail
-        let geofenceDataRef = sharedValue.db.collection("GeofenceData").document("\(docId as! String)")
+        let docId = GlobalValues.currentUserEmail
+        let geofenceDataRef = GlobalValues.db.collection("GeofenceData").document("\(docId as! String)")
         
         geofenceDataRef.getDocument { (snapshot, error) in
             if let err = error{
@@ -97,8 +97,8 @@ extension JoinAlertViewController{
     //appends user_id to confirmed_users array
     func updateConfirmedUsersArrayAndUsersIdArray(for id:String, with userId:String, and picUrl:String){
         let batch = Firestore.firestore().batch()
-        let meetupRef = sharedValue.db.collection("Meetups").document("\(id)")
-        let geofenceDocRef = sharedValue.db.collection("GeofenceData").document("\(userId)")
+        let meetupRef = GlobalValues.db.collection("Meetups").document("\(id)")
+        let geofenceDocRef = GlobalValues.db.collection("GeofenceData").document("\(userId)")
         
         batch.updateData([
             "confirmed_users" : FieldValue.arrayUnion([["user_id" : "\(userId)", "user_pic_url" : "\(picUrl)"]]),
@@ -119,6 +119,8 @@ extension JoinAlertViewController{
                 //show error  alert
             } else{
                 print("update commited successfully")
+                //uploads the fcm key when the user joins
+                self.helper.checkIfNotificationPermissionWasGiven()
                 self.showSuccessAlert()
             }
         }
@@ -128,7 +130,7 @@ extension JoinAlertViewController{
     func didUserAlreadyJoin(search id:String) -> Bool{
         for users in self.confirmedUsers{
             if let id = users["user_id"]{
-                if id == "\(sharedValue.currentUserEmail! as String)"{
+                if id == "\(GlobalValues.currentUserEmail! as String)"{
                     return true
                 }
             }

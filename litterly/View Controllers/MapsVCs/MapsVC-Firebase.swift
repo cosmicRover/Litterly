@@ -9,6 +9,7 @@ import UIKit
 import GoogleMaps
 import FirebaseFirestore
 import FirebaseMessaging
+import Firebase
 
 extension MapsViewController{
     
@@ -135,39 +136,15 @@ extension MapsViewController{
         
     }
     
-    func updateDeviceToken(for user_id:String){
-        let token = getDeviceToken()
-        let batch = Firestore.firestore().batch()
-        let tokenRef = db.collection("GeofenceData").document("\(user_id)")
-        
-        batch.updateData(["device_token": "\(token)"], forDocument: tokenRef)
-        
-        batch.commit { (error) in
-            if let err = error{
-                print("error posting token", err.localizedDescription)
-            }else{
-                print("successfully posted token")
+    func updateUserCurrentNeighborhood(forUser id:String, with neighborhood:String){
+        db.collection("Users").document("\(id)").updateData([
+            "neighborhood" : neighborhood
+        ]) { (error:Error?) in
+            if let err = error {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
             }
         }
-        
-    }
-    
-    func getDeviceToken() -> String {
-        
-        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            
-            let file = "deviceToken.txt"
-            let fileURL = dir.appendingPathComponent(file)
-            
-            do {
-                let token = try String(contentsOf: fileURL, encoding: .utf8)
-                return token
-            }
-            catch {
-                print("error getting token from disk")
-            }
-        }
-        
-        return "device_token_not_found"
     }
 }

@@ -33,12 +33,8 @@ extension MapsViewController{
         //listening for marker modification event
         NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
         
-        //startMonnitoring()
-        updateDeviceToken(for: "\(Auth.auth().currentUser?.email as! String)")
-        
-        //zeroMarkerBug temp fix
-        NotificationCenter.default.addObserver(self, selector: #selector(manuallyListenForRadius), name: NSNotification.Name("zeroMarkerCountTempFix"), object: nil)
-        
+        //uploads the fcm key if it had changed
+        helper.checkIfNotificationPermissionWasGiven()
     }
     
     //when view has appeared successfully, we call in to add the sliding card + the listeners
@@ -47,14 +43,6 @@ extension MapsViewController{
         makeTheNavBarClear()
         addMenuAndSearchButtonToNavBar()
         listenForRadius()
-        
-//        let realm = try! Realm()
-//
-//        let fence = realm.objects(GeofenceRegion.self)
-//
-//        print("**********************************************REALM HERE********************************")
-//        print(fence)
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {

@@ -36,6 +36,7 @@ class CardViewController: UIViewController {
     let firestoreCollection = Firestore.firestore().collection("TaggedTrash")
     var geoFirestore:GeoFirestore!
     let alertService = AlertService()
+    let helper = HelperFunctions()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,13 +109,20 @@ class CardViewController: UIViewController {
         }
     }
     
+    func deselectAllTrashTypeButtons(){
+        trashType1.isSelected = false
+        trashType2.isSelected = false
+        trashType3.isSelected = false
+    }
+    
     //func that will request lat, lon, trash type in order to got to the next steps of reporting trash
     @IBAction func reportTrashButtonOnTap(_ sender: UIButton) {
         print("report trash tapped!!")
         executeTagTrash()
         
-        //Posting a notification
+        //Posting a notification so the card can be lowered
         NotificationCenter.default.post(name: NSNotification.Name("reportTapped"), object: nil)
+        deselectAllTrashTypeButtons()
     }
     
     
@@ -140,7 +148,7 @@ class CardViewController: UIViewController {
                     if document.exists{
                         //show alert saying marker already exists
                         print("data already exists")
-                        self.showErrorAlert()
+                        self.helper.showErrorAlert()
                         
                     } else {
                         
@@ -162,23 +170,4 @@ class CardViewController: UIViewController {
             print("an error occoured!")
         }
     }
-    
-    func showErrorAlert(){
-        let alert = alertService.alertForError()
-        
-        DispatchQueue.main.async {
-            self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func getTopMostViewController() -> UIViewController? {
-        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
-        
-        while let presentedViewController = topMostViewController?.presentedViewController {
-            topMostViewController = presentedViewController
-        }
-        
-        return topMostViewController
-    }
-    
 }

@@ -49,7 +49,7 @@ extension MapsViewController{
             //not sure why this seems to fix the problem of view conflicts between mapsView and card view... but I'm not
             //complaining -.-
             //view.bringSubviewToFront(cardViewController.view)
-            animateTransitionIfNeeded(state: nextState, duration: 0.9)
+            animateTransitionIfNeeded(state: nextState, duration: 0.5)
         default:
             break
         }
@@ -111,6 +111,7 @@ extension MapsViewController{
                     self.navigationController?.navigationBar.isUserInteractionEnabled = false
                     self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHeight
                     self.cardViewController.arrowImage.image = UIImage(named: "down_arrow")
+                    
                 case .collapsed:
                     self.cardViewController.view.frame.origin.y = self.view.frame.height - self.cardHandleAreaHeight
                     self.cardViewController.arrowImage.image = UIImage(named: "up_arrow")
@@ -154,7 +155,11 @@ extension MapsViewController{
             let blurAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
                 switch state{
                 case .expanded:
+                    //add a tapGesture on top of the visual effectView that will lower the card onn tap
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.postNotificationToLOwerCard))
+                    self.visualEffectView.addGestureRecognizer(tapGesture)
                     self.visualEffectView.effect = UIBlurEffect(style: .dark)
+                    
                 case .collapsed:
                     self.visualEffectView.effect = nil
                 }
@@ -163,6 +168,10 @@ extension MapsViewController{
             blurAnimator.startAnimation()
             runningAnimations.append(blurAnimator)
         }
+    }
+    
+    @objc func postNotificationToLOwerCard(){
+        NotificationCenter.default.post(name: NSNotification.Name("reportTapped"), object: nil)
     }
     
     //call when you need to start an interactiveTransition

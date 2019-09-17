@@ -5,7 +5,7 @@ extension MetalMeetupViewController{
     
     func fetchMetalMeetups(){
         
-        let metalMeetupQuery = sharedValues.db.collection("Meetups").whereField("type_of_trash", isEqualTo: "metal")
+        let metalMeetupQuery = GlobalValues.db.collection("Meetups").whereField("type_of_trash", isEqualTo: "metal")
         
         metalMeetupQuery.getDocuments(){
             QuerySnapshot, Error in

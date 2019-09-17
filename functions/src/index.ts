@@ -8,8 +8,9 @@ const fcm = admin.messaging();
 
 export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
     //(* * * * *) runs every 1 minute. look up cron time to learn more
-    //at 10 pm each day
-    .schedule('0 22 * * *').onRun(async context => {
+    //at 00:00 each day
+    //configure to run at NYC time
+    .schedule('0 0 * * *').timeZone("America/New_York").onRun(async context => {
 
         //get today's day
         const now = Date();
@@ -18,34 +19,35 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
         const today = day[0];
         var queryDay = ""
         var queryDayCount = ""
+        var exception = ["token_not_found", "account_signed_out"]
 
         //why send tomorrow......?
         switch (today) {
-            case "Sun":
+            case "Mon":
                 queryDay = "monday"
                 queryDayCount = "monday_count"
                 break
-            case "Mon":
+            case "Tue":
                 queryDay = "tuesday"
                 queryDayCount = "tuesday_count"
                 break
-            case "Tue":
+            case "Wed":
                 queryDay = "wednesday"
                 queryDayCount = "wednesday_count"
                 break
-            case "Wed":
+            case "Thu":
                 queryDay = "thursday"
                 queryDayCount = "thursday_count"
                 break
-            case "Thu":
+            case "Fri":
                 queryDay = "friday"
                 queryDayCount = "friday_count"
                 break
-            case "Fri":
+            case "Sat":
                 queryDay = "saturday"
                 queryDayCount = "saturday_count"
                 break
-            case "Sat":
+            case "Sun":
                 queryDay = "sunday"
                 queryDayCount = "sunday_count"
                 break
@@ -70,14 +72,15 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
             //only send fcm if count > 0
             let day_count = data[`${queryDayCount}`];
 
-            console.log(device_token, day_count)
-
-            if (day_count > 0) {
+            console.log(device_token, day_count, queryDay, queryDayCount)
+            
+            //make exception
+            if (day_count > 0 && data["device_token"] != exception) {
                 //follow the silent message composing format to send silent messages
                 //insert payload into the message
                 const payload = {
                     notification: {
-                        title: "Your meetups are ready!",
+                        title: "Your meetups are ready.",
                         body: "Tap me to confirm!"
                     },
                     data: {
@@ -90,16 +93,6 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
                     contentAvailable: true,
                     priority: "high"
                 };
-
-                // console.log(name);
-
-                // var message = {
-                //     notification: {
-                //         title: '$GOOG up 1.43% on the day',
-                //         body: '$GOOG gained 11.80 points to close at 835.67, up 1.43% on the day.'
-                //     },
-                //     condition: condition
-                // };
 
                 // send to each individual device token retrieved from the database
                 fcm.sendToDevice(`${device_token}`, payload, options)
@@ -114,6 +107,3 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
         return await Promise.all(jobs);
 
     });
-
-
-
