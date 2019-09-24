@@ -13,12 +13,27 @@ import CoreLocation
 
 extension MapsViewController: GMSMapViewDelegate{
     
-    func findTheIndex(with lat:Double, and lon:Double) ->Int{
+    func findTheIndexOnTrashModelArrAndMarkers(with lat:Double, and lon:Double) ->Int{
         let index = trashModelArray.firstIndex{$0.lat == lat && $0.lon == lon}
         print("tapped lat+lon index ->> \(index! as Int)")
         
         return index!
     }
+    
+    func findTheIndexOnNearbyMarkers(with id:String) ->Int{
+        let index = nearbyIdsAndTheirDistanceFromUser.firstIndex{$0.nearby_id == id}
+        print("nearby inndex at ->> \(index! as Int)")
+        
+        return index!
+    }
+    
+    func findTheIndexWithId(with id:String) ->Int{
+        let index = trashModelArray.firstIndex{$0.id == id}
+        print("nearby inndex at ->> \(index! as Int)")
+        
+        return index!
+    }
+    
     
     //gets lat and lon for tapped marker
     //configures a new marker and it's info window
@@ -27,7 +42,7 @@ extension MapsViewController: GMSMapViewDelegate{
         print("tapped on marker with lon: \(marker.position.longitude)")
         
         tappedMarker = marker.position
-        let index = findTheIndex(with: tappedMarker.latitude, and: tappedMarker.longitude)
+        let index = findTheIndexOnTrashModelArrAndMarkers(with: tappedMarker.latitude, and: tappedMarker.longitude)
         tappedArrayElement = trashModelArray[index]
         
         //passing the data to the singleton

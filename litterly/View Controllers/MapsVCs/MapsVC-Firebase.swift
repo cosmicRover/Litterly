@@ -10,11 +10,12 @@ import GoogleMaps
 import FirebaseFirestore
 import FirebaseMessaging
 import Firebase
+import GeoFire
 
 extension MapsViewController{
     
     //returns a custom map marker based on trashType
-    func giveMeAMarker(for location:CLLocationCoordinate2D, on trashType:String, and isMeetupScheduled:Bool) -> GMSMarker{
+    func assignAMarkerIcon(for location:CLLocationCoordinate2D, on trashType:String, and isMeetupScheduled:Bool) -> GMSMarker{
         
         let customMarker = GMSMarker(position: location)
         
@@ -74,7 +75,7 @@ extension MapsViewController{
                     
                     let position = CLLocationCoordinate2D(latitude: self.trashModelArray.last!.lat, longitude: self.trashModelArray.last!.lon)
                     let trashType = self.trashModelArray.last!.trash_type
-                    let marker = self.giveMeAMarker(for: position, on: trashType, and: isMeetupScheduled)
+                    let marker = self.assignAMarkerIcon(for: position, on: trashType, and: isMeetupScheduled)
 
                     marker.opacity = 0.8
                     //appends to marker tracking array
@@ -87,20 +88,53 @@ extension MapsViewController{
                     //if removed (when a clean up is complete, add a ghost trail of the previous marker
                 } else if diff.type == .removed{
                     
-                   //gotta handle remove event responsibly
-                    //reload both of the arrays??
+                    print("------------>>>> REMOVE TRIGGERED")
                     
+                    //gotta find a way that is not to obtuse for users to get new data
+                    //self.listenForRadius()
                     
-                  
+                    print("REMOVED DATA ---->> \(diff.document.data())")
+                    
+                    //**** experimental
+                    let data = TrashDataModel(dictionary: diff.document.data())
+//
+                    let index = self.findTheIndexOnTrashModelArrAndMarkers(with: data!.lat, and: data!.lon)
+
+                    let mockData = TrashDataModel(id: "removed", author: "removed", lat: 999999, lon: 999999, trash_type: "removed", street_address: "removed", is_meetup_scheduled: false)
+//
+//                    self.trashModelArray[index] = mockData
+                    self.markers[index].map = nil
+                    //**** experimental
+                    
+                    //*****below solution sometimes produce nil********
+                    //**cant remove an index that doesnt exist. only if ther
+                    //takes the diif that was removed, finds the index of it
+                    //then makes the marker dissapear from map, then removes the
+                    //data from markers + trashModel array
+//                    let data = TrashDataModel(dictionary: diff.document.data())
+//                    print(diff.document.data())
+//                    let index = self.findTheIndexWithId(with: id)
+//
+//                    self.markers[index].map = nil
+//                    self.markers.remove(at: index)
+//                    self.trashModelArray.remove(at: index)
+//
+//                    let id = data?.id
+//                    let nearbyIndex = self.findTheIndexOnNearbyMarkers(with: id!)
+//                    self.nearbyIdsAndTheirDistanceFromUser.remove(at: nearbyIndex)
+                    
+                    //**** experimental
                     
                     //or modified an existing one (when a cleanup is scheduled)
                 } else if diff.type == .modified{
+                    
+                    print("------------>>>> MOD TRIGGERED")
                     
                     //self.oldTappedArrayElement = self.tappedArrayElement
                     
                     let data = TrashDataModel(dictionary: diff.document.data())
                     //gets the index of the modded data with the lat and long
-                    let index = self.findTheIndex(with: data!.lat, and: data!.lon)
+                    let index = self.findTheIndexOnTrashModelArrAndMarkers(with: data!.lat, and: data!.lon)
                     
                     //assigning a reference to the modded data
                     self.justModdedArrayElement = data
@@ -121,7 +155,7 @@ extension MapsViewController{
                     let trashType = self.trashModelArray[index].trash_type
                     let isMeetupScheduled = self.trashModelArray[index].is_meetup_scheduled
                     
-                    let marker = self.giveMeAMarker(for: position, on: trashType, and: isMeetupScheduled)
+                    let marker = self.assignAMarkerIcon(for: position, on: trashType, and: isMeetupScheduled)
                     
                     marker.opacity = 0.8
                     marker.appearAnimation = .pop
