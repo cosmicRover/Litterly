@@ -89,42 +89,22 @@ extension MapsViewController{
                 } else if diff.type == .removed{
                     
                     print("------------>>>> REMOVE TRIGGERED")
-                    
-                    //gotta find a way that is not to obtuse for users to get new data
-                    //self.listenForRadius()
-                    
-                    print("REMOVED DATA ---->> \(diff.document.data())")
+                    print("REMOVED DATA ---->> \(diff.document.data()) AND ARR COUNT ->>> \(self.trashModelArray.count)")
                     
                     //**** experimental
                     let data = TrashDataModel(dictionary: diff.document.data())
-//
-                    let index = self.findTheIndexOnTrashModelArrAndMarkers(with: data!.lat, and: data!.lon)
+                    let index = self.findTheIndexWithId(with: data!.id as String)
+                    
+                    self.justRemovedArrayElement = data
+                    NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-removed"), object: nil)
+                    
+                    let placeholderData = TrashDataModel(id: self.trashModelArray[index].id, author: self.trashModelArray[index].author, lat: 90.0, lon: 180.0, trash_type: self.trashModelArray[index].trash_type, street_address: self.trashModelArray[index].street_address, is_meetup_scheduled: self.trashModelArray[index].is_meetup_scheduled)
+                    
+                    self.trashModelArray[index] = placeholderData
 
-                    let mockData = TrashDataModel(id: "removed", author: "removed", lat: 999999, lon: 999999, trash_type: "removed", street_address: "removed", is_meetup_scheduled: false)
-//
-//                    self.trashModelArray[index] = mockData
-                    self.markers[index].map = nil
-                    //**** experimental
-                    
-                    //*****below solution sometimes produce nil********
-                    //**cant remove an index that doesnt exist. only if ther
-                    //takes the diif that was removed, finds the index of it
-                    //then makes the marker dissapear from map, then removes the
-                    //data from markers + trashModel array
-//                    let data = TrashDataModel(dictionary: diff.document.data())
-//                    print(diff.document.data())
-//                    let index = self.findTheIndexWithId(with: id)
-//
-//                    self.markers[index].map = nil
-//                    self.markers.remove(at: index)
-//                    self.trashModelArray.remove(at: index)
-//
-//                    let id = data?.id
-//                    let nearbyIndex = self.findTheIndexOnNearbyMarkers(with: id!)
-//                    self.nearbyIdsAndTheirDistanceFromUser.remove(at: nearbyIndex)
-                    
-                    //**** experimental
-                    
+                    self.markers[index].isTappable = false
+                    self.markers[index].opacity = 0.1
+
                     //or modified an existing one (when a cleanup is scheduled)
                 } else if diff.type == .modified{
                     
@@ -139,7 +119,7 @@ extension MapsViewController{
                     //assigning a reference to the modded data
                     self.justModdedArrayElement = data
                     //and then posting a notification to modify the array
-                    NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-modded"), object: nil)
                     
                     print("The index of the modded data ->>> \(index)")
                     print("Before change ->>> \(self.trashModelArray[index])")

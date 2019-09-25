@@ -30,8 +30,11 @@ extension MapsViewController{
         //listening for buttonTapped
         NotificationCenter.default.addObserver(self, selector: #selector(reportTapped), name: NSNotification.Name("reportTapped"), object: nil)
         
-        //listening for marker modification event
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTappedArrayElement), name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
+        //listening for marker remove event
+        NotificationCenter.default.addObserver(self, selector: #selector(removeMarkerInfoWinOnRemove), name: NSNotification.Name("tappedArrayElement-removed"), object: nil)
+        
+        //listening for marker mod event
+        NotificationCenter.default.addObserver(self, selector: #selector(removeMarkerInfoWinOnMod), name: NSNotification.Name("tappedArrayElement-modded"), object: nil)
         
         //uploads the fcm key if it had changed
         helper.checkIfNotificationPermissionWasGiven()
@@ -69,8 +72,24 @@ extension MapsViewController{
         animateTransitionIfNeeded(state: .collapsed, duration: 0.5)
     }
     
-    //calling a func to re-assign userAssignedElement
-    @objc private func updateTappedArrayElement(){
+    
+    //funcs to make the marker info windows disappear
+    @objc private func removeMarkerInfoWinOnRemove(){
+        guard tappedMarker != nil else {return}
+        
+        print("tapped array element -> \(String(describing: tappedArrayElement))")
+        print("just modded element -> \(String(describing: justModdedArrayElement))")
+        
+        guard justRemovedArrayElement != nil else {return}
+        
+        //if id's match, we remove the markerInfoWindow
+        if GlobalValues.tappedArrayElementDict.id == justRemovedArrayElement.id{
+            unScheduledMarkerInfoWindow.removeFromSuperview()
+            scheduledMarkerInfoWindow.removeFromSuperview()
+        }
+    }
+    
+    @objc private func removeMarkerInfoWinOnMod(){
         guard tappedMarker != nil else {return}
         
         print("tapped array element -> \(String(describing: tappedArrayElement))")
@@ -79,7 +98,7 @@ extension MapsViewController{
         guard justModdedArrayElement != nil else {return}
         
         //if id's match, we remove the markerInfoWindow
-        if tappedArrayElement.id == justModdedArrayElement.id{
+        if GlobalValues.tappedArrayElementDict.id == justModdedArrayElement.id{
             unScheduledMarkerInfoWindow.removeFromSuperview()
             scheduledMarkerInfoWindow.removeFromSuperview()
         }

@@ -29,7 +29,7 @@ extension MapsViewController: GMSMapViewDelegate{
     
     func findTheIndexWithId(with id:String) ->Int{
         let index = trashModelArray.firstIndex{$0.id == id}
-        print("nearby inndex at ->> \(index! as Int)")
+        print("MODDED ARRAY INDEX ->> \(index! as Int)")
         
         return index!
     }

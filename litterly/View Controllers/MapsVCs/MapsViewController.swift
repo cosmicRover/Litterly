@@ -101,6 +101,8 @@ class MapsViewController: UIViewController{
     
     var justModdedArrayElement:TrashDataModel!
     
+    var justRemovedArrayElement:TrashDataModel!
+    
     
     // MARK: Nearby queries and their handler + array
     

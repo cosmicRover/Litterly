@@ -125,7 +125,7 @@ extension MapsViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Nearby", bundle: .main)
 
         let NearbyVC = storyBoard.instantiateViewController(withIdentifier: "NearbyScreen") as! NearbyViewController
-        
+        NearbyVC.modalPresentationStyle = .fullScreen
         let navController = UINavigationController(rootViewController: NearbyVC)
 
         self.present(navController, animated: true, completion: nil)
