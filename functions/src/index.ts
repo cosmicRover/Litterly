@@ -73,7 +73,7 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
             let day_count = data[`${queryDayCount}`];
 
             console.log(device_token, day_count, queryDay, queryDayCount)
-            
+
             //make exception
             if (day_count > 0 && data["device_token"] != exception) {
                 //follow the silent message composing format to send silent messages
@@ -107,3 +107,19 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
         return await Promise.all(jobs);
 
     });
+
+//**note** /{id} is a wildcard which monitors for any new document creation
+export const addExpirationDate = functions.firestore.document("TaggedTrash/{id}").onCreate((snapshot, context) => {
+
+    //step 1 get the created docId
+    const docId: String = snapshot.id.toString()
+    console.log(`just crated document id -> ${docId}`)
+
+    //step 2 get today's date and increment it forward 7 days at 00:00:00
+
+    //step 3 convert the new date to firestore timestamp
+
+    //step 4 update expiration key to the timestamp
+
+
+})
