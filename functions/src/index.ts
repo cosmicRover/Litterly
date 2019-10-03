@@ -13,10 +13,10 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
     .schedule('0 0 * * *').timeZone("America/New_York").onRun(async context => {
 
         //get today's day
-        const now = Date();
-        const day = now.split(" ");
-        console.log("Now is ->> ", day[0]);
-        const today = day[0];
+        const now = Date()
+        const day = now.split(" ")
+        console.log("Now is ->> ", day[0])
+        const today = day[0]
         var queryDay = ""
         var queryDayCount = ""
         var exception = ["token_not_found", "account_signed_out"]
@@ -109,6 +109,7 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
     });
 
 //**note** /{id} is a wildcard which monitors for any new document creation
+//**note** that timestamp is in UTC time
 export const addExpirationDate = functions.firestore.document("TaggedTrash/{id}").onCreate((snapshot, context) => {
 
     //step 1 get the created docId
@@ -116,10 +117,30 @@ export const addExpirationDate = functions.firestore.document("TaggedTrash/{id}"
     console.log(`just crated document id -> ${docId}`)
 
     //step 2 get today's date and increment it forward 7 days at 00:00:00
+    var initTimeStmp = admin.firestore.Timestamp.now()
+    const initDateValue = initTimeStmp.toDate()
+    console.log(`Init time value -->> ${initDateValue}`)
+
+    var date = new Date()
+    date.setDate(initDateValue.getDate() + 7)
+    date.setHours(0, 0, 0, 0)
+    console.log(`ADDED days -->> ${date}`)
 
     //step 3 convert the new date to firestore timestamp
+    const timeStmp = admin.firestore.Timestamp.fromDate(date)
+    const value = timeStmp.toDate()
+    console.log(`FIREBASE timestamp -->> ${value}`)
 
     //step 4 update expiration key to the timestamp
+    var batch = db.batch()
+    var ref = db.collection('TaggedTrash').doc(`${docId}`)
+    // const dataToUpdate = 
+    batch.update(ref, { "expiration_date": value })
 
-
+    return batch.commit().then(function () {
+        //add success/error message
+    })
 })
+
+//TODO: write a cloud function using pubsub to schedule TahhedTrash cleannup every day
+//at a certain time to clean up the expired documents
