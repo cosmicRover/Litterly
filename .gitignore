@@ -38,13 +38,13 @@ coverage
 bower_components
 
 # node-waf configuration
-.lock-wscript
+#.lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
+#build/Release
 
 # Dependency directories
-node_modules/
+#node_modules/
 
 # Optional npm cache directory
 .npm
