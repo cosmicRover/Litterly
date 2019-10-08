@@ -6,7 +6,7 @@ admin.initializeApp();
 const db = admin.firestore()
 const fcm = admin.messaging();
 
-export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
+export const taskRunner = functions.runWith({ memory: '512MB' }).pubsub
     //(* * * * *) runs every 1 minute. look up cron time to learn more
     //at 00:00 each day
     //configure to run at NYC time
@@ -21,7 +21,7 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
         var queryDayCount = ""
         var exception = ["token_not_found", "account_signed_out"]
 
-        //why send tomorrow......?
+        //setup today's query vars
         switch (today) {
             case "Mon":
                 queryDay = "monday"
@@ -56,15 +56,15 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
 
         //query and the task to get those queries from firebase
         //need to get the device tokens + today's geofence payload
-        const query = db.collection('GeofenceData');
+        const query = db.collection('GeofenceData')
         const task = await query.get();
 
         //jobs to execute
-        const jobs: Promise<any>[] = [];
+        const jobs: Promise<any>[] = []
 
         //for each user in the user class, send out the 
         task.forEach(snapshot => {
-            const data = snapshot.data();
+            const data = snapshot.data()
 
             //gotta get today's payload ****might have to re-configure dates on firestore
             let device_token = data["device_token"];
@@ -104,9 +104,9 @@ export const taskRunner = functions.runWith({ memory: '1GB' }).pubsub
             }
         });
 
-        return await Promise.all(jobs);
+        return await Promise.all(jobs)
 
-    });
+    })
 
 //**note** /{id} is a wildcard which monitors for any new document creation
 //**note** that timestamp is in UTC time
@@ -142,5 +142,59 @@ export const addExpirationDate = functions.firestore.document("TaggedTrash/{id}"
     })
 })
 
-//TODO: write a cloud function using pubsub to schedule TahhedTrash cleannup every day
-//at a certain time to clean up the expired documents
+//TODO: Add expiration to the meetup doc on created
+export const addExpirationForMeetups = functions.firestore.document("Meetups/{id}").onCreate((snapshot, context) => {
+    //step 1 get the created docId
+    const docId: String = snapshot.id.toString()
+    console.log(`just crated meetup id -> ${docId}`)
+    
+    //step 2 make a get request to get the doc details
+
+
+    //step 3 determine the timezone and convert the meetup date and time to UTC time
+
+    //step 4, add the expiration date to the document
+})
+
+//schedule cleanup jobs everyday 1t 0:0 UTC time to cleanup unscheduled markers
+export const markerCleaner = functions.runWith({memory: '512MB'}).pubsub
+    .schedule('0 0 * * *').timeZone("UTC").onRun(async context =>{
+
+        //find timestamp for now and convert to miliSecs
+        var serverTimeStmp = admin.firestore.Timestamp.now().toMillis()
+        console.log(`TIME IN MILLLLI -> ${serverTimeStmp}`)
+
+        const query = db.collection('TaggedTrash')
+        const task = await query.get();
+
+        //jobs to execute
+        const jobs: Promise<any>[] = []
+
+        //for each user in the user class, send out the 
+        task.forEach(snapshot => {
+            const data = snapshot.data()
+            
+            //get doc's expiration date and convert to milis
+            var expirationDate = data["expiration_date"]
+            expirationDate = expirationDate.toMillis()
+            console.log(`document exp date ----->> ${expirationDate}`)
+            
+            const docId = data["id"]
+            const meetupStatus = data["is_meetup_scheduled"]
+
+            if (serverTimeStmp >= expirationDate && !meetupStatus){
+                jobs.push(
+                    deleteADoc("TaggedTrash", docId)
+                )}
+        })
+
+        return await Promise.all(jobs)
+
+})
+
+//helper function to delete a document from tagged trash
+function deleteADoc(collectionId:string, docID:string){
+    return db.collection(collectionId).doc(docID).delete()
+}
+
+

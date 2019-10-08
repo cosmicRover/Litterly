@@ -98,7 +98,7 @@ extension MapsViewController{
                     self.justRemovedArrayElement = data
                     NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-removed"), object: nil)
                     
-                    let placeholderData = TrashDataModel(id: self.trashModelArray[index].id, author: self.trashModelArray[index].author, lat: 90.0, lon: 180.0, trash_type: self.trashModelArray[index].trash_type, street_address: self.trashModelArray[index].street_address, is_meetup_scheduled: self.trashModelArray[index].is_meetup_scheduled)
+                    let placeholderData = TrashDataModel(id: self.trashModelArray[index].id, author: self.trashModelArray[index].author, lat: 90.0, lon: 180.0, trash_type: self.trashModelArray[index].trash_type, timezone: self.trashModelArray[index].timezone, street_address: self.trashModelArray[index].street_address, is_meetup_scheduled: self.trashModelArray[index].is_meetup_scheduled)
                     
                     self.trashModelArray[index] = placeholderData
 
