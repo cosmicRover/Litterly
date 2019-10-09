@@ -37,6 +37,9 @@ class CardViewController: UIViewController {
     var geoFirestore:GeoFirestore!
     let alertService = AlertService()
     let helper = HelperFunctions()
+    var localTimeZone: String {
+        return TimeZone.current.abbreviation() ?? "unknown"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -158,7 +161,7 @@ class CardViewController: UIViewController {
                         
                         print(address!)
                         print(userCurrentNeighborhood!)
-                        let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.submitTrashType, street_address: address!, is_meetup_scheduled: false)
+                            let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.submitTrashType, timezone: self.localTimeZone, street_address: address!, is_meetup_scheduled: false)
                         self.submitTrashToFirestore(with: trashTag.dictionary, for: id)
                         self.setLocationWithGeoFirestore(for: id, on: coordinates)
                         }

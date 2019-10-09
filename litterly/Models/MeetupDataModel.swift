@@ -16,11 +16,15 @@ struct MeetupDataModel{
     var meetup_address: String
     //var neighborhood: String
     var meetup_date_time: String
+    var meetup_id: String
+    var parent_marker_id: String
     var type_of_trash: String
     var author_id: String
     var author_display_name: String
     var confirmed_users:[[String:String]]
     var confirmed_users_ids:[String]
+    var meetup_timezone: String
+    var UTC_meetup_time_and_expiration_time: Double
     var meetup_day:String
     
     
@@ -30,11 +34,15 @@ struct MeetupDataModel{
             "marker_lon": marker_lon,
             "meetup_address": meetup_address,
             "meetup_date_time": meetup_date_time,
+            "meetup_id": meetup_id,
+            "parent_marker_id" : parent_marker_id,
             "type_of_trash": type_of_trash,
             "author_id": author_id,
             "author_display_name": author_display_name,
             "confirmed_users": confirmed_users,
             "confirmed_users_ids": confirmed_users_ids,
+            "meetup_timezone": meetup_timezone,
+            "UTC_meetup_time_and_expiration_time" : UTC_meetup_time_and_expiration_time,
             "meetup_day": meetup_day
         ]
     }
@@ -49,13 +57,17 @@ extension MeetupDataModel: DocumentSerializable{
             let marker_lon = dictionary["marker_lon"] as? Double,
             let meetup_address = dictionary["meetup_address"] as? String,
             let meetup_date_time = dictionary["meetup_date_time"] as? String,
+            let parent_marker_id = dictionary["parent_marker_id"] as? String,
             let type_of_trash = dictionary["type_of_trash"] as? String,
+            let meetup_id = dictionary["meetup_id"] as? String,
             let author_id = dictionary["author_id"] as? String,
             let author_display_name = dictionary["author_display_name"] as? String,
             let confirmed_users = dictionary["confirmed_users"] as? [[String:String]],
             let meetup_day = dictionary["meetup_day"] as? String,
+            let meetup_timezone = dictionary["meetup_timezone"] as? String,
+            let UTC_meetup_time_and_expiration_time = dictionary["UTC_meetup_time_and_expiration_time"] as? Double,
             let confirmed_users_ids = dictionary["confirmed_users_ids"] as? [String] else {return nil}
         
-        self.init(marker_lat: marker_lat, marker_lon: marker_lon, meetup_address: meetup_address, meetup_date_time: meetup_date_time, type_of_trash: type_of_trash, author_id: author_id, author_display_name: author_display_name, confirmed_users: confirmed_users, confirmed_users_ids: confirmed_users_ids, meetup_day: meetup_day)
+        self.init(marker_lat: marker_lat, marker_lon: marker_lon, meetup_address: meetup_address, meetup_date_time: meetup_date_time, meetup_id: meetup_id, parent_marker_id: parent_marker_id, type_of_trash: type_of_trash, author_id: author_id, author_display_name: author_display_name, confirmed_users: confirmed_users, confirmed_users_ids: confirmed_users_ids, meetup_timezone: meetup_timezone, UTC_meetup_time_and_expiration_time:UTC_meetup_time_and_expiration_time, meetup_day: meetup_day)
     }
 }

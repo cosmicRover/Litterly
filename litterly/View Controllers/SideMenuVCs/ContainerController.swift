@@ -159,12 +159,14 @@ class ContainerController: UIViewController{
             print("show meetup")
             
             let meetupVC:UIViewController = UIStoryboard(name: "Meetups", bundle: nil).instantiateViewController(withIdentifier: "MeetupVC") as UIViewController
+            meetupVC.modalPresentationStyle = .fullScreen
             self.present(UINavigationController(rootViewController: meetupVC), animated: true, completion: nil)
             
         case .Profile:
             print("show profile")
             
             let profileVC:UIViewController = UIStoryboard(name: "Profile", bundle: nil).instantiateViewController(withIdentifier: "ProfileVC") as UIViewController
+            profileVC.modalPresentationStyle = .fullScreen
             self.present(UINavigationController(rootViewController: profileVC), animated: true, completion: nil)
             
         case .Logout:
@@ -175,7 +177,7 @@ class ContainerController: UIViewController{
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 
                 let introVc = storyBoard.instantiateViewController(withIdentifier: "IntroPageVC")
-                
+                introVc.modalPresentationStyle = .fullScreen
                 self.present(introVc, animated: true, completion: nil)
                 
             } catch {

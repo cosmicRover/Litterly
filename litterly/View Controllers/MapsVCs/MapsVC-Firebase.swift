@@ -10,11 +10,12 @@ import GoogleMaps
 import FirebaseFirestore
 import FirebaseMessaging
 import Firebase
+import GeoFire
 
 extension MapsViewController{
     
     //returns a custom map marker based on trashType
-    func giveMeAMarker(for location:CLLocationCoordinate2D, on trashType:String, and isMeetupScheduled:Bool) -> GMSMarker{
+    func assignAMarkerIcon(for location:CLLocationCoordinate2D, on trashType:String, and isMeetupScheduled:Bool) -> GMSMarker{
         
         let customMarker = GMSMarker(position: location)
         
@@ -74,7 +75,7 @@ extension MapsViewController{
                     
                     let position = CLLocationCoordinate2D(latitude: self.trashModelArray.last!.lat, longitude: self.trashModelArray.last!.lon)
                     let trashType = self.trashModelArray.last!.trash_type
-                    let marker = self.giveMeAMarker(for: position, on: trashType, and: isMeetupScheduled)
+                    let marker = self.assignAMarkerIcon(for: position, on: trashType, and: isMeetupScheduled)
 
                     marker.opacity = 0.8
                     //appends to marker tracking array
@@ -87,25 +88,38 @@ extension MapsViewController{
                     //if removed (when a clean up is complete, add a ghost trail of the previous marker
                 } else if diff.type == .removed{
                     
-                   //gotta handle remove event responsibly
-                    //reload both of the arrays??
+                    print("------------>>>> REMOVE TRIGGERED")
+                    print("REMOVED DATA ---->> \(diff.document.data()) AND ARR COUNT ->>> \(self.trashModelArray.count)")
                     
+                    //**** experimental
+                    let data = TrashDataModel(dictionary: diff.document.data())
+                    let index = self.findTheIndexWithId(with: data!.id as String)
                     
-                  
+                    self.justRemovedArrayElement = data
+                    NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-removed"), object: nil)
                     
+                    let placeholderData = TrashDataModel(id: self.trashModelArray[index].id, author: self.trashModelArray[index].author, lat: 90.0, lon: 180.0, trash_type: self.trashModelArray[index].trash_type, timezone: self.trashModelArray[index].timezone, street_address: self.trashModelArray[index].street_address, is_meetup_scheduled: self.trashModelArray[index].is_meetup_scheduled)
+                    
+                    self.trashModelArray[index] = placeholderData
+
+                    self.markers[index].isTappable = false
+                    self.markers[index].opacity = 0.1
+
                     //or modified an existing one (when a cleanup is scheduled)
                 } else if diff.type == .modified{
+                    
+                    print("------------>>>> MOD TRIGGERED")
                     
                     //self.oldTappedArrayElement = self.tappedArrayElement
                     
                     let data = TrashDataModel(dictionary: diff.document.data())
                     //gets the index of the modded data with the lat and long
-                    let index = self.findTheIndex(with: data!.lat, and: data!.lon)
+                    let index = self.findTheIndexOnTrashModelArrAndMarkers(with: data!.lat, and: data!.lon)
                     
                     //assigning a reference to the modded data
                     self.justModdedArrayElement = data
                     //and then posting a notification to modify the array
-                    NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-reloaded"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-modded"), object: nil)
                     
                     print("The index of the modded data ->>> \(index)")
                     print("Before change ->>> \(self.trashModelArray[index])")
@@ -121,7 +135,7 @@ extension MapsViewController{
                     let trashType = self.trashModelArray[index].trash_type
                     let isMeetupScheduled = self.trashModelArray[index].is_meetup_scheduled
                     
-                    let marker = self.giveMeAMarker(for: position, on: trashType, and: isMeetupScheduled)
+                    let marker = self.assignAMarkerIcon(for: position, on: trashType, and: isMeetupScheduled)
                     
                     marker.opacity = 0.8
                     marker.appearAnimation = .pop

@@ -39,7 +39,7 @@ extension MapsViewController{
     func queryForNearby(center centerCamera:CLLocationCoordinate2D, with circleRadius:Double){
         
         let center = CLLocation(latitude: centerCamera.latitude, longitude: centerCamera.longitude)
-        var leftCounter:Int = 0
+        var nearbyCounter:Int = 0
         print(center)
         
         self.circleQuery = geoFirestoreRef.query(withCenter: center, radius: circleRadius)
@@ -66,21 +66,29 @@ extension MapsViewController{
                     self.nearbyIdsAndTheirDistanceFromUser.append(nearbyDataToAppend)
                     print("Appeneded Nearby item. Nearby count is \(self.nearbyIdsAndTheirDistanceFromUser.count)")
                     self.cardViewController.nearByCount.fadeTransition(0.3)
-                    self.cardViewController.nearByCount.text = "\(self.nearbyIdsAndTheirDistanceFromUser.count)"
+                    nearbyCounter += 1
+                    self.cardViewController.nearByCount.text = "\(nearbyCounter)"
                     
                     self.realTimeMarkerListener(documentId: self.nearbyIdsAndTheirDistanceFromUser.last!.nearby_id)
                     
                     print(self.nearbyIdsAndTheirDistanceFromUser.last?.dictionary as! [String : Any])
                 }
-                
             })
             
             //remove events
             self.hasLeftNearby = self.circleQuery.observe(.documentExited, with: {(id, location) in
                 print("LEFT NEARBY EVENT ---->\(id! as String) has left nearby")
+                
+                //**** experimental
+//                let mockData = TrashDataModel(id: "removed", author: "removed", lat: 999999, lon: 999999, trash_type: "removed", street_address: "removed", is_meetup_scheduled: false)
+//                let index = self.findTheIndexOnNearbyMarkers(with: "\(id as! String)")
+//                self.nearbyIdsAndTheirDistanceFromUser.remove(at: index)
+//                    NearbyIdModel(nearby_id: "removed", nearby_id_lat: 99.99, nearby_id_lon: 99.99, nearby_id_distance: 999)
+                //**** experimental
+                
                 self.cardViewController.nearByCount.fadeTransition(0.3)
-                leftCounter += 1
-                self.cardViewController.nearByCount.text = "\(self.nearbyIdsAndTheirDistanceFromUser.count - leftCounter)"
+                nearbyCounter -= 1
+                self.cardViewController.nearByCount.text = "\(nearbyCounter)"
             })
             
             self.hasDocumentMoved = self.circleQuery.observe(.documentMoved, with: {(id, location) in

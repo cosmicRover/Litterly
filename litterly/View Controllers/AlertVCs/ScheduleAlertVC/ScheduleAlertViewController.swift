@@ -29,6 +29,10 @@ class ScheduleAlertViewController: UIViewController {
     let eligibleMarkerDistance = 10.0 //meters
     var batch = Firestore.firestore().batch()
     let helper = HelperFunctions()
+    var localTimeZone: String {
+        return TimeZone.current.abbreviation() ?? "unknown"
+    }
+    var UTCMeetupDate:Double!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,16 +48,23 @@ class ScheduleAlertViewController: UIViewController {
         let currentDate = Date()
         var components = DateComponents()
         components.calendar = calender
-
         components.day = +1
-//        components.hour = +12
-        let minDate = calender.date(byAdding: components, to: currentDate)!
+        
+        var minDate = calender.date(byAdding: components, to: currentDate)!
+        meetupdatePicker.minimumDate = minDate
+        
+        //atempting to advance time by an hour if minute > 1 ***neds work**
+        if Calendar.current.component(.minute, from: Date()) > 1{
+            components.hour = +1
+        }
+        
+        minDate = calender.date(byAdding: components, to: currentDate)!
+        meetupdatePicker.setDate(minDate, animated: true)
         
         components.day = +7
         let maxDate = calender.date(byAdding: components, to: currentDate)
         
-        
-        meetupdatePicker.minimumDate = minDate
+//        meetupdatePicker.setDate(minDate, animated: true)
         meetupdatePicker.maximumDate = maxDate
         
         meetupdatePicker.minuteInterval = 30
@@ -62,6 +73,11 @@ class ScheduleAlertViewController: UIViewController {
         let date = getFormattedDate(date: minDate)
         meetupDate = date as String
         print(meetupDate! as String)
+        
+        //converted to UTC for firestore
+        let fullDate = self.getFormattedDateToUTCDoubleValue(date: minDate)
+        print("******** UTC DOUBLE VALUE*********", fullDate)
+        UTCMeetupDate = fullDate
         
         scheduleWeekdayNum = Calendar.current.component(.weekday, from: minDate)
         print("\(scheduleWeekdayNum as Int)")
@@ -78,6 +94,11 @@ class ScheduleAlertViewController: UIViewController {
         meetupDate = date as String
         print(meetupDate! as String)
         
+        //converted to UTC for firestore
+        let fullDate = self.getFormattedDateToUTCDoubleValue(date: sender.date)
+        print("******** FULL DATE AND TIME*********", fullDate)
+        UTCMeetupDate = fullDate
+        
         //int associated with weekday
         scheduleWeekdayNum = Calendar.current.component(.weekday, from: sender.date)
         print("\(scheduleWeekdayNum as Int)")
@@ -88,7 +109,7 @@ class ScheduleAlertViewController: UIViewController {
     }
     
     //returns a formatted date when given an input
-    func getFormattedDate(date: Date) -> String {
+    func getFormattedDate(date: Date) ->String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeZone = TimeZone.current
@@ -96,6 +117,14 @@ class ScheduleAlertViewController: UIViewController {
         let formattedDateAndTime = dateFormatter.string(from: date)
         
         return formattedDateAndTime as String
+    }
+    
+    //format time to UTC
+    func getFormattedDateToUTCDoubleValue(date: Date) -> Double {
+        
+        let UTCTimeDoubleValue = date.timeIntervalSince1970
+        
+        return UTCTimeDoubleValue as Double
     }
 
     func roundsCorners(){
@@ -225,7 +254,7 @@ class ScheduleAlertViewController: UIViewController {
                                 
                             } else {
                                 //data prep
-                                let dict:MeetupDataModel = MeetupDataModel(marker_lat: marker.lat, marker_lon: marker.lon, meetup_address: marker.street_address, meetup_date_time: "\(self.meetupDate! as String)", type_of_trash: marker.trash_type, author_id: "\(GlobalValues.currentUserEmail! as String)", author_display_name: GlobalValues.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(GlobalValues.currentUserEmail! as String)", "user_pic_url" : "\(GlobalValues.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(GlobalValues.currentUserEmail! as String)"], meetup_day: "\(self.scheduleWeekdayText as String)")
+                                let dict:MeetupDataModel = MeetupDataModel(marker_lat: marker.lat, marker_lon: marker.lon, meetup_address: marker.street_address, meetup_date_time: "\(self.meetupDate! as String)", meetup_id: meetupId, parent_marker_id: markerId, type_of_trash: marker.trash_type, author_id: "\(GlobalValues.currentUserEmail! as String)" , author_display_name: GlobalValues.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(GlobalValues.currentUserEmail! as String)", "user_pic_url" : "\(GlobalValues.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(GlobalValues.currentUserEmail! as String)"], meetup_timezone: self.localTimeZone, UTC_meetup_time_and_expiration_time: self.UTCMeetupDate,  meetup_day: "\(self.scheduleWeekdayText as String)")
                                 
                                 //batch prep
                                 self.batch.setData(dict.dictionary, forDocument: meetupDocRef)
