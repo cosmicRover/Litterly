@@ -15,7 +15,6 @@ extension SigninViewController{
     //creates a user on firestore
     func submitUserToFirestore(with userDictionary: [String:Any], for id:String){
         
-        
         db.collection("Users").document("\(id)").setData(userDictionary) { (error:Error?) in
             if let err = error {
                 print("Error writing document: \(err)")
@@ -25,6 +24,40 @@ extension SigninViewController{
 
         }
         
+    }
+    
+    func initFenceTriggerDocumentForUser(for userId:String){
+        let ref = db.collection("GeofenceTriggerTimes").document("\(userId)")
+        ref.getDocument { (snapshot, error) in
+            if snapshot!.exists{
+                //document already exists
+            }else{
+                ref.setData(["dont" : "delete"], completion: {(error) in
+                    if let error = error{
+                        print("Print error submitting geofence User: ", error.localizedDescription)
+                    }else{
+                        print("Succeeded creating geofence data!")
+                    }
+                })//just a placeholder
+            }
+        }
+    }
+    
+    func initPointsDocumentForUser(for userId:String){
+        let ref = db.collection("Points").document("\(userId)")
+        ref.getDocument { (snapshot, error) in
+            if snapshot!.exists{
+                //document already exists
+            }else{
+                ref.setData(["dont" : "delete"], completion: {(error) in
+                    if let error = error{
+                        print("Print error submitting geofence User: ", error.localizedDescription)
+                    }else{
+                        print("Succeeded creating geofence data!")
+                    }
+                })//just a placeholder
+            }
+        }
     }
     
     func submitGeofenceInitialDataToFirestore(with geofenceDictionary: [String:Any], for id:String){

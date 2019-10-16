@@ -143,8 +143,8 @@ export const addExpirationDate = functions.firestore.document("TaggedTrash/{id}"
 })
 
 //schedule cleanup jobs everyday 1t 0:0 UTC time to cleanup unscheduled markers
-export const markerCleaner = functions.runWith({memory: '512MB'}).pubsub
-    .schedule('23 0 * * *').timeZone("UTC").onRun(async context =>{
+export const markerCleaner = functions.runWith({ memory: '512MB' }).pubsub
+    .schedule('23 0 * * *').timeZone("UTC").onRun(async context => {
 
         //find timestamp for now and convert to miliSecs
         var serverTimeStmp = admin.firestore.Timestamp.now().toMillis()
@@ -159,24 +159,25 @@ export const markerCleaner = functions.runWith({memory: '512MB'}).pubsub
         //for each user in the user class, send out the 
         task.forEach(snapshot => {
             const data = snapshot.data()
-            
+
             //get doc's expiration date and convert to milis
             var expirationDate = data["expiration_date"]
             expirationDate = expirationDate.toMillis()
             console.log(`document exp date ----->> ${expirationDate}`)
-            
+
             const docId = data["id"]
             const meetupStatus = data["is_meetup_scheduled"]
 
-            if (serverTimeStmp >= expirationDate && !meetupStatus){
+            if (serverTimeStmp >= expirationDate && !meetupStatus) {
                 jobs.push(
                     deleteADoc("TaggedTrash", docId)
-                )}
+                )
+            }
         })
 
         return await Promise.all(jobs)
 
-})
+    })
 
 
 //schedule cleanup jobs everyday 1t 0:0 UTC time to cleanup unscheduled markers
@@ -199,15 +200,15 @@ export const meetupCleaner = functions.runWith({ memory: '512MB' }).pubsub
             const data = snapshot.data()
 
             //get doc's expiration date and convert to milis
-            var expirationValue = data["UTC_meetup_time_and_expiration_time"]  
+            var expirationValue = data["UTC_meetup_time_and_expiration_time"]
             console.log(`meetup document exp date ----->> ${expirationValue}`)
             const meetupDocId = data["meetup_id"]
             const parentMarkerId = data["parent_marker_id"]
-                
-                if (serverTimeStmp >= expirationValue){
-                    jobs.push(deleteADoc("Meetups", meetupDocId))
-                    jobs.push(deleteADoc("TaggedTrash", parentMarkerId))
-                }
+
+            if (serverTimeStmp >= expirationValue) {
+                jobs.push(deleteADoc("Meetups", meetupDocId))
+                jobs.push(deleteADoc("TaggedTrash", parentMarkerId))
+            }
         })
 
         return await Promise.all(jobs)
@@ -215,7 +216,7 @@ export const meetupCleaner = functions.runWith({ memory: '512MB' }).pubsub
     })
 
 //helper function to delete a document from tagged trash
-function deleteADoc(collectionId:string, docID:string){
+function deleteADoc(collectionId: string, docID: string) {
     console.log("DELETING DOCS")
     return db.collection(collectionId).doc(docID).delete()
 }

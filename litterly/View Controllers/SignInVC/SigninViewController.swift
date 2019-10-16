@@ -158,15 +158,13 @@ extension SigninViewController: FUIAuthDelegate{
             //calls func to create user in firestore
             submitUserToFirestore(with: currentUser.dictionary, for: user_id!)
             submitGeofenceInitialDataToFirestore(with: geofenceInitData.dictionary, for: user_id!)
-            
+            initFenceTriggerDocumentForUser(for: user_id!)
+            initPointsDocumentForUser(for: user_id!)
             
             let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "ContainerVC")
             
             present(mapsViewController, animated: true, completion: nil)
-            
-            
         }
-        
     }
     
     //stores user profile photo to disk
