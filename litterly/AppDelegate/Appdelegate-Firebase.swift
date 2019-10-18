@@ -66,7 +66,7 @@ extension AppDelegate{
                 //show error  alert
                 completion("failed")
             } else{
-                print("update commited successfully")
+                print("\(status) update commited successfully")
                 completion("passed")
             }
         }

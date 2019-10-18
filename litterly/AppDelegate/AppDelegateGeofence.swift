@@ -124,13 +124,13 @@ extension AppDelegate: CLLocationManagerDelegate{
         if region is CLCircularRegion{
             print("*********Entered fence********* on \(region)")
             let coordinates = region as! CLCircularRegion
-            geofenceExitHandler(for: coordinates)
+            geofenceEntranceHandler(for: coordinates)
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         if region is CLCircularRegion{
-            print("*********exited fence********* on \(region.identifier)")
+            print("*********Exited fence********* on \(region.identifier)")
             let coordinates = region as! CLCircularRegion
             geofenceExitHandler(for: coordinates)
         }

@@ -36,8 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.distanceFilter = kCLDistanceFilterNone
-        //locationManager.allowsBackgroundLocationUpdates = true
+//        locationManager.allowsBackgroundLocationUpdates = true
         locationManager.activityType = CLActivityType.automotiveNavigation
+        //locationManager.startMonitoringSignificantLocationChanges() only useful for less precision location monitoring
 
         //init push notification
         if #available(iOS 10.0, *) {
@@ -86,8 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             self.window?.rootViewController = mapsViewController
         }
     }
-    
-    
+
     //push notification callBack handlers
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         // If you are receiving a notification message while your app is in the background,
