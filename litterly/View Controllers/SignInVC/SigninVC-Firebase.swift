@@ -20,11 +20,7 @@ extension SigninViewController{
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
-            }
-
-        }
-        
-    }
+            }}}
     
     func initFenceTriggerDocumentForUser(for userId:String){
         let ref = db.collection("GeofenceTriggerTimes").document("\(userId)")
@@ -39,9 +35,7 @@ extension SigninViewController{
                         print("Succeeded creating geofence data!")
                     }
                 })//just a placeholder
-            }
-        }
-    }
+            }}}
     
     func initPointsDocumentForUser(for userId:String){
         let ref = db.collection("Points").document("\(userId)")
@@ -49,16 +43,15 @@ extension SigninViewController{
             if snapshot!.exists{
                 //document already exists
             }else{
-                ref.setData(["dont" : "delete"], completion: {(error) in
+                let data = PointsDataModel(cumulative_points: 0, total_points: 0)
+                ref.setData(data.dictionary, completion: {(error) in
                     if let error = error{
                         print("Print error submitting geofence User: ", error.localizedDescription)
                     }else{
                         print("Succeeded creating geofence data!")
                     }
-                })//just a placeholder
-            }
-        }
-    }
+                })
+            }}}
     
     func submitGeofenceInitialDataToFirestore(with geofenceDictionary: [String:Any], for id:String){
         
@@ -76,9 +69,5 @@ extension SigninViewController{
                         print("Succeeded creating geofence data!")
                     }
                 })
-            }
-        
-        }
-        
-    }
+            }}}
 }

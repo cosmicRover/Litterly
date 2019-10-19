@@ -31,6 +31,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             print("Message ID: \(messageID)")
         }
         
+        //if user is currently using the app, this gets called
+        print("********  1  ***********")
+        //logoutAndRouteTheUser()
+        
         // Print full message.
         print(userInfo)
         
@@ -46,6 +50,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
+        
+        //if the app is in background or terminated, this gets called
+        print("********  2  ***********")
+        //logoutAndRouteTheUser()
         
         // Print full message.
         print(userInfo)

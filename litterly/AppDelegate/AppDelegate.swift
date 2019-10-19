@@ -99,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("THIS IS FOR BACKFROUND regular *******************")
+            print("THIS IS FOR regular *******************")
             print("Message ID: \(messageID)")
         }
         
@@ -119,10 +119,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("THIS IS FOR BACKFROUND FETCH *******************")
+            print("THIS IS FOR background fetch *******************")
             print("Message ID: \(messageID)")
         }
         
+        //init geofence funcs
         deletePreviousGeofenceDataAndStopMonitoring { (text) in
             if text == "ok"{
                 print(userInfo)
@@ -141,10 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                                 completionHandler(UIBackgroundFetchResult.newData)
                             }
                         })
-                    }
-                }
-            }
-        }
+                    }}}}
     }
 
 }

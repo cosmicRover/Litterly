@@ -284,7 +284,7 @@ class ScheduleAlertViewController: UIViewController {
                     print("loop finished")
                     self.commitTheBatch(for: self.batch)
                     //uploading the fcm key
-                    self.helper.checkIfNotificationPermissionWasGiven()
+                    //self.helper.checkIfNotificationPermissionWasGiven()
                 }
             }
         }
