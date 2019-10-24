@@ -128,7 +128,7 @@ export const addExpirationDate = functions.firestore.document("TaggedTrash/{id}"
 
     //step 3 convert the new date to firestore timestamp
     const timeStmp = admin.firestore.Timestamp.fromDate(date)
-    const value = timeStmp.toDate()
+    const value = timeStmp.seconds
     console.log(`FIREBASE timestamp -->> ${value}`)
 
     //step 4 update expiration key to the timestamp
@@ -142,13 +142,13 @@ export const addExpirationDate = functions.firestore.document("TaggedTrash/{id}"
     })
 })
 
-//schedule cleanup jobs everyday 1t 0:0 UTC time to cleanup unscheduled markers
+//schedule cleanup jobs everyday at 23:0 UTC time to cleanup unscheduled markers
 export const markerCleaner = functions.runWith({ memory: '512MB' }).pubsub
     .schedule('23 0 * * *').timeZone("UTC").onRun(async context => {
 
-        //find timestamp for now and convert to miliSecs
-        var serverTimeStmp = admin.firestore.Timestamp.now().toMillis()
-        console.log(`TIME IN MILLLLI -> ${serverTimeStmp}`)
+        //find timestamp for now and convert to seconds
+        var serverTimeStmp = admin.firestore.Timestamp.now().seconds
+        console.log(`TIME IN seconds -> ${serverTimeStmp}`)
 
         const query = db.collection('TaggedTrash')
         const task = await query.get();
@@ -160,9 +160,8 @@ export const markerCleaner = functions.runWith({ memory: '512MB' }).pubsub
         task.forEach(snapshot => {
             const data = snapshot.data()
 
-            //get doc's expiration date and convert to milis
+            //get doc's expiration date 
             var expirationDate = data["expiration_date"]
-            expirationDate = expirationDate.toMillis()
             console.log(`document exp date ----->> ${expirationDate}`)
 
             const docId = data["id"]
@@ -210,9 +209,7 @@ export const meetupCleaner = functions.runWith({ memory: '512MB' }).pubsub
                 jobs.push(deleteADoc("TaggedTrash", parentMarkerId))
             }
         })
-
         return await Promise.all(jobs)
-
     })
 
 //helper function to delete a document from tagged trash
@@ -221,4 +218,83 @@ function deleteADoc(collectionId: string, docID: string) {
     return db.collection(collectionId).doc(docID).delete()
 }
 
+
+//schedule awarding points jobs everyday at 22:0 UTC time 
+export const awardPoints = functions.runWith({ memory: '512MB' }).pubsub
+    .schedule('22 0 * * *').timeZone("UTC").onRun(async context => {
+
+        //find timestamp for now inseconds. Keeping it at seconnds 
+        //since app sends in seconds
+        var serverTimeStmp = admin.firestore.Timestamp.now().seconds
+        console.log(`TIME IN seconds -> ${serverTimeStmp}`)
+
+        const query = db.collection('GeofenceTriggerTimes')
+        const task = await query.get();
+
+        //jobs to execute
+        const jobs: Promise<any>[] = []
+
+        //
+        task.forEach(snapshot => {
+            //these may change at any time
+            //*
+            const expectedMeetupDuration = 5
+            const pointsRatePerMeetup = 20
+            //*
+            const data = snapshot.data()
+            const docId = snapshot.id
+            var pointsToAward = 0
+
+            //use a for loop to find the matching pairs
+            for (let i = 1; i<= 10; i++){
+
+                //since snapshot is a dictionary we do a lookup in constant time to see if a complete timestamp exists
+                //e.g. insideTrigger and outsideTrigger
+                if ((data[`insideAtregion${i}`]) && (data[`outsideAtregion${i}`])){
+                    var timeSpent = data[`outsideAtregion${i}`] - data[`insideAtregion${i}`]
+                    timeSpent = timeSpent/60 // time spent in minutes
+                    console.log(`time spent from region ${i} is ${timeSpent}, docId -> ${docId}`)
+                    
+                    //determine how mnay points the user had earned
+                    switch(true){
+                        case (timeSpent >= expectedMeetupDuration):{
+                            pointsToAward += pointsRatePerMeetup
+                        }
+
+                        case ((timeSpent < expectedMeetupDuration) && (timeSpent >= expectedMeetupDuration/2)):{
+                            pointsToAward += pointsRatePerMeetup/2
+                        }
+
+                        case (timeSpent < expectedMeetupDuration/2): {
+                            pointsToAward += pointsRatePerMeetup/timeSpent
+                        }
+                    }
+                    console.log(`POINTS TO AWARD ---->>> ${~~pointsToAward}`)                   
+                }}
+                //award the point to the user
+                if (pointsToAward != 0){
+                    jobs.push(incrementPoints("Points", docId, pointsToAward|0)) 
+                }
+
+                //reset the trigger collection 
+                jobs.push(resetADoc('GeofenceTriggerTimes', docId))
+                
+            })
+
+        return await Promise.all(jobs)})
+
+//helper function to increment user points
+function incrementPoints(collectionId: string, docID: string, points: number) {
+    console.log("incrementing user points")
+    const increment = admin.firestore.FieldValue.increment(points)
+    const ref = db.collection(collectionId).doc(docID)
+    return ref.update({cumulative_points: increment, total_points: increment})
+}
+
+//helper function to delete a document from tagged trash
+function resetADoc(collectionId: string, docID: string) {
+    console.log("Reseting doc")
+    const ref = db.collection(collectionId).doc(docID)
+    return ref.set({dont : "delete"})
+}
 
