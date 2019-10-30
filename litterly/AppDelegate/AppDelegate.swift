@@ -123,26 +123,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             print("Message ID: \(messageID)")
         }
         
-        //init geofence funcs
-        deletePreviousGeofenceDataAndStopMonitoring { (text) in
-            if text == "ok"{
-                print(userInfo)
-                
-                let today:String = userInfo["day"] as! String
-                let userId:String = Auth.auth().currentUser?.email as! String
-                
-                //gets the data from firestore. Note that it can't get data if app is force killed
-                //but data gets fetched when user opens the app next
-                self.getGeofenceDataFromFirestore(for: userId, on: today) { (text) in
+        if userInfo["logout"] as! Bool == true{
+            //execute logout procedure here
+        }
+        else{
+            //init geofence funcs
+            deletePreviousGeofenceDataAndStopMonitoring { (text) in
+                if text == "ok"{
+                    print(userInfo)
                     
-                    if text == "ok"{
-                        self.readRealmDataAndStartMonitoring(completionHandler: { (text) in
-                            if text == "ok"{
-                                self.eraseGeofenceToDefaultAndSetDayCountToZero(for: "\(userId as String)", on: "\(today as String)")
-                                completionHandler(UIBackgroundFetchResult.newData)
-                            }
-                        })
-                    }}}}
+                    let today:String = userInfo["day"] as! String
+                    let userId:String = Auth.auth().currentUser?.email as! String
+                    
+                    //gets the data from firestore. Note that it can't get data if app is force killed
+                    //but data gets fetched when user opens the app next
+                    self.getGeofenceDataFromFirestore(for: userId, on: today) { (text) in
+                        
+                        if text == "ok"{
+                            self.readRealmDataAndStartMonitoring(completionHandler: { (text) in
+                                if text == "ok"{
+                                    self.eraseGeofenceToDefaultAndSetDayCountToZero(for: "\(userId as String)", on: "\(today as String)")
+                                    completionHandler(UIBackgroundFetchResult.newData)
+                                }
+                            })
+                        }}}
+            }
+        }
     }
 
 }

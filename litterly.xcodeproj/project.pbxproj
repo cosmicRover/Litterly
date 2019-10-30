@@ -18,6 +18,7 @@
 		C50C752F22978724005A16DD /* RedeemPointsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50C752D22978724005A16DD /* RedeemPointsCell.swift */; };
 		C50C753022978724005A16DD /* RedeemPointsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50C752E22978724005A16DD /* RedeemPointsCell.xib */; };
 		C50C75322297914D005A16DD /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = C50C75312297914D005A16DD /* AppIcon.appiconset */; };
+		C534CE6823690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C534CE6723690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift */; };
 		C543BF982277D5CE000C2FC7 /* MapsVC-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */; };
 		C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543BF9A2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift */; };
 		C543BF9D2277D6E3000C2FC7 /* UnscheduledMarkerInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C543BF9C2277D6E3000C2FC7 /* UnscheduledMarkerInfoWindow.xib */; };
@@ -121,6 +122,7 @@
 		C50C752D22978724005A16DD /* RedeemPointsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemPointsCell.swift; sourceTree = "<group>"; };
 		C50C752E22978724005A16DD /* RedeemPointsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedeemPointsCell.xib; sourceTree = "<group>"; };
 		C50C75312297914D005A16DD /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
+		C534CE6723690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JoinAlertVC-ValidateTimezone.swift"; sourceTree = "<group>"; };
 		C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-Firebase.swift"; sourceTree = "<group>"; };
 		C543BF9A2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscheduledMarkerInfoWindow.swift; sourceTree = "<group>"; };
 		C543BF9C2277D6E3000C2FC7 /* UnscheduledMarkerInfoWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnscheduledMarkerInfoWindow.xib; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 			children = (
 				C593FB71229359FC002FAE72 /* JoinAlertViewController.swift */,
 				C593FB79229381B9002FAE72 /* JoinAlertVC-Firebase.swift */,
+				C534CE6723690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift */,
 			);
 			path = JoinAlertVC;
 			sourceTree = "<group>";
@@ -890,6 +893,7 @@
 				C5A085B422F4F84900D10644 /* GeofenceDataModel.swift in Sources */,
 				C59C82AD2295BE3B0051F3F8 /* PlasticMeetupViewController.swift in Sources */,
 				C5863AFC228A38B5004A25E4 /* SharedValues.swift in Sources */,
+				C534CE6823690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift in Sources */,
 				C5063156226E8F100078265C /* HomeControllerDelegateProtocol.swift in Sources */,
 				C5C13D9722D6B1B100C440D7 /* TrashTagsCollectionViewCell.swift in Sources */,
 				C599F5EC2263044C0038A1A6 /* PageTwoViewController.swift in Sources */,

@@ -60,13 +60,10 @@ class ScheduleAlertViewController: UIViewController {
         
         minDate = calender.date(byAdding: components, to: currentDate)!
         meetupdatePicker.setDate(minDate, animated: true)
-        
         components.day = +7
         let maxDate = calender.date(byAdding: components, to: currentDate)
         
-//        meetupdatePicker.setDate(minDate, animated: true)
         meetupdatePicker.maximumDate = maxDate
-        
         meetupdatePicker.minuteInterval = 30
         meetupdatePicker.addTarget(self, action: #selector(handleUiDatePicker), for: .valueChanged)
         
