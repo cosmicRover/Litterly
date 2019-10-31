@@ -246,55 +246,106 @@ export const awardPoints = functions.runWith({ memory: '512MB' }).pubsub
             var pointsToAward = 0
 
             //use a for loop to find the matching pairs
-            for (let i = 1; i<= 10; i++){
+            for (let i = 1; i <= 10; i++) {
 
                 //since snapshot is a dictionary we do a lookup in constant time to see if a complete timestamp exists
                 //e.g. insideTrigger and outsideTrigger
-                if ((data[`insideAtregion${i}`]) && (data[`outsideAtregion${i}`])){
+                if ((data[`insideAtregion${i}`]) && (data[`outsideAtregion${i}`])) {
                     var timeSpent = data[`outsideAtregion${i}`] - data[`insideAtregion${i}`]
-                    timeSpent = timeSpent/60 // time spent in minutes
+                    timeSpent = timeSpent / 60 // time spent in minutes
                     console.log(`time spent from region ${i} is ${timeSpent}, docId -> ${docId}`)
-                    
+
                     //determine how mnay points the user had earned
-                    switch(true){
-                        case (timeSpent >= expectedMeetupDuration):{
+                    switch (true) {
+                        case (timeSpent >= expectedMeetupDuration): {
                             pointsToAward += pointsRatePerMeetup
                         }
 
-                        case ((timeSpent < expectedMeetupDuration) && (timeSpent >= expectedMeetupDuration/2)):{
-                            pointsToAward += pointsRatePerMeetup/2
+                        case ((timeSpent < expectedMeetupDuration) && (timeSpent >= expectedMeetupDuration / 2)): {
+                            pointsToAward += pointsRatePerMeetup / 2
                         }
 
-                        case (timeSpent < expectedMeetupDuration/2): {
-                            pointsToAward += pointsRatePerMeetup/timeSpent
+                        case (timeSpent < expectedMeetupDuration / 2): {
+                            pointsToAward += pointsRatePerMeetup / timeSpent
                         }
                     }
-                    console.log(`POINTS TO AWARD ---->>> ${~~pointsToAward}`)                   
-                }}
-                //award the point to the user
-                if (pointsToAward != 0){
-                    jobs.push(incrementPoints("Points", docId, pointsToAward|0)) 
+                    console.log(`POINTS TO AWARD ---->>> ${~~pointsToAward}`)
                 }
+            }
+            //award the point to the user
+            if (pointsToAward != 0) {
+                jobs.push(incrementPoints("Points", docId, pointsToAward | 0))
+            }
 
-                //reset the trigger collection 
-                jobs.push(resetADoc('GeofenceTriggerTimes', docId))
-                
-            })
+            //reset the trigger collection 
+            jobs.push(resetADoc('GeofenceTriggerTimes', docId))
 
-        return await Promise.all(jobs)})
+        })
+
+        return await Promise.all(jobs)
+    })
 
 //helper function to increment user points
 function incrementPoints(collectionId: string, docID: string, points: number) {
     console.log("incrementing user points")
     const increment = admin.firestore.FieldValue.increment(points)
     const ref = db.collection(collectionId).doc(docID)
-    return ref.update({cumulative_points: increment, total_points: increment})
+    return ref.update({ cumulative_points: increment, total_points: increment })
 }
 
 //helper function to delete a document from tagged trash
 function resetADoc(collectionId: string, docID: string) {
     console.log("Reseting doc")
     const ref = db.collection(collectionId).doc(docID)
-    return ref.set({dont : "delete"})
+    return ref.set({ dont: "delete" })
 }
+
+export const logoutUser = functions.runWith({ memory: '512MB' }).pubsub
+    //(* * * * *) runs every 1 minute. look up cron time to learn more
+    //at 00:00 each day
+    //configure to run at NYC time
+    .schedule('0 * * 12 *').timeZone("UTC").onRun(async context => {
+
+        //query and the task to get those queries from firebase
+        //need to get the device tokens 
+        const query = db.collection('GeofenceData')
+        const task = await query.get();
+
+        //jobs to execute
+        const jobs: Promise<any>[] = []
+
+        //for each user in the user class, send out the logout message
+        task.forEach(snapshot => {
+            const data = snapshot.data()
+
+            //gotta get today's payload ****might have to re-configure dates on firestore
+            let device_token = data["device_token"];
+
+            const payload = {
+                notification: {
+                    title: "You have been logged-out!"
+                },
+                data: {
+                    "logout": "true"//`${queryDay}`
+                }
+            };
+
+            var options = {
+                contentAvailable: true,
+                priority: "high",
+                sound: 'false'//turing off sound since user dont need to see it
+            };
+
+            // send to each individual device token retrieved from the database
+            fcm.sendToDevice(`${device_token}`, payload, options)
+                .then((response) => {
+                    console.log(response)
+                }).catch((error) => {
+                    console.log(error)
+                });
+        })
+
+        return await Promise.all(jobs)
+
+    })
 

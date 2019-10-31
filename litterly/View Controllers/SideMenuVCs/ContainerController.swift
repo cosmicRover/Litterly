@@ -171,7 +171,7 @@ class ContainerController: UIViewController{
             
         case .Logout:
             print("log user out")
-            HelperFunctions().deleteDeviceTokenn()//deletes token on sign out as to prevent notificatio being sent to a wrong device
+            HelperFunctions().deleteDeviceToken()//deletes token on sign out as to prevent notificatio being sent to a wrong device
             do {
                 try Auth.auth().signOut()
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

@@ -42,6 +42,10 @@ class ScheduleAlertViewController: UIViewController {
         setupUiDatePicker()
     }
     
+    func returnScheduleView(){
+        return self.dismiss(animated: true, completion: nil)
+    }
+    
     //sets up the datePicker with proper date + time configuration
     func setupUiDatePicker(){
         let calender = Calendar(identifier: .gregorian)

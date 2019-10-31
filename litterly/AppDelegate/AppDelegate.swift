@@ -123,8 +123,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             print("Message ID: \(messageID)")
         }
         
-        if userInfo["logout"] as! Bool == true{
+        if userInfo["logout"] as! String == "true"{
             //execute logout procedure here
+            self.logoutAndRouteTheUser()
         }
         else{
             //init geofence funcs

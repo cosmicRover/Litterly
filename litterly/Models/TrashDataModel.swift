@@ -22,6 +22,7 @@ struct TrashDataModel{
     var timezone: String
     var street_address: String
     var is_meetup_scheduled: Bool
+    var expiration_date: Double
     
     var dictionary:[String: Any]{
         return [
@@ -32,7 +33,8 @@ struct TrashDataModel{
             "trash_type" : trash_type,
             "timezone" : timezone,
             "street_address" : street_address,
-            "is_meetup_scheduled" : is_meetup_scheduled
+            "is_meetup_scheduled" : is_meetup_scheduled,
+            "expiration_date" : expiration_date
         ]
     }
 }
@@ -49,9 +51,10 @@ extension TrashDataModel: DocumentSerializable{
             let trash_type = dictionary["trash_type"] as? String,
             let timezone = dictionary["timezone"] as? String,
             let street_address = dictionary["street_address"] as? String,
-            let is_meetup_scheduled = dictionary["is_meetup_scheduled"] as? Bool else {return nil}
+            let is_meetup_scheduled = dictionary["is_meetup_scheduled"] as? Bool,
+            let expiration_date = dictionary["expiration_date"] as? Double else {return nil}
         
         
-        self.init(id: id, author: author, lat: lat, lon: lon, trash_type: trash_type, timezone: timezone, street_address: street_address, is_meetup_scheduled: is_meetup_scheduled)
+        self.init(id: id, author: author, lat: lat, lon: lon, trash_type: trash_type, timezone: timezone, street_address: street_address, is_meetup_scheduled: is_meetup_scheduled, expiration_date: expiration_date)
     }
 }
