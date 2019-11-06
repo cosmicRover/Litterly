@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseFirestore
 
-class ScheduleAlertViewController: UIViewController {
+class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var organicButton: UIButton!
@@ -18,6 +18,9 @@ class ScheduleAlertViewController: UIViewController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var meetupdatePicker: UIDatePicker!
+    @IBOutlet weak var pickerParentView: UIView!
+    @IBOutlet weak var uiPickerView: UIPickerView!
+    
     
     let cornerRadius:CGFloat = 12.0
     var scheduleWeekdayNum:Int!
@@ -33,18 +36,116 @@ class ScheduleAlertViewController: UIViewController {
         return TimeZone.current.abbreviation() ?? "unknown"
     }
     var UTCMeetupDate:Double!
+    var nextSevenDays:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        pickerParentView.isUserInteractionEnabled = false //diabling it before getting the data ready
+        generateNextSixDays()
+        
+        uiPickerView.dataSource = self
+        uiPickerView.delegate = self
+        
         roundsCorners()
         configuresColors()
-        setupUiDatePicker()
+        //setupUiDatePicker()
+    }
+    
+    //generates the next seven days with day, month, date and year
+    func generateNextSixDays(){
+        let calender = Calendar(identifier: .gregorian)
+        var components = DateComponents()
+        components.calendar = calender
+        
+        let today = Date()
+        print("today is --->>",DateFormatter.localizedString(from: today, dateStyle: .full, timeStyle: .none))
+        
+        //add two days to today and generate the next 6 days
+        for x in 2...7{
+            components.day = +x
+            let nextDay = calender.date(byAdding: components, to: today)
+            nextSevenDays.append(DateFormatter.localizedString(from: nextDay!, dateStyle: .medium, timeStyle: .none))
+        }
+        
+        pickerParentView.isUserInteractionEnabled = true //enable pickerView after generation
+        print(nextSevenDays)
     }
     
     func returnScheduleView(){
         return self.dismiss(animated: true, completion: nil)
     }
+    
+    //each section on the pickerView is called a component. This one has two, date and time
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 2
+    }
+    
+    //return the component row height
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case 0:
+            return nextSevenDays.count
+        case 1:
+            return 12
+        default:
+            fatalError()//this isn't supposed to happen
+        }
+    }
+    
+    //returns the data for the pickerViews with their default color modified
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        switch component {
+        case 0:
+            let coloredString = NSAttributedString(string: nextSevenDays[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.textWhite])
+            return coloredString
+        case 1:
+            let attributedString = NSAttributedString(string: "7 AM", attributes: [NSAttributedString.Key.foregroundColor : UIColor.textWhite])
+            return attributedString
+        default:
+            fatalError()
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     //sets up the datePicker with proper date + time configuration
     func setupUiDatePicker(){
@@ -169,17 +270,13 @@ class ScheduleAlertViewController: UIViewController {
         selectedButtonColor(selected: GlobalValues.tappedArrayElementDict.trash_type)
         createButton.backgroundColor = UIColor.mainGreen
         cancelButton.backgroundColor = UIColor.unselectedGrey
-        meetupdatePicker.setValue(UIColor.textWhite, forKey: "textColor")
+        pickerParentView.backgroundColor = UIColor.mainBlue
     }
 
     
     @IBAction func onCancelTap(_ sender: UIButton) {
         
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    func sortMarkersByMeetupStatus(){
-        
     }
     
     //on createTap, schedule a meetup and update the marker's meetup property

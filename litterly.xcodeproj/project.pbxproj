@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2FA974CC2272B0F000115FBD /* CardContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA974CB2272B0F000115FBD /* CardContentTableViewCell.swift */; };
+		C5042F2E237257B40078EDCD /* ScheduleableDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5042F2D237257B40078EDCD /* ScheduleableDates.swift */; };
 		C506314E226E8E430078265C /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C506314D226E8E430078265C /* ContainerController.swift */; };
 		C5063150226E8E7C0078265C /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C506314F226E8E7C0078265C /* MenuController.swift */; };
 		C5063152226E8ED00078265C /* MenuOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5063151226E8ED00078265C /* MenuOptionCell.swift */; };
@@ -112,6 +113,7 @@
 		2FA974CB2272B0F000115FBD /* CardContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContentTableViewCell.swift; sourceTree = "<group>"; };
 		39E256F25A70D3C807D7B6F4 /* Pods-Litterly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Litterly.release.xcconfig"; path = "Target Support Files/Pods-Litterly/Pods-Litterly.release.xcconfig"; sourceTree = "<group>"; };
 		A6E706035DFCD681245FB63D /* Pods_Litterly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Litterly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5042F2D237257B40078EDCD /* ScheduleableDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleableDates.swift; sourceTree = "<group>"; };
 		C506314D226E8E430078265C /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		C506314F226E8E7C0078265C /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		C5063151226E8ED00078265C /* MenuOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionCell.swift; sourceTree = "<group>"; };
@@ -254,6 +256,14 @@
 				39E256F25A70D3C807D7B6F4 /* Pods-Litterly.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C5042F2C237257860078EDCD /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				C5042F2D237257B40078EDCD /* ScheduleableDates.swift */,
+			);
+			path = Date;
 			sourceTree = "<group>";
 		};
 		C506314B226E8C0B0078265C /* SideMenuVCs */ = {
@@ -520,6 +530,7 @@
 		C59C82BD2295D1250051F3F8 /* Subclassing Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C5042F2C237257860078EDCD /* Date */,
 				C59C82C12295D2150051F3F8 /* Text */,
 				C58D9120225D55BE006A0390 /* Colors */,
 				C59C82C02295D1EC0051F3F8 /* UIImage */,
@@ -943,6 +954,7 @@
 				C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */,
 				C5D83E2122581793009CB884 /* AppDelegate.swift in Sources */,
 				C5C35EE322791FD300103AD9 /* DocumentSerializableProtocol.swift in Sources */,
+				C5042F2E237257B40078EDCD /* ScheduleableDates.swift in Sources */,
 				C56CEA33225D977A005DC40E /* SelectedButton.swift in Sources */,
 				2FA974CC2272B0F000115FBD /* CardContentTableViewCell.swift in Sources */,
 				C5C35EEB227A1C7B00103AD9 /* ApiKeys.swift in Sources */,
