@@ -47,6 +47,26 @@ extension MapsViewController{
         
     }
     
+    //return a marker with proper marker properties based on the expiration minutes
+    //The purpose is that it will not allow anyone to schecule meetup if the marker is about to expire
+    //can be modified for different outcomes as well
+    func assignMarkerProperty(expirationTime:Double, isMeetupScheduled:Bool, marker:GMSMarker) -> GMSMarker{
+        if (expirationTime > 10.0 && isMeetupScheduled == false) || (expirationTime > 10.0 && isMeetupScheduled == true){
+            marker.opacity = 0.8
+            marker.appearAnimation = .pop
+            return marker
+        }else if expirationTime <= 10 && isMeetupScheduled == true{
+            marker.opacity = 0.8
+            marker.appearAnimation = .pop
+            return marker
+        }else{
+            marker.opacity = 0.1
+            marker.isTappable = false
+            marker.appearAnimation = .pop
+            return marker
+        }
+    }
+    
     //a listener for markers in real time from other users
     func realTimeMarkerListener(documentId id:String){
         
@@ -67,23 +87,22 @@ extension MapsViewController{
                     
                     print("Document diff gets called")
                     
-                    
                     self.trashModelArray.append(TrashDataModel(dictionary: diff.document.data())!)
                     
                     let isMeetupScheduled = self.trashModelArray.last!.is_meetup_scheduled
                     print(isMeetupScheduled)
                     
+                    let expirationTime = self.helper.minuteParameter(for: self.trashModelArray.last!.expiration_date)
                     let position = CLLocationCoordinate2D(latitude: self.trashModelArray.last!.lat, longitude: self.trashModelArray.last!.lon)
                     let trashType = self.trashModelArray.last!.trash_type
+                    
                     let marker = self.assignAMarkerIcon(for: position, on: trashType, and: isMeetupScheduled)
-
-                    marker.opacity = 0.8
-                    //appends to marker tracking array
-                    self.markers.append(marker)
-                    marker.appearAnimation = .pop
-                    marker.map = self.mapView
+                    let filledMarker = self.assignMarkerProperty(expirationTime: expirationTime, isMeetupScheduled: isMeetupScheduled, marker: marker)
+                    self.markers.append(filledMarker)
+                    self.markers.last?.map = self.mapView
                     
                     print("TYPE ADDED->> \(diff.document.data())")
+                    print("EXPIRATION TIME --> ",expirationTime)
                     
                     //if removed (when a clean up is complete, add a ghost trail of the previous marker
                 } else if diff.type == .removed{
@@ -91,17 +110,17 @@ extension MapsViewController{
                     print("------------>>>> REMOVE TRIGGERED")
                     print("REMOVED DATA ---->> \(diff.document.data()) AND ARR COUNT ->>> \(self.trashModelArray.count)")
                     
-                    //**** experimental
                     let data = TrashDataModel(dictionary: diff.document.data())
                     let index = self.findTheIndexWithId(with: data!.id as String)
                     
                     self.justRemovedArrayElement = data
                     NotificationCenter.default.post(name: NSNotification.Name("tappedArrayElement-removed"), object: nil)
                     
-                    let placeholderData = TrashDataModel(id: self.trashModelArray[index].id, author: self.trashModelArray[index].author, lat: 90.0, lon: 180.0, trash_type: self.trashModelArray[index].trash_type, timezone: self.trashModelArray[index].timezone, street_address: self.trashModelArray[index].street_address, is_meetup_scheduled: self.trashModelArray[index].is_meetup_scheduled)
+                    let placeholderData = TrashDataModel(id: self.trashModelArray[index].id, author: self.trashModelArray[index].author, lat: 90.0, lon: 180.0, trash_type: self.trashModelArray[index].trash_type, timezone: self.trashModelArray[index].timezone, street_address: self.trashModelArray[index].street_address, is_meetup_scheduled: self.trashModelArray[index].is_meetup_scheduled, expiration_date: self.trashModelArray[index].expiration_date)
                     
                     self.trashModelArray[index] = placeholderData
-
+                    
+                    //disabling the markers from being tapped. It will get removed next time the map updates
                     self.markers[index].isTappable = false
                     self.markers[index].opacity = 0.1
 
@@ -134,12 +153,12 @@ extension MapsViewController{
                     let position = CLLocationCoordinate2D(latitude: self.trashModelArray[index].lat, longitude: self.trashModelArray[index].lon)
                     let trashType = self.trashModelArray[index].trash_type
                     let isMeetupScheduled = self.trashModelArray[index].is_meetup_scheduled
+                    let expirationTime = self.helper.minuteParameter(for: self.trashModelArray[index].expiration_date)
                     
                     let marker = self.assignAMarkerIcon(for: position, on: trashType, and: isMeetupScheduled)
+                    let filledMarker = self.assignMarkerProperty(expirationTime: expirationTime, isMeetupScheduled: isMeetupScheduled, marker: marker)
                     
-                    marker.opacity = 0.8
-                    marker.appearAnimation = .pop
-                    self.markers[index] = marker
+                    self.markers[index] = filledMarker
                     self.markers[index].map = self.mapView
 
                     print("TYPE MODDED ->>>")

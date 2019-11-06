@@ -29,14 +29,10 @@ extension ProfileViewController{
                 self.userTaggedTrash.append(TrashDataModel(dictionary: data.data())!)
                 
             }
-            
             completion(self.userTaggedTrash.count as Int)
             self.tableView.reloadData()
             //print(self.userTaggedTrash.count as Int)
-        }
-        
-        
-    }
+        }}
     
     //gets all the meetups user had joined
     func fetchUserJoinedMeetup(completion: @escaping (Int?) -> ()){
@@ -60,15 +56,11 @@ extension ProfileViewController{
                 let dataToAppend = MeetupsQueryModel(meetup_address: address as! String, meetup_date_time: meetup_date_time as! String, type_of_trash: type_of_trash as! String)
                 
                 self.userCreatedMeetups.append(dataToAppend)
-                
             }
-            
             completion(self.userCreatedMeetups.count)
             print(self.userCreatedMeetups)
             self.tableView.reloadData()
-        }
-        
-    }
+        }}
     
     //fetches the basic user info from firestore
     func fetchUserBasicInfo(completion: @escaping (String?, String?) -> ()){
@@ -85,14 +77,18 @@ extension ProfileViewController{
             snapShot.documents.forEach{
                 data in
                 
-                self.userBasicInfo = UserDataModel(dictionary: data.data())
-                
-            }
-            
+                self.userBasicInfo = UserDataModel(dictionary: data.data())}
             completion(self.userBasicInfo.user_name, self.userBasicInfo.neighborhood)
             //print(self.userTaggedTrash.count as Int)
-        }
-        
-    }
+        }}
     
-}
+    //fetches points info from firestore
+    func fetchUserPointsInfo(completion: @escaping (Double?, String?) -> ()){
+        let pointsQuery = db.collection("Points").document(userEmail!)
+        
+        pointsQuery.getDocument { (snapshot, error) in
+            print("POINTS GET CALLED *****")
+            guard let data = snapshot?.data() else{return}
+            let points = PointsDataModel(cumulative_points: data["cumulative_points"] as! Double, total_points: data["total_points"] as! Double)
+            completion(points.cumulative_points, "wow")
+        }}}

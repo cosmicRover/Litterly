@@ -26,6 +26,7 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
     var markerLat:Double!
     var markerLon:Double!
     var dayMeetupCount:Int!
+    var UTCMeetupTime:Double!
     var viewingMeetupDay:String!
     let helper = HelperFunctions()
     let alertService = AlertService()
@@ -87,26 +88,26 @@ class JoinAlertViewController: UIViewController, UICollectionViewDataSource, UIC
         
         updateConfirmedUsersArrayAndUsersIdArray(for: meetupId, with: userId, and: userPicUrl)
         
-        self.dismiss(animated: true, completion: showSuccessAlert)
+        self.dismiss(animated: true, completion: helper.showSuccessAlert)
     }
     
-    func showSuccessAlert(){
-        let alert = alertService.alertForGeneral()
-        
-        DispatchQueue.main.async {
-            self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func getTopMostViewController() -> UIViewController? {
-        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
-        
-        while let presentedViewController = topMostViewController?.presentedViewController {
-            topMostViewController = presentedViewController
-        }
-        
-        return topMostViewController
-    }
+//    func showSuccessAlert(){
+//        let alert = alertService.alertForGeneral()
+//        
+//        DispatchQueue.main.async {
+//            self.getTopMostViewController()?.present(alert, animated: true, completion: nil)
+//        }
+//    }
+//    
+//    func getTopMostViewController() -> UIViewController? {
+//        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
+//        
+//        while let presentedViewController = topMostViewController?.presentedViewController {
+//            topMostViewController = presentedViewController
+//        }
+//        
+//        return topMostViewController
+//    }
     
     func fetchMeetupDetails(){
         let meetupId = ("\(GlobalValues.tappedArrayElementDict.lat)\(GlobalValues.tappedArrayElementDict.lon)meetup")

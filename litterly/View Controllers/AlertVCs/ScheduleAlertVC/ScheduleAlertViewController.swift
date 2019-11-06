@@ -42,6 +42,10 @@ class ScheduleAlertViewController: UIViewController {
         setupUiDatePicker()
     }
     
+    func returnScheduleView(){
+        return self.dismiss(animated: true, completion: nil)
+    }
+    
     //sets up the datePicker with proper date + time configuration
     func setupUiDatePicker(){
         let calender = Calendar(identifier: .gregorian)
@@ -60,13 +64,10 @@ class ScheduleAlertViewController: UIViewController {
         
         minDate = calender.date(byAdding: components, to: currentDate)!
         meetupdatePicker.setDate(minDate, animated: true)
-        
         components.day = +7
         let maxDate = calender.date(byAdding: components, to: currentDate)
         
-//        meetupdatePicker.setDate(minDate, animated: true)
         meetupdatePicker.maximumDate = maxDate
-        
         meetupdatePicker.minuteInterval = 30
         meetupdatePicker.addTarget(self, action: #selector(handleUiDatePicker), for: .valueChanged)
         
@@ -284,7 +285,7 @@ class ScheduleAlertViewController: UIViewController {
                     print("loop finished")
                     self.commitTheBatch(for: self.batch)
                     //uploading the fcm key
-                    self.helper.checkIfNotificationPermissionWasGiven()
+                    //self.helper.checkIfNotificationPermissionWasGiven()
                 }
             }
         }

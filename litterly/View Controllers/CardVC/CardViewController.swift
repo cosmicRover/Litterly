@@ -161,7 +161,7 @@ class CardViewController: UIViewController {
                         
                         print(address!)
                         print(userCurrentNeighborhood!)
-                            let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.submitTrashType, timezone: self.localTimeZone, street_address: address!, is_meetup_scheduled: false)
+                            let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.submitTrashType, timezone: self.localTimeZone, street_address: address!, is_meetup_scheduled: false, expiration_date: 0.0)
                         self.submitTrashToFirestore(with: trashTag.dictionary, for: id)
                         self.setLocationWithGeoFirestore(for: id, on: coordinates)
                         }

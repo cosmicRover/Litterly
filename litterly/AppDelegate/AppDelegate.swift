@@ -36,8 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.distanceFilter = kCLDistanceFilterNone
-        //locationManager.allowsBackgroundLocationUpdates = true
+//        locationManager.allowsBackgroundLocationUpdates = true
         locationManager.activityType = CLActivityType.automotiveNavigation
+        //locationManager.startMonitoringSignificantLocationChanges() only useful for less precision location monitoring
 
         //init push notification
         if #available(iOS 10.0, *) {
@@ -86,8 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             self.window?.rootViewController = mapsViewController
         }
     }
-    
-    
+
     //push notification callBack handlers
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         // If you are receiving a notification message while your app is in the background,
@@ -99,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("THIS IS FOR BACKFROUND regular *******************")
+            print("THIS IS FOR regular *******************")
             print("Message ID: \(messageID)")
         }
         
@@ -110,41 +110,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     //*******for silent push notifications
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
         
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        guard let userInfo:[String:Any] = userInfo as? [String : Any] else {return} //dont think this helps since I'm null checking with if let
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-            print("THIS IS FOR BACKFROUND FETCH *******************")
+            print("THIS IS FOR background fetch *******************")
             print("Message ID: \(messageID)")
         }
         
-        deletePreviousGeofenceDataAndStopMonitoring { (text) in
-            if text == "ok"{
-                print(userInfo)
-                
-                let today:String = userInfo["day"] as! String
-                let userId:String = Auth.auth().currentUser?.email as! String
-                
-                //gets the data from firestore. Note that it can't get data if app is force killed
-                //but data gets fetched when user opens the app next
-                self.getGeofenceDataFromFirestore(for: userId, on: today) { (text) in
+        if let _ = userInfo["logout"]{
+            self.logoutAndRouteTheUser()
+        }
+        
+        
+        if let userInfo = userInfo["day"]{
+            //init geofence funcs
+            deletePreviousGeofenceDataAndStopMonitoring { (text) in
+                if text == "ok"{
+                    print(userInfo)
                     
-                    if text == "ok"{
-                        self.readRealmDataAndStartMonitoring(completionHandler: { (text) in
-                            if text == "ok"{
-                                self.eraseGeofenceToDefaultAndSetDayCountToZero(for: "\(userId as String)", on: "\(today as String)")
-                                completionHandler(UIBackgroundFetchResult.newData)
-                            }
-                        })
-                    }
-                }
+                    let today:String = userInfo as! String
+                    let userId:String = Auth.auth().currentUser?.email as! String
+                    
+                    //gets the data from firestore. Note that it can't get data if app is force killed
+                    //but data gets fetched when user opens the app next
+                    self.getGeofenceDataFromFirestore(for: userId, on: today) { (text) in
+                        
+                        if text == "ok"{
+                            self.readRealmDataAndStartMonitoring(completionHandler: { (text) in
+                                if text == "ok"{
+                                    self.eraseGeofenceToDefaultAndSetDayCountToZero(for: "\(userId as String)", on: "\(today as String)")
+                                    completionHandler(UIBackgroundFetchResult.newData)
+                                }
+                            })
+                        }}}
             }
         }
     }
-
 }

@@ -88,7 +88,7 @@ struct HelperFunctions {
         return topMostViewController
     }
     
-    //Deprecated
+    //Deprecated **DONT USE***
     func getDeviceToken(completionHandler: @escaping (String?) -> Void) {
         
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -148,5 +148,37 @@ struct HelperFunctions {
                 // Either denied or notDetermined
             }
         }
+    }
+    
+    //replaces the device_token on firestore
+    func deleteDeviceToken(){
+        let db = GlobalValues.db
+        let ref = db.collection("GeofenceData").document("\(GlobalValues.currentUserEmail as! String)")
+        let batch = Firestore.firestore().batch()
+        let updateDeviceTokenValue:[String:String] = ["device_token" : "account_signed_out"]
+        
+        batch.updateData(updateDeviceTokenValue, forDocument: ref)
+        batch.commit { (error) in
+            if error != nil{
+                print("error deleting firebase device token")
+            }else{
+                print("submitted device token delete *************")
+            }
+        }
+    }
+    
+    //finds the difference between a specified UTC time and current utc time
+    func minuteParameter(for UTCTime:Double) -> Double{
+        //base case when we encounter 0 UTCTime
+        if UTCTime == 0{
+            return 10
+        }
+        //else we return the actual remaining minutes
+        let currentUTCTime = Date().timeIntervalSince1970
+        return (UTCTime - currentUTCTime) / 60
+    }
+    
+    func logoutTheUser(){
+        
     }
 }

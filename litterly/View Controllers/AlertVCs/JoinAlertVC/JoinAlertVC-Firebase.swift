@@ -23,16 +23,17 @@ extension JoinAlertViewController{
             let address = document?.data()!["meetup_address"]
             let meetup_date_time = document?.data()!["meetup_date_time"]
             let confirmed_users = document?.data()!["confirmed_users"] as! [[String:String]]
-            let meetup_day = document?.data()!["meetup_day"] as! String
-            self.markerLat = document?.data()!["marker_lat"] as! Double
-            self.markerLon = document?.data()!["marker_lon"] as! Double
+            let meetup_day = document?.data()!["meetup_day"] as? String
+            self.markerLat = document?.data()!["marker_lat"] as? Double
+            self.markerLon = document?.data()!["marker_lon"] as? Double
+            self.UTCMeetupTime = document?.data()!["UTC_meetup_time_and_expiration_time"] as? Double
             self.viewingMeetupDay = meetup_day
             
             print("******JOIN ALERT PRE-REQ")
-            print(self.viewingMeetupDay)
-            print(self.dayMeetupCount)
+            print(self.viewingMeetupDay as! String)
             
-            self.checkDayCount(for: meetup_day as! String, completionHandler: { (count) in
+            self.checkDayCount(for: meetup_day!, completionHandler: { (count) in
+                print(self.dayMeetupCount as! Int)
                 if let count = count{
                     if count < 10{
                         self.meetupAddress.fadeTransition(0.4)
@@ -72,9 +73,7 @@ extension JoinAlertViewController{
         
     }
     
-    //*******TODO********
-    //*****get the day count before enabling the join button
-    //*****modify the meetup data model to contain a day field
+    //checks if meetup limit had been exceeded
     func checkDayCount(for day:String, completionHandler: @escaping (Int?) -> Void){
         let docId = GlobalValues.currentUserEmail
         let geofenceDataRef = GlobalValues.db.collection("GeofenceData").document("\(docId as! String)")
@@ -90,7 +89,6 @@ extension JoinAlertViewController{
                 self.dayMeetupCount = day_count as? Int
                 completionHandler(day_count as? Int)
             }
-            
         }
     }
     
@@ -121,7 +119,7 @@ extension JoinAlertViewController{
                 print("update commited successfully")
                 //uploads the fcm key when the user joins
                 self.helper.checkIfNotificationPermissionWasGiven()
-                self.showSuccessAlert()
+                self.helper.showSuccessAlert()
             }
         }
     }

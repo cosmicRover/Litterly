@@ -52,20 +52,24 @@ extension AppDelegate: CLLocationManagerDelegate{
 //        locationManager.requestState(for: region)
     }
     
-    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-        let regionId = region.identifier
-        let userId = Auth.auth().currentUser?.email as! String
-        let time = NSDate().timeIntervalSince1970
-        
-        if state == .inside{
-            geofenceIndsideHandler(for: region)
-            updateGeofenceOnTrigger(for: "\(regionId)inside", with: "\(userId)", and: "\(time)")
-            
-        }else if state == .outside{
-            geofenceExitHandler(for: region)
-            updateGeofenceOnTrigger(for: "\(regionId)outside", with: "\(userId)", and: "\(time)")
-        }
-    }
+//    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
+//        let regionId = region.identifier
+//        let userId = Auth.auth().currentUser?.email as! String
+//        let time = NSDate().timeIntervalSince1970 //***time in UTC time
+//
+//        if state == .inside{
+//            geofenceIndsideHandler(for: region)
+//            updateGeofenceOnTrigger(for: regionId, with: "\(userId)", and: time, fenseStatus: "inside") {(text) in
+//                if text != "passed"{
+//                    //error occoured sendinng timestamp
+//                    print("error sending trigger timestamp for inside")
+//                }
+//            }
+//
+//        }else if state == .outside{
+//            //geofenceExitHandler(for: region)
+//        }
+//    }
     
     func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?,
                          withError error: Error) {
@@ -77,32 +81,59 @@ extension AppDelegate: CLLocationManagerDelegate{
         print("Location Manager failed with the following error: \(error)")
     }
     
-    func geofenceEntranceHandler(for region:CLRegion){
-        print("Entered on \(region.identifier)")
+    func geofenceEntranceHandler(for coordinates:CLCircularRegion){
+        print("Entered on \(coordinates.identifier)")
+        let userId = Auth.auth().currentUser?.email!
+        let time = NSDate().timeIntervalSince1970 //***time in UTC time
+        
+        updateGeofenceOnTrigger(for: coordinates.identifier, with: userId!, and: time, fenseStatus: "inside") {(text) in
+            if text != "passed"{
+                //error occoured sendinng timestamp
+                print("error sending trigger timestamp for outside")
+            }else{
+               
+            }
+        }
     }
     
-    func geofenceIndsideHandler(for region:CLRegion){
-        print("Inside on \(region.identifier)")
+//    func geofenceIndsideHandler(for region:CLRegion){
+//        print("Inside on \(region.identifier)")
+//    }
+    
+    func geofenceExitHandler(for coordinates:CLCircularRegion){
+        print("Exited on \(coordinates.identifier)")
+        let userId = Auth.auth().currentUser?.email!
+        let time = NSDate().timeIntervalSince1970 //***time in UTC time
+        
+        updateGeofenceOnTrigger(for: coordinates.identifier, with: userId!, and: time, fenseStatus: "outside") {(text) in
+            if text != "passed"{
+                //error occoured sendinng timestamp
+                print("error sending trigger timestamp for outside")
+            }else{
+                //stop monitoring for that region
+                print("stop monitoring for", coordinates.identifier)
+                self.stopMonitoring(lat: coordinates.center.latitude, lon: coordinates.center.longitude, identifier: coordinates.identifier)
+            }
+        }
     }
     
-    func geofenceExitHandler(for region:CLRegion){
-        print("Exited on \(region.identifier)")
-    }
+    //******TODO: current issue: getting called both at once*******
     
+    //gets called as user enters/exits a region
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-
         if region is CLCircularRegion{
-            print("*********Entered fence*********")
+            print("*********Entered fence********* on \(region)")
+            let coordinates = region as! CLCircularRegion
+            geofenceEntranceHandler(for: coordinates)
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         if region is CLCircularRegion{
-            print("*********exited fence*********")
+            print("*********Exited fence********* on \(region.identifier)")
+            let coordinates = region as! CLCircularRegion
+            geofenceExitHandler(for: coordinates)
         }
     }
-    
-    //func to append data to firestore, to check if geofence gets triggered when the app is terminated. Needs more testing though
-    
     
 }

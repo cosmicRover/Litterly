@@ -48,23 +48,26 @@ extension AppDelegate{
     }
     
     //need to approach ot on a different way. It will be for the point system
-    func updateGeofenceOnTrigger(for id:String, with userId:String, and time:String){
+    func updateGeofenceOnTrigger(for regionId:String, with userId:String, and time:Double, fenseStatus status:String, completion: @escaping (String?) -> Void){
         let db = Firestore.firestore()
         let batch = Firestore.firestore().batch()
-        let meetupRef = db.collection("GeofenceProof").document("\(userId)")
+        let meetupRef = db.collection("GeofenceTriggerTimes").document("\(userId)")
         
-        batch.setData([
-            "geofence_region_id" : FieldValue.arrayUnion(["\(id)"]),
-            "users_id": FieldValue.arrayUnion(["\(userId)"]),
-            "time_stamp": FieldValue.arrayUnion(["\(time)"])
-            ], forDocument: meetupRef)
+        if status == "outside"{
+            batch.updateData(["outsideAt\(regionId)" : time ], forDocument: meetupRef)
+
+        }else if status == "inside"{
+            batch.updateData(["insideAt\(regionId)" : time ], forDocument: meetupRef)
+        }
         
         batch.commit { (err) in
             if let err = err{
                 print(err.localizedDescription)
                 //show error  alert
+                completion("failed")
             } else{
-                print("update commited successfully")
+                print("\(status) update commited successfully")
+                completion("passed")
             }
         }
     }

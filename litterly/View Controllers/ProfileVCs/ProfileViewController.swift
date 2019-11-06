@@ -26,14 +26,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     let tableView = UITableView()
 
     let trashTagAtt = ("---", "TRASHTAG")
-    let meetupAtt = ("___", "MEETUPS")
-    let pointsAtt = ("0", "POINTS")
+    let meetupAtt = ("---", "MEETUPS")
+    let pointsAtt = ("---", "POINTS")
     
     //firestore instance and the data model vars
-    let db = Firestore.firestore()
+    let db = GlobalValues.db
     var userTaggedTrash = [TrashDataModel]()
     var userCreatedMeetups = [MeetupsQueryModel]()
     var userBasicInfo:UserDataModel!
+    let userEmail = GlobalValues.currentUserEmail
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +74,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         //gets basic user info and configures them
         fetchUserBasicInfo { (name, neighborhood) in
             self.configureUsrBasicInfo(user: name as! String, on: neighborhood as! String)
+        }
+        
+        fetchUserPointsInfo { (points, bar) in
+            self.segmentedCtrl.setTitle("\(points as! Double)\n\(self.pointsAtt.1)", forSegmentAt: 2)
         }
 
     }

@@ -156,17 +156,17 @@ extension SigninViewController: FUIAuthDelegate{
             //might want to set the array objects later
             
             //calls func to create user in firestore
+            //***Bug*** it is possible to get to maps screen without fully triggering the below init methods
+            //Gotta move the last three to backend
             submitUserToFirestore(with: currentUser.dictionary, for: user_id!)
             submitGeofenceInitialDataToFirestore(with: geofenceInitData.dictionary, for: user_id!)
-            
+            initFenceTriggerDocumentForUser(for: user_id!)
+            initPointsDocumentForUser(for: user_id!)
             
             let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "ContainerVC")
             
             present(mapsViewController, animated: true, completion: nil)
-            
-            
         }
-        
     }
     
     //stores user profile photo to disk
