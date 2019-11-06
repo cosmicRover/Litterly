@@ -110,12 +110,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     //*******for silent push notifications
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
         
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        guard let userInfo:[String:Any] = userInfo as? [String : Any] else {return} //dont think this helps since I'm null checking with if let
         
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
@@ -123,17 +119,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             print("Message ID: \(messageID)")
         }
         
-        if userInfo["logout"] as! String == "true"{
-            //execute logout procedure here
+        if let _ = userInfo["logout"]{
             self.logoutAndRouteTheUser()
         }
-        else{
+        
+        
+        if let userInfo = userInfo["day"]{
             //init geofence funcs
             deletePreviousGeofenceDataAndStopMonitoring { (text) in
                 if text == "ok"{
                     print(userInfo)
                     
-                    let today:String = userInfo["day"] as! String
+                    let today:String = userInfo as! String
                     let userId:String = Auth.auth().currentUser?.email as! String
                     
                     //gets the data from firestore. Note that it can't get data if app is force killed
@@ -151,5 +148,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             }
         }
     }
-
 }
