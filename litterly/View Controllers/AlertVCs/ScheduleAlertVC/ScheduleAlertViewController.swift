@@ -27,7 +27,7 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
     var scheduleWeekdayText:String!
     let alertService = AlertService()
     let sharedValue = SharedValues.sharedInstance
-    var meetupDate:String!
+//    var meetupDate:String!
     let db = Firestore.firestore()
     let eligibleMarkerDistance = 10.0 //meters
     var batch = Firestore.firestore().batch()
@@ -37,6 +37,10 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
     }
     var UTCMeetupDate:Double!
     var nextSevenDays:[String] = []
+    var meetupTimes:[String] = ["7 AM", "8 AM", "9 AM", "10 AM",
+                                "11 AM", "12 PM", "1 PM", "2 PM",
+                                "3 PM", "4 PM", "5 PM", "6 PM", "7 PM"]
+    var finalMeetupString:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +55,11 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
         configuresColors()
         //setupUiDatePicker()
     }
+    
+    /*
+     TODO:= Comment, cleanup and seprate the code
+     need to update backend cloud functions as well
+     */
     
     //generates the next seven days with day, month, date and year
     func generateNextSixDays(){
@@ -69,7 +78,17 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
         }
         
         pickerParentView.isUserInteractionEnabled = true //enable pickerView after generation
-        print(nextSevenDays)
+        
+        //setting up initial meetup string
+        finalMeetupString = produceCompleteMeetupString(for: nextSevenDays[0], with: meetupTimes[0])
+        print(finalMeetupString as String)
+        
+        let hour = determineHour(hour: 0)
+        let formattedDate = getFormattedDate(day: 2, time: hour)
+        print(formattedDate)
+        getScheduledWeekDay(date: formattedDate)
+        UTCMeetupDate = getFormattedDateToUTCDoubleValue(date: formattedDate)
+        print("UTC TIME -->>", UTCMeetupDate as Double)
     }
     
     func returnScheduleView(){
@@ -87,7 +106,7 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
         case 0:
             return nextSevenDays.count
         case 1:
-            return 12
+            return meetupTimes.count
         default:
             fatalError()//this isn't supposed to happen
         }
@@ -100,132 +119,63 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
             let coloredString = NSAttributedString(string: nextSevenDays[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.textWhite])
             return coloredString
         case 1:
-            let attributedString = NSAttributedString(string: "7 AM", attributes: [NSAttributedString.Key.foregroundColor : UIColor.textWhite])
+            let attributedString = NSAttributedString(string: meetupTimes[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.textWhite])
             return attributedString
         default:
             fatalError()
         }
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let daysRow = pickerView.selectedRow(inComponent: 0)
+        let timesRow = pickerView.selectedRow(inComponent: 1)
+        
+        finalMeetupString = produceCompleteMeetupString(for: nextSevenDays[daysRow], with: meetupTimes[timesRow])
+        
+        let hour = determineHour(hour: timesRow)
+        let formattedDate = getFormattedDate(day: daysRow + 2, time: hour)
+        print(formattedDate)
+        getScheduledWeekDay(date: formattedDate)
+        UTCMeetupDate = getFormattedDateToUTCDoubleValue(date: formattedDate)
+        print("UTC TIME -->>", UTCMeetupDate as Double)
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //sets up the datePicker with proper date + time configuration
-    func setupUiDatePicker(){
+    func determineHour(hour:Int) -> Int{
         let calender = Calendar(identifier: .gregorian)
-        let currentDate = Date()
+        let date = Date()
+        let currentHour = calender.component(.hour, from: date)
+        
+        print("currentHour ->", currentHour)
+        
+        return (hour + 7) - currentHour
+    }
+    
+    func produceCompleteMeetupString(for day:String, with time:String) -> String {
+        let completeString = "\(day) at \(time)"
+        return completeString
+    }
+    
+    //returns a formatted date when given a date String
+    func getFormattedDate(day: Int, time: Int)-> Date {
+        let calender = Calendar(identifier: .gregorian)
+        let date = Date()
         var components = DateComponents()
-        components.calendar = calender
-        components.day = +1
+        components.day = +day
+        components.hour = +time
         
-        var minDate = calender.date(byAdding: components, to: currentDate)!
-        meetupdatePicker.minimumDate = minDate
+        let formattedDate = calender.date(byAdding: components, to: date)
         
-        //atempting to advance time by an hour if minute > 1 ***neds work**
-        if Calendar.current.component(.minute, from: Date()) > 1{
-            components.hour = +1
-        }
-        
-        minDate = calender.date(byAdding: components, to: currentDate)!
-        meetupdatePicker.setDate(minDate, animated: true)
-        components.day = +7
-        let maxDate = calender.date(byAdding: components, to: currentDate)
-        
-        meetupdatePicker.maximumDate = maxDate
-        meetupdatePicker.minuteInterval = 30
-        meetupdatePicker.addTarget(self, action: #selector(handleUiDatePicker), for: .valueChanged)
-        
-        let date = getFormattedDate(date: minDate)
-        meetupDate = date as String
-        print(meetupDate! as String)
-        
-        //converted to UTC for firestore
-        let fullDate = self.getFormattedDateToUTCDoubleValue(date: minDate)
-        print("******** UTC DOUBLE VALUE*********", fullDate)
-        UTCMeetupDate = fullDate
-        
-        scheduleWeekdayNum = Calendar.current.component(.weekday, from: minDate)
-        print("\(scheduleWeekdayNum as Int)")
-        
-        scheduleWeekdayText = helper.convertNumToWeekday(on: scheduleWeekdayNum)
-        print("\(scheduleWeekdayText as String)")
-        
+        return formattedDate!
     }
     
-    //gets the date and time selected by the user
-    @objc func handleUiDatePicker(sender: UIDatePicker){
-        
-        let date = self.getFormattedDate(date: sender.date)
-        meetupDate = date as String
-        print(meetupDate! as String)
-        
-        //converted to UTC for firestore
-        let fullDate = self.getFormattedDateToUTCDoubleValue(date: sender.date)
-        print("******** FULL DATE AND TIME*********", fullDate)
-        UTCMeetupDate = fullDate
-        
-        //int associated with weekday
-        scheduleWeekdayNum = Calendar.current.component(.weekday, from: sender.date)
-        print("\(scheduleWeekdayNum as Int)")
-        
-        scheduleWeekdayText = helper.convertNumToWeekday(on: scheduleWeekdayNum)
-        print("\(scheduleWeekdayText as String)")
-        
-    }
-    
-    //returns a formatted date when given an input
-    func getFormattedDate(date: Date) ->String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.timeStyle = DateFormatter.Style.short
-        let formattedDateAndTime = dateFormatter.string(from: date)
-        
-        return formattedDateAndTime as String
+    func getScheduledWeekDay(date:Date){
+        let weekNum = Calendar.current.component(.weekday, from: date)
+        scheduleWeekdayText = helper.convertNumToWeekday(on: weekNum)
     }
     
     //format time to UTC
     func getFormattedDateToUTCDoubleValue(date: Date) -> Double {
-        
         let UTCTimeDoubleValue = date.timeIntervalSince1970
-        
         return UTCTimeDoubleValue as Double
     }
 
@@ -352,7 +302,7 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
                                 
                             } else {
                                 //data prep
-                                let dict:MeetupDataModel = MeetupDataModel(marker_lat: marker.lat, marker_lon: marker.lon, meetup_address: marker.street_address, meetup_date_time: "\(self.meetupDate! as String)", meetup_id: meetupId, parent_marker_id: markerId, type_of_trash: marker.trash_type, author_id: "\(GlobalValues.currentUserEmail! as String)" , author_display_name: GlobalValues.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(GlobalValues.currentUserEmail! as String)", "user_pic_url" : "\(GlobalValues.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(GlobalValues.currentUserEmail! as String)"], meetup_timezone: self.localTimeZone, UTC_meetup_time_and_expiration_time: self.UTCMeetupDate,  meetup_day: "\(self.scheduleWeekdayText as String)")
+                                let dict:MeetupDataModel = MeetupDataModel(marker_lat: marker.lat, marker_lon: marker.lon, meetup_address: marker.street_address, meetup_date_time: "\(self.finalMeetupString! as String)", meetup_id: meetupId, parent_marker_id: markerId, type_of_trash: marker.trash_type, author_id: "\(GlobalValues.currentUserEmail! as String)" , author_display_name: GlobalValues.currentUserDisplayName! as String, confirmed_users: [["user_id" : "\(GlobalValues.currentUserEmail! as String)", "user_pic_url" : "\(GlobalValues.currentUserProfileImageURL! as String)"]], confirmed_users_ids: ["\(GlobalValues.currentUserEmail! as String)"], meetup_timezone: self.localTimeZone, UTC_meetup_time_and_expiration_time: self.UTCMeetupDate,  meetup_day: "\(self.scheduleWeekdayText as String)")
                                 
                                 //batch prep
                                 self.batch.setData(dict.dictionary, forDocument: meetupDocRef)
