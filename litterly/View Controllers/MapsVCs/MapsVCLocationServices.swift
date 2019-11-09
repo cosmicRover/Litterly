@@ -84,6 +84,8 @@ extension MapsViewController: CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+//        locationManager.pausesLocationUpdatesAutomatically = true
+        
         //locationManager.allowsBackgroundLocationUpdates = true
         
 //        if UIApplication.shared.applicationState == .active{
@@ -94,6 +96,7 @@ extension MapsViewController: CLLocationManagerDelegate{
 //            print("Inactive app location \(locations.last?.coordinate as! CLLocationCoordinate2D)")
 //        }
     }
+    
     
     //if auth changed, run through the switch case statements
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -115,13 +118,15 @@ extension MapsViewController: CLLocationManagerDelegate{
                 let resultChunk = objects["results"] as! [Any]
                 let getAddress = resultChunk[0] as? [String:Any]
 
-                let neighborhoodChunk = getAddress?["address_components"] as! [Any]
-                let neighborhood = neighborhoodChunk[5] as! [String:Any]
+                if let neighborhoodChunk = getAddress?["address_components"] as? [Any]{
+                    let neighborhood = neighborhoodChunk[5] as! [String:Any]
 
-                let userNeighborhood = neighborhood["short_name"] as! String
-                let formattedAddress = getAddress?["formatted_address"] as! String
-                print(formattedAddress)
-                completionHandler(formattedAddress, userNeighborhood, nil)
+                    let userNeighborhood = neighborhood["short_name"] as! String
+                    let formattedAddress = getAddress?["formatted_address"] as! String
+                    print(formattedAddress)
+                    completionHandler(formattedAddress, userNeighborhood, nil)
+                }
+                
                 
             }catch{
                 print("error reverseGeocoding " + error.localizedDescription)

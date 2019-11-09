@@ -53,7 +53,6 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
         
         roundsCorners()
         configuresColors()
-        //setupUiDatePicker()
     }
     
     /*
