@@ -330,8 +330,8 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
                 dispatcher.notify(queue: .main) {
                     print("loop finished")
                     self.commitTheBatch(for: self.batch)
-                    //uploading the fcm key
-                    //self.helper.checkIfNotificationPermissionWasGiven()
+                    //uploading the fcm key, if it hasnt already uploaded
+                    self.helper.checkIfNotificationPermissionWasGiven()
                 }
             }
         }
