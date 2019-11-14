@@ -40,6 +40,7 @@ class CardViewController: UIViewController {
     var localTimeZone: String {
         return TimeZone.current.abbreviation() ?? "unknown"
     }
+    var cameraView:UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,14 +119,38 @@ class CardViewController: UIViewController {
         trashType3.isSelected = false
     }
     
+    func hideExistingUiElements(){
+        self.LitterlySign.isHidden = true
+        self.trashType1.isHidden = true
+        self.trashType3.isHidden = true
+        self.reportTrashButton.isHidden = true
+    }
+    
+    func insertCameraView(){
+        cameraView = UIView(frame: CGRect(x: 0, y: self.handleArea.frame.size.height, width: self.cardView.frame.size.width, height: self.cardView.frame.size.height))
+        cameraView.backgroundColor = UIColor.clear
+        self.view.addSubview(self.cameraView)
+    }
+    
     //func that will request lat, lon, trash type in order to got to the next steps of reporting trash
     @IBAction func reportTrashButtonOnTap(_ sender: UIButton) {
         print("report trash tapped!!")
-        executeTagTrash()
         
+        self.insertCameraView()
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+            self.cameraView.backgroundColor = UIColor.yellow
+        }) { (_) in
+            
+        }
+        //transition to the camera view
+        
+        
+//        executeTagTrash()
+    
         //Posting a notification so the card can be lowered
-        NotificationCenter.default.post(name: NSNotification.Name("reportTapped"), object: nil)
-        deselectAllTrashTypeButtons()
+//        NotificationCenter.default.post(name: NSNotification.Name("reportTapped"), object: nil)
+//        deselectAllTrashTypeButtons()
     }
     
     

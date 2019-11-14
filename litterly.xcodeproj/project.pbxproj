@@ -19,6 +19,8 @@
 		C50C752F22978724005A16DD /* RedeemPointsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50C752D22978724005A16DD /* RedeemPointsCell.swift */; };
 		C50C753022978724005A16DD /* RedeemPointsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50C752E22978724005A16DD /* RedeemPointsCell.xib */; };
 		C50C75322297914D005A16DD /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = C50C75312297914D005A16DD /* AppIcon.appiconset */; };
+		C52C0EFB237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0EFA237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift */; };
+		C52C0EFD237CB83D009120BE /* ScheduleAlertVc-Pic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0EFC237CB83D009120BE /* ScheduleAlertVc-Pic.swift */; };
 		C534CE6823690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C534CE6723690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift */; };
 		C543BF982277D5CE000C2FC7 /* MapsVC-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */; };
 		C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543BF9A2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift */; };
@@ -124,6 +126,8 @@
 		C50C752D22978724005A16DD /* RedeemPointsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemPointsCell.swift; sourceTree = "<group>"; };
 		C50C752E22978724005A16DD /* RedeemPointsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedeemPointsCell.xib; sourceTree = "<group>"; };
 		C50C75312297914D005A16DD /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
+		C52C0EFA237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleAlertVc-PickerViewDelegate.swift"; sourceTree = "<group>"; };
+		C52C0EFC237CB83D009120BE /* ScheduleAlertVc-Pic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleAlertVc-Pic.swift"; sourceTree = "<group>"; };
 		C534CE6723690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JoinAlertVC-ValidateTimezone.swift"; sourceTree = "<group>"; };
 		C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-Firebase.swift"; sourceTree = "<group>"; };
 		C543BF9A2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscheduledMarkerInfoWindow.swift; sourceTree = "<group>"; };
@@ -559,6 +563,8 @@
 			children = (
 				C5863AFD228A3D64004A25E4 /* ScheduleAlertVC-Firebase.swift */,
 				C5907FAB2284EDBE001E720D /* ScheduleAlertViewController.swift */,
+				C52C0EFA237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift */,
+				C52C0EFC237CB83D009120BE /* ScheduleAlertVc-Pic.swift */,
 			);
 			path = ScheduleAlertVC;
 			sourceTree = "<group>";
@@ -963,6 +969,7 @@
 				C5D8C78C2304C7E500A5D968 /* RealmGeofenceSaveModel.swift in Sources */,
 				C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */,
 				C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */,
+				C52C0EFD237CB83D009120BE /* ScheduleAlertVc-Pic.swift in Sources */,
 				C5A085B622F4FF8C00D10644 /* Appdelegate-Firebase.swift in Sources */,
 				C5907FAC2284EDBE001E720D /* ScheduleAlertViewController.swift in Sources */,
 				C5D8C78E2304C8EE00A5D968 /* AppDelegate-Realm.swift in Sources */,
@@ -974,6 +981,7 @@
 				C5E8F20522656A0C009FAE68 /* AuthPickerViewController.swift in Sources */,
 				C59C82AB2295B09F0051F3F8 /* MeetupVC-Firebase.swift in Sources */,
 				C5931BD6225EBBA400ECBEEB /* MapsVC-SearchButton.swift in Sources */,
+				C52C0EFB237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift in Sources */,
 				C5DFA17922EFE9B700E16E21 /* AppDelegate-PushNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

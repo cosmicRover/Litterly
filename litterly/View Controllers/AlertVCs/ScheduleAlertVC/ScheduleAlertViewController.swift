@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseFirestore
 
-class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ScheduleAlertViewController: UIViewController{
     
     @IBOutlet weak var parentView: UIView!
     @IBOutlet weak var organicButton: UIButton!
@@ -20,6 +20,7 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
     @IBOutlet weak var meetupdatePicker: UIDatePicker!
     @IBOutlet weak var pickerParentView: UIView!
     @IBOutlet weak var uiPickerView: UIPickerView!
+    @IBOutlet weak var cameraButton: UIButton!
     
     
     let cornerRadius:CGFloat = 12.0
@@ -27,7 +28,6 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
     var scheduleWeekdayText:String!
     let alertService = AlertService()
     let sharedValue = SharedValues.sharedInstance
-//    var meetupDate:String!
     let db = Firestore.firestore()
     let eligibleMarkerDistance = 10.0 //meters
     var batch = Firestore.firestore().batch()
@@ -55,128 +55,6 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
         configuresColors()
     }
     
-    /*
-     TODO:= Comment, cleanup and seprate the code
-     need to update backend cloud functions as well
-     */
-    
-    //generates the next seven days with day, month, date and year
-    func generateNextSixDays(){
-        let calender = Calendar(identifier: .gregorian)
-        var components = DateComponents()
-        components.calendar = calender
-        
-        let today = Date()
-        print("today is --->>",DateFormatter.localizedString(from: today, dateStyle: .full, timeStyle: .none))
-        
-        //add two days to today and generate the next 6 days
-        for x in 2...7{
-            components.day = +x
-            let nextDay = calender.date(byAdding: components, to: today)
-            nextSevenDays.append(DateFormatter.localizedString(from: nextDay!, dateStyle: .medium, timeStyle: .none))
-        }
-        
-        pickerParentView.isUserInteractionEnabled = true //enable pickerView after generation
-        
-        //setting up initial meetup string
-        finalMeetupString = produceCompleteMeetupString(for: nextSevenDays[0], with: meetupTimes[0])
-        print(finalMeetupString as String)
-        
-        let hour = determineHour(hour: 0)
-        let formattedDate = getFormattedDate(day: 2, time: hour)
-        print(formattedDate)
-        getScheduledWeekDay(date: formattedDate)
-        UTCMeetupDate = getFormattedDateToUTCDoubleValue(date: formattedDate)
-        print("UTC TIME -->>", UTCMeetupDate as Double)
-    }
-    
-    func returnScheduleView(){
-        return self.dismiss(animated: true, completion: nil)
-    }
-    
-    //each section on the pickerView is called a component. This one has two, date and time
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
-    }
-    
-    //return the component row height
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch component {
-        case 0:
-            return nextSevenDays.count
-        case 1:
-            return meetupTimes.count
-        default:
-            fatalError()//this isn't supposed to happen
-        }
-    }
-    
-    //returns the data for the pickerViews with their default color modified
-    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        switch component {
-        case 0:
-            let coloredString = NSAttributedString(string: nextSevenDays[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.textWhite])
-            return coloredString
-        case 1:
-            let attributedString = NSAttributedString(string: meetupTimes[row], attributes: [NSAttributedString.Key.foregroundColor : UIColor.textWhite])
-            return attributedString
-        default:
-            fatalError()
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let daysRow = pickerView.selectedRow(inComponent: 0)
-        let timesRow = pickerView.selectedRow(inComponent: 1)
-        
-        finalMeetupString = produceCompleteMeetupString(for: nextSevenDays[daysRow], with: meetupTimes[timesRow])
-        
-        let hour = determineHour(hour: timesRow)
-        let formattedDate = getFormattedDate(day: daysRow + 2, time: hour)
-        print(formattedDate)
-        getScheduledWeekDay(date: formattedDate)
-        UTCMeetupDate = getFormattedDateToUTCDoubleValue(date: formattedDate)
-        print("UTC TIME -->>", UTCMeetupDate as Double)
-    }
-    
-    func determineHour(hour:Int) -> Int{
-        let calender = Calendar(identifier: .gregorian)
-        let date = Date()
-        let currentHour = calender.component(.hour, from: date)
-        
-        print("currentHour ->", currentHour)
-        
-        return (hour + 7) - currentHour
-    }
-    
-    func produceCompleteMeetupString(for day:String, with time:String) -> String {
-        let completeString = "\(day) at \(time)"
-        return completeString
-    }
-    
-    //returns a formatted date when given a date String
-    func getFormattedDate(day: Int, time: Int)-> Date {
-        let calender = Calendar(identifier: .gregorian)
-        let date = Date()
-        var components = DateComponents()
-        components.day = +day
-        components.hour = +time
-        
-        let formattedDate = calender.date(byAdding: components, to: date)
-        
-        return formattedDate!
-    }
-    
-    func getScheduledWeekDay(date:Date){
-        let weekNum = Calendar.current.component(.weekday, from: date)
-        scheduleWeekdayText = helper.convertNumToWeekday(on: weekNum)
-    }
-    
-    //format time to UTC
-    func getFormattedDateToUTCDoubleValue(date: Date) -> Double {
-        let UTCTimeDoubleValue = date.timeIntervalSince1970
-        return UTCTimeDoubleValue as Double
-    }
 
     func roundsCorners(){
         parentView.layer.cornerRadius = cornerRadius
@@ -185,6 +63,7 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
         metalButton.layer.cornerRadius = cornerRadius
         cancelButton.layer.cornerRadius = cornerRadius
         createButton.layer.cornerRadius = cornerRadius
+        cameraButton.layer.cornerRadius = cornerRadius
     }
     
     //decides which button to color orange
@@ -220,8 +99,15 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
         createButton.backgroundColor = UIColor.mainGreen
         cancelButton.backgroundColor = UIColor.unselectedGrey
         pickerParentView.backgroundColor = UIColor.mainBlue
+        cameraButton.backgroundColor = UIColor.unselectedGrey
     }
-
+    
+    
+    @IBAction func onCameraButtonTap(_ sender: UIButton) {
+        print("camera button tapped")
+        //let user upload a photo
+    }
+    
     
     @IBAction func onCancelTap(_ sender: UIButton) {
         
@@ -235,8 +121,6 @@ class ScheduleAlertViewController: UIViewController, UIPickerViewDataSource, UIP
         let dispatcher = DispatchGroup()
         var loopCounter = 0
         var todayCount:Int!
-        
-        
         
         getMeetupDayCount(for: "\(GlobalValues.currentUserEmail! as String)") { (count) in
             todayCount = count
