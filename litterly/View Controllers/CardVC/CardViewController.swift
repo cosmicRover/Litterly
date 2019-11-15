@@ -51,6 +51,7 @@ class CardViewController: UIViewController {
         
         geoFirestore = GeoFirestore(collectionRef: firestoreCollection)
     }
+    
 
     //rounds the button's corners
     func roundButtonCorners(){
@@ -127,23 +128,19 @@ class CardViewController: UIViewController {
     }
     
     func insertCameraView(){
-        cameraView = UIView(frame: CGRect(x: 0, y: self.handleArea.frame.size.height, width: self.cardView.frame.size.width, height: self.cardView.frame.size.height))
-        cameraView.backgroundColor = UIColor.clear
-        self.view.addSubview(self.cameraView)
+        
     }
     
     //func that will request lat, lon, trash type in order to got to the next steps of reporting trash
     @IBAction func reportTrashButtonOnTap(_ sender: UIButton) {
         print("report trash tapped!!")
+        let height = self.view.frame.height
+        let width = self.view.frame.width
         
-        self.insertCameraView()
+        //TODO build cameraVC
+        let cameraVC = CameraViewController(height: Double(height), width: Double(width))
         
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
-            self.cameraView.backgroundColor = UIColor.yellow
-        }) { (_) in
-            
-        }
-        //transition to the camera view
+        self.view.addSubview(cameraVC.view)
         
         
 //        executeTagTrash()
