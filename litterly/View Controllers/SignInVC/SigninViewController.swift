@@ -18,6 +18,7 @@ class SigninViewController: UIViewController {
     let signInButton = UIButton()
     let db = Firestore.firestore()
     var userDataModel = [UserDataModel]()
+    let helper = HelperFunctions()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,8 +140,6 @@ extension SigninViewController: FUIAuthDelegate{
             let user_name = firebaseUserInstance.displayName!
             let profile_pic_url = firebaseUserInstance.photoURL?.absoluteString as! String
             
-            let singletonValues = SharedValues.sharedInstance
-            
             GlobalValues.currentUserEmail = user_id
             GlobalValues.currentUserDisplayName = user_name
             GlobalValues.currentUserProfileImageURL = profile_pic_url
@@ -149,12 +148,17 @@ extension SigninViewController: FUIAuthDelegate{
             
             let currentUser = UserDataModel(user_id: user_id!, user_name: user_name, profile_pic_url: profile_pic_url, neighborhood: "")
      
-            submitUserToFirestore(with: currentUser.dictionary, for: user_id!)
+            submitUserToFirestore(with: currentUser.dictionary, for: user_id!) { (result) in
+                if result != "fail"{
+                    let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "ContainerVC")
+                    self.present(mapsViewController, animated: true, completion: nil)
+                }else{
+                    self.helper.showErrorAlert()
+                }
+            }
 
             
-            let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "ContainerVC")
             
-            present(mapsViewController, animated: true, completion: nil)
         }
     }
     

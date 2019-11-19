@@ -136,16 +136,16 @@ class CardViewController: UIViewController {
         print("report trash tapped!!")
         let height = self.view.frame.height
         let width = self.view.frame.width
-        
-        //TODO build cameraVC
+//
+//        //TODO build cameraVC
         let cameraVC = CameraViewController(height: Double(height), width: Double(width))
-        
+
         self.view.addSubview(cameraVC.view)
         
         
 //        executeTagTrash()
-    
-        //Posting a notification so the card can be lowered
+//
+//        //Posting a notification so the card can be lowered
 //        NotificationCenter.default.post(name: NSNotification.Name("reportTapped"), object: nil)
 //        deselectAllTrashTypeButtons()
     }
