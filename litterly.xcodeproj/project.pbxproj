@@ -25,7 +25,6 @@
 		C543BF982277D5CE000C2FC7 /* MapsVC-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */; };
 		C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543BF9A2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift */; };
 		C543BF9D2277D6E3000C2FC7 /* UnscheduledMarkerInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C543BF9C2277D6E3000C2FC7 /* UnscheduledMarkerInfoWindow.xib */; };
-		C544A5DB2383889F00EB1424 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C544A5DA2383889F00EB1424 /* CameraView.swift */; };
 		C564B480226A9EB300F2DEF1 /* MapsVCLocationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564B47F226A9EB300F2DEF1 /* MapsVCLocationServices.swift */; };
 		C564B483226AA05B00F2DEF1 /* TrashDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C564B482226AA05B00F2DEF1 /* TrashDataModel.swift */; };
 		C56CEA33225D977A005DC40E /* SelectedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56CEA32225D977A005DC40E /* SelectedButton.swift */; };
@@ -134,7 +133,6 @@
 		C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-Firebase.swift"; sourceTree = "<group>"; };
 		C543BF9A2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscheduledMarkerInfoWindow.swift; sourceTree = "<group>"; };
 		C543BF9C2277D6E3000C2FC7 /* UnscheduledMarkerInfoWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UnscheduledMarkerInfoWindow.xib; sourceTree = "<group>"; };
-		C544A5DA2383889F00EB1424 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		C564B47F226A9EB300F2DEF1 /* MapsVCLocationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsVCLocationServices.swift; sourceTree = "<group>"; };
 		C564B482226AA05B00F2DEF1 /* TrashDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashDataModel.swift; sourceTree = "<group>"; };
 		C56CEA32225D977A005DC40E /* SelectedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedButton.swift; sourceTree = "<group>"; };
@@ -754,7 +752,6 @@
 		C5F9A01E237E2F0E00D58D80 /* CameraView */ = {
 			isa = PBXGroup;
 			children = (
-				C544A5DA2383889F00EB1424 /* CameraView.swift */,
 			);
 			path = CameraView;
 			sourceTree = "<group>";
@@ -984,7 +981,6 @@
 				C5D83E2122581793009CB884 /* AppDelegate.swift in Sources */,
 				C5C35EE322791FD300103AD9 /* DocumentSerializableProtocol.swift in Sources */,
 				C5042F2E237257B40078EDCD /* ScheduleableDates.swift in Sources */,
-				C544A5DB2383889F00EB1424 /* CameraView.swift in Sources */,
 				C56CEA33225D977A005DC40E /* SelectedButton.swift in Sources */,
 				2FA974CC2272B0F000115FBD /* CardContentTableViewCell.swift in Sources */,
 				C5C35EEB227A1C7B00103AD9 /* ApiKeys.swift in Sources */,

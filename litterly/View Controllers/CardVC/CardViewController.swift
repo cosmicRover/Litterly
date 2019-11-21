@@ -137,10 +137,13 @@ class CardViewController: UIViewController {
         let height = self.view.frame.height
         let width = self.view.frame.width
 //
-//        //TODO build cameraVC
+//      //steps to add a subVC
         let cameraVC = CameraViewController(height: Double(height), width: Double(width))
-
         self.view.addSubview(cameraVC.view)
+        self.addChild(cameraVC)
+        cameraVC.didMove(toParent: self)
+//        self.addChild(cameraVC)
+//        cameraVC.didMove(toParent: self)
         
         
 //        executeTagTrash()
