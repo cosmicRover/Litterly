@@ -15,6 +15,7 @@ class CameraViewController: UIViewController {
     
     let cameraIcon = UIImage(named: "camera")?.withRenderingMode(.alwaysOriginal)
     let backIcon = UIImage(named: "white_back_arrow")?.withRenderingMode(.alwaysOriginal)
+    var imagePicker: UIImagePickerController!
     
     lazy var cameraView:UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.width, height: self.height))
@@ -86,6 +87,13 @@ class CameraViewController: UIViewController {
         return button
     }()
     
+    lazy var imageView:UIImageView = {
+       let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "blue")
+        return imageView
+    }()
+    
     
     init(height:Double, width:Double){
         self.height = height
@@ -129,21 +137,34 @@ extension CameraViewController{
             subtitle.centerXAnchor.constraint(equalTo: cameraView.centerXAnchor, constant: 0)
         ])
         
-        cameraView.addSubview(cameraButton)
-        cameraButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cameraButton.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 20),
-            cameraButton.centerXAnchor.constraint(equalTo: cameraView.centerXAnchor)
-        ])
-        
         cameraView.addSubview(submitButton)
         submitButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            submitButton.leftAnchor.constraint(equalTo: cameraView.leftAnchor, constant: 24),
             submitButton.heightAnchor.constraint(equalToConstant: 52),
+            submitButton.leftAnchor.constraint(equalTo: cameraView.leftAnchor, constant: 24),
             submitButton.rightAnchor.constraint(equalTo: cameraView.rightAnchor, constant: -24),
             submitButton.bottomAnchor.constraint(equalTo: cameraView.bottomAnchor, constant: -20)
         ])
+        
+        cameraView.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 8),
+            imageView.bottomAnchor.constraint(equalTo: submitButton.topAnchor, constant: -8),
+            imageView.leftAnchor.constraint(equalTo: cameraView.leftAnchor, constant: 24),
+            imageView.rightAnchor.constraint(equalTo: cameraView.rightAnchor, constant: -24)
+        ])
+       
+        imageView.addSubview(cameraButton)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        cameraButton.isUserInteractionEnabled = true
+        NSLayoutConstraint.activate([
+            cameraButton.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            cameraButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
+        ])
+        
+        
     }
     
     func addTargets(){
@@ -156,14 +177,30 @@ extension CameraViewController{
         print("dismiss view")
         //must do these do remove a subVC from parent
         self.view.removeFromSuperview()
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func initCamera(){
         print("camera tapped!!")
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .camera
+        
+        //TODO fix the issue where presenting a camera prings mapView to back
+        //Think I should present the camera as an Alert and get the image from there..
+        
     }
     
     @objc func executeTag(){
         print("execute tag!!")
     }
+}
+
+extension CameraViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        imagePicker.dismiss(animated: true, completion: nil)//should do some on completion eg. size shrink?
+        imageView.image = info[.originalImage] as? UIImage
+    }
+    
+    
 }
