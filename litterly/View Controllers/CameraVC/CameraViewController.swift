@@ -10,6 +10,8 @@ import UIKit
 
 class CameraViewController: UIViewController {
     
+//    var delegate: PassImageDelegate
+    
     let height:Double
     let width:Double
     
@@ -75,6 +77,7 @@ class CameraViewController: UIViewController {
         button.setAttributedTitle(attText, for: .normal)
         button.backgroundColor = UIColor.mainGreen
         button.layer.cornerRadius = 12
+        button.isEnabled = false
         return button
     }()
     
@@ -91,6 +94,7 @@ class CameraViewController: UIViewController {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "blue")
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -149,6 +153,7 @@ extension CameraViewController{
         cameraView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isUserInteractionEnabled = true
+        imageView.layer.cornerRadius = 12
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 8),
             imageView.bottomAnchor.constraint(equalTo: submitButton.topAnchor, constant: -8),
@@ -163,7 +168,6 @@ extension CameraViewController{
             cameraButton.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             cameraButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
         ])
-        
         
     }
     
@@ -182,12 +186,17 @@ extension CameraViewController{
     
     @objc func initCamera(){
         print("camera tapped!!")
-        imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        
+    
         //TODO fix the issue where presenting a camera prings mapView to back
         //Think I should present the camera as an Alert and get the image from there..
+        let vc = HelperFunctions().getTopMostViewController()
+        let alert = Camera()
+        alert.delegate = self
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            vc?.present(alert, animated: true, completion: nil)
+        }
+        
         
     }
     
@@ -196,11 +205,14 @@ extension CameraViewController{
     }
 }
 
-extension CameraViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imagePicker.dismiss(animated: true, completion: nil)//should do some on completion eg. size shrink?
-        imageView.image = info[.originalImage] as? UIImage
+extension CameraViewController: PassImageDelegate {
+    func getImage(image: UIImage) {
+        //TODO fix image and clean up code
+        self.imageView.image = image
+        self.cameraButton.isHidden = true
+        submitButton.isEnabled = true
     }
+    
     
     
 }

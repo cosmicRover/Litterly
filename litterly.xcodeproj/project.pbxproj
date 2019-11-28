@@ -19,6 +19,7 @@
 		C50C752F22978724005A16DD /* RedeemPointsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50C752D22978724005A16DD /* RedeemPointsCell.swift */; };
 		C50C753022978724005A16DD /* RedeemPointsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50C752E22978724005A16DD /* RedeemPointsCell.xib */; };
 		C50C75322297914D005A16DD /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = C50C75312297914D005A16DD /* AppIcon.appiconset */; };
+		C50D56DA238F3D640018BF42 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D56D9238F3D640018BF42 /* Camera.swift */; };
 		C52C0EFB237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0EFA237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift */; };
 		C52C0EFD237CB83D009120BE /* ScheduleAlertVc-Pic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0EFC237CB83D009120BE /* ScheduleAlertVc-Pic.swift */; };
 		C534CE6823690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C534CE6723690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift */; };
@@ -127,6 +128,7 @@
 		C50C752D22978724005A16DD /* RedeemPointsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemPointsCell.swift; sourceTree = "<group>"; };
 		C50C752E22978724005A16DD /* RedeemPointsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedeemPointsCell.xib; sourceTree = "<group>"; };
 		C50C75312297914D005A16DD /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
+		C50D56D9238F3D640018BF42 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		C52C0EFA237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleAlertVc-PickerViewDelegate.swift"; sourceTree = "<group>"; };
 		C52C0EFC237CB83D009120BE /* ScheduleAlertVc-Pic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleAlertVc-Pic.swift"; sourceTree = "<group>"; };
 		C534CE6723690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JoinAlertVC-ValidateTimezone.swift"; sourceTree = "<group>"; };
@@ -745,6 +747,7 @@
 			isa = PBXGroup;
 			children = (
 				C5F9A025237E30DF00D58D80 /* CameraViewController.swift */,
+				C50D56D9238F3D640018BF42 /* Camera.swift */,
 			);
 			path = CameraVC;
 			sourceTree = "<group>";
@@ -972,6 +975,7 @@
 				C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */,
 				C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */,
 				C50C752F22978724005A16DD /* RedeemPointsCell.swift in Sources */,
+				C50D56DA238F3D640018BF42 /* Camera.swift in Sources */,
 				C56CEA35225D9E87005DC40E /* MapsVC-GoogleMaps.swift in Sources */,
 				C564B480226A9EB300F2DEF1 /* MapsVCLocationServices.swift in Sources */,
 				C5B6858A2294DAF300421EE1 /* GeneralAlertViewController.swift in Sources */,
