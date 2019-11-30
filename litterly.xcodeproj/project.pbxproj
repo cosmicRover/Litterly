@@ -109,6 +109,7 @@
 		C5E8F20522656A0C009FAE68 /* AuthPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F20322656A0C009FAE68 /* AuthPickerViewController.swift */; };
 		C5E8F20622656A0C009FAE68 /* AuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5E8F20422656A0C009FAE68 /* AuthPickerViewController.xib */; };
 		C5F9A026237E30DF00D58D80 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F9A025237E30DF00D58D80 /* CameraViewController.swift */; };
+		C5FD04202391EF3B00C492A9 /* capture.json in Resources */ = {isa = PBXBuildFile; fileRef = C5FD041F2391EF3A00C492A9 /* capture.json */; };
 		D34B1F79709B5F5A3BD8D8B6 /* Pods_Litterly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E706035DFCD681245FB63D /* Pods_Litterly.framework */; };
 /* End PBXBuildFile section */
 
@@ -221,6 +222,7 @@
 		C5E8F20322656A0C009FAE68 /* AuthPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPickerViewController.swift; sourceTree = "<group>"; };
 		C5E8F20422656A0C009FAE68 /* AuthPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthPickerViewController.xib; sourceTree = "<group>"; };
 		C5F9A025237E30DF00D58D80 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		C5FD041F2391EF3A00C492A9 /* capture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capture.json; sourceTree = "<group>"; };
 		CCB928DB4E5E78DB217C54B3 /* Pods-Litterly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Litterly.debug.xcconfig"; path = "Target Support Files/Pods-Litterly/Pods-Litterly.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -375,6 +377,7 @@
 		C584FC622266986D00ED1B53 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				C5FD041F2391EF3A00C492A9 /* capture.json */,
 				C5B6858C2294E08800421EE1 /* check.json */,
 				C584FC6022668F3200ED1B53 /* alert.json */,
 				C5AD39E922CD258100258C5B /* broken-stick.json */,
@@ -836,6 +839,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5FD04202391EF3B00C492A9 /* capture.json in Resources */,
 				C50C75322297914D005A16DD /* AppIcon.appiconset in Resources */,
 				C5B6858D2294E08800421EE1 /* check.json in Resources */,
 				C5E8F20622656A0C009FAE68 /* AuthPickerViewController.xib in Resources */,

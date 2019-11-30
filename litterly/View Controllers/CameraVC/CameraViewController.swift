@@ -67,14 +67,27 @@ class CameraViewController: UIViewController {
     lazy var submitButton:UIButton = {
         let button = UIButton()
         let font = UIFont(name: "Marker Felt", size: 17)
-        let color = UIColor.textWhite
+        var color = UIColor.textWhite
         let text = "Report it!"
-        let atts:[NSAttributedString.Key : Any] = [
+        var atts:[NSAttributedString.Key : Any] = [
             .font : font as Any,
             .foregroundColor : color,
         ]
-        let attText = NSAttributedString(string: text, attributes: atts)
+        var attText = NSAttributedString(string: text, attributes: atts)
         button.setAttributedTitle(attText, for: .normal)
+        
+        color = UIColor.lightText
+        atts = [
+            .font : font as Any,
+            .foregroundColor : color,
+        ]
+        
+        attText = NSAttributedString(string: text, attributes: atts)
+        button.setAttributedTitle(attText, for: .disabled)
+        
+        
+        
+        button.isEnabled = false
         button.backgroundColor = UIColor.mainGreen
         button.layer.cornerRadius = 12
         button.isEnabled = false
@@ -93,8 +106,9 @@ class CameraViewController: UIViewController {
     lazy var imageView:UIImageView = {
        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 12
         imageView.image = UIImage(named: "blue")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
@@ -153,7 +167,6 @@ extension CameraViewController{
         cameraView.addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isUserInteractionEnabled = true
-        imageView.layer.cornerRadius = 12
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: subtitle.bottomAnchor, constant: 8),
             imageView.bottomAnchor.constraint(equalTo: submitButton.topAnchor, constant: -8),
@@ -168,7 +181,6 @@ extension CameraViewController{
             cameraButton.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             cameraButton.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
         ])
-        
     }
     
     func addTargets(){
@@ -186,18 +198,14 @@ extension CameraViewController{
     
     @objc func initCamera(){
         print("camera tapped!!")
-    
-        //TODO fix the issue where presenting a camera prings mapView to back
-        //Think I should present the camera as an Alert and get the image from there..
-        let vc = HelperFunctions().getTopMostViewController()
+
+        let cameraVC = HelperFunctions().getTopMostViewController()
         let alert = Camera()
         alert.delegate = self
         
         DispatchQueue.main.asyncAfter(deadline: .now()) {
-            vc?.present(alert, animated: true, completion: nil)
+            cameraVC?.present(alert, animated: true, completion: nil)
         }
-        
-        
     }
     
     @objc func executeTag(){
@@ -207,7 +215,7 @@ extension CameraViewController{
 
 extension CameraViewController: PassImageDelegate {
     func getImage(image: UIImage) {
-        //TODO fix image and clean up code
+        subtitle.text = "Go ahead, tag this trash."
         self.imageView.image = image
         self.cameraButton.isHidden = true
         submitButton.isEnabled = true

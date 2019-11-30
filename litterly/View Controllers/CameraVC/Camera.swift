@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Lottie
 
 protocol PassImageDelegate {
     func getImage(image: UIImage)
@@ -21,6 +22,7 @@ class Camera: UIViewController, AVCapturePhotoCaptureDelegate {
     var captureSession: AVCaptureSession!
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
+    let animationView = AnimationView(name: "capture")
     
     
     lazy var camerView:UIView = {
@@ -30,20 +32,25 @@ class Camera: UIViewController, AVCapturePhotoCaptureDelegate {
         return view
     }()
     
-    lazy var captureButton:UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Capture", for: .normal)
-        button.addTarget(self, action: #selector(didTakePhoto), for: .touchUpInside)
-        return button
+    lazy var tapGesture:UIGestureRecognizer = {
+        let tap = UITapGestureRecognizer()
+        tap.addTarget(self, action: #selector(didTakePhoto))
+        return tap
+    }()
+    
+    lazy var captureButton:AnimationView = {
+        animationView.contentMode = .scaleAspectFill
+        animationView.loopMode = .playOnce
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        animationView.contentMode = .scaleAspectFill
+        animationView.animationSpeed = 2.0
+        animationView.addGestureRecognizer(self.tapGesture)
+        return animationView
     }()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        view.addSubview(camerView)
-//        setupLayout()
     }
     
     @objc func didTakePhoto(){
@@ -58,17 +65,18 @@ class Camera: UIViewController, AVCapturePhotoCaptureDelegate {
         print("photo taken")
         //send the image back to slide in card
         
-        delegate?.getImage(image: image!)
-        
-        
-        dismiss(animated: true, completion: nil)
-        
+        animationView.play { (_) in
+            self.delegate?.getImage(image: image!)
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func setupCaptureButton(){
         view.addSubview(captureButton)
         NSLayoutConstraint.activate([
-            captureButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            captureButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
+            captureButton.heightAnchor.constraint(equalToConstant: 250),
+            captureButton.widthAnchor.constraint(equalToConstant: 250),
             captureButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -78,6 +86,10 @@ class Camera: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        setupInputOutput()
+    }
+    
+    func setupInputOutput(){
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .photo
 

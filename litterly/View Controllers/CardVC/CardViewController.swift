@@ -137,11 +137,16 @@ class CardViewController: UIViewController {
         let height = self.view.frame.height
         let width = self.view.frame.width
 //
-//      //steps to add a subVC
+//      //ANIMATION??????
         let cameraVC = CameraViewController(height: Double(height), width: Double(width))
-        self.view.addSubview(cameraVC.view)
-        self.addChild(cameraVC)
-        cameraVC.didMove(toParent: self)
+        
+        UIView.animate(withDuration: 2, delay: 0, options: .transitionFlipFromLeft, animations: {
+            self.view.addSubview(cameraVC.view)
+            self.addChild(cameraVC)
+            cameraVC.didMove(toParent: self)
+        }) { (_) in
+            
+        }
 //        self.addChild(cameraVC)
 //        cameraVC.didMove(toParent: self)
         
