@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseStorage
+import Geofirestore
+import CoreLocation
 
 class CameraViewController: UIViewController {
     
@@ -14,10 +19,16 @@ class CameraViewController: UIViewController {
     
     let height:Double
     let width:Double
+    let trashType:String
+    let timezone:String
     
     let cameraIcon = UIImage(named: "camera")?.withRenderingMode(.alwaysOriginal)
     let backIcon = UIImage(named: "white_back_arrow")?.withRenderingMode(.alwaysOriginal)
     var imagePicker: UIImagePickerController!
+    let db = GlobalValues.db
+    var geoFirestore:GeoFirestore!
+    let helper = HelperFunctions()
+    let firestoreCollection = Firestore.firestore().collection("TaggedTrash")
     
     lazy var cameraView:UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.width, height: self.height))
@@ -113,9 +124,11 @@ class CameraViewController: UIViewController {
     }()
     
     
-    init(height:Double, width:Double){
+    init(height:Double, width:Double, trashType:String, timezone:String){
         self.height = height
         self.width = width
+        self.trashType = trashType
+        self.timezone = timezone
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -126,6 +139,7 @@ class CameraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraView.isUserInteractionEnabled = true
+        geoFirestore = GeoFirestore(collectionRef: firestoreCollection)
         setupLayout()
         addTargets()
     }
@@ -210,17 +224,178 @@ extension CameraViewController{
     
     @objc func executeTag(){
         print("execute tag!!")
+        executeTagTrash { (result) in
+            if let result = result{
+                //need main thread to work with UI elements 
+                DispatchQueue.main.async {
+                    self.dismissesView()
+                    NotificationCenter.default.post(name: NSNotification.Name("reportTapped"), object: nil)
+                }
+            }
+        }
+
     }
 }
 
 extension CameraViewController: PassImageDelegate {
     func getImage(image: UIImage) {
         subtitle.text = "Go ahead, tag this trash."
+        savePhotoToTemp(image: image)
         self.imageView.image = image
         self.cameraButton.isHidden = true
         submitButton.isEnabled = true
     }
     
+    func savePhotoToTemp(image: UIImage){
+        let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileName = "trash"
+        let fileUrl = dir.appendingPathComponent(fileName)
+        
+        if let data = image.jpegData(compressionQuality: 1.0){
+            
+            if !FileManager.default.fileExists(atPath: fileUrl.path){
+                do {
+                    try data.write(to: fileUrl)
+                    print("file saved")
+                } catch{
+                    print("error saving file")
+                }
+            }else{
+                do {
+                    try FileManager.default.removeItem(at: fileUrl)
+                    try data.write(to: fileUrl)
+                    print("file saved")
+                } catch{
+                    print("error saving file")
+                }
+            }
+        }
+    }
     
+    func loadImage() -> URL{
+        let fileName = "trash"
+        let dir = FileManager.SearchPathDirectory.documentDirectory
+        let DM = FileManager.SearchPathDomainMask.userDomainMask
+        let paths = NSSearchPathForDirectoriesInDomains(dir, DM, true)
+        if let dirPath = paths.first{
+            let url = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
+            print("url retrieved")
+            return url
+        }
+        return URL(string: "could_not_get_url")!
+    }
+    
+}
+
+
+extension CameraViewController{
+    
+    func uploadImage(imageName:String){
+        let imageName = imageName
+        let imageUrl = loadImage()
+        let imageRef = Storage.storage().reference().child("TrashPics/\(imageName)")
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        let _ = imageRef.putFile(from: imageUrl, metadata: metadata) { (metadata, error) in
+            guard let metadata = metadata else{
+                return //error
+            }
+            print("upload complete")
+            print(metadata.bucket)
+        }
+    }
+    
+    func executeTagTrash(completionHandler: @escaping (String?) -> Void){
+        //checking to see if location services is enabled, then proceeding to report the trash
+        let mapFuncs = MapsViewController()
+        mapFuncs.checkLocationServices()
+        
+        if let coordinates = mapFuncs.locationManager.location?.coordinate{
+            print(coordinates.latitude)
+            print(coordinates.longitude)
+            
+            guard let firebaseUserInstance = Auth.auth().currentUser else {return}
+            let id = "\(coordinates.latitude)" + "\(coordinates.longitude)"+"marker" as String
+            let author = firebaseUserInstance.email!
+            
+            let docRef = db.collection("TaggedTrash").document("\(id)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document {
+                    
+                    
+                    if document.exists{
+                        //show alert saying marker already exists
+                        print("data already exists")
+                        self.helper.showErrorAlert()
+                        
+                    } else {
+                        
+                        print("Document does not exist and we are free to create one")
+                        //gets tag address and the neighborhood from reverseGeocode
+                        mapFuncs.reverseGeocodeApi(on: coordinates.latitude, and: coordinates.longitude) { (address, userCurrentNeighborhood, error) in
+                        
+                        print(address!)
+                        print(userCurrentNeighborhood!)
+                            let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.trashType, timezone: self.timezone, street_address: address!, is_meetup_scheduled: false, expiration_date: 0.0)
+                        
+                            self.submitTrashToFirestore(with: trashTag.dictionary, for: id)
+                            self.setLocationWithGeoFirestore(for: id, on: coordinates)
+                            let id = "\(coordinates.latitude)" + "\(coordinates.longitude)"+"photo" as String
+                            self.uploadImage(imageName: id)
+                            completionHandler("pass")
+                        }
+                    }
+                }}
+        } else{
+            //show an alert saying that location is off
+            // can get detailed direction on how to do that
+            print("an error occoured tagging trash!")
+            completionHandler("fail")
+        }
+    }
+    
+    //adds document to firestore
+    func submitTrashToFirestore(with dictionary: [String:Any], for id:String){
+        
+        db.collection("TaggedTrash").document("\(id)").setData(dictionary) { (error:Error?) in
+            if let err = error {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+            
+        }
+        
+    }
+    
+    //updates neighborhood on each tag
+    func updateUserCurrentNeighborhood(forUser id:String, with neighborhood:String){
+        db.collection("Users").document("\(id)").updateData([
+            "neighborhood" : neighborhood
+        ]) { (error:Error?) in
+            if let err = error {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
+    //**************EXPERIMENTS*****************
+    func setLocationWithGeoFirestore(for id:String, on location:CLLocationCoordinate2D){
+        
+        let cllocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        
+        geoFirestore.setLocation(location: cllocation, forDocumentWithID: "\(id)") { (error) in
+            if let error = error {
+                print("An error occured: \(error)")
+            } else {
+                print("Saved location successfully!")
+            }
+        }
+    }
     
 }

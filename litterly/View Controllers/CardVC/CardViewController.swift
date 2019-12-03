@@ -136,71 +136,17 @@ class CardViewController: UIViewController {
         print("report trash tapped!!")
         let height = self.view.frame.height
         let width = self.view.frame.width
-//
-//      //ANIMATION??????
-        let cameraVC = CameraViewController(height: Double(height), width: Double(width))
+        let trashType = self.submitTrashType
+        let timezone = self.localTimeZone
+
+        let cameraVC = CameraViewController(height: Double(height), width: Double(width), trashType: trashType!, timezone: timezone)
         
-        UIView.animate(withDuration: 2, delay: 0, options: .transitionFlipFromLeft, animations: {
+//        UIView.animate(withDuration: 2, delay: 0, options: .transitionFlipFromLeft, animations: {
             self.view.addSubview(cameraVC.view)
             self.addChild(cameraVC)
             cameraVC.didMove(toParent: self)
-        }) { (_) in
-            
-        }
-//        self.addChild(cameraVC)
-//        cameraVC.didMove(toParent: self)
-        
-        
-//        executeTagTrash()
+//        }) { (_) in
 //
-//        //Posting a notification so the card can be lowered
-//        NotificationCenter.default.post(name: NSNotification.Name("reportTapped"), object: nil)
-//        deselectAllTrashTypeButtons()
-    }
-    
-    
-    func executeTagTrash(){
-        //checking to see if location services is enabled, then proceeding to report the trash
-        let mapFuncs = MapsViewController()
-        mapFuncs.checkLocationServices()
-        
-        if let coordinates = mapFuncs.locationManager.location?.coordinate{
-            print(coordinates.latitude)
-            print(coordinates.longitude)
-            
-            guard let firebaseUserInstance = Auth.auth().currentUser else {return}
-            let id = "\(coordinates.latitude)" + "\(coordinates.longitude)"+"marker" as String
-            let author = firebaseUserInstance.email!
-            
-            let docRef = db.collection("TaggedTrash").document("\(id)")
-            
-            docRef.getDocument { (document, error) in
-                if let document = document {
-                    
-                    
-                    if document.exists{
-                        //show alert saying marker already exists
-                        print("data already exists")
-                        self.helper.showErrorAlert()
-                        
-                    } else {
-                        
-                        print("Document does not exist and we are free to create one")
-                        //gets tag address and the neighborhood from reverseGeocode
-                        mapFuncs.reverseGeocodeApi(on: coordinates.latitude, and: coordinates.longitude) { (address, userCurrentNeighborhood, error) in
-                        
-                        print(address!)
-                        print(userCurrentNeighborhood!)
-                            let trashTag = TrashDataModel(id: id, author: author, lat: coordinates.latitude, lon: coordinates.longitude, trash_type: self.submitTrashType, timezone: self.localTimeZone, street_address: address!, is_meetup_scheduled: false, expiration_date: 0.0)
-                        self.submitTrashToFirestore(with: trashTag.dictionary, for: id)
-                        self.setLocationWithGeoFirestore(for: id, on: coordinates)
-                        }
-                    }
-                }}
-        } else{
-            //show an alert saying that location is off
-            // can get detailed direction on how to do that
-            print("an error occoured!")
-        }
+//        }
     }
 }
