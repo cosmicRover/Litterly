@@ -127,10 +127,6 @@ class CardViewController: UIViewController {
         self.reportTrashButton.isHidden = true
     }
     
-    func insertCameraView(){
-        
-    }
-    
     //func that will request lat, lon, trash type in order to got to the next steps of reporting trash
     @IBAction func reportTrashButtonOnTap(_ sender: UIButton) {
         print("report trash tapped!!")
@@ -141,12 +137,8 @@ class CardViewController: UIViewController {
 
         let cameraVC = CameraViewController(height: Double(height), width: Double(width), trashType: trashType!, timezone: timezone)
         
-//        UIView.animate(withDuration: 2, delay: 0, options: .transitionFlipFromLeft, animations: {
-            self.view.addSubview(cameraVC.view)
-            self.addChild(cameraVC)
-            cameraVC.didMove(toParent: self)
-//        }) { (_) in
-//
-//        }
+        self.view.addSubview(cameraVC.view)
+        self.addChild(cameraVC)
+        cameraVC.didMove(toParent: self)
     }
 }

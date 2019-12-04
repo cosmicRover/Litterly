@@ -225,15 +225,21 @@ extension CameraViewController{
     @objc func executeTag(){
         print("execute tag!!")
         executeTagTrash { (result) in
-            if let result = result{
+            if let _ = result{
                 //need main thread to work with UI elements 
-                DispatchQueue.main.async {
-                    self.dismissesView()
-                    NotificationCenter.default.post(name: NSNotification.Name("reportTapped"), object: nil)
-                }
+                self.postNotificationAndDismssView()
+            }else{
+                //something went wrong, but still post notification
+                self.postNotificationAndDismssView()
             }
         }
-
+    }
+    
+    func postNotificationAndDismssView(){
+        DispatchQueue.main.async {
+            self.dismissesView()
+            NotificationCenter.default.post(name: NSNotification.Name("reportTapped"), object: nil)
+        }
     }
 }
 
