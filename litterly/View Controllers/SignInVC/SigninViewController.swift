@@ -18,6 +18,7 @@ class SigninViewController: UIViewController {
     let signInButton = UIButton()
     let db = Firestore.firestore()
     var userDataModel = [UserDataModel]()
+    let helper = HelperFunctions()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,33 +140,25 @@ extension SigninViewController: FUIAuthDelegate{
             let user_name = firebaseUserInstance.displayName!
             let profile_pic_url = firebaseUserInstance.photoURL?.absoluteString as! String
             
-            let singletonValues = SharedValues.sharedInstance
-            
             GlobalValues.currentUserEmail = user_id
             GlobalValues.currentUserDisplayName = user_name
             GlobalValues.currentUserProfileImageURL = profile_pic_url
             
             storeImageOnDevice(with: profile_pic_url)
             
-            
-            
             let currentUser = UserDataModel(user_id: user_id!, user_name: user_name, profile_pic_url: profile_pic_url, neighborhood: "")
+     
+            submitUserToFirestore(with: currentUser.dictionary, for: user_id!) { (result) in
+                if result != "fail"{
+                    let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "ContainerVC")
+                    self.present(mapsViewController, animated: true, completion: nil)
+                }else{
+                    self.helper.showErrorAlert()
+                }
+            }
+
             
-            //only do this if the user doesn't already exist******
-            let geofenceInitData = GeofenceDataModel(user_id: user_id!, device_token: "", monday: [["lat": 0, "lon":0]], tuesday: [["lat":0, "lon":0]], wednesday: [["lat":0, "lon":0]], thursday: [["lat":0, "lon":0]], friday: [["lat":0, "lon":0]], saturday: [["lat":0, "lon":0]], sunday: [["lat":0, "lon":0]], monday_count: 0, tuesday_count: 0, wednesday_count: 0, thursday_count: 0, friday_count: 0, saturday_count: 0, sunday_count: 0)
-            //might want to set the array objects later
             
-            //calls func to create user in firestore
-            //***Bug*** it is possible to get to maps screen without fully triggering the below init methods
-            //Gotta move the last three to backend
-            submitUserToFirestore(with: currentUser.dictionary, for: user_id!)
-            submitGeofenceInitialDataToFirestore(with: geofenceInitData.dictionary, for: user_id!)
-            initFenceTriggerDocumentForUser(for: user_id!)
-            initPointsDocumentForUser(for: user_id!)
-            
-            let mapsViewController = storyBoard.instantiateViewController(withIdentifier: "ContainerVC")
-            
-            present(mapsViewController, animated: true, completion: nil)
         }
     }
     

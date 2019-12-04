@@ -31,6 +31,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Litterly needs permission to take a picture.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Litterly needs  to monitor your location for meetups and points varification</string>
 	<key>NSLocationAlwaysUsageDescription</key>

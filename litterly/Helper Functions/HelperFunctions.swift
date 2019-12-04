@@ -146,6 +146,7 @@ struct HelperFunctions {
             }
             else {
                 // Either denied or notDetermined
+                //show a notification to enable it
             }
         }
     }

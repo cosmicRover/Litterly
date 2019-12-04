@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CardViewController" customModule="Litterly" customModuleProvider="target">
             <connections>
+                <outlet property="LitterlySign" destination="3pA-u8-pBn" id="dBu-iK-NDx"/>
                 <outlet property="arrowImage" destination="6bp-Hf-dzB" id="p0V-aG-wSG"/>
                 <outlet property="cardView" destination="i5M-Pr-FkT" id="iwC-OX-DaH"/>
                 <outlet property="cardViewArea" destination="REE-LG-VS8" id="XMo-2W-DdC"/>
                 <outlet property="handleArea" destination="K0t-iM-8uf" id="hnn-kQ-DeO"/>
-                <outlet property="LitterlySign" destination="3pA-u8-pBn" id="dBu-iK-NDx"/>
                 <outlet property="nearByCount" destination="CE4-yj-vas" id="fD9-Qc-5VA"/>
                 <outlet property="nearbySign" destination="iyo-uH-5Be" id="Zql-PQ-x8u"/>
                 <outlet property="nearbySignSubTitle" destination="VFF-tN-Yvs" id="bCI-Wt-9vJ"/>
@@ -49,7 +46,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Litterly, meetups" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VFF-tN-Yvs">
-                            <rect key="frame" x="53" y="37.5" width="95.5" height="16"/>
+                            <rect key="frame" x="53" y="37.5" width="98" height="16"/>
                             <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -82,7 +79,7 @@
                     <rect key="frame" x="0.0" y="72" width="385" height="303"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Litterly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pA-u8-pBn">
-                            <rect key="frame" x="24" y="30" width="77.5" height="26"/>
+                            <rect key="frame" x="24" y="30" width="81.5" height="26"/>
                             <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="20"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -95,7 +92,7 @@
                                 <constraint firstAttribute="height" constant="52" id="f5T-CU-erW"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="17"/>
-                            <state key="normal" title="TAG TRASH"/>
+                            <state key="normal" title="Take a picture"/>
                             <connections>
                                 <action selector="reportTrashButtonOnTap:" destination="-1" eventType="touchUpInside" id="ejs-Uv-uE1"/>
                             </connections>

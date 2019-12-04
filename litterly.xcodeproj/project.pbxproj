@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2FA974CC2272B0F000115FBD /* CardContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA974CB2272B0F000115FBD /* CardContentTableViewCell.swift */; };
+		C5042F2E237257B40078EDCD /* ScheduleableDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5042F2D237257B40078EDCD /* ScheduleableDates.swift */; };
 		C506314E226E8E430078265C /* ContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C506314D226E8E430078265C /* ContainerController.swift */; };
 		C5063150226E8E7C0078265C /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C506314F226E8E7C0078265C /* MenuController.swift */; };
 		C5063152226E8ED00078265C /* MenuOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5063151226E8ED00078265C /* MenuOptionCell.swift */; };
@@ -18,6 +19,9 @@
 		C50C752F22978724005A16DD /* RedeemPointsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50C752D22978724005A16DD /* RedeemPointsCell.swift */; };
 		C50C753022978724005A16DD /* RedeemPointsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C50C752E22978724005A16DD /* RedeemPointsCell.xib */; };
 		C50C75322297914D005A16DD /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = C50C75312297914D005A16DD /* AppIcon.appiconset */; };
+		C50D56DA238F3D640018BF42 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50D56D9238F3D640018BF42 /* Camera.swift */; };
+		C52C0EFB237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0EFA237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift */; };
+		C52C0EFD237CB83D009120BE /* ScheduleAlertVc-Pic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52C0EFC237CB83D009120BE /* ScheduleAlertVc-Pic.swift */; };
 		C534CE6823690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C534CE6723690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift */; };
 		C543BF982277D5CE000C2FC7 /* MapsVC-Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */; };
 		C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C543BF9A2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift */; };
@@ -104,6 +108,8 @@
 		C5DFA17922EFE9B700E16E21 /* AppDelegate-PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */; };
 		C5E8F20522656A0C009FAE68 /* AuthPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8F20322656A0C009FAE68 /* AuthPickerViewController.swift */; };
 		C5E8F20622656A0C009FAE68 /* AuthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5E8F20422656A0C009FAE68 /* AuthPickerViewController.xib */; };
+		C5F9A026237E30DF00D58D80 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F9A025237E30DF00D58D80 /* CameraViewController.swift */; };
+		C5FD04202391EF3B00C492A9 /* capture.json in Resources */ = {isa = PBXBuildFile; fileRef = C5FD041F2391EF3A00C492A9 /* capture.json */; };
 		D34B1F79709B5F5A3BD8D8B6 /* Pods_Litterly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E706035DFCD681245FB63D /* Pods_Litterly.framework */; };
 /* End PBXBuildFile section */
 
@@ -112,6 +118,7 @@
 		2FA974CB2272B0F000115FBD /* CardContentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContentTableViewCell.swift; sourceTree = "<group>"; };
 		39E256F25A70D3C807D7B6F4 /* Pods-Litterly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Litterly.release.xcconfig"; path = "Target Support Files/Pods-Litterly/Pods-Litterly.release.xcconfig"; sourceTree = "<group>"; };
 		A6E706035DFCD681245FB63D /* Pods_Litterly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Litterly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5042F2D237257B40078EDCD /* ScheduleableDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleableDates.swift; sourceTree = "<group>"; };
 		C506314D226E8E430078265C /* ContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerController.swift; sourceTree = "<group>"; };
 		C506314F226E8E7C0078265C /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		C5063151226E8ED00078265C /* MenuOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionCell.swift; sourceTree = "<group>"; };
@@ -122,6 +129,9 @@
 		C50C752D22978724005A16DD /* RedeemPointsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedeemPointsCell.swift; sourceTree = "<group>"; };
 		C50C752E22978724005A16DD /* RedeemPointsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedeemPointsCell.xib; sourceTree = "<group>"; };
 		C50C75312297914D005A16DD /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
+		C50D56D9238F3D640018BF42 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		C52C0EFA237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleAlertVc-PickerViewDelegate.swift"; sourceTree = "<group>"; };
+		C52C0EFC237CB83D009120BE /* ScheduleAlertVc-Pic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleAlertVc-Pic.swift"; sourceTree = "<group>"; };
 		C534CE6723690781004F1BFA /* JoinAlertVC-ValidateTimezone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JoinAlertVC-ValidateTimezone.swift"; sourceTree = "<group>"; };
 		C543BF972277D5CE000C2FC7 /* MapsVC-Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapsVC-Firebase.swift"; sourceTree = "<group>"; };
 		C543BF9A2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnscheduledMarkerInfoWindow.swift; sourceTree = "<group>"; };
@@ -211,6 +221,8 @@
 		C5DFA17822EFE9B700E16E21 /* AppDelegate-PushNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate-PushNotification.swift"; sourceTree = "<group>"; };
 		C5E8F20322656A0C009FAE68 /* AuthPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPickerViewController.swift; sourceTree = "<group>"; };
 		C5E8F20422656A0C009FAE68 /* AuthPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthPickerViewController.xib; sourceTree = "<group>"; };
+		C5F9A025237E30DF00D58D80 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		C5FD041F2391EF3A00C492A9 /* capture.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capture.json; sourceTree = "<group>"; };
 		CCB928DB4E5E78DB217C54B3 /* Pods-Litterly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Litterly.debug.xcconfig"; path = "Target Support Files/Pods-Litterly/Pods-Litterly.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -254,6 +266,14 @@
 				39E256F25A70D3C807D7B6F4 /* Pods-Litterly.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C5042F2C237257860078EDCD /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				C5042F2D237257B40078EDCD /* ScheduleableDates.swift */,
+			);
+			path = Date;
 			sourceTree = "<group>";
 		};
 		C506314B226E8C0B0078265C /* SideMenuVCs */ = {
@@ -357,6 +377,7 @@
 		C584FC622266986D00ED1B53 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				C5FD041F2391EF3A00C492A9 /* capture.json */,
 				C5B6858C2294E08800421EE1 /* check.json */,
 				C584FC6022668F3200ED1B53 /* alert.json */,
 				C5AD39E922CD258100258C5B /* broken-stick.json */,
@@ -393,6 +414,7 @@
 		C58D911E225D5581006A0390 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C5F9A01E237E2F0E00D58D80 /* CameraView */,
 				C5C7448B22A8003E005C0E72 /* Storyboards */,
 				C5C7448122A7F394005C0E72 /* ProfileVCXib */,
 				C543BFA12277DB7D000C2FC7 /* AuthVCXib */,
@@ -406,6 +428,7 @@
 		C58D911F225D559D006A0390 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C5F9A01D237E2F0100D58D80 /* CameraVC */,
 				C594409522B9B13C00B95FF9 /* NearbyVC */,
 				C5907FAA2284ED3A001E720D /* AlertVCs */,
 				C5942AEB2273760B004F1A43 /* ProfileVCs */,
@@ -520,6 +543,7 @@
 		C59C82BD2295D1250051F3F8 /* Subclassing Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C5042F2C237257860078EDCD /* Date */,
 				C59C82C12295D2150051F3F8 /* Text */,
 				C58D9120225D55BE006A0390 /* Colors */,
 				C59C82C02295D1EC0051F3F8 /* UIImage */,
@@ -548,6 +572,8 @@
 			children = (
 				C5863AFD228A3D64004A25E4 /* ScheduleAlertVC-Firebase.swift */,
 				C5907FAB2284EDBE001E720D /* ScheduleAlertViewController.swift */,
+				C52C0EFA237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift */,
+				C52C0EFC237CB83D009120BE /* ScheduleAlertVc-Pic.swift */,
 			);
 			path = ScheduleAlertVC;
 			sourceTree = "<group>";
@@ -720,6 +746,22 @@
 			path = "Realm Models";
 			sourceTree = "<group>";
 		};
+		C5F9A01D237E2F0100D58D80 /* CameraVC */ = {
+			isa = PBXGroup;
+			children = (
+				C5F9A025237E30DF00D58D80 /* CameraViewController.swift */,
+				C50D56D9238F3D640018BF42 /* Camera.swift */,
+			);
+			path = CameraVC;
+			sourceTree = "<group>";
+		};
+		C5F9A01E237E2F0E00D58D80 /* CameraView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CameraView;
+			sourceTree = "<group>";
+		};
 		CCAFCF734AD4EBD5E0794F3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -797,6 +839,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5FD04202391EF3B00C492A9 /* capture.json in Resources */,
 				C50C75322297914D005A16DD /* AppIcon.appiconset in Resources */,
 				C5B6858D2294E08800421EE1 /* check.json in Resources */,
 				C5E8F20622656A0C009FAE68 /* AuthPickerViewController.xib in Resources */,
@@ -904,6 +947,7 @@
 				C5C675D82283DEF20005AFEA /* ScheduledMarkerInfoWindow.swift in Sources */,
 				C5DD088122584562000988A3 /* IntroPageViewController.swift in Sources */,
 				C564B483226AA05B00F2DEF1 /* TrashDataModel.swift in Sources */,
+				C5F9A026237E30DF00D58D80 /* CameraViewController.swift in Sources */,
 				C59A8BB9227B665E009CAA90 /* SigninVC-Firebase.swift in Sources */,
 				C5CA15A3226950AD008B04EB /* MeetupViewController.swift in Sources */,
 				C59A8BB7227B65A4009CAA90 /* CardVC-Firebase.swift in Sources */,
@@ -935,6 +979,7 @@
 				C543BF9B2277D67A000C2FC7 /* UnscheduledMarkerInfoWindow.swift in Sources */,
 				C5B2D9F622C6CAE70058EEA4 /* MapVC-ViewDidLoad.swift in Sources */,
 				C50C752F22978724005A16DD /* RedeemPointsCell.swift in Sources */,
+				C50D56DA238F3D640018BF42 /* Camera.swift in Sources */,
 				C56CEA35225D9E87005DC40E /* MapsVC-GoogleMaps.swift in Sources */,
 				C564B480226A9EB300F2DEF1 /* MapsVCLocationServices.swift in Sources */,
 				C5B6858A2294DAF300421EE1 /* GeneralAlertViewController.swift in Sources */,
@@ -943,6 +988,7 @@
 				C59C82BA2295C9820051F3F8 /* PlasticMeetup-Firebase.swift in Sources */,
 				C5D83E2122581793009CB884 /* AppDelegate.swift in Sources */,
 				C5C35EE322791FD300103AD9 /* DocumentSerializableProtocol.swift in Sources */,
+				C5042F2E237257B40078EDCD /* ScheduleableDates.swift in Sources */,
 				C56CEA33225D977A005DC40E /* SelectedButton.swift in Sources */,
 				2FA974CC2272B0F000115FBD /* CardContentTableViewCell.swift in Sources */,
 				C5C35EEB227A1C7B00103AD9 /* ApiKeys.swift in Sources */,
@@ -951,6 +997,7 @@
 				C5D8C78C2304C7E500A5D968 /* RealmGeofenceSaveModel.swift in Sources */,
 				C5743263229617150050F4D4 /* MapsVC-SearchButton-GMS.swift in Sources */,
 				C59C82BF2295D1550051F3F8 /* UIImageExtension.swift in Sources */,
+				C52C0EFD237CB83D009120BE /* ScheduleAlertVc-Pic.swift in Sources */,
 				C5A085B622F4FF8C00D10644 /* Appdelegate-Firebase.swift in Sources */,
 				C5907FAC2284EDBE001E720D /* ScheduleAlertViewController.swift in Sources */,
 				C5D8C78E2304C8EE00A5D968 /* AppDelegate-Realm.swift in Sources */,
@@ -962,6 +1009,7 @@
 				C5E8F20522656A0C009FAE68 /* AuthPickerViewController.swift in Sources */,
 				C59C82AB2295B09F0051F3F8 /* MeetupVC-Firebase.swift in Sources */,
 				C5931BD6225EBBA400ECBEEB /* MapsVC-SearchButton.swift in Sources */,
+				C52C0EFB237CB68D009120BE /* ScheduleAlertVc-PickerViewDelegate.swift in Sources */,
 				C5DFA17922EFE9B700E16E21 /* AppDelegate-PushNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1111,10 +1159,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Litterly/Litterly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = BGNF8D28S2;
 				INFOPLIST_FILE = Litterly/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1133,10 +1181,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Litterly/Litterly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = BGNF8D28S2;
 				INFOPLIST_FILE = Litterly/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

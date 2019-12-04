@@ -123,6 +123,5 @@ class MapsViewController: UIViewController{
     
     //an array to hold all the nearbyIds that is being pulled from our databse
     var nearbyIdsAndTheirDistanceFromUser = [NearbyIdModel]()
-    
 }
 
