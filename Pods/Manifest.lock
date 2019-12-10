@@ -8,8 +8,6 @@ PODS:
   - BoringSSL/Implementation (10.0.6):
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
-  - Cards (1.4.0):
-    - Player (= 0.13.0)
   - Firebase (5.15.0):
     - Firebase/Core (= 5.15.0)
   - Firebase/Auth (5.15.0):
@@ -164,17 +162,16 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - Player (0.13.0)
   - Protobuf (3.10.0)
-  - Realm (4.0.0):
-    - Realm/Headers (= 4.0.0)
-  - Realm/Headers (4.0.0)
-  - RealmSwift (4.0.0):
-    - Realm (= 4.0.0)
+  - RxCocoa (5.0.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.0.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.1)
 
 DEPENDENCIES:
   - AlamofireImage
-  - Cards
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Messaging
@@ -185,14 +182,14 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - lottie-ios
-  - RealmSwift
+  - RxCocoa (~> 5)
+  - RxSwift (~> 5)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
     - BoringSSL
-    - Cards
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
@@ -219,16 +216,15 @@ SPEC REPOS:
     - leveldb-library
     - lottie-ios
     - nanopb
-    - Player
     - Protobuf
-    - Realm
-    - RealmSwift
+    - RxCocoa
+    - RxRelay
+    - RxSwift
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  Cards: 45ae6bd0eca7b5e8016d3b6cb30b60b04753f68f
   Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
   FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
   FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
@@ -255,11 +251,11 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   lottie-ios: 32bf84389337d86fbc8b12266e88452e0abf1dee
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  Player: 968d8d07d923bcdd6f7e4091c9e306eb44a5f7a4
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
-  Realm: 0c5b8f398daeec5b29824e41c453ff9e126e31d8
-  RealmSwift: 02e1f604f7091ec535145055764ca53efa8cdc92
+  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
+  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
 
-PODFILE CHECKSUM: fa82d60b3d0a762e6da4b0ef764962fbfff4a90c
+PODFILE CHECKSUM: 274b2102cb58bb6814bb7d4ef5f3f6c37bb785fb
 
 COCOAPODS: 1.8.4

@@ -16,10 +16,8 @@ pod 'FirebaseUI/Auth'
 pod 'Firebase/Storage'
 pod 'lottie-ios'
 pod 'Firebase/Firestore'
-pod 'Cards'
+pod 'RxSwift', '~> 5'
+pod 'RxCocoa', '~> 5'
 pod 'AlamofireImage'
 pod 'Geofirestore'
-pod 'RealmSwift'
-
-
 end
