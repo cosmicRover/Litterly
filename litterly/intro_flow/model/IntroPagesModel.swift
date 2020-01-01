@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct IntroPageModel {
+public struct IntroPageDataModel {
     let title:String
     let subtitle:String
     let graphic:UIImage

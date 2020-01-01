@@ -12,7 +12,6 @@ import Firebase
 import FirebaseMessaging
 import FirebaseFirestore
 import UserNotifications
-import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate{
