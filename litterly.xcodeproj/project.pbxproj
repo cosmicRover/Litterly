@@ -27,6 +27,7 @@
 		39E256F25A70D3C807D7B6F4 /* Pods-Litterly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Litterly.release.xcconfig"; path = "Target Support Files/Pods-Litterly/Pods-Litterly.release.xcconfig"; sourceTree = "<group>"; };
 		A6E706035DFCD681245FB63D /* Pods_Litterly.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Litterly.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C50C75312297914D005A16DD /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
+		C50E767F23BD439900F3E468 /* LitterlyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LitterlyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C518C21E23A006A800AB261E /* ReactiveExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveExtensions.swift; sourceTree = "<group>"; };
 		C527E607239F3F3700FCB123 /* IntroPagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPagesModel.swift; sourceTree = "<group>"; };
 		C527E611239F46DD00FCB123 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		C5D83E1422581793009CB884 = {
 			isa = PBXGroup;
 			children = (
+				C50E767F23BD439900F3E468 /* LitterlyPlayground.playground */,
 				C5D83E1F22581793009CB884 /* Litterly */,
 				C5D83E1E22581793009CB884 /* Products */,
 				6344928A19CA66CD1E8498A7 /* Pods */,

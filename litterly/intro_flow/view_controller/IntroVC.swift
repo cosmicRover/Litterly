@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class IntroVC: UIViewController {
     
@@ -20,14 +22,14 @@ class IntroVC: UIViewController {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "title"
+        label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private var subTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "subtitle"
+        label.text = ""
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -35,24 +37,44 @@ class IntroVC: UIViewController {
     private var featureImage: UIImageView = {
        let iView = UIImageView()
         iView.contentMode = .scaleAspectFit
-        iView.image = UIImage(named: "building.png")
+        iView.image = UIImage(named: "")
         iView.translatesAutoresizingMaskIntoConstraints = false
         return iView
     }()
     
     //MARK: view models and other logic inits fo here
-    private var viewModel:IntroVM!
-    
+    private var viewModel:IntroVM = IntroVM()
+    private var disposeBage = DisposeBag()
     
     //MARK: viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         paintUI()
-        viewModel = IntroVM()
+        setUpDataStream()
     }
     
-    func paintUI(){
+    private func setUpDataStream(){
+        let _ = viewModel.valueStream.observeOn(MainScheduler.instance)
+            .subscribe{event in
+                switch event{
+                case .next(let data):
+                    self.bindDataToUI(data: data)
+                case .error(let error):
+                    print(error)
+                case .completed:
+                    print("completed")
+                }
+        }
+    }
+    
+    private func bindDataToUI(data: IntroPageDataModel){
+        self.titleLabel.text = data.title
+        self.subTitleLabel.text = data.subtitle
+        self.featureImage.image = data.graphic
+    }
+    
+    private func paintUI(){
         view.backgroundColor = UIColor.litterlyWhite
         view.addSubview(backgroundImage)
         NSLayoutConstraint.activate([

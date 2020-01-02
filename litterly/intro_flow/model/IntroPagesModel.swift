@@ -13,5 +13,6 @@ public struct IntroPageDataModel {
     let title:String
     let subtitle:String
     let graphic:UIImage
-    let button_text:String
+    let buttonText:String
+    let position:Int
 }
