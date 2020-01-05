@@ -12,6 +12,7 @@ import UIKit
 extension UIColor{
     
     static let litterlyWhite = UIColor(hex: 0xFFFFFF)
+    static let litterlyGreen = UIColor(hex: 0x2ECC71)
     
     //MARK: Hex to UIColor conversion init
     convenience init(hex: Int, alpha: CGFloat = 1.0){

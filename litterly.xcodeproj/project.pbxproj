@@ -75,6 +75,37 @@
 			path = reactive_extensions;
 			sourceTree = "<group>";
 		};
+		C526A7A923C16270003F2D85 /* signin_flow */ = {
+			isa = PBXGroup;
+			children = (
+				C526A7AC23C162E5003F2D85 /* model */,
+				C526A7AB23C162DC003F2D85 /* view_model */,
+				C526A7AA23C162BC003F2D85 /* view_controller */,
+			);
+			path = signin_flow;
+			sourceTree = "<group>";
+		};
+		C526A7AA23C162BC003F2D85 /* view_controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view_controller;
+			sourceTree = "<group>";
+		};
+		C526A7AB23C162DC003F2D85 /* view_model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view_model;
+			sourceTree = "<group>";
+		};
+		C526A7AC23C162E5003F2D85 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		C527E601239F3B9D00FCB123 /* supporting_files */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +203,7 @@
 				C58776B92267DA86007C680D /* GoogleService-Info.plist */,
 				C5D83E2C22581794009CB884 /* Info.plist */,
 				C58E1CCE22EFE26E00A05DFB /* Litterly.entitlements */,
+				C526A7A923C16270003F2D85 /* signin_flow */,
 				C527E603239F3E0600FCB123 /* intro_flow */,
 				C527E601239F3B9D00FCB123 /* supporting_files */,
 				C5D83E2722581794009CB884 /* Assets.xcassets */,

@@ -42,6 +42,15 @@ class IntroVC: UIViewController {
         return iView
     }()
     
+    private var getStartedButton: UIButton = {
+       let button = UIButton()
+        button.setTitle("Get Started!", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = UIColor.litterlyGreen
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     //MARK: view models and other logic inits fo here
     private var viewModel:IntroVM = IntroVM()
     private var disposeBage = DisposeBag()
@@ -52,8 +61,10 @@ class IntroVC: UIViewController {
         
         paintUI()
         setUpDataStream()
+        bindAction()
     }
     
+    //MARK: Data handling from view model
     private func setUpDataStream(){
         let _ = viewModel.valueStream.observeOn(MainScheduler.instance)
             .subscribe{event in
@@ -74,6 +85,13 @@ class IntroVC: UIViewController {
         self.featureImage.image = data.graphic
     }
     
+    private func bindAction(){
+        getStartedButton.rx.tap.bind{
+            //TODO navigate to sign-in vc
+        }.disposed(by: disposeBage)
+    }
+    
+    //MARK: UI painting
     private func paintUI(){
         view.backgroundColor = UIColor.litterlyWhite
         view.addSubview(backgroundImage)
@@ -102,7 +120,11 @@ class IntroVC: UIViewController {
             featureImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
+        view.addSubview(getStartedButton)
+        getStartedButton.backgroundColor = UIColor.litterlyGreen //color not working TODO
+        NSLayoutConstraint.activate([
+            getStartedButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
+            getStartedButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
     }
-    
-    
 }
