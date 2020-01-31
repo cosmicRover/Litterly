@@ -118,8 +118,8 @@ extension JoinAlertViewController{
             } else{
                 print("update commited successfully")
                 //uploads the fcm key when the user joins
-                self.helper.checkIfNotificationPermissionWasGiven()
-                self.helper.showSuccessAlert()
+//                self.helper.checkIfNotificationPermissionWasGiven()
+//                self.helper.showSuccessAlert()
             }
         }
     }
